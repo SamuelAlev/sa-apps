@@ -1,0 +1,11 @@
+{
+    "name": "root",
+    "private": true,
+    "scripts": {
+        "lint": "pnpm --stream --filter {packages/**} --parallel lint",
+        "lint:fix": "pnpm --stream --filter {packages/**} --parallel lint:fix",
+        "prettier": "pnpm --stream --filter {packages/**} --parallel prettier",
+        "prettier:fix": "pnpm --stream --filter {packages/**} --parallel prettier:fix",
+        "typecheck": "pnpm --stream --filter {packages/**} --parallel typecheck"
+    }
+}
