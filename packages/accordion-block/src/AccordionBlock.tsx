@@ -54,7 +54,12 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
     } as CSSProperties;
 
     return (
-        <Accordion.Root type="multiple" style={style} className="flex flex-col gap-[var(--accordion-gap)]">
+        <Accordion.Root
+            type="multiple"
+            style={style}
+            className="flex flex-col gap-[var(--accordion-gap)]"
+            data-test-id="accordion-block"
+        >
             {[
                 ...accordionItems,
                 ...(!isLastItemEmpty && isEditing ? [{ ...DEFAULT_ACCORDION_ITEM, id: `${Date.now()}` }] : []),
