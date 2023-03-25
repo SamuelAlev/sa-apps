@@ -6,6 +6,7 @@
         "lint:fix": "pnpm --stream --filter {packages/**} --parallel lint:fix",
         "prettier": "pnpm --stream --filter {packages/**} --parallel prettier",
         "prettier:fix": "pnpm --stream --filter {packages/**} --parallel prettier:fix",
+        "test": "pnpm --stream --filter {packages/**} --parallel test",
         "typecheck": "pnpm --stream --filter {packages/**} --parallel typecheck"
     }
 }
