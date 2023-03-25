@@ -1,5 +1,5 @@
 {
-    "name": "root",
+    "name": "@sablocks/root",
     "private": true,
     "scripts": {
         "lint": "pnpm --stream --filter {packages/**} --parallel lint",

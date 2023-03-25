@@ -1,0 +1,27 @@
+.accordionContent {
+  overflow: hidden;
+}
+.accordionContent[data-state='open'] {
+  animation: accordionSlideDown 300ms ease-out;
+}
+.accordionContent[data-state='closed'] {
+  animation: accordionSlideUp 300ms ease-out;
+}
+
+@keyframes accordionSlideDown {
+  from {
+    height: 0;
+  }
+  to {
+    height: var(--radix-accordion-content-height);
+  }
+}
+
+@keyframes accordionSlideUp {
+  from {
+    height: var(--radix-accordion-content-height);
+  }
+  to {
+    height: 0;
+  }
+}

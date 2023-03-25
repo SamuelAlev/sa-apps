@@ -1,0 +1,25 @@
+{
+    "name": "@sablocks/shared",
+    "private": true,
+    "author": "Samuel Alev <samuel.alev@protonmail.com>",
+    "version": "1.0.0",
+    "sideEffects": false,
+    "main": "src/index.ts",
+    "types": "src/index.ts",
+    "dependencies": {
+        "@frontify/fondue": "^12.0.0-beta.159",
+        "@frontify/fondue-tokens": "^3.2.1",
+        "class-variance-authority": "^0.4.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwindcss": "^3.2.7"
+    },
+    "devDependencies": {
+        "@frontify/eslint-config-react": "^0.15.7",
+        "@types/react": "^18.0.29",
+        "@types/react-dom": "^18.0.11",
+        "eslint": "^8.36.0",
+        "prettier": "^2.8.7",
+        "typescript": "^5.0.2"
+    }
+}

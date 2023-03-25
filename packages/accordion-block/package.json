@@ -1,0 +1,42 @@
+{
+    "name": "@sablocks/accordion-block",
+    "private": true,
+    "author": "Samuel Alev <samuel.alev@protonmail.com>",
+    "version": "1.0.0",
+    "main": "dist/index.js",
+    "scripts": {
+        "serve": "frontify-cli serve --entryPath src/index.ts",
+        "deploy": "frontify-cli deploy --entryPath src/index.ts",
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix .",
+        "prettier": "prettier --check .",
+        "prettier:fix": "prettier --write .",
+        "typecheck": "tsc --noEmit"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.21.3",
+        "@frontify/eslint-config-react": "^0.15.7",
+        "@frontify/frontify-cli": "^5.3.9",
+        "@testing-library/react": "^14.0.0",
+        "@types/react": "^17.0.53",
+        "@types/react-dom": "^17.0.19",
+        "autoprefixer": "^10.4.14",
+        "eslint": "^8.36.0",
+        "happy-dom": "^8.9.0",
+        "postcss": "^8.4.21",
+        "prettier": "^2.8.7",
+        "sinon": "^15.0.2",
+        "tailwindcss": "^3.2.7",
+        "typescript": "^5.0.2",
+        "vitest": "^0.29.7"
+    },
+    "dependencies": {
+        "@frontify/app-bridge": "3.0.0-beta.58",
+        "@frontify/guideline-blocks-settings": "^0.25.12",
+        "@radix-ui/react-accordion": "^1.1.1",
+        "@sablocks/shared": "workspace:*",
+        "lucide-react": "^0.127.0",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2"
+    }
+}
