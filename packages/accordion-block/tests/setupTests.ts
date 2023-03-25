@@ -3,7 +3,11 @@ import { cleanup, configure } from '@testing-library/react';
 
 import nodeCrypto from 'crypto';
 globalThis.crypto = {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    //@ts-ignore
     getRandomValues(buffer) {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
         return nodeCrypto.randomFillSync(buffer);
     },
 };
