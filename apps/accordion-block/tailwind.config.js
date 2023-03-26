@@ -1,5 +1,5 @@
 module.exports = {
-    content: ['src/**/*.{ts,tsx}', '../shared/src/**/*.{ts,tsx}'],
+    content: ['src/**/*.{ts,tsx}', '../../packages/shared/src/**/*.{ts,tsx}'],
     corePlugins: {
         preflight: false,
     },

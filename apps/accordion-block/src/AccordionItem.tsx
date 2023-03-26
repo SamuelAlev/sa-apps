@@ -2,7 +2,7 @@ import './styles.css';
 
 import { Button, RichTextEditor } from '@sa-apps/shared';
 import * as Accordion from '@radix-ui/react-accordion';
-import { ReactElement } from 'react';
+import { MouseEvent, ReactElement } from 'react';
 import { ChevronRight, Trash } from 'lucide-react';
 
 import { AccordionItemProps } from './types';
@@ -18,6 +18,11 @@ export const AccordionItem = ({
     onDeleteClick,
 }: AccordionItemProps): ReactElement => {
     const isEmpty = isAccordionItemEmpty({ id, heading, content });
+
+    const handleDeleteClick = (event: MouseEvent) => {
+        event.stopPropagation();
+        onDeleteClick?.();
+    };
 
     return (
         <Accordion.Item id={id} data-test-id={`accordion-item-${id}`} value={id} className="group/accordionItem">
@@ -37,7 +42,7 @@ export const AccordionItem = ({
                         <>
                             <div className="flex-grow" />
                             <div className="absolute right-0 hidden group-hover/accordionItem:block">
-                                <Button onClick={onDeleteClick} variant="outline" size="sm">
+                                <Button onClick={handleDeleteClick} variant="outline" size="sm">
                                     <Trash className="max-w-[16px] w-[16px] max-h-[16px] h-[16px] text-inherit" />
                                 </Button>
                             </div>
