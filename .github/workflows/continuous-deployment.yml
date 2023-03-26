@@ -6,7 +6,7 @@ on:
             - main
 
 env:
-    FRONTIFY_DOMAIN: "company-241204.frontify.com"
+    FRONTIFY_INSTANCE_DOMAIN: "company-241204.frontify.com"
     NODE_VERSION: 18
     CI: true
 
@@ -117,5 +117,5 @@ jobs:
               uses: SamuelAlev/frontify-app-deploy@v1
               with:
                   path: "./apps/*"
-                  instanceDomain: ${{ env.FRONTIFY_DOMAIN }}
-                  token: ${{ secret.FRONTIFY_TOKEN }}
+                  instanceDomain: ${{ env.FRONTIFY_INSTANCE_DOMAIN }}
+                  token: ${{ secrets.FRONTIFY_TOKEN }}
