@@ -27,18 +27,18 @@ export const AccordionItem = ({
 
     return (
         <Accordion.Item id={id} data-test-id={`accordion-item-${id}`} value={id} className="group/accordionItem">
-            <Accordion.Header className="!mb-0" data-test-id="accordion-item-heading">
+            <Accordion.Header data-test-id="accordion-item-heading">
                 <Accordion.Trigger
                     className="group/trigger w-full flex gap-2 items-center group ltr:flex-row rtl:flex-row-reverse"
                     data-test-id="accordion-item-trigger"
                 >
                     {triggerDirection === 'left' && <AccordionItemTrigger icon={triggerIcon} />}
 
-                    <div className="flex-none rtl:flex-grow" />
+                    <div className="hidden rtl:flex rtl:flex-grow" />
 
                     <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
 
-                    <div className="flex-grow rtl:flex-none" />
+                    <div className="flex flex-grow rtl:hidden" />
 
                     {triggerDirection === 'right' && <AccordionItemTrigger icon={triggerIcon} />}
 
