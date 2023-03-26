@@ -17,6 +17,7 @@ export const settings = defineSettings({
             ],
         },
     ],
+    basics: [{ id: 'accordionMultiple', type: 'switch', label: 'Allow multiple items open', defaultValue: false }],
     layout: [
         {
             id: 'gapCustomEnabled',
@@ -34,6 +35,81 @@ export const settings = defineSettings({
                         { value: '8px', label: 'S' },
                         { value: '16px', label: 'M' },
                         { value: '24px', label: 'L' },
+                    ],
+                },
+            ],
+        },
+    ],
+    style: [
+        {
+            id: 'triggerSection',
+            type: 'sectionHeading',
+            label: 'Trigger',
+            blocks: [
+                {
+                    id: 'triggerIcon',
+                    type: 'slider',
+                    defaultValue: 'plus',
+                    choices: [
+                        { value: 'plus', label: 'Plus' },
+                        { value: 'chevron-right', label: 'Right' },
+                        { value: 'chevron-left', label: 'Left' },
+                    ],
+                },
+                {
+                    id: 'triggerDirection',
+                    type: 'slider',
+                    label: 'Position',
+                    defaultValue: 'right',
+                    info: 'The direction of the trigger icon will be reversed when the text is right to left.',
+                    choices: [
+                        { value: 'left', label: 'Left' },
+                        { value: 'right', label: 'Right' },
+                    ],
+                },
+                {
+                    id: 'triggerSizeCustomEnabled',
+                    type: 'switch',
+                    label: 'Size',
+                    switchLabel: 'Custom',
+                    on: [{ id: 'triggerSizeCustom', type: 'input', placeholder: '16px', rules: [minimumPixelRule(0)] }],
+                    off: [
+                        {
+                            id: 'triggerSizeSimple',
+                            type: 'slider',
+                            defaultValue: '16px',
+                            choices: [
+                                { value: '16px', label: 'S' },
+                                { value: '24px', label: 'M' },
+                                { value: '32px', label: 'L' },
+                            ],
+                        },
+                    ],
+                },
+                {
+                    id: 'triggerThicknessCustomEnabled',
+                    type: 'switch',
+                    label: 'Thickness',
+                    switchLabel: 'Custom',
+                    on: [
+                        {
+                            id: 'triggerThicknessCustom',
+                            type: 'input',
+                            placeholder: '2px',
+                            rules: [minimumPixelRule(0)],
+                        },
+                    ],
+                    off: [
+                        {
+                            id: 'triggerThicknessSimple',
+                            type: 'slider',
+                            defaultValue: '2px',
+                            choices: [
+                                { value: '1px', label: 'S' },
+                                { value: '2px', label: 'M' },
+                                { value: '4px', label: 'L' },
+                            ],
+                        },
                     ],
                 },
             ],

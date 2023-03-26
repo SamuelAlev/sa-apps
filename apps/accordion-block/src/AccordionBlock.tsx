@@ -1,12 +1,13 @@
+import './styles.css';
+
+import { ReactElement } from 'react';
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';
-import { CSSProperties } from 'react';
-import { ReactElement } from 'react';
 
 import { AccordionItem } from './AccordionItem';
 import { DEFAULT_ACCORDION_ITEM } from './constant';
-import { isLastAccordionItemEmpty } from './helpers';
+import { getAccordionRootStyles, isLastAccordionItemEmpty } from './helpers';
 import type { BlockSettings } from './types';
 
 export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
@@ -47,14 +48,10 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
         }
     };
 
-    const style = {
-        '--accordion-gap': blockSettings.gapCustomEnabled ? blockSettings.gapCustom : blockSettings.gapSimple,
-    } as CSSProperties;
-
     return (
         <Accordion.Root
-            type="multiple"
-            style={style}
+            {...(blockSettings.accordionMultiple ? { type: 'multiple' } : { type: 'single', collapsible: true })}
+            style={getAccordionRootStyles(blockSettings)}
             className="flex flex-col gap-[var(--accordion-gap)]"
             data-test-id="accordion-block"
         >
@@ -64,6 +61,8 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             ].map((accordionItem) => (
                 <AccordionItem
                     key={accordionItem.id}
+                    triggerIcon={blockSettings.triggerIcon}
+                    triggerDirection={blockSettings.triggerDirection}
                     onHeadingChange={(value) => handleHeadingChange(accordionItem.id, value)}
                     onContentChange={(value) => handleContentChange(accordionItem.id, value)}
                     onDeleteClick={

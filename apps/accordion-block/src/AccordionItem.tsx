@@ -1,15 +1,16 @@
-import './styles.css';
-
 import { Button, RichTextEditor } from '@sa-apps/shared';
 import * as Accordion from '@radix-ui/react-accordion';
 import { MouseEvent, ReactElement } from 'react';
-import { ChevronRight, Trash } from 'lucide-react';
+import { Trash } from 'lucide-react';
 
 import { AccordionItemProps } from './types';
 import { isAccordionItemEmpty } from './helpers';
+import { AccordionItemTrigger } from './AccordionItemTrigger';
 
 export const AccordionItem = ({
     id,
+    triggerIcon,
+    triggerDirection,
     heading,
     content,
     readonly,
@@ -28,25 +29,31 @@ export const AccordionItem = ({
         <Accordion.Item id={id} data-test-id={`accordion-item-${id}`} value={id} className="group/accordionItem">
             <Accordion.Header className="!mb-0" data-test-id="accordion-item-heading">
                 <Accordion.Trigger
-                    className="group/trigger w-full flex gap-2 items-center group"
+                    className="group/trigger w-full flex gap-2 items-center group ltr:flex-row rtl:flex-row-reverse"
                     data-test-id="accordion-item-trigger"
                 >
-                    <ChevronRight
-                        className="max-w-[16px] w-[16px] max-h-[16px] h-[16px] group-[[data-state='open']]/trigger:rotate-90 transition-transform ease-out motion-reduce:transition-none"
-                        aria-hidden
-                    />
+                    {triggerDirection === 'left' && <AccordionItemTrigger icon={triggerIcon} />}
+
+                    <div className="flex-none rtl:flex-grow" />
 
                     <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
 
+                    <div className="flex-grow rtl:flex-none" />
+
+                    {triggerDirection === 'right' && <AccordionItemTrigger icon={triggerIcon} />}
+
                     {onDeleteClick && !isEmpty ? (
-                        <>
-                            <div className="flex-grow" />
-                            <div className="absolute right-0 hidden group-hover/accordionItem:block">
-                                <Button onClick={handleDeleteClick} variant="outline" size="sm">
-                                    <Trash className="max-w-[16px] w-[16px] max-h-[16px] h-[16px] text-inherit" />
-                                </Button>
-                            </div>
-                        </>
+                        <div
+                            className={`absolute hidden group-hover/accordionItem:block ${
+                                triggerDirection === 'right'
+                                    ? 'right-10 rtl:left-0 rtl:right-auto'
+                                    : 'right-0 rtl:left-10 rtl:right-auto'
+                            }`}
+                        >
+                            <Button onClick={handleDeleteClick} variant="outline" size="sm">
+                                <Trash className="max-w-[20px] w-[20px] max-h-[20px] h-[20px] text-inherit" />
+                            </Button>
+                        </div>
                     ) : null}
                 </Accordion.Trigger>
             </Accordion.Header>
