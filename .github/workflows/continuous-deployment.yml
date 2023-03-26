@@ -114,7 +114,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Deploy apps
-              uses: SamuelAlev/frontify-app-deploy@v1
+              uses: SamuelAlev/frontify-app-deploy@main
               with:
                   path: "./apps/*"
                   instanceDomain: ${{ env.FRONTIFY_INSTANCE_DOMAIN }}
