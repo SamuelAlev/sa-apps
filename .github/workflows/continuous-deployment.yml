@@ -115,6 +115,8 @@ jobs:
 
             - name: Deploy apps
               uses: SamuelAlev/frontify-app-deploy@main
+              env:
+                  NODE_OPTIONS: "--max_old_space_size=7168"
               with:
                   path: "./apps/*"
                   instanceDomain: ${{ env.FRONTIFY_INSTANCE_DOMAIN }}
