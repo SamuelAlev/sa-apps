@@ -1,12 +1,12 @@
-name: Continuous Integration
+name: Continuous Deployment
 
 on:
-    pull_request:
     push:
         branches:
             - main
 
 env:
+    FRONTIFY_DOMAIN: "company-241204.frontify.com"
     NODE_VERSION: 18
     CI: true
 
@@ -88,3 +88,34 @@ jobs:
 
             - name: Test files
               run: pnpm test
+
+    deployment:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+        needs: [linting, typecheck, tests]
+
+        steps:
+            - name: Checkout current commit
+              uses: actions/checkout@v3
+
+            - name: Use pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: latest
+                  run_install: false
+
+            - name: Use Node.js ${{ env.NODE_VERSION }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: "pnpm"
+
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
+
+            # - name: Deploy apps
+            #   uses: SamuelAlev/frontify-app-deploy
+            #   with:
+            #       path: "./apps/*"
+            #       instanceDomain: ${{ env.FRONTIFY_DOMAIN }}
+            #       token: ${{ secret.FRONTIFY_TOKEN }}

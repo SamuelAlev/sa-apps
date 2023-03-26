@@ -1,5 +1,3 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
-
 import { describe, expect, it } from 'vitest';
 import { withAppBridgeBlockStubs } from '@frontify/app-bridge';
 import { render } from '@testing-library/react';

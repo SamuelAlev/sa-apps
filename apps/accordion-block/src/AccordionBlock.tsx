@@ -1,5 +1,3 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
-
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';

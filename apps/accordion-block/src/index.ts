@@ -1,5 +1,3 @@
-/* (c) Copyright Frontify Ltd., all rights reserved. */
-
 import 'tailwindcss/tailwind.css';
 import { defineBlock } from '@frontify/guideline-blocks-settings';
 

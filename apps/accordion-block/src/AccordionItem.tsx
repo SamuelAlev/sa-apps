@@ -1,6 +1,6 @@
 import './styles.css';
 
-import { Button, RichTextEditor } from '@sablocks/shared';
+import { Button, RichTextEditor } from '@sa-apps/shared';
 import * as Accordion from '@radix-ui/react-accordion';
 import { ReactElement } from 'react';
 import { ChevronRight, Trash } from 'lucide-react';

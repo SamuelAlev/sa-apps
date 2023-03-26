@@ -38,7 +38,7 @@
         "@frontify/app-bridge": "3.0.0-beta.58",
         "@frontify/guideline-blocks-settings": "^0.25.12",
         "@radix-ui/react-accordion": "^1.1.1",
-        "@sablocks/shared": "workspace:*",
+        "@sa-apps/shared": "workspace:*",
         "lucide-react": "^0.127.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"

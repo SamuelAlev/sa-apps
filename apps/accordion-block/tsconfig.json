@@ -15,6 +15,6 @@
         "resolveJsonModule": true,
         "skipLibCheck": true
     },
-    "include": ["src/**/*", "tests/AccordionBlock.spec.tsx"],
+    "include": ["src/**/*"],
     "exclude": ["node_modules", "dist"]
 }
