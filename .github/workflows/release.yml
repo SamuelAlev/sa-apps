@@ -1,14 +1,11 @@
-name: Continuous Deployment
+name: Release
 
 on:
-    push:
-        branches:
-            - main
+    workflow_run:
 
 env:
     FRONTIFY_INSTANCE_DOMAIN: "company-241204.frontify.com"
     NODE_VERSION: 18
-    CI: true
 
 jobs:
     linting:
