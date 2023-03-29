@@ -3,9 +3,14 @@ export type BlockSettings = {
 
     accordionMultiple: boolean;
 
-    gapCustomEnabled: boolean;
-    gapSimple?: '0px' | '8px' | '16px' | '24px';
-    gapCustom?: string;
+    itemGapCustomEnabled: boolean;
+    itemGapSimple?: '0px' | '8px' | '16px' | '24px';
+    itemGapCustom?: string;
+
+    itemHeadingPaddingHorizontal: string;
+    itemHeadingPaddingVertical: string;
+    itemContentPaddingHorizontal: string;
+    itemContentPaddingVertical: string;
 
     triggerIcon: 'plus' | 'chevron-right' | 'chevron-left';
 
@@ -24,6 +29,10 @@ export type AccordionItem = {
     id: string;
     heading: string;
     content: string;
+
+    style?: {
+        backgroundColor?: { r: number; g: number; b: number; a: number };
+    };
 };
 
 export type AccordionItemProps = AccordionItem & {
@@ -32,6 +41,7 @@ export type AccordionItemProps = AccordionItem & {
     triggerDirection: 'left' | 'right';
     onContentChange: (content: string) => void;
     onHeadingChange: (heading: string) => void;
+    onStyleChange: (style: AccordionItem['style']) => void;
     onDeleteClick?: () => void;
 };
 

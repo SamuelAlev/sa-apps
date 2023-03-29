@@ -11,7 +11,13 @@ export const isAccordionItemEmpty = (accordionItem: AccordionItem) =>
 
 export const getAccordionRootStyles = (blockSettings: BlockSettings) =>
     ({
-        '--accordion-gap': blockSettings.gapCustomEnabled ? blockSettings.gapCustom : blockSettings.gapSimple,
+        '--accordion-item-heading-padding-horizontal': blockSettings.itemHeadingPaddingHorizontal,
+        '--accordion-item-heading-padding-vertical': blockSettings.itemHeadingPaddingVertical,
+        '--accordion-item-content-padding-horizontal': blockSettings.itemContentPaddingHorizontal,
+        '--accordion-item-content-padding-vertical': blockSettings.itemContentPaddingVertical,
+        '--accordion-gap': blockSettings.itemGapCustomEnabled
+            ? blockSettings.itemGapCustom
+            : blockSettings.itemGapSimple,
         '--accordion-trigger-size': blockSettings.triggerSizeCustomEnabled
             ? blockSettings.triggerSizeCustom
             : blockSettings.triggerSizeSimple,
@@ -19,3 +25,8 @@ export const getAccordionRootStyles = (blockSettings: BlockSettings) =>
             ? blockSettings.triggerThicknessCustom
             : blockSettings.triggerThicknessSimple,
     } as CSSProperties);
+
+export const getNewAccordionItemId = () => Date.now().toString();
+
+export const rgbaObjectToString = (color: { r: number; g: number; b: number; a: number }) =>
+    `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;

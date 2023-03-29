@@ -1,4 +1,10 @@
-import { DropdownSize, IconEnum, defineSettings, minimumPixelRule } from '@frontify/guideline-blocks-settings';
+import {
+    DropdownSize,
+    IconEnum,
+    MultiInputLayout,
+    defineSettings,
+    minimumPixelRule,
+} from '@frontify/guideline-blocks-settings';
 
 export const settings = defineSettings({
     main: [
@@ -20,21 +26,88 @@ export const settings = defineSettings({
     basics: [{ id: 'accordionMultiple', type: 'switch', label: 'Allow multiple items open', defaultValue: false }],
     layout: [
         {
-            id: 'gapCustomEnabled',
-            type: 'switch',
-            label: 'Gap',
-            switchLabel: 'Custom',
-            on: [{ id: 'gapCustom', type: 'input', placeholder: '4px', rules: [minimumPixelRule(0)] }],
-            off: [
+            id: 'itemSection',
+            type: 'sectionHeading',
+            label: 'Item',
+            blocks: [
                 {
-                    id: 'gapSimple',
-                    type: 'slider',
-                    defaultValue: '16px',
-                    choices: [
-                        { value: '0px', label: 'None' },
-                        { value: '8px', label: 'S' },
-                        { value: '16px', label: 'M' },
-                        { value: '24px', label: 'L' },
+                    id: 'itemGapCustomEnabled',
+                    type: 'switch',
+                    label: 'Gap',
+                    switchLabel: 'Custom',
+                    on: [{ id: 'itemGapCustom', type: 'input', placeholder: '4px', rules: [minimumPixelRule(0)] }],
+                    off: [
+                        {
+                            id: 'itemGapSimple',
+                            type: 'slider',
+                            defaultValue: '16px',
+                            choices: [
+                                { value: '0px', label: 'None' },
+                                { value: '8px', label: 'S' },
+                                { value: '16px', label: 'M' },
+                                { value: '24px', label: 'L' },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'itemHeadingSection',
+            type: 'sectionHeading',
+            label: 'Heading',
+            blocks: [
+                {
+                    id: 'itemHeadingPaddingMultiInput',
+                    type: 'multiInput',
+                    layout: MultiInputLayout.Columns,
+                    blocks: [
+                        {
+                            id: 'itemHeadingPaddingHorizontal',
+                            type: 'input',
+                            label: 'Padding X',
+                            placeholder: '12px',
+                            defaultValue: '12px',
+                            rules: [minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'itemHeadingPaddingVertical',
+                            type: 'input',
+                            label: 'Padding Y',
+                            placeholder: '8px',
+                            defaultValue: '8px',
+                            rules: [minimumPixelRule(0)],
+                        },
+                    ],
+                },
+            ],
+        },
+        {
+            id: 'itemContentSection',
+            type: 'sectionHeading',
+            label: 'Content',
+            blocks: [
+                {
+                    id: 'itemContentPaddingMultiInput',
+                    type: 'multiInput',
+                    layout: MultiInputLayout.Columns,
+                    blocks: [
+                        {
+                            id: 'itemContentPaddingHorizontal',
+                            type: 'input',
+                            label: 'Padding X',
+                            placeholder: '12px',
+                            defaultValue: '12px',
+                            rules: [minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'itemContentPaddingVertical',
+                            type: 'input',
+                            label: 'Padding Y',
+                            placeholder: '8px',
+                            defaultValue: '8px',
+                            rules: [minimumPixelRule(0)],
+                        },
                     ],
                 },
             ],

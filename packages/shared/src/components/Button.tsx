@@ -31,4 +31,4 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement>, Va
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(({ variant, size, ...props }, ref) => {
     return <button ref={ref} className={buttonVariants({ variant, size })} {...props} />;
 });
-Button.displayName = 'Button';
+Button.displayName = 'SAButton';
