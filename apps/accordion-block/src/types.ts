@@ -3,20 +3,35 @@ export type BlockSettings = {
 
     accordionMultiple: boolean;
 
-    itemGapCustomEnabled: boolean;
-    itemGapSimple?: '0px' | '8px' | '16px' | '24px';
-    itemGapCustom?: string;
+    itemsGapCustomEnabled: boolean;
+    itemsGapSimple?: '0px' | '8px' | '16px' | '24px';
+    itemsGapCustom?: string;
 
-    itemHeadingPaddingHorizontal: string;
-    itemHeadingPaddingVertical: string;
-    itemContentPaddingHorizontal: string;
-    itemContentPaddingVertical: string;
+    itemHeadingPaddingTop: string;
+    itemHeadingPaddingRight: string;
+    itemHeadingPaddingBottom: string;
+    itemHeadingPaddingLeft: string;
+
+    itemContentPaddingTop: string;
+    itemContentPaddingRight: string;
+    itemContentPaddingBottom: string;
+    itemContentPaddingLeft: string;
+
+    itemsBorderEnabled: boolean;
+    itemsBorderStyle: 'solid' | 'dashed' | 'dotted';
+    itemsBorderWidth: string;
+    itemsBorderColor: { r: number; g: number; b: number; a: number };
 
     triggerIcon: 'plus' | 'chevron-right' | 'chevron-left';
 
     triggerSizeCustomEnabled: boolean;
     triggerSizeSimple?: '16px' | '24px' | '32px';
     triggerSizeCustom?: string;
+
+    triggerBorderEnabled: boolean;
+    triggerBorderStyle: 'solid' | 'dashed' | 'dotted';
+    triggerBorderWidth: string;
+    triggerBorderColor: { r: number; g: number; b: number; a: number };
 
     triggerThicknessCustomEnabled: boolean;
     triggerThicknessSimple?: '1px' | '2px' | '4px';

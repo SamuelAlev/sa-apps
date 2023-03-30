@@ -76,7 +76,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             <Accordion.Root
                 {...(blockSettings.accordionMultiple ? { type: 'multiple' } : { type: 'single', collapsible: true })}
                 style={getAccordionRootStyles(blockSettings)}
-                className="flex flex-col gap-[var(--accordion-gap)]"
+                className="flex flex-col gap-[var(--accordion-items-gap)]"
                 data-test-id="accordion-block"
             >
                 {accordionItems.map((accordionItem, index) => (

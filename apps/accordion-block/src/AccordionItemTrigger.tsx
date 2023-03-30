@@ -1,13 +1,18 @@
 import { ReactElement } from 'react';
 import { ChevronRight } from 'lucide-react';
+import { cn } from '@sa-apps/shared';
 
 import type { AccordionItemTriggerProps } from './types';
+import { triggerBorderClasses } from './constant';
 
-const PlusMinusIcon = (): ReactElement => {
+const PlusMinusIcon = ({ className }: { className?: string }): ReactElement => {
     return (
         <div>
             <svg
-                className="max-w-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] h-[var(--accordion-trigger-size)] stroke-[number:var(--accordion-trigger-thickness)]"
+                className={cn(
+                    'max-w-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] h-[var(--accordion-trigger-size)] stroke-[number:var(--accordion-trigger-thickness)]',
+                    className
+                )}
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -38,18 +43,24 @@ const PlusMinusIcon = (): ReactElement => {
 export const AccordionItemTrigger = ({ icon }: AccordionItemTriggerProps): ReactElement => {
     return (
         <>
-            {icon === 'plus' && <PlusMinusIcon />}
+            {icon === 'plus' && <PlusMinusIcon className={triggerBorderClasses} />}
 
             {icon === 'chevron-right' && (
                 <ChevronRight
-                    className="max-w-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] h-[var(--accordion-trigger-size)] group-[[data-state='open']]/trigger:rotate-90 transition-transform ease-out motion-reduce:transition-none stroke-[number:var(--accordion-trigger-thickness)]"
+                    className={cn(
+                        "max-w-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] h-[var(--accordion-trigger-size)] group-[[data-state='open']]/trigger:rotate-90 transition-transform ease-out motion-reduce:transition-none stroke-[number:var(--accordion-trigger-thickness)]",
+                        triggerBorderClasses
+                    )}
                     aria-hidden
                 />
             )}
 
             {icon === 'chevron-left' && (
                 <ChevronRight
-                    className="max-w-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] h-[var(--accordion-trigger-size)] rotate-180 group-[[data-state='open']]/trigger:rotate-90 transition-transform ease-out motion-reduce:transition-none stroke-[number:var(--accordion-trigger-thickness)]"
+                    className={cn(
+                        "max-w-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] h-[var(--accordion-trigger-size)] rotate-180 group-[[data-state='open']]/trigger:rotate-90 transition-transform ease-out motion-reduce:transition-none stroke-[number:var(--accordion-trigger-thickness)]",
+                        triggerBorderClasses
+                    )}
                     aria-hidden
                 />
             )}

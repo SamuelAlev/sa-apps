@@ -2,8 +2,10 @@ import {
     DropdownSize,
     IconEnum,
     MultiInputLayout,
+    appendUnit,
     defineSettings,
     minimumPixelRule,
+    numericalOrPixelRule,
 } from '@frontify/guideline-blocks-settings';
 
 export const settings = defineSettings({
@@ -26,19 +28,27 @@ export const settings = defineSettings({
     basics: [{ id: 'accordionMultiple', type: 'switch', label: 'Allow multiple items open', defaultValue: false }],
     layout: [
         {
-            id: 'itemSection',
+            id: 'itemsLayoutSection',
             type: 'sectionHeading',
-            label: 'Item',
+            label: 'Items',
             blocks: [
                 {
-                    id: 'itemGapCustomEnabled',
+                    id: 'itemsGapCustomEnabled',
                     type: 'switch',
                     label: 'Gap',
                     switchLabel: 'Custom',
-                    on: [{ id: 'itemGapCustom', type: 'input', placeholder: '4px', rules: [minimumPixelRule(0)] }],
+                    on: [
+                        {
+                            id: 'itemsGapCustom',
+                            type: 'input',
+                            placeholder: '4px',
+                            onChange: (bundle) => appendUnit(bundle, 'triggerThicknessCustom'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                    ],
                     off: [
                         {
-                            id: 'itemGapSimple',
+                            id: 'itemsGapSimple',
                             type: 'slider',
                             defaultValue: '16px',
                             choices: [
@@ -60,53 +70,90 @@ export const settings = defineSettings({
                 {
                     id: 'itemHeadingPaddingMultiInput',
                     type: 'multiInput',
-                    layout: MultiInputLayout.Columns,
+                    layout: MultiInputLayout.Spider,
+                    label: 'Padding',
                     blocks: [
                         {
-                            id: 'itemHeadingPaddingHorizontal',
+                            id: 'itemHeadingPaddingTop',
                             type: 'input',
-                            label: 'Padding X',
+                            label: 'Top',
                             placeholder: '12px',
                             defaultValue: '12px',
-                            rules: [minimumPixelRule(0)],
+                            onChange: (bundle) => appendUnit(bundle, 'itemHeadingPaddingTop'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
                         },
                         {
-                            id: 'itemHeadingPaddingVertical',
+                            id: 'itemHeadingPaddingLeft',
                             type: 'input',
-                            label: 'Padding Y',
+                            label: 'Left',
                             placeholder: '8px',
                             defaultValue: '8px',
-                            rules: [minimumPixelRule(0)],
+                            onChange: (bundle) => appendUnit(bundle, 'itemHeadingPaddingLeft'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'itemHeadingPaddingRight',
+                            type: 'input',
+                            label: 'Right',
+                            placeholder: '8px',
+                            defaultValue: '8px',
+                            onChange: (bundle) => appendUnit(bundle, 'itemHeadingPaddingRight'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'itemHeadingPaddingBottom',
+                            type: 'input',
+                            label: 'Bottom',
+                            placeholder: '12px',
+                            defaultValue: '12px',
+                            onChange: (bundle) => appendUnit(bundle, 'itemHeadingPaddingBottom'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
                         },
                     ],
                 },
             ],
         },
         {
-            id: 'itemContentSection',
+            id: 'itemContentLayoutSection',
             type: 'sectionHeading',
             label: 'Content',
             blocks: [
                 {
                     id: 'itemContentPaddingMultiInput',
                     type: 'multiInput',
-                    layout: MultiInputLayout.Columns,
+                    layout: MultiInputLayout.Spider,
                     blocks: [
                         {
-                            id: 'itemContentPaddingHorizontal',
+                            id: 'itemContentPaddingTop',
                             type: 'input',
-                            label: 'Padding X',
+                            label: 'Top',
                             placeholder: '12px',
-                            defaultValue: '12px',
-                            rules: [minimumPixelRule(0)],
+                            onChange: (bundle) => appendUnit(bundle, 'itemContentPaddingTop'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
                         },
                         {
-                            id: 'itemContentPaddingVertical',
+                            id: 'itemContentPaddingLeft',
                             type: 'input',
-                            label: 'Padding Y',
+                            label: 'Left',
                             placeholder: '8px',
-                            defaultValue: '8px',
-                            rules: [minimumPixelRule(0)],
+                            onChange: (bundle) => appendUnit(bundle, 'itemContentPaddingLeft'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'itemContentPaddingRight',
+                            type: 'input',
+                            label: 'Right',
+                            placeholder: '8px',
+                            onChange: (bundle) => appendUnit(bundle, 'itemContentPaddingRight'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'itemContentPaddingBottom',
+                            type: 'input',
+                            label: 'Bottom',
+                            placeholder: '12px',
+                            onChange: (bundle) => appendUnit(bundle, 'itemContentPaddingBottom'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
                         },
                     ],
                 },
@@ -114,6 +161,62 @@ export const settings = defineSettings({
         },
     ],
     style: [
+        {
+            id: 'itemsStyleSection',
+            type: 'sectionHeading',
+            label: 'Items',
+            blocks: [
+                {
+                    id: 'itemsBorderEnabled',
+                    label: 'Border',
+                    type: 'switch',
+                    defaultValue: false,
+                    on: [
+                        {
+                            id: 'itemsBorderMultiInput',
+                            type: 'multiInput',
+                            onChange: (bundle) => appendUnit(bundle, 'itemsBorderWidth'),
+                            layout: MultiInputLayout.Columns,
+                            lastItemFullWidth: true,
+                            blocks: [
+                                {
+                                    id: 'itemsBorderStyle',
+                                    type: 'dropdown',
+                                    defaultValue: 'solid',
+                                    choices: [
+                                        {
+                                            value: 'solid',
+                                            label: 'Solid',
+                                        },
+                                        {
+                                            value: 'dotted',
+                                            label: 'Dotted',
+                                        },
+                                        {
+                                            value: 'dashed',
+                                            label: 'Dashed',
+                                        },
+                                    ],
+                                },
+                                {
+                                    id: 'itemsBorderWidth',
+                                    type: 'input',
+                                    defaultValue: '1px',
+                                    rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                                    placeholder: '3px',
+                                },
+                                {
+                                    id: 'itemsBorderColor',
+                                    type: 'colorInput',
+                                    defaultValue: { r: 0, g: 0, b: 0, a: 1 },
+                                },
+                            ],
+                        },
+                    ],
+                    off: [],
+                },
+            ],
+        },
         {
             id: 'triggerSection',
             type: 'sectionHeading',
@@ -160,6 +263,55 @@ export const settings = defineSettings({
                     ],
                 },
                 {
+                    id: 'triggerBorderEnabled',
+                    label: 'Border',
+                    type: 'switch',
+                    defaultValue: false,
+                    on: [
+                        {
+                            id: 'triggerBorderMultiInput',
+                            type: 'multiInput',
+                            onChange: (bundle) => appendUnit(bundle, 'triggerBorderWidth'),
+                            layout: MultiInputLayout.Columns,
+                            lastItemFullWidth: true,
+                            blocks: [
+                                {
+                                    id: 'triggerBorderStyle',
+                                    type: 'dropdown',
+                                    defaultValue: 'solid',
+                                    choices: [
+                                        {
+                                            value: 'solid',
+                                            label: 'Solid',
+                                        },
+                                        {
+                                            value: 'dotted',
+                                            label: 'Dotted',
+                                        },
+                                        {
+                                            value: 'dashed',
+                                            label: 'Dashed',
+                                        },
+                                    ],
+                                },
+                                {
+                                    id: 'triggerBorderWidth',
+                                    type: 'input',
+                                    defaultValue: '1px',
+                                    rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                                    placeholder: '3px',
+                                },
+                                {
+                                    id: 'triggerBorderColor',
+                                    type: 'colorInput',
+                                    defaultValue: { r: 0, g: 0, b: 0, a: 1 },
+                                },
+                            ],
+                        },
+                    ],
+                    off: [],
+                },
+                {
                     id: 'triggerThicknessCustomEnabled',
                     type: 'switch',
                     label: 'Thickness',
@@ -169,7 +321,8 @@ export const settings = defineSettings({
                             id: 'triggerThicknessCustom',
                             type: 'input',
                             placeholder: '2px',
-                            rules: [minimumPixelRule(0)],
+                            onChange: (bundle) => appendUnit(bundle, 'triggerThicknessCustom'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
                         },
                     ],
                     off: [

@@ -13,5 +13,12 @@ module.exports = {
                 });
             });
         }),
+        plugin(({ matchUtilities }) => {
+            matchUtilities({
+                'border-style': (value) => ({
+                    'border-style': value,
+                }),
+            });
+        }),
     ],
 };

@@ -11,13 +11,29 @@ export const isAccordionItemEmpty = (accordionItem: AccordionItem) =>
 
 export const getAccordionRootStyles = (blockSettings: BlockSettings) =>
     ({
-        '--accordion-item-heading-padding-horizontal': blockSettings.itemHeadingPaddingHorizontal,
-        '--accordion-item-heading-padding-vertical': blockSettings.itemHeadingPaddingVertical,
-        '--accordion-item-content-padding-horizontal': blockSettings.itemContentPaddingHorizontal,
-        '--accordion-item-content-padding-vertical': blockSettings.itemContentPaddingVertical,
-        '--accordion-gap': blockSettings.itemGapCustomEnabled
-            ? blockSettings.itemGapCustom
-            : blockSettings.itemGapSimple,
+        '--accordion-item-heading-padding-top': blockSettings.itemHeadingPaddingTop,
+        '--accordion-item-heading-padding-right': blockSettings.itemHeadingPaddingRight,
+        '--accordion-item-heading-padding-bottom': blockSettings.itemHeadingPaddingBottom,
+        '--accordion-item-heading-padding-left': blockSettings.itemHeadingPaddingLeft,
+
+        '--accordion-item-content-padding-top': blockSettings.itemContentPaddingTop,
+        '--accordion-item-content-padding-right': blockSettings.itemContentPaddingRight,
+        '--accordion-item-content-padding-bottom': blockSettings.itemContentPaddingBottom,
+        '--accordion-item-content-padding-left': blockSettings.itemContentPaddingLeft,
+
+        '--accordion-items-border-disabled': blockSettings.itemsBorderEnabled ? undefined : '0',
+        '--accordion-items-border-style': blockSettings.itemsBorderStyle,
+        '--accordion-items-border-width': blockSettings.itemsBorderWidth,
+        '--accordion-items-border-color': rgbaObjectToString(blockSettings.itemsBorderColor),
+
+        '--accordion-trigger-border-disabled': blockSettings.triggerBorderEnabled ? undefined : '0',
+        '--accordion-trigger-border-style': blockSettings.triggerBorderStyle,
+        '--accordion-trigger-border-width': blockSettings.triggerBorderWidth,
+        '--accordion-trigger-border-color': rgbaObjectToString(blockSettings.triggerBorderColor),
+
+        '--accordion-items-gap': blockSettings.itemsGapCustomEnabled
+            ? blockSettings.itemsGapCustom
+            : blockSettings.itemsGapSimple,
         '--accordion-trigger-size': blockSettings.triggerSizeCustomEnabled
             ? blockSettings.triggerSizeCustom
             : blockSettings.triggerSizeSimple,

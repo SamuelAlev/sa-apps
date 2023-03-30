@@ -6,12 +6,14 @@ import { AccordionItemProps } from './types';
 type AccordionItemPopoverContentProps = {
     style: AccordionItemProps['style'];
     onStyleChange: AccordionItemProps['onStyleChange'];
+    onCloseClick: (event: MouseEvent) => void;
     onDeleteClick: (event: MouseEvent) => void;
 };
 
 export const AccordionItemPopoverContent = ({
     style,
     onStyleChange,
+    onCloseClick,
     onDeleteClick,
 }: AccordionItemPopoverContentProps): ReactElement => {
     const handleStyleChange = (newStyle: Partial<typeof style>) => {
@@ -33,9 +35,12 @@ export const AccordionItemPopoverContent = ({
                     />
                 </div>
             </div>
-            <div className="flex justify-end w-full pt-4">
+            <div className="flex justify-end w-full pt-4 gap-4">
                 <Button variant="destructive" onClick={onDeleteClick} size="lg">
                     Delete
+                </Button>
+                <Button onClick={onCloseClick} size="lg">
+                    Close
                 </Button>
             </div>
         </div>

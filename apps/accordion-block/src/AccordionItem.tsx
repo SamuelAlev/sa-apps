@@ -1,12 +1,13 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, RichTextEditor } from '@sa-apps/shared';
+import { Button, Popover, PopoverContent, PopoverTrigger, RichTextEditor, cn } from '@sa-apps/shared';
 import * as Accordion from '@radix-ui/react-accordion';
 import { MouseEvent, ReactElement, useState } from 'react';
 import { Menu } from 'lucide-react';
 
-import { AccordionItemProps } from './types';
+import type { AccordionItemProps } from './types';
 import { isAccordionItemEmpty, rgbaObjectToString } from './helpers';
 import { AccordionItemTrigger } from './AccordionItemTrigger';
 import { AccordionItemPopoverContent } from './AccordionItemPopoverContent';
+import { contentPaddingClasses, headerPaddingClasses, itemBorderClasses } from './constant';
 
 export const AccordionItem = ({
     id,
@@ -43,13 +44,10 @@ export const AccordionItem = ({
             id={id}
             data-test-id={`accordion-item-${id}`}
             value={id}
-            className="group/accordionItem"
+            className={cn('group/accordionItem', itemBorderClasses)}
             style={{ backgroundColor: style?.backgroundColor ? rgbaObjectToString(style.backgroundColor) : undefined }}
         >
-            <Accordion.Header
-                className="px-[var(--accordion-item-heading-padding-horizontal)] py-[var(--accordion-item-heading-padding-vertical)]"
-                data-test-id="accordion-item-heading"
-            >
+            <Accordion.Header className={headerPaddingClasses} data-test-id="accordion-item-heading">
                 <Accordion.Trigger
                     className="group/trigger w-full flex gap-2 items-center group ltr:flex-row rtl:flex-row-reverse"
                     data-test-id="accordion-item-trigger"
@@ -81,6 +79,7 @@ export const AccordionItem = ({
                                     <AccordionItemPopoverContent
                                         style={style}
                                         onStyleChange={handleStyleChange}
+                                        onCloseClick={() => setIsOpen(false)}
                                         onDeleteClick={handleDeleteClick}
                                     />
                                 </PopoverContent>
@@ -93,7 +92,7 @@ export const AccordionItem = ({
             </Accordion.Header>
 
             <Accordion.Content data-test-id="accordion-item-content" className="accordionContent">
-                <div className=" px-[var(--accordion-item-content-padding-horizontal)] py-[var(--accordion-item-content-padding-vertical)]">
+                <div className={contentPaddingClasses}>
                     <RichTextEditor id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
                 </div>
             </Accordion.Content>
