@@ -27,7 +27,7 @@ export const SortableItem = ({ id, children, disabled }: SortableItemProps): Rea
                 {...attributes}
                 {...listeners}
                 disabled={disabled}
-                className="disabled:hidden absolute -left-8 top-0 bottom-0 hover:cursor-grabactive:cursor-grabbing"
+                className="disabled:hidden absolute -left-8 top-0 bottom-0 hover:cursor-grab active:cursor-grabbing text-slate-700 hover:text-slate-800 active:text-slate-900"
             >
                 <GripVertical />
             </button>

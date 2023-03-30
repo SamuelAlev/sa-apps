@@ -1,4 +1,4 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, RichTextEditor, cn } from '@sa-apps/shared';
+import { Button, Popover, PopoverContent, PopoverTrigger, RichTextEditor } from '@sa-apps/shared';
 import * as Accordion from '@radix-ui/react-accordion';
 import { MouseEvent, ReactElement, useState } from 'react';
 import { Menu } from 'lucide-react';
@@ -62,23 +62,22 @@ export const AccordionItem = ({
 
                     <div className="flex flex-grow rtl:hidden" />
 
-                    {triggerDirection === 'right' && <AccordionItemTrigger icon={triggerIcon} />}
-
-                    {onDeleteClick && !isEmpty ? (
-                        <div className="relative invisible">
+                    <div className="flex gap-4 items-center">
+                        {onDeleteClick && !isEmpty && !readonly ? (
                             <Popover open={isOpen}>
                                 <PopoverTrigger
                                     onClick={handleTriggerClick}
-                                    className={cn(
-                                        'absolute -translate-y-1/2 invisible',
-                                        !readonly && 'group-hover/accordionItem:visible expanded:visible'
-                                    )}
+                                    className="invisible group-hover/accordionItem:visible expanded:visible"
                                 >
-                                    <Button variant="outline" size="sm">
+                                    <Button size="sm">
                                         <Menu className="max-w-[20px] w-[20px] max-h-[20px] h-[20px] text-inherit" />
                                     </Button>
                                 </PopoverTrigger>
-                                <PopoverContent onClick={(event) => event.stopPropagation()}>
+                                <PopoverContent
+                                    onClick={(event) => event.stopPropagation()}
+                                    onEscapeKeyDown={() => setIsOpen(false)}
+                                    onInteractOutside={() => setIsOpen(false)}
+                                >
                                     <AccordionItemPopoverContent
                                         style={style}
                                         onStyleChange={handleStyleChange}
@@ -86,16 +85,17 @@ export const AccordionItem = ({
                                     />
                                 </PopoverContent>
                             </Popover>
-                        </div>
-                    ) : null}
+                        ) : null}
+
+                        {triggerDirection === 'right' && <AccordionItemTrigger icon={triggerIcon} />}
+                    </div>
                 </Accordion.Trigger>
             </Accordion.Header>
 
-            <Accordion.Content
-                data-test-id="accordion-item-content"
-                className="accordionContent px-[var(--accordion-item-content-padding-horizontal)] py-[var(--accordion-item-content-padding-vertical)]"
-            >
-                <RichTextEditor id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
+            <Accordion.Content data-test-id="accordion-item-content" className="accordionContent">
+                <div className=" px-[var(--accordion-item-content-padding-horizontal)] py-[var(--accordion-item-content-padding-vertical)]">
+                    <RichTextEditor id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
+                </div>
             </Accordion.Content>
         </Accordion.Item>
     );
