@@ -4,7 +4,7 @@ export const debounce = <T extends unknown[], U>(callback: (...args: T) => Promi
     return (...args: T): Promise<U> => {
         clearTimeout(timer);
         return new Promise((resolve) => {
-            timer = setTimeout(() => resolve(callback(...args)), wait);
+            timer = window.setTimeout(() => resolve(callback(...args)), wait);
         });
     };
 };
