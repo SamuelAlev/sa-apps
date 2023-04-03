@@ -24,12 +24,16 @@ export const getAccordionRootStyles = (blockSettings: BlockSettings) =>
         '--accordion-items-border-disabled': blockSettings.itemsBorderEnabled ? undefined : '0',
         '--accordion-items-border-style': blockSettings.itemsBorderStyle,
         '--accordion-items-border-width': blockSettings.itemsBorderWidth,
-        '--accordion-items-border-color': rgbaObjectToString(blockSettings.itemsBorderColor),
+        '--accordion-items-border-color': blockSettings.itemsBorderColor
+            ? rgbaObjectToString(blockSettings.itemsBorderColor)
+            : undefined,
 
         '--accordion-trigger-border-disabled': blockSettings.triggerBorderEnabled ? undefined : '0',
         '--accordion-trigger-border-style': blockSettings.triggerBorderStyle,
         '--accordion-trigger-border-width': blockSettings.triggerBorderWidth,
-        '--accordion-trigger-border-color': rgbaObjectToString(blockSettings.triggerBorderColor),
+        '--accordion-trigger-border-color': blockSettings.triggerBorderColor
+            ? rgbaObjectToString(blockSettings.triggerBorderColor)
+            : undefined,
 
         '--accordion-items-gap': blockSettings.itemsGapCustomEnabled
             ? blockSettings.itemsGapCustom
