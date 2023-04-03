@@ -47,16 +47,21 @@ export const AccordionItem = ({
             className={cn('group/accordionItem', itemBorderClasses)}
             style={{ backgroundColor: style?.backgroundColor ? rgbaObjectToString(style.backgroundColor) : undefined }}
         >
-            <Accordion.Header className={headerPaddingClasses} data-test-id="accordion-item-heading">
+            <Accordion.Header data-test-id="accordion-item-heading">
                 <Accordion.Trigger
-                    className="group/trigger w-full flex gap-2 items-center group ltr:flex-row rtl:flex-row-reverse"
+                    className={cn(
+                        headerPaddingClasses,
+                        'group/trigger w-full flex gap-2 items-center group ltr:flex-row rtl:flex-row-reverse'
+                    )}
                     data-test-id="accordion-item-trigger"
                 >
                     {triggerDirection === 'left' && <AccordionItemTrigger icon={triggerIcon} />}
 
                     <div className="hidden rtl:flex rtl:flex-grow" />
 
-                    <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
+                    <div className={cn(!readonly && 'cursor-text')}>
+                        <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
+                    </div>
 
                     <div className="flex flex-grow rtl:hidden" />
 

@@ -20,8 +20,6 @@ import {
     TextStylePlugin,
     UnderlinePlugin,
     UnorderedListPlugin,
-    parseRawValue,
-    serializeRawToHtml,
 } from '@frontify/fondue';
 import { ReactElement, useMemo } from 'react';
 
@@ -68,14 +66,10 @@ export const RichTextEditor = ({
         return pluginsComposer;
     }, []);
 
-    const rawValue = JSON.stringify(parseRawValue({ raw: content }));
-    const html = serializeRawToHtml(rawValue, designTokens);
-
-    return readonly ? (
-        <div data-test-id="fondue-rich-text-editor-content" dangerouslySetInnerHTML={{ __html: html }} />
-    ) : (
-        <div onClick={(event) => !readonly && event.stopPropagation()} className="cursor-text">
+    return (
+        <div onClick={(event) => !readonly && event.stopPropagation()}>
             <FondueRichTextEditor
+                readonly={readonly}
                 id={id}
                 designTokens={designTokens}
                 value={content}
