@@ -111,6 +111,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                         }
                         onStyleChange={(value) => handleStyleChange(getNewAccordionItemId(), value)}
                         readonly={false}
+                        data-test-id="accordion-item-empty"
                         {...DEFAULT_ACCORDION_ITEM}
                     />
                 )}

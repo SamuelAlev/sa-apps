@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 export default defineConfig({
     plugins: [react()],
     test: {
-        environment: 'happy-dom',
+        environment: 'jsdom',
         coverage: {
             all: true,
             reporter: ['text', 'lcov'],

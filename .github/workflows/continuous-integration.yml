@@ -62,28 +62,28 @@ jobs:
             - name: Typecheck files
               run: pnpm typecheck
 
-    # tests:
-    #     runs-on: ubuntu-latest
-    #     timeout-minutes: 10
+    tests:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
 
-    #     steps:
-    #         - name: Checkout current commit
-    #           uses: actions/checkout@v3
+        steps:
+            - name: Checkout current commit
+              uses: actions/checkout@v3
 
-    #         - name: Use pnpm
-    #           uses: pnpm/action-setup@v2
-    #           with:
-    #               version: latest
-    #               run_install: false
+            - name: Use pnpm
+              uses: pnpm/action-setup@v2
+              with:
+                  version: latest
+                  run_install: false
 
-    #         - name: Use Node.js ${{ env.NODE_VERSION }}
-    #           uses: actions/setup-node@v3
-    #           with:
-    #               node-version: ${{ env.NODE_VERSION }}
-    #               cache: "pnpm"
+            - name: Use Node.js ${{ env.NODE_VERSION }}
+              uses: actions/setup-node@v3
+              with:
+                  node-version: ${{ env.NODE_VERSION }}
+                  cache: "pnpm"
 
-    #         - name: Install dependencies
-    #           run: pnpm install --frozen-lockfile
+            - name: Install dependencies
+              run: pnpm install --frozen-lockfile
 
-    #         - name: Test files
-    #           run: pnpm test
+            - name: Test files
+              run: pnpm test

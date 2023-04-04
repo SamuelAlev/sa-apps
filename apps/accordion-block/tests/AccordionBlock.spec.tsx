@@ -7,7 +7,7 @@ import { AccordionBlock } from '../src/AccordionBlock';
 const ACCORDION_BLOCK_TEST_ID = 'accordion-block';
 
 describe('Accordion Block', () => {
-    it('renders an accordion block', () => {
+    it('renders an empty accordion block', () => {
         const [AccordionBlockWithStubs] = withAppBridgeBlockStubs(AccordionBlock);
         const { getByTestId } = render(<AccordionBlockWithStubs />);
 

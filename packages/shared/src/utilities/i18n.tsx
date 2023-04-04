@@ -35,8 +35,6 @@ export const TranslationsProvider = <M extends Messages>({
 
     useEffect(() => {
         const handleLangChange = () => {
-            console.log('change, lang: ', document.documentElement.lang);
-
             setLanguage(document.documentElement.lang.substring(0, 2) || 'en');
         };
 
@@ -55,7 +53,7 @@ export const useTranslations = () => useContext(TranslationsContext);
 export const withTranslations =
     (messages: ComponentProps<typeof TranslationsProvider>['messages']) =>
     <P extends object>(Component: ComponentType<P>): FC<P> => {
-        return (props) => {
+        return function withTranslations(props): ReactElement {
             return (
                 <TranslationsProvider messages={messages}>
                     <Component {...(props as P)} />
