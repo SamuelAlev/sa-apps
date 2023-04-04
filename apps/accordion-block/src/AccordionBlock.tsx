@@ -15,8 +15,9 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
     const isEditing = useEditorState(appBridge);
 
-    const accordionItems = blockSettings.accordionItems ?? [{ ...DEFAULT_ACCORDION_ITEM, id: `${Date.now()}` }];
-    const isLastItemEmpty = accordionItems.length > 0 && isLastAccordionItemEmpty(accordionItems);
+    const accordionItems = blockSettings.accordionItems ?? [];
+    const isAccordionItemsEmpty = accordionItems.length === 0;
+    const isLastItemEmpty = !isAccordionItemsEmpty && isLastAccordionItemEmpty(accordionItems);
 
     const handleContentChange = (id: string, content: string) => {
         const accordionItemIndex = accordionItems.findIndex((accordionItem) => accordionItem.id === id);
@@ -98,7 +99,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                     </SortableItem>
                 ))}
 
-                {!isLastItemEmpty && isEditing && (
+                {(!isLastItemEmpty || isAccordionItemsEmpty) && isEditing && (
                     <AccordionItem
                         id={getNewAccordionItemId()}
                         triggerIcon={blockSettings.triggerIcon}
@@ -111,7 +112,6 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                         }
                         onStyleChange={(value) => handleStyleChange(getNewAccordionItemId(), value)}
                         readonly={false}
-                        data-test-id="accordion-item-empty"
                         {...DEFAULT_ACCORDION_ITEM}
                     />
                 )}

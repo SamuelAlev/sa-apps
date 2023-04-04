@@ -13,6 +13,7 @@
         "prettier:fix": "prettier --write .",
         "typecheck": "tsc --noEmit",
         "test": "vitest run",
+        "test:ui": "vitest --ui",
         "test:watch": "vitest"
     },
     "devDependencies": {
@@ -23,6 +24,7 @@
         "@types/react": "^18.0.33",
         "@types/react-dom": "^18.0.11",
         "@vitejs/plugin-react": "^3.1.0",
+        "@vitest/ui": "^0.29.8",
         "autoprefixer": "^10.4.14",
         "eslint": "^8.37.0",
         "jsdom": "^21.1.1",
@@ -35,7 +37,7 @@
         "vitest": "^0.29.8"
     },
     "dependencies": {
-        "@frontify/app-bridge": "^3.0.0-beta.60",
+        "@frontify/app-bridge": "^3.0.0-beta.61",
         "@frontify/guideline-blocks-settings": "^0.26.2",
         "@radix-ui/react-accordion": "^1.1.1",
         "@sa-apps/shared": "workspace:*",
