@@ -41,7 +41,7 @@ describe('Accordion Block', () => {
         expect(getByTestId(ACCORDION_BLOCK_TEST_ID)).toBeTruthy();
     });
 
-    it.only('renders an empty accordion when no settings and in edit mode', () => {
+    it('renders an empty accordion when no settings and in edit mode', () => {
         const date = new Date(2023, 2, 15);
         vi.setSystemTime(date);
 
