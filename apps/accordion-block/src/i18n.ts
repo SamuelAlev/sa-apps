@@ -1,4 +1,4 @@
-import { Messages } from '@sa-apps/shared';
+import { Messages } from '@sa-apps/i18n';
 
 export const messages: Messages = {
     en: {

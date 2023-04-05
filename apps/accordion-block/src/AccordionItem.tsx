@@ -1,4 +1,7 @@
-import { Button, Popover, PopoverContent, PopoverTrigger, RichTextEditor, cn } from '@sa-apps/shared';
+import { Button } from '@sa-apps/button';
+import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
+import { RichTextEditor } from '@sa-apps/rich-text-editor';
+import { cn } from '@sa-apps/utilities';
 import * as Accordion from '@radix-ui/react-accordion';
 import { MouseEvent, ReactElement, useState } from 'react';
 import { Menu } from 'lucide-react';
@@ -8,6 +11,8 @@ import { isAccordionItemEmpty, rgbaObjectToString } from './helpers';
 import { AccordionItemTrigger } from './AccordionItemTrigger';
 import { AccordionItemPopoverContent } from './AccordionItemPopoverContent';
 import { contentPaddingClasses, headerPaddingClasses, itemBorderClasses } from './constant';
+
+import css from './styles.module.css';
 
 export const AccordionItem = ({
     id,
@@ -96,7 +101,7 @@ export const AccordionItem = ({
                 </Accordion.Trigger>
             </Accordion.Header>
 
-            <Accordion.Content data-test-id="accordion-item-content" className="accordionContent">
+            <Accordion.Content data-test-id="accordion-item-content" className={css.accordionContent}>
                 <div className={contentPaddingClasses}>
                     <RichTextEditor id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
                 </div>

@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import { ChevronRight } from 'lucide-react';
-import { cn } from '@sa-apps/shared';
+import { cn } from '@sa-apps/utilities';
 
 import type { AccordionItemTriggerProps } from './types';
 import { triggerBorderClasses } from './constant';

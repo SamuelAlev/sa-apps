@@ -1,0 +1,24 @@
+{
+    "name": "@sa-apps/label",
+    "private": true,
+    "author": "Samuel Alev <samuel.alev@protonmail.com>",
+    "version": "1.0.0",
+    "sideEffects": false,
+    "main": "src/index.ts",
+    "types": "src/index.ts",
+    "dependencies": {
+        "@sa-apps/utilities": "workspace:*",
+        "@radix-ui/react-label": "^2.0.1",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "tailwindcss": "^3.3.1"
+    },
+    "devDependencies": {
+        "@frontify/eslint-config-react": "^0.15.7",
+        "@types/react": "^18.0.33",
+        "@types/react-dom": "^18.0.11",
+        "eslint": "^8.37.0",
+        "prettier": "^2.8.7",
+        "typescript": "^5.0.3"
+    }
+}

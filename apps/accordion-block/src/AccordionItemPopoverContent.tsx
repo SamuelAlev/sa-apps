@@ -1,4 +1,8 @@
-import { Button, Label, RgbaColorPicker, debounce, useTranslations } from '@sa-apps/shared';
+import { useTranslations } from '@sa-apps/i18n';
+import { RgbaColorPicker } from '@sa-apps/color-picker';
+import { debounce } from '@sa-apps/utilities';
+import { Button } from '@sa-apps/button';
+import { Label } from '@sa-apps/label';
 import { MouseEvent, ReactElement } from 'react';
 
 import { AccordionItemProps } from './types';

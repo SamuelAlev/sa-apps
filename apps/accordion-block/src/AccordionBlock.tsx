@@ -1,10 +1,9 @@
-import './styles.css';
-
 import { ReactElement } from 'react';
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';
-import { DragAndDropSortableContext, DragEndEvent, SortableItem, arrayMove } from '@sa-apps/shared';
+import { arrayMove } from '@sa-apps/utilities';
+import { DragAndDropSortableContext, DragEndEvent, SortableItem } from '@sa-apps/drag-and-drop';
 
 import { AccordionItem } from './AccordionItem';
 import { DEFAULT_ACCORDION_ITEM, DEFAULT_RTE_CONTENT, DEFAULT_RTE_HEADING } from './constant';
