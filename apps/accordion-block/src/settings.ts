@@ -1,7 +1,5 @@
 import {
-    DropdownSize,
     IconEnum,
-    MultiInputLayout,
     appendUnit,
     defineSettings,
     minimumPixelRule,
@@ -14,7 +12,7 @@ export const settings = defineSettings({
             id: 'accordion',
             type: 'dropdown',
             defaultValue: 'accordion',
-            size: DropdownSize.Large,
+            size: 'large',
             disabled: true,
             choices: [
                 {
@@ -70,7 +68,7 @@ export const settings = defineSettings({
                 {
                     id: 'itemHeadingPaddingMultiInput',
                     type: 'multiInput',
-                    layout: MultiInputLayout.Spider,
+                    layout: 'spider',
                     label: 'Padding',
                     blocks: [
                         {
@@ -121,7 +119,7 @@ export const settings = defineSettings({
                 {
                     id: 'itemContentPaddingMultiInput',
                     type: 'multiInput',
-                    layout: MultiInputLayout.Spider,
+                    layout: 'spider',
                     blocks: [
                         {
                             id: 'itemContentPaddingTop',
@@ -176,7 +174,6 @@ export const settings = defineSettings({
                             id: 'itemsBorderMultiInput',
                             type: 'multiInput',
                             onChange: (bundle) => appendUnit(bundle, 'itemsBorderWidth'),
-                            layout: MultiInputLayout.Columns,
                             lastItemFullWidth: true,
                             blocks: [
                                 {
@@ -272,7 +269,6 @@ export const settings = defineSettings({
                             id: 'triggerBorderMultiInput',
                             type: 'multiInput',
                             onChange: (bundle) => appendUnit(bundle, 'triggerBorderWidth'),
-                            layout: MultiInputLayout.Columns,
                             lastItemFullWidth: true,
                             blocks: [
                                 {
