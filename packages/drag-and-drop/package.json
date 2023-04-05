@@ -6,6 +6,11 @@
     "sideEffects": false,
     "main": "src/index.ts",
     "types": "src/index.ts",
+    "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix .",
+        "typecheck": "tsc --noEmit"
+    },
     "dependencies": {
         "@dnd-kit/core": "^6.0.8",
         "@dnd-kit/sortable": "^7.0.2",

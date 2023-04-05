@@ -26,6 +26,7 @@ import { ReactElement, useMemo } from 'react';
 type RichTextEditorProps = {
     id: string;
     readonly?: boolean;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     designTokens?: any;
     content?: string;
     placeholder?: string;
