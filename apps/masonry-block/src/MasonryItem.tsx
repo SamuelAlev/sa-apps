@@ -8,13 +8,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
 
 import type { MasonryItemProps } from './types';
 import { isMasonryItemEmpty, prepareVideoUrl, rgbaObjectToString } from './helpers';
-import {
-    DEFAULT_MASONRY_ITEM,
-    contentPaddingClasses,
-    itemBorderClasses,
-    itemCornerRadiusClasses,
-    itemsAssetFilterToStyle,
-} from './constant';
+import { DEFAULT_MASONRY_ITEM, contentPaddingClasses, itemBorderClasses, itemCornerRadiusClasses } from './constant';
 import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
 import { MasonryItemPopoverContent } from './MasonryItemPopoverContent';
 import { FileExtension, FileExtensionSets } from '@frontify/app-bridge';
@@ -68,7 +62,6 @@ export const MasonryItem = ({
         enabled: !readonly,
         onMouseUp: (height) => onStyleChange({ height }),
     });
-    console.log(id, content === DEFAULT_MASONRY_ITEM['content'], readonly);
 
     return (
         <ResizeWrapper>

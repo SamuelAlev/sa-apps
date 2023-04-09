@@ -93,7 +93,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     };
 
     return (
-        <div style={getMasonryRootStyles(blockSettings)}>
+        <div style={getMasonryRootStyles(blockSettings)} data-test-id="masonry-block">
             <DragAndDropSortableContext items={masonryItems} strategy="rect-swapping" onDragEnd={handleDragEnd}>
                 <Masonry
                     columnCount={parseInt(

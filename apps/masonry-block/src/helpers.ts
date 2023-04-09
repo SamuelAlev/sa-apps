@@ -1,8 +1,8 @@
 import { CSSProperties } from 'react';
 
 import type { BlockSettings, MasonryItem } from './types';
-import { DEFAULT_RTE_CONTENT, itemsAssetFilterToStyle } from './constant';
-import { useBlockAssets } from '@frontify/app-bridge';
+import { DEFAULT_RTE_CONTENT } from './constant';
+import type { useBlockAssets } from '@frontify/app-bridge';
 
 export const isLastMasonryItemEmpty = (
     masonryItems: MasonryItem[],
@@ -47,8 +47,6 @@ export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
         '--masonry-items-corner-radius-bottom-left': blockSettings.itemsCornerRadiusCustomEnabled
             ? blockSettings.itemsCornerRadiusCustomBottomLeft
             : blockSettings.itemsCornerRadiusSimple,
-
-        ...computeItemsAssetFiltersCssVariables(blockSettings),
     } as CSSProperties);
 
 export const getNewMasonryItemId = () => Date.now().toString();
@@ -60,14 +58,4 @@ export const prepareVideoUrl = (url: string) => {
     const urlObj = new URL(url);
     urlObj.searchParams.set('format', 'mp4');
     return urlObj.toString();
-};
-
-const computeItemsAssetFiltersCssVariables = (blockSettings: BlockSettings) => {
-    const keys = Object.keys(itemsAssetFilterToStyle[blockSettings.itemsAssetFilter]);
-    return keys.reduce((acc, key) => {
-        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-        //@ts-ignore
-        acc[`--masonry-items-asset-filter-${key}`] = itemsAssetFilterToStyle[blockSettings.itemsAssetFilter][key];
-        return acc;
-    }, {} as Record<string, string>);
 };
