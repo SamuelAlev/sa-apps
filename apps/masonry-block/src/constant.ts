@@ -1,4 +1,5 @@
-import type { MasonryItem } from './types';
+import type { CSSProperties } from 'react';
+import type { BlockSettings, MasonryItem } from './types';
 
 export const DEFAULT_RTE_CONTENT = '[{"type":"p","children":[{"text":""}]}]';
 
@@ -18,3 +19,8 @@ export const contentPaddingClasses =
 
 export const itemCornerRadiusClasses =
     'rounded-tl-[var(--masonry-items-corner-radius-top-left)] rounded-tr-[var(--masonry-items-corner-radius-top-right)] rounded-bl-[var(--masonry-items-corner-radius-bottom-left)] rounded-br-[var(--masonry-items-corner-radius-bottom-right)]';
+
+export const itemsAssetFilterToStyle: Record<BlockSettings['itemsAssetFilter'], CSSProperties> = {
+    none: {},
+    gradient: { background: 'linear-gradient(0deg, #00000088 30%, #ffffff44 100%)' },
+};

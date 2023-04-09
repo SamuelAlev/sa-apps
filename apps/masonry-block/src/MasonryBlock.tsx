@@ -63,6 +63,17 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     const handleBrowseAssetClick = (id: string) => {
         openAssetChooser(
             async (result) => {
+                const masonryItemsIndex = masonryItems.findIndex((masonryItems) => masonryItems.id === id);
+                if (masonryItemsIndex === -1) {
+                    setBlockSettings({
+                        ...blockSettings,
+                        masonryItems: [
+                            ...(blockSettings.masonryItems ? blockSettings.masonryItems : []),
+                            { ...DEFAULT_MASONRY_ITEM, id },
+                        ],
+                    });
+                }
+
                 await updateAssetIdsFromKey(`mansory-item-${id}`, [result[0].id]);
                 closeAssetChooser();
             },
@@ -101,6 +112,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                                 onDeleteClick={() => handleDeleteClick(masonryItem.id)}
                                 readonly={!isEditing}
                                 coverAsset={blockAssets[`mansory-item-${masonryItem.id}`]?.[0]}
+                                showControls={blockSettings.itemsVideoControlsEnabled}
+                                loopVideo={blockSettings.itemsVideoLoopEnabled}
+                                autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
+                                contentPosition={blockSettings.itemContentPosition}
                                 {...masonryItem}
                             />
                         </SwappableItem>
@@ -114,6 +129,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                             onBrowseAssetClick={() => handleBrowseAssetClick(getNewMasonryItemId())}
                             onUploadClick={() => handleUploadClick(getNewMasonryItemId())}
                             readonly={false}
+                            showControls={blockSettings.itemsVideoControlsEnabled}
+                            loopVideo={blockSettings.itemsVideoLoopEnabled}
+                            autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
+                            contentPosition={blockSettings.itemContentPosition}
                             {...DEFAULT_MASONRY_ITEM}
                         />
                     )}

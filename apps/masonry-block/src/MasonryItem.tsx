@@ -7,15 +7,26 @@ import { RichTextEditor } from '@sa-apps/rich-text-editor';
 import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
 
 import type { MasonryItemProps } from './types';
-import { isMasonryItemEmpty, rgbaObjectToString } from './helpers';
-import { DEFAULT_MASONRY_ITEM, contentPaddingClasses, itemBorderClasses, itemCornerRadiusClasses } from './constant';
+import { isMasonryItemEmpty, prepareVideoUrl, rgbaObjectToString } from './helpers';
+import {
+    DEFAULT_MASONRY_ITEM,
+    contentPaddingClasses,
+    itemBorderClasses,
+    itemCornerRadiusClasses,
+    itemsAssetFilterToStyle,
+} from './constant';
 import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
 import { MasonryItemPopoverContent } from './MasonryItemPopoverContent';
+import { FileExtension, FileExtensionSets } from '@frontify/app-bridge';
 
 export const MasonryItem = ({
     id,
     readonly,
     coverAsset,
+    showControls,
+    loopVideo,
+    autoPlayEnabled,
+    contentPosition,
     content,
     style,
     onUploadClick,
@@ -57,6 +68,7 @@ export const MasonryItem = ({
         enabled: !readonly,
         onMouseUp: (height) => onStyleChange({ height }),
     });
+    console.log(id, content === DEFAULT_MASONRY_ITEM['content'], readonly);
 
     return (
         <ResizeWrapper>
@@ -66,16 +78,29 @@ export const MasonryItem = ({
                     backgroundColor: style?.backgroundColor ? rgbaObjectToString(style.backgroundColor) : undefined,
                 }}
                 className={cn(
-                    'relative group/masonryItem flex flex-col overflow-auto',
+                    'relative group/masonryItem flex overflow-auto',
+                    contentPosition === 'top' ? 'flex-col-reverse' : 'flex-col',
                     itemBorderClasses,
                     itemCornerRadiusClasses
                 )}
             >
-                {coverAsset?.previewUrl && (
-                    <img
-                        draggable={false}
+                {coverAsset?.previewUrl &&
+                    !FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
+                        <img
+                            draggable={false}
+                            className="overflow-hidden select-none object-cover h-full"
+                            src={coverAsset.previewUrl}
+                        />
+                    )}
+
+                {coverAsset?.previewUrl && FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
+                    <video
                         className="overflow-hidden select-none object-cover h-full"
-                        src={coverAsset.previewUrl}
+                        draggable={false}
+                        controls={showControls}
+                        loop={loopVideo}
+                        autoPlay={autoPlayEnabled}
+                        src={prepareVideoUrl(coverAsset?.previewUrl)}
                     />
                 )}
 

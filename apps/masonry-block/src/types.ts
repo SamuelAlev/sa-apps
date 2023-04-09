@@ -11,10 +11,16 @@ export type BlockSettings = {
     columnsCountSimple: '1' | '2' | '3';
     columnsCountCustom: string;
 
+    itemContentPosition: 'top' | 'bottom';
+
     itemContentPaddingTop: string;
     itemContentPaddingRight: string;
     itemContentPaddingBottom: string;
     itemContentPaddingLeft: string;
+
+    itemsVideoAutoPlayEnabled: boolean;
+    itemsVideoLoopEnabled: boolean;
+    itemsVideoControlsEnabled: boolean;
 
     itemsBorderEnabled: boolean;
     itemsBorderStyle: 'solid' | 'dashed' | 'dotted';
@@ -41,6 +47,10 @@ export type MasonryItem = {
 
 export type MasonryItemProps = MasonryItem & {
     coverAsset?: Asset;
+    showControls: boolean;
+    loopVideo: boolean;
+    autoPlayEnabled: boolean;
+    contentPosition: BlockSettings['itemContentPosition'];
     readonly: boolean;
     onContentChange: (content: string) => void;
     onStyleChange: (style: MasonryItem['style']) => void;

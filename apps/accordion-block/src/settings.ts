@@ -120,6 +120,7 @@ export const settings = defineSettings({
                     id: 'itemContentPaddingMultiInput',
                     type: 'multiInput',
                     layout: 'spider',
+                    label: 'Padding',
                     blocks: [
                         {
                             id: 'itemContentPaddingTop',

@@ -1,7 +1,7 @@
 import { CSSProperties } from 'react';
 
 import type { BlockSettings, MasonryItem } from './types';
-import { DEFAULT_RTE_CONTENT } from './constant';
+import { DEFAULT_RTE_CONTENT, itemsAssetFilterToStyle } from './constant';
 import { useBlockAssets } from '@frontify/app-bridge';
 
 export const isLastMasonryItemEmpty = (
@@ -12,7 +12,7 @@ export const isLastMasonryItemEmpty = (
 export const isMasonryItemEmpty = (
     masonryItem: MasonryItem,
     blockAssets: ReturnType<typeof useBlockAssets>['blockAssets']
-) => masonryItem.content === DEFAULT_RTE_CONTENT && !blockAssets[`mansory-item-${masonryItem.id}`] !== undefined;
+) => masonryItem.content === DEFAULT_RTE_CONTENT && blockAssets[`mansory-item-${masonryItem.id}`] === undefined;
 
 export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
     ({
@@ -47,9 +47,27 @@ export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
         '--masonry-items-corner-radius-bottom-left': blockSettings.itemsCornerRadiusCustomEnabled
             ? blockSettings.itemsCornerRadiusCustomBottomLeft
             : blockSettings.itemsCornerRadiusSimple,
+
+        ...computeItemsAssetFiltersCssVariables(blockSettings),
     } as CSSProperties);
 
 export const getNewMasonryItemId = () => Date.now().toString();
 
 export const rgbaObjectToString = (color: { r: number; g: number; b: number; a: number }) =>
     `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})`;
+
+export const prepareVideoUrl = (url: string) => {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set('format', 'mp4');
+    return urlObj.toString();
+};
+
+const computeItemsAssetFiltersCssVariables = (blockSettings: BlockSettings) => {
+    const keys = Object.keys(itemsAssetFilterToStyle[blockSettings.itemsAssetFilter]);
+    return keys.reduce((acc, key) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        //@ts-ignore
+        acc[`--masonry-items-asset-filter-${key}`] = itemsAssetFilterToStyle[blockSettings.itemsAssetFilter][key];
+        return acc;
+    }, {} as Record<string, string>);
+};

@@ -100,9 +100,20 @@ export const settings = defineSettings({
             label: 'Content',
             blocks: [
                 {
+                    id: 'itemContentPosition',
+                    type: 'slider',
+                    label: 'Text position',
+                    defaultValue: 'bottom',
+                    choices: [
+                        { value: 'top', icon: IconEnum.ArrowAlignUp },
+                        { value: 'bottom', icon: IconEnum.ArrowAlignDown },
+                    ],
+                },
+                {
                     id: 'itemContentPaddingMultiInput',
                     type: 'multiInput',
                     layout: 'spider',
+                    label: 'Padding',
                     blocks: [
                         {
                             id: 'itemContentPaddingTop',
@@ -147,6 +158,24 @@ export const settings = defineSettings({
             type: 'sectionHeading',
             label: 'Items',
             blocks: [
+                {
+                    id: 'itemsVideoAutoPlayEnabled',
+                    label: 'Auto play videos',
+                    type: 'switch',
+                    defaultValue: true,
+                },
+                {
+                    id: 'itemsVideoLoopEnabled',
+                    label: 'Loop videos',
+                    type: 'switch',
+                    defaultValue: true,
+                },
+                {
+                    id: 'itemsVideoControlsEnabled',
+                    label: 'Show video controls',
+                    type: 'switch',
+                    defaultValue: false,
+                },
                 {
                     id: 'itemsBorderEnabled',
                     label: 'Border',
