@@ -111,7 +111,7 @@ jobs:
               run: pnpm install --frozen-lockfile
 
             - name: Deploy apps
-              uses: SamuelAlev/frontify-app-deploy@main
+              uses: SamuelAlev/frontify-app-deploy@v1.0.1
               env:
                   NODE_OPTIONS: "--max_old_space_size=7168"
               with:
