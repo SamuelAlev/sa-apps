@@ -1,5 +1,5 @@
 {
-    "name": "@sa-apps/accordion-block",
+    "name": "@sa-apps/masonry-block",
     "private": true,
     "author": "Samuel Alev <samuel.alev@protonmail.com>",
     "version": "1.0.0",
@@ -39,7 +39,6 @@
     "dependencies": {
         "@frontify/app-bridge": "^3.0.0-beta.61",
         "@frontify/guideline-blocks-settings": "^0.26.2",
-        "@radix-ui/react-accordion": "^1.1.1",
         "@sa-apps/button": "workspace:*",
         "@sa-apps/color-picker": "workspace:*",
         "@sa-apps/drag-and-drop": "workspace:*",

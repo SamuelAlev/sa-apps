@@ -36,7 +36,7 @@ export const AccordionItem = ({
     };
 
     const handleStyleChange = (newStyle: Partial<AccordionItemProps['style']>) => {
-        onStyleChange?.(newStyle);
+        onStyleChange(newStyle);
     };
 
     const handleTriggerClick = (event: MouseEvent) => {
@@ -64,9 +64,7 @@ export const AccordionItem = ({
 
                     <div className="hidden rtl:flex rtl:flex-grow" />
 
-                    <div className={cn(!readonly && 'cursor-text')}>
-                        <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
-                    </div>
+                    <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
 
                     <div className="flex flex-grow rtl:hidden" />
 

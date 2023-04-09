@@ -1,2 +1,3 @@
 export * from './DragAndDropSortableContext';
-export * from './SortableItem';
+export * from './VerticalItem';
+export * from './SwappableItem';

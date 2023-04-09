@@ -3,7 +3,7 @@ import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';
 import { arrayMove } from '@sa-apps/utilities';
-import { DragAndDropSortableContext, DragEndEvent, SortableItem } from '@sa-apps/drag-and-drop';
+import { DragAndDropSortableContext, DragEndEvent, VerticalItem } from '@sa-apps/drag-and-drop';
 
 import { AccordionItem } from './AccordionItem';
 import { DEFAULT_ACCORDION_ITEM, DEFAULT_RTE_CONTENT, DEFAULT_RTE_HEADING } from './constant';
@@ -55,8 +55,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
         const newIndex = accordionItems.findIndex((accordionItem) => accordionItem.id === over?.id);
 
         if (over && active.id !== over.id && oldIndex !== undefined && newIndex !== undefined) {
-            const newAccordionItems = structuredClone(accordionItems);
-            setBlockSettings({ ...blockSettings, accordionItems: arrayMove(newAccordionItems, oldIndex, newIndex) });
+            setBlockSettings({ ...blockSettings, accordionItems: arrayMove(accordionItems, oldIndex, newIndex) });
         }
     };
 
@@ -72,19 +71,15 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
     };
 
     return (
-        <DragAndDropSortableContext items={accordionItems} onDragEnd={handleDragEnd}>
+        <DragAndDropSortableContext strategy="vertical-list" items={accordionItems} onDragEnd={handleDragEnd}>
             <Accordion.Root
                 {...(blockSettings.accordionMultiple ? { type: 'multiple' } : { type: 'single', collapsible: true })}
                 style={getAccordionRootStyles(blockSettings)}
                 className="flex flex-col gap-[var(--accordion-items-gap)]"
                 data-test-id="accordion-block"
             >
-                {accordionItems.map((accordionItem, index) => (
-                    <SortableItem
-                        key={accordionItem.id}
-                        id={accordionItem.id}
-                        disabled={(index === accordionItems.length && isEditing) || !isEditing}
-                    >
+                {accordionItems.map((accordionItem) => (
+                    <VerticalItem key={accordionItem.id} id={accordionItem.id} disabled={!isEditing}>
                         <AccordionItem
                             triggerIcon={blockSettings.triggerIcon}
                             triggerDirection={blockSettings.triggerDirection}
@@ -95,7 +90,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                             readonly={!isEditing}
                             {...accordionItem}
                         />
-                    </SortableItem>
+                    </VerticalItem>
                 ))}
 
                 {(!isLastItemEmpty || isAccordionItemsEmpty) && isEditing && (

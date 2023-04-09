@@ -3,20 +3,20 @@ import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
 
-type SortableItemProps = {
+type VerticalItemProps = {
     id: string;
     children: ReactNode;
     disabled?: boolean;
 };
 
-export const SortableItem = ({ id, children, disabled }: SortableItemProps): ReactElement => {
+export const VerticalItem = ({ id, children, disabled }: VerticalItemProps): ReactElement => {
     const { attributes, listeners, setNodeRef, transform, transition, setDraggableNodeRef } = useSortable({
         id,
         disabled,
     });
 
     const style = {
-        transform: CSS.Transform.toString(transform),
+        transform: CSS.Translate.toString(transform),
         transition,
     };
 
@@ -36,4 +36,4 @@ export const SortableItem = ({ id, children, disabled }: SortableItemProps): Rea
         </div>
     );
 };
-SortableItem.displayName = 'SASortableItem';
+VerticalItem.displayName = 'SAVerticalItem';

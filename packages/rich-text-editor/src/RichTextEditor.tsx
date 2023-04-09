@@ -22,6 +22,7 @@ import {
     UnorderedListPlugin,
 } from '@frontify/fondue';
 import { ReactElement, useMemo } from 'react';
+import { cn } from '@sa-apps/utilities';
 
 type RichTextEditorProps = {
     id: string;
@@ -36,7 +37,7 @@ type RichTextEditorProps = {
 export const RichTextEditor = ({
     readonly = false,
     id,
-    designTokens,
+    // designTokens,
     content = '',
     placeholder = 'Enter your text...',
     onTextChange,
@@ -64,15 +65,20 @@ export const RichTextEditor = ({
             new ResetFormattingPlugin(),
             new EmojiPlugin(),
         ]);
+
         return pluginsComposer;
     }, []);
 
     return (
-        <div onClick={(event) => !readonly && event.stopPropagation()}>
+        <div
+            data-no-dnd={true}
+            onClick={(event) => !readonly && event.stopPropagation()}
+            className={cn(!readonly && 'cursor-text', 'w-full items-start [&]:text-left')}
+        >
             <FondueRichTextEditor
                 readonly={readonly}
                 id={id}
-                designTokens={designTokens}
+                // designTokens={designTokens}
                 value={content}
                 border={false}
                 placeholder={placeholder}
@@ -83,4 +89,4 @@ export const RichTextEditor = ({
         </div>
     );
 };
-RichTextEditor.displayName = 'RichTextEditor';
+RichTextEditor.displayName = 'SARichTextEditor';
