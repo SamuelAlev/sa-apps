@@ -234,7 +234,6 @@ export const settings = defineSettings({
                         {
                             id: 'itemsCornerRadiusMultiInput',
                             type: 'multiInput',
-                            lastItemFullWidth: true,
                             blocks: [
                                 {
                                     id: 'itemsCornerRadiusCustomTopLeft',
@@ -283,6 +282,18 @@ export const settings = defineSettings({
                                 { value: '12px', label: 'L' },
                             ],
                         },
+                    ],
+                },
+                {
+                    id: 'itemsBoxShadow',
+                    type: 'slider',
+                    label: 'Box shadow',
+                    defaultValue: 'medium',
+                    choices: [
+                        { value: 'none', label: 'None' },
+                        { value: 'small', label: 'S' },
+                        { value: 'medium', label: 'M' },
+                        { value: 'large', label: 'L' },
                     ],
                 },
             ],

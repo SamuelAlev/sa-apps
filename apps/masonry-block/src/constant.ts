@@ -1,4 +1,4 @@
-import type { MasonryItem } from './types';
+import type { BlockSettings, MasonryItem } from './types';
 
 export const DEFAULT_RTE_CONTENT = '[{"type":"p","children":[{"text":""}]}]';
 
@@ -6,7 +6,7 @@ export const DEFAULT_MASONRY_ITEM: Omit<MasonryItem, 'id'> = {
     content: DEFAULT_RTE_CONTENT,
     style: {
         height: 400,
-        backgroundColor: { r: 50, g: 50, b: 50, a: 1 },
+        backgroundColor: { r: 247, g: 247, b: 247, a: 1 },
     },
 };
 
@@ -18,3 +18,10 @@ export const contentPaddingClasses =
 
 export const itemCornerRadiusClasses =
     'rounded-tl-[var(--masonry-items-corner-radius-top-left)] rounded-tr-[var(--masonry-items-corner-radius-top-right)] rounded-bl-[var(--masonry-items-corner-radius-bottom-left)] rounded-br-[var(--masonry-items-corner-radius-bottom-right)]';
+
+export const itemBoxShadowClasses: Record<BlockSettings['itemsBoxShadow'], string> = {
+    none: '',
+    small: 'shadow',
+    medium: 'shadow-md',
+    large: 'shadow-lg',
+};

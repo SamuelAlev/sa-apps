@@ -12,7 +12,7 @@ export const isLastMasonryItemEmpty = (
 export const isMasonryItemEmpty = (
     masonryItem: MasonryItem,
     blockAssets: ReturnType<typeof useBlockAssets>['blockAssets']
-) => masonryItem.content === DEFAULT_RTE_CONTENT && blockAssets[`mansory-item-${masonryItem.id}`] === undefined;
+) => masonryItem.content === DEFAULT_RTE_CONTENT && blockAssets[`masonry-item-${masonryItem.id}`] === undefined;
 
 export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
     ({

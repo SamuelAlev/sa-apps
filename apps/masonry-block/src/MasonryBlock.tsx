@@ -74,10 +74,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                     });
                 }
 
-                await updateAssetIdsFromKey(`mansory-item-${id}`, [result[0].id]);
+                await updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]);
                 closeAssetChooser();
             },
-            { selectedValueId: blockAssets[`mansory-item-${id}`]?.[0]?.id }
+            { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id }
         );
     };
 
@@ -111,11 +111,12 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                                 onUploadClick={() => handleUploadClick(masonryItem.id)}
                                 onDeleteClick={() => handleDeleteClick(masonryItem.id)}
                                 readonly={!isEditing}
-                                coverAsset={blockAssets[`mansory-item-${masonryItem.id}`]?.[0]}
+                                coverAsset={blockAssets[`masonry-item-${masonryItem.id}`]?.[0]}
                                 showControls={blockSettings.itemsVideoControlsEnabled}
                                 loopVideo={blockSettings.itemsVideoLoopEnabled}
                                 autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
                                 contentPosition={blockSettings.itemContentPosition}
+                                boxShadow={blockSettings.itemsBoxShadow}
                                 {...masonryItem}
                             />
                         </SwappableItem>
@@ -133,6 +134,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                             loopVideo={blockSettings.itemsVideoLoopEnabled}
                             autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
                             contentPosition={blockSettings.itemContentPosition}
+                            boxShadow={blockSettings.itemsBoxShadow}
                             {...DEFAULT_MASONRY_ITEM}
                         />
                     )}

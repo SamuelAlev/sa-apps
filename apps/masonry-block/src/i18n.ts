@@ -2,13 +2,15 @@ import { Messages } from '@sa-apps/i18n';
 
 export const messages: Messages = {
     en: {
-        style: 'Styles',
-        styleDescription: 'Choose a style for your accordion',
+        styles: 'Styles',
+        stylesDescription: 'Choose a style for your masonry grid',
         backgroundColor: 'Background color',
         delete: 'Delete',
         close: 'Close',
-        upload: 'Upload',
-        browse: 'Browse',
+        cancel: 'Cancel',
+        item: 'Item',
+        deleteItemQuestion: 'Delete item?',
+        areYouSureDeleteItem: 'Are you sure you want to delete this item from this grid?',
     },
     ar: {},
     zh: {},

@@ -33,6 +33,8 @@ export type BlockSettings = {
     itemsCornerRadiusCustomTopRight: string;
     itemsCornerRadiusCustomBottomRight: string;
     itemsCornerRadiusCustomBottomLeft: string;
+
+    itemsBoxShadow: 'none' | 'small' | 'medium' | 'large';
 };
 
 export type MasonryItem = {
@@ -50,6 +52,7 @@ export type MasonryItemProps = MasonryItem & {
     showControls: boolean;
     loopVideo: boolean;
     autoPlayEnabled: boolean;
+    boxShadow: BlockSettings['itemsBoxShadow'];
     contentPosition: BlockSettings['itemContentPosition'];
     readonly: boolean;
     onContentChange: (content: string) => void;
