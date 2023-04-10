@@ -1,5 +1,5 @@
 export const init = (id: string) => {
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
         if (window.clarity) {
             resolve();
         }
