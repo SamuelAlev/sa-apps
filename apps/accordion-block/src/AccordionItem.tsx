@@ -1,15 +1,12 @@
-import { Button } from '@sa-apps/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
 import { RichTextEditor } from '@sa-apps/rich-text-editor';
 import { cn } from '@sa-apps/utilities';
 import * as Accordion from '@radix-ui/react-accordion';
-import { MouseEvent, ReactElement, useState } from 'react';
-import { Menu } from 'lucide-react';
+import { ReactElement } from 'react';
 
 import type { AccordionItemProps } from './types';
 import { isAccordionItemEmpty, rgbaObjectToString } from './helpers';
 import { AccordionItemTrigger } from './AccordionItemTrigger';
-import { AccordionItemPopoverContent } from './AccordionItemPopoverContent';
+import { AccordionItemMenu } from './AccordionItemMenu';
 import { contentPaddingClasses, headerPaddingClasses, itemBorderClasses } from './constant';
 
 import css from './styles.module.css';
@@ -27,21 +24,14 @@ export const AccordionItem = ({
     onStyleChange,
     onDeleteClick,
 }: AccordionItemProps): ReactElement => {
-    const [isOpen, setIsOpen] = useState(false);
     const isEmpty = isAccordionItemEmpty({ id, heading, content });
 
-    const handleDeleteClick = (event: MouseEvent) => {
-        event.stopPropagation();
+    const handleDeleteClick = () => {
         onDeleteClick?.();
     };
 
     const handleStyleChange = (newStyle: Partial<AccordionItemProps['style']>) => {
         onStyleChange(newStyle);
-    };
-
-    const handleTriggerClick = (event: MouseEvent) => {
-        event.stopPropagation();
-        setIsOpen((isOpen) => !isOpen);
     };
 
     return (
@@ -70,28 +60,11 @@ export const AccordionItem = ({
 
                     <div className="flex gap-4 items-center">
                         {onDeleteClick && !isEmpty && !readonly ? (
-                            <Popover open={isOpen}>
-                                <PopoverTrigger
-                                    onClick={handleTriggerClick}
-                                    className="invisible group-hover/accordionItem:visible expanded:visible"
-                                >
-                                    <Button size="sm">
-                                        <Menu className="max-w-[20px] w-[20px] max-h-[20px] h-[20px] text-inherit" />
-                                    </Button>
-                                </PopoverTrigger>
-                                <PopoverContent
-                                    onClick={(event) => event.stopPropagation()}
-                                    onEscapeKeyDown={() => setIsOpen(false)}
-                                    onInteractOutside={() => setIsOpen(false)}
-                                >
-                                    <AccordionItemPopoverContent
-                                        style={style}
-                                        onStyleChange={handleStyleChange}
-                                        onCloseClick={() => setIsOpen(false)}
-                                        onDeleteClick={handleDeleteClick}
-                                    />
-                                </PopoverContent>
-                            </Popover>
+                            <AccordionItemMenu
+                                style={style}
+                                onStyleChange={handleStyleChange}
+                                onDeleteClick={handleDeleteClick}
+                            />
                         ) : null}
 
                         {triggerDirection === 'right' && <AccordionItemTrigger icon={triggerIcon} />}

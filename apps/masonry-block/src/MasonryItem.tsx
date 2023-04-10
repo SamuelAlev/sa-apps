@@ -49,7 +49,7 @@ export const MasonryItem = ({
     };
 
     const handleStyleChange: MasonryItemProps['onStyleChange'] = (style) => {
-        onStyleChange?.(style);
+        onStyleChange(style);
     };
 
     const { height, ResizeHandle, ResizeWrapper } = useDraggableHeightHandle({
