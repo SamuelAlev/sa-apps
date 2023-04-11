@@ -6,7 +6,6 @@ on:
             - main
 
 env:
-    FRONTIFY_INSTANCE_DOMAIN: "company-241204.frontify.com"
     NODE_VERSION: 18
 
 jobs:

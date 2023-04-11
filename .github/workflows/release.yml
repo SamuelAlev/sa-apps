@@ -4,7 +4,7 @@ on:
     workflow_dispatch:
 
 env:
-    FRONTIFY_INSTANCE_DOMAIN: "company-241204.frontify.com"
+    FRONTIFY_INSTANCE_DOMAIN: "frontify.alev.cloud"
     NODE_VERSION: 18
 
 jobs:
