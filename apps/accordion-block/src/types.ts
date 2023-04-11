@@ -7,11 +7,15 @@ export type BlockSettings = {
     itemsGapSimple?: '0px' | '8px' | '16px' | '24px';
     itemsGapCustom?: string;
 
+    itemHeadingPaddingCustomEnabled: boolean;
+    itemHeadingPaddingSimple: '0px' | '12px' | '24px' | '32px';
     itemHeadingPaddingTop: string;
     itemHeadingPaddingRight: string;
     itemHeadingPaddingBottom: string;
     itemHeadingPaddingLeft: string;
 
+    itemContentPaddingCustomEnabled: boolean;
+    itemContentPaddingSimple: '0px' | '12px' | '24px' | '32px';
     itemContentPaddingTop: string;
     itemContentPaddingRight: string;
     itemContentPaddingBottom: string;

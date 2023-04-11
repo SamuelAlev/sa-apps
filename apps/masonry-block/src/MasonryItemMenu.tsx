@@ -24,17 +24,23 @@ import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
 import { RgbaColorPicker } from '@sa-apps/color-picker';
 import { Label } from '@sa-apps/label';
 import { debounce } from '@sa-apps/utilities';
-import { Menu, Paintbrush2, Trash } from 'lucide-react';
+import { Menu, Paintbrush2, Trash, Unlink } from 'lucide-react';
 
 import { MasonryItemProps } from './types';
 
 type MasonryItemMenuProps = {
     style: MasonryItemProps['style'];
     onStyleChange: MasonryItemProps['onStyleChange'];
+    onUnlinkAsset: MasonryItemProps['onUnlinkAsset'];
     onDeleteClick: MasonryItemProps['onDeleteClick'];
 };
 
-export const MasonryItemMenu = ({ style, onStyleChange, onDeleteClick }: MasonryItemMenuProps): ReactElement => {
+export const MasonryItemMenu = ({
+    style,
+    onStyleChange,
+    onUnlinkAsset,
+    onDeleteClick,
+}: MasonryItemMenuProps): ReactElement => {
     const { t } = useTranslations();
     const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
     const [isStylePopoverOpen, setIsStylePopoverOpen] = useState(false);
@@ -66,6 +72,10 @@ export const MasonryItemMenu = ({ style, onStyleChange, onDeleteClick }: Masonry
         onStyleChange(newStyle);
     };
 
+    const handleDropdownUnlinkAssetClick = () => {
+        onUnlinkAsset();
+    };
+
     const handlePopoverClickOutside = (target: EventTarget | null) => {
         if (target === itemDropdownRef.current) {
             return;
@@ -91,6 +101,11 @@ export const MasonryItemMenu = ({ style, onStyleChange, onDeleteClick }: Masonry
                         <DropdownMenuItem onClick={handleDropdownStyleClick}>
                             <Paintbrush2 className="mr-2 h-4 w-4" />
                             {t('styles')}
+                        </DropdownMenuItem>
+                        <DropdownMenuSeparator />
+                        <DropdownMenuItem onClick={handleDropdownUnlinkAssetClick}>
+                            <Unlink className="mr-2 h-4 w-4" />
+                            {t('unlinkAsset')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem

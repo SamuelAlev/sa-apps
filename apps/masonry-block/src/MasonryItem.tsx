@@ -5,7 +5,7 @@ import { Dropzone } from '@sa-apps/dropzone';
 import { FileExtension, FileExtensionSets } from '@frontify/app-bridge';
 
 import type { MasonryItemProps } from './types';
-import { isMasonryItemEmpty, prepareVideoUrl, rgbaObjectToString } from './helpers';
+import { isMasonryItemEmpty, prepareImageUrl, prepareVideoUrl, rgbaObjectToString } from './helpers';
 import {
     DEFAULT_MASONRY_ITEM,
     contentPaddingClasses,
@@ -15,6 +15,7 @@ import {
 } from './constant';
 import { useDraggableHeightHandle } from './utilities';
 import { MasonryItemMenu } from './MasonryItemMenu';
+import { Video } from './Video';
 
 export const MasonryItem = ({
     id,
@@ -31,6 +32,7 @@ export const MasonryItem = ({
     onBrowseAssetClick,
     onContentChange,
     onStyleChange,
+    onUnlinkAsset,
     onDeleteClick,
 }: MasonryItemProps): ReactElement => {
     const isEmpty = isMasonryItemEmpty({ id, content }, coverAsset ? { [`masonry-item-${id}`]: [coverAsset] } : {});
@@ -42,6 +44,10 @@ export const MasonryItem = ({
 
     const handleBrowseAssetClick = () => {
         onBrowseAssetClick();
+    };
+
+    const handleUnlinkAsset = () => {
+        onUnlinkAsset();
     };
 
     const handleDeleteClick = () => {
@@ -79,18 +85,18 @@ export const MasonryItem = ({
                         <img
                             draggable={false}
                             className="overflow-hidden select-none object-cover h-full flex-grow"
-                            src={coverAsset.previewUrl}
+                            src={prepareImageUrl(coverAsset.previewUrl)}
                         />
                     )}
 
                 {coverAsset?.previewUrl && FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
-                    <video
+                    <Video
                         className="overflow-hidden select-none object-cover h-full flex-grow"
                         draggable={false}
                         controls={showControls}
                         loop={loopVideo}
                         autoPlay={autoPlayEnabled}
-                        src={prepareVideoUrl(coverAsset?.previewUrl)}
+                        src={prepareVideoUrl(coverAsset.previewUrl)}
                     />
                 )}
 
@@ -106,6 +112,7 @@ export const MasonryItem = ({
                     <MasonryItemMenu
                         style={style}
                         onStyleChange={handleStyleChange}
+                        onUnlinkAsset={handleUnlinkAsset}
                         onDeleteClick={handleDeleteClick}
                     />
                 ) : null}

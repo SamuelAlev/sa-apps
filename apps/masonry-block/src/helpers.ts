@@ -20,10 +20,18 @@ export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
             ? blockSettings.itemsGapCustom
             : blockSettings.itemsGapSimple,
 
-        '--masonry-item-content-padding-top': blockSettings.itemContentPaddingTop,
-        '--masonry-item-content-padding-right': blockSettings.itemContentPaddingRight,
-        '--masonry-item-content-padding-bottom': blockSettings.itemContentPaddingBottom,
-        '--masonry-item-content-padding-left': blockSettings.itemContentPaddingLeft,
+        '--masonry-item-content-padding-top': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingTop
+            : blockSettings.itemContentPaddingSimple,
+        '--masonry-item-content-padding-right': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingRight
+            : blockSettings.itemContentPaddingSimple,
+        '--masonry-item-content-padding-bottom': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingBottom
+            : blockSettings.itemContentPaddingSimple,
+        '--masonry-item-content-padding-left': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingLeft
+            : blockSettings.itemContentPaddingSimple,
 
         '--masonry-items-border-disabled': blockSettings.itemsBorderEnabled ? undefined : '0',
         '--masonry-items-border-style': blockSettings.itemsBorderStyle,
@@ -57,5 +65,12 @@ export const rgbaObjectToString = (color: { r: number; g: number; b: number; a: 
 export const prepareVideoUrl = (url: string) => {
     const urlObj = new URL(url);
     urlObj.searchParams.set('format', 'mp4');
+    return urlObj.toString();
+};
+
+export const prepareImageUrl = (url: string) => {
+    const urlObj = new URL(url);
+    urlObj.searchParams.set('width', '1280');
+    urlObj.searchParams.set('format', 'webp');
     return urlObj.toString();
 };

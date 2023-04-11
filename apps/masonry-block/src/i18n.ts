@@ -11,6 +11,7 @@ export const messages: Messages = {
         item: 'Item',
         deleteItemQuestion: 'Delete item?',
         areYouSureDeleteItem: 'Are you sure you want to delete this item from this grid?',
+        unlinkAsset: 'Unlink asset',
     },
     ar: {},
     zh: {},

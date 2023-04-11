@@ -13,6 +13,8 @@ export type BlockSettings = {
 
     itemContentPosition: 'top' | 'bottom';
 
+    itemContentPaddingCustomEnabled: boolean;
+    itemContentPaddingSimple: '0px' | '12px' | '24px' | '32px';
     itemContentPaddingTop: string;
     itemContentPaddingRight: string;
     itemContentPaddingBottom: string;
@@ -59,5 +61,6 @@ export type MasonryItemProps = MasonryItem & {
     onStyleChange: (style: MasonryItem['style']) => void;
     onDeleteClick?: () => void;
     onUploadClick: () => void;
+    onUnlinkAsset: () => void;
     onBrowseAssetClick: () => void;
 };

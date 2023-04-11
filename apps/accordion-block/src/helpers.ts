@@ -11,15 +11,31 @@ export const isAccordionItemEmpty = (accordionItem: AccordionItem) =>
 
 export const getAccordionRootStyles = (blockSettings: BlockSettings) =>
     ({
-        '--accordion-item-heading-padding-top': blockSettings.itemHeadingPaddingTop,
-        '--accordion-item-heading-padding-right': blockSettings.itemHeadingPaddingRight,
-        '--accordion-item-heading-padding-bottom': blockSettings.itemHeadingPaddingBottom,
-        '--accordion-item-heading-padding-left': blockSettings.itemHeadingPaddingLeft,
+        '--accordion-item-heading-padding-top': blockSettings.itemHeadingPaddingCustomEnabled
+            ? blockSettings.itemHeadingPaddingTop
+            : blockSettings.itemHeadingPaddingSimple,
+        '--accordion-item-heading-padding-right': blockSettings.itemHeadingPaddingCustomEnabled
+            ? blockSettings.itemHeadingPaddingRight
+            : blockSettings.itemHeadingPaddingSimple,
+        '--accordion-item-heading-padding-bottom': blockSettings.itemHeadingPaddingCustomEnabled
+            ? blockSettings.itemHeadingPaddingBottom
+            : blockSettings.itemHeadingPaddingSimple,
+        '--accordion-item-heading-padding-left': blockSettings.itemHeadingPaddingCustomEnabled
+            ? blockSettings.itemHeadingPaddingLeft
+            : blockSettings.itemHeadingPaddingSimple,
 
-        '--accordion-item-content-padding-top': blockSettings.itemContentPaddingTop,
-        '--accordion-item-content-padding-right': blockSettings.itemContentPaddingRight,
-        '--accordion-item-content-padding-bottom': blockSettings.itemContentPaddingBottom,
-        '--accordion-item-content-padding-left': blockSettings.itemContentPaddingLeft,
+        '--accordion-item-content-padding-top': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingTop
+            : blockSettings.itemContentPaddingSimple,
+        '--accordion-item-content-padding-right': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingRight
+            : blockSettings.itemContentPaddingSimple,
+        '--accordion-item-content-padding-bottom': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingBottom
+            : blockSettings.itemContentPaddingSimple,
+        '--accordion-item-content-padding-left': blockSettings.itemContentPaddingCustomEnabled
+            ? blockSettings.itemContentPaddingLeft
+            : blockSettings.itemContentPaddingSimple,
 
         '--accordion-items-border-disabled': blockSettings.itemsBorderEnabled ? undefined : '0',
         '--accordion-items-border-style': blockSettings.itemsBorderStyle,

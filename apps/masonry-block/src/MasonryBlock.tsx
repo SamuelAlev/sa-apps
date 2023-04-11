@@ -12,7 +12,7 @@ import { getMasonryRootStyles, getNewMasonryItemId, isLastMasonryItemEmpty } fro
 
 export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
-    const { blockAssets, updateAssetIdsFromKey } = useBlockAssets(appBridge);
+    const { blockAssets, updateAssetIdsFromKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge);
     const { openAssetChooser, closeAssetChooser } = useAssetChooser(appBridge);
     const isEditing = useEditorState(appBridge);
 
@@ -53,6 +53,13 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 masonryItems: arraySwap(newMasonryItems, oldIndex, newIndex),
             });
         }
+    };
+
+    const handleUnlinkAssetClick = (id: string) => {
+        deleteAssetIdsFromKey(
+            `masonry-item-${id}`,
+            blockAssets[`masonry-item-${id}`]?.map((asset) => asset.id)
+        );
     };
 
     const handleUploadClick = (id: string) => {
@@ -109,6 +116,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                                 onStyleChange={(value) => handleStyleChange(masonryItem.id, value)}
                                 onBrowseAssetClick={() => handleBrowseAssetClick(masonryItem.id)}
                                 onUploadClick={() => handleUploadClick(masonryItem.id)}
+                                onUnlinkAsset={() => handleUnlinkAssetClick(masonryItem.id)}
                                 onDeleteClick={() => handleDeleteClick(masonryItem.id)}
                                 readonly={!isEditing}
                                 coverAsset={blockAssets[`masonry-item-${masonryItem.id}`]?.[0]}
@@ -126,9 +134,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                         <MasonryItem
                             id={getNewMasonryItemId()}
                             onContentChange={(value) => handleContentChange(getNewMasonryItemId(), value)}
-                            onStyleChange={(value) => handleStyleChange(getNewMasonryItemId(), value)}
                             onBrowseAssetClick={() => handleBrowseAssetClick(getNewMasonryItemId())}
                             onUploadClick={() => handleUploadClick(getNewMasonryItemId())}
+                            onStyleChange={() => null}
+                            onUnlinkAsset={() => null}
                             readonly={false}
                             showControls={blockSettings.itemsVideoControlsEnabled}
                             loopVideo={blockSettings.itemsVideoLoopEnabled}
