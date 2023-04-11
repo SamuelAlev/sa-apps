@@ -42,6 +42,9 @@ importers:
       '@sa-apps/rich-text-editor':
         specifier: workspace:*
         version: link:../../packages/rich-text-editor
+      '@sa-apps/text-input':
+        specifier: workspace:*
+        version: link:../../packages/text-input
       '@sa-apps/tracking':
         specifier: workspace:*
         version: link:../../packages/tracking
@@ -151,6 +154,9 @@ importers:
       '@sa-apps/rich-text-editor':
         specifier: workspace:*
         version: link:../../packages/rich-text-editor
+      '@sa-apps/text-input':
+        specifier: workspace:*
+        version: link:../../packages/text-input
       '@sa-apps/tracking':
         specifier: workspace:*
         version: link:../../packages/tracking

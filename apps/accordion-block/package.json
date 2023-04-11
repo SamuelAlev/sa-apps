@@ -49,6 +49,7 @@
         "@sa-apps/label": "workspace:*",
         "@sa-apps/popover": "workspace:*",
         "@sa-apps/rich-text-editor": "workspace:*",
+        "@sa-apps/text-input": "workspace:*",
         "@sa-apps/tracking": "workspace:*",
         "@sa-apps/utilities": "workspace:*",
         "lucide-react": "^0.138.0",

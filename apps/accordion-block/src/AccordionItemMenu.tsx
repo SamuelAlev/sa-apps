@@ -21,9 +21,10 @@ import {
 } from '@sa-apps/dropdown-menu';
 import { useTranslations } from '@sa-apps/i18n';
 import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
-import { RgbaColorPicker } from '@sa-apps/color-picker';
+import { RgbaColorPicker, RgbaColorPickerProps } from '@sa-apps/color-picker';
 import { Label } from '@sa-apps/label';
-import { debounce } from '@sa-apps/utilities';
+import { debounce, hex8ToRgbaObject, rgbaObjectToHex8 } from '@sa-apps/utilities';
+import { TextInput } from '@sa-apps/text-input';
 import { Menu, Paintbrush2, Trash } from 'lucide-react';
 
 import { AccordionItemProps } from './types';
@@ -39,6 +40,9 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
     const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
     const [isStylePopoverOpen, setIsStylePopoverOpen] = useState(false);
     const itemDropdownRef = useRef<HTMLButtonElement>(null);
+    const [localBackgroundColor, setLocalBackgroundColor] = useState<RgbaColorPickerProps['color'] | undefined>(
+        style?.backgroundColor
+    );
 
     const handleModalCancelClick = () => {
         setIsDeleteAlertOpen(false);
@@ -108,25 +112,34 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
                         onInteractOutside={(event) => handlePopoverClickOutside(event.target)}
                         onClick={(event) => event.stopPropagation()}
                     >
-                        <div className="grid gap-4">
+                        <div className="flex flex-col gap-8">
                             <div className="space-y-2">
-                                <h4 className="font-medium leading-none">{t('styles')}</h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-400">{t('stylesDescription')}.</p>
+                                <h4 className="font-medium leading-none dark:text-slate-50">{t('styles')}</h4>
+                                <p className="text-sm text-slate-500 dark:text-slate-50">{t('stylesDescription')}.</p>
                             </div>
-                            <div className="grid gap-2">
-                                <div className="grid grid-cols-3 items-center gap-4">
+                            <div className="flex flex-col gap-2">
+                                <div className="flex flex-col gap-4 w-full">
                                     <Label>{t('backgroundColor')}</Label>
                                     <RgbaColorPicker
                                         color={style?.backgroundColor ?? { r: 0, g: 0, b: 0, a: 1 }}
-                                        onColorChange={debounce(
-                                            (backgroundColor) => handleStyleChange({ backgroundColor }),
-                                            300
-                                        )}
+                                        onColorChange={debounce((backgroundColor) => {
+                                            setLocalBackgroundColor(backgroundColor);
+                                            handleStyleChange({ backgroundColor });
+                                        }, 300)}
+                                    />
+                                    <TextInput
+                                        className="w-[calc(100%-24px)]"
+                                        value={
+                                            localBackgroundColor ? rgbaObjectToHex8(localBackgroundColor) : undefined
+                                        }
+                                        onChange={(event) =>
+                                            handleStyleChange({ backgroundColor: hex8ToRgbaObject(event.target.value) })
+                                        }
                                     />
                                 </div>
                             </div>
                             <div className="flex justify-end w-full pt-4">
-                                <Button onClick={handlePopoverCancelClick} size="lg" variant="default">
+                                <Button onClick={handlePopoverCancelClick} size="lg">
                                     {t('close')}
                                 </Button>
                             </div>

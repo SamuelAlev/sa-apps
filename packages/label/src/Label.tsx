@@ -7,7 +7,7 @@ export const Label = forwardRef<HTMLLabelElement, ComponentPropsWithoutRef<typeo
         <LabelPrimitive.Root
             ref={ref}
             className={cn(
-                'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70',
+                'text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 dark:text-slate-50',
                 className
             )}
             {...props}
