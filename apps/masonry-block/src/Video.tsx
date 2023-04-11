@@ -23,6 +23,14 @@ export const Video = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoE
 
     return (
         <>
+            {state === 'init' && (
+                <img
+                    draggable={false}
+                    className="overflow-hidden select-none object-cover h-full flex-grow"
+                    src={props?.src ? prepareImageUrl(props.src) : undefined}
+                />
+            )}
+
             {state === 'loading' && (
                 <div className="h-full w-full flex items-center justify-center relative">
                     <img
