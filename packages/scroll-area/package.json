@@ -1,5 +1,5 @@
 {
-    "name": "@sa-apps/alert-dialog",
+    "name": "@sa-apps/scroll-area",
     "private": true,
     "author": "Samuel Alev <samuel.alev@protonmail.com>",
     "version": "1.0.0",
@@ -12,7 +12,7 @@
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
-        "@radix-ui/react-alert-dialog": "^1.0.3",
+        "@radix-ui/react-scroll-area": "^1.0.3",
         "@sa-apps/utilities": "workspace:*",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
