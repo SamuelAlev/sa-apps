@@ -1,3 +1,17 @@
+.t-container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 1.5rem;
+    padding-left: 1.5rem;
+}
+
+@media (min-width: 1440px) {
+    .t-container {
+        max-width: 1440px;
+    }
+}
+
 .co-powerbar__frontify {
     height: theme('spacing.16');
     transition: none;

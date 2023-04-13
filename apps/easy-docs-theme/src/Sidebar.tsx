@@ -3,20 +3,16 @@ import { ScrollArea } from '@sa-apps/scroll-area';
 import { useDocumentCategories, useDocumentPages } from '@frontify/app-bridge';
 
 import { useThemeContext } from './Context';
+import { cn } from '@sa-apps/utilities';
+import { useCurrentPath } from './hooks';
 
 export const Sidebar = (): ReactElement => {
     const { appBridge, context } = useThemeContext();
     const documentId = context.template !== 'cover' ? context.documentId : 0;
+    const currentPath = useCurrentPath();
 
-    const { getSortedCategories, isLoading: isLoadingDocumentCategories } = useDocumentCategories(
-        appBridge,
-        documentId
-    );
-    const {
-        getCategorizedPages,
-        getUncategorizedPages,
-        isLoading: isLoadingDocumentPages,
-    } = useDocumentPages(appBridge, documentId);
+    const { getSortedCategories } = useDocumentCategories(appBridge, documentId);
+    const { getCategorizedPages, getUncategorizedPages } = useDocumentPages(appBridge, documentId);
 
     const getSortedDocumentCategories = getSortedCategories();
     const uncategorizedDocumentPages = getUncategorizedPages();
@@ -32,7 +28,12 @@ export const Sidebar = (): ReactElement => {
                                 {getCategorizedPages(documentCategory.id).map((documentPage) => (
                                     <a
                                         key={documentPage.id}
-                                        className="group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                        className={cn(
+                                            'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-slate-50 dark:hover:bg-slate-800',
+                                            currentPath ===
+                                                `/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}` &&
+                                                'bg-slate-100 dark:bg-slate-800'
+                                        )}
                                         href={`/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}`}
                                     >
                                         {documentPage.title}
@@ -47,7 +48,11 @@ export const Sidebar = (): ReactElement => {
                             {uncategorizedDocumentPages.map((documentPage) => (
                                 <a
                                     key={documentPage.id}
-                                    className="text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-slate-50 dark:hover:bg-slate-800"
+                                    className={cn(
+                                        'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-slate-50 dark:hover:bg-slate-800',
+                                        currentPath === `/document/${documentId}#/${documentPage.slug}` &&
+                                            'bg-slate-100 dark:bg-slate-800'
+                                    )}
                                     href={`/document/${documentId}#/${documentPage.slug}`}
                                 >
                                     {documentPage.title}

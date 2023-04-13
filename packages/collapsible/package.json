@@ -1,5 +1,5 @@
 {
-    "name": "@sa-apps/dropdown-menu",
+    "name": "@sa-apps/collapsible",
     "private": true,
     "author": "Samuel Alev <samuel.alev@protonmail.com>",
     "version": "1.0.0",
@@ -12,9 +12,7 @@
         "typecheck": "tsc --noEmit"
     },
     "dependencies": {
-        "@radix-ui/react-dropdown-menu": "^2.0.4",
-        "@sa-apps/utilities": "workspace:*",
-        "lucide-react": "^0.138.0",
+        "@radix-ui/react-collapsible": "^1.0.2",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },

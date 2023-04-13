@@ -6,6 +6,7 @@ export const messages: Messages = {
         light: 'Light',
         dark: 'Dark',
         system: 'System',
+        onThisPage: 'On this page',
     },
     ar: {},
     zh: {},
