@@ -11,7 +11,7 @@ export const EasyDocsTheme = ({ appBridge, router, context, Content }: ThemeProp
         <ThemeContext.Provider value={{ appBridge, router, context }}>
             <div
                 data-test-id="easy-docs-theme"
-                className="flex flex-col min-h-screen bg-white text-slate-900 antialiased dark:bg-slate-900 dark:text-slate-50"
+                className="flex flex-col h-screen overflow-y-auto bg-background text-primary antialiased"
             >
                 <Header />
 

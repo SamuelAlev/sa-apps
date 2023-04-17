@@ -60,7 +60,7 @@ export const Header = (): ReactElement => {
     };
 
     return (
-        <header className="sticky z-40 w-full border-b border-b-slate-200 bg-white dark:border-b-slate-700 dark:bg-slate-900">
+        <header className="sticky z-40 w-full border-b bg-background/80">
             <div className="sa-container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
                 <div className="flex gap-6 md:gap-10">
                     <a className="hidden items-center space-x-2 md:flex" href="/">
@@ -102,7 +102,7 @@ export const Header = (): ReactElement => {
                     </button>
                     {showMobileMenu && (
                         <div className="fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden">
-                            <div className="relative z-20 grid gap-6 rounded-md bg-white p-4 shadow-md">
+                            <div className="relative z-20 grid gap-6 rounded-md bg-background p-4 shadow-md">
                                 <a className="flex items-center space-x-2" href="/">
                                     {window.application.sandbox.config.context.brand?.image !== undefined && (
                                         <img

@@ -129,8 +129,8 @@ export const MasonryItemMenu = ({
                     >
                         <div className="flex flex-col gap-8">
                             <div className="space-y-2">
-                                <h4 className="font-medium leading-none dark:text-slate-50">{t('styles')}</h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-50">{t('stylesDescription')}.</p>
+                                <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{t('styles')}</h4>
+                                <p className="text-sm text-muted-foreground">{t('stylesDescription')}.</p>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <div className="flex flex-col gap-4 w-full">

@@ -9,15 +9,16 @@
 .dark .m-pager__item-link,
 .dark .page-footer,
 .dark .page-placeholder .placeholder-title,
+.dark .section-title-content,
 .dark .page-placeholder p {
-    color: theme('colors.slate.100') !important;
+    color: theme('colors.primary.DEFAULT') !important;
 }
 
 .dark .a-p {
-    color: theme('colors.slate.400') !important;
+    color: theme('colors.secondary.DEFAULT') !important;
 }
 
 .dark .m-pager__btn-wrapper:hover,
 .dark .m-pager__item-link:hover {
-    color: theme('colors.slate.50') !important;
+    color: theme('colors.muted.foreground') !important;
 }

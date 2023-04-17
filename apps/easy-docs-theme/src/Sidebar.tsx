@@ -18,7 +18,7 @@ export const Sidebar = (): ReactElement => {
     const uncategorizedDocumentPages = getUncategorizedPages();
 
     return (
-        <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r border-r-slate-100 dark:border-r-slate-700 md:sticky md:block">
+        <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r md:sticky md:block">
             <ScrollArea>
                 <div className="relative overflow-hidden pr-6 lg:py-10">
                     {getSortedDocumentCategories.map((documentCategory) => (
@@ -29,10 +29,10 @@ export const Sidebar = (): ReactElement => {
                                     <a
                                         key={documentPage.id}
                                         className={cn(
-                                            'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-slate-50 dark:hover:bg-slate-800',
+                                            'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-accent',
                                             currentPath ===
                                                 `/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}` &&
-                                                'bg-slate-100 dark:bg-slate-800'
+                                                'bg-accent'
                                         )}
                                         href={`/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}`}
                                     >
@@ -49,9 +49,8 @@ export const Sidebar = (): ReactElement => {
                                 <a
                                     key={documentPage.id}
                                     className={cn(
-                                        'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-slate-50 dark:hover:bg-slate-800',
-                                        currentPath === `/document/${documentId}#/${documentPage.slug}` &&
-                                            'bg-slate-100 dark:bg-slate-800'
+                                        'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-accent',
+                                        currentPath === `/document/${documentId}#/${documentPage.slug}` && 'bg-accent'
                                     )}
                                     href={`/document/${documentId}#/${documentPage.slug}`}
                                 >

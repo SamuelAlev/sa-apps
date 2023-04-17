@@ -102,10 +102,10 @@ export const TableOfContent = (): ReactElement | null => {
                                 aria-label={section.title}
                                 onClick={() => handleSectionClick(section.id)}
                                 className={cn(
-                                    'inline-block no-underline text-sm',
+                                    'inline-block no-underline text-sm transition-colors',
                                     section.id === activeItem
-                                        ? 'font-medium text-slate-900 dark:text-white'
-                                        : 'text-sm text-slate-600 hover:text-slate-900 dark:text-slate-400 cursor-pointer'
+                                        ? 'font-medium text-primary'
+                                        : 'text-sm text-muted-foreground hover:text-primary cursor-pointer'
                                 )}
                             >
                                 {section.title}
