@@ -20,7 +20,7 @@ export const Dropzone = withTranslations(messages)(
         return (
             <div
                 ref={ref}
-                className="flex w-full h-[calc(100%-16px)] bg-gray-100 border border-gray-300 border-dashed rounded-2xl m-2 overflow-hidden"
+                className="flex w-full h-[calc(100%-16px)] bg-gray-100 border border-border border-dashed rounded-2xl m-2 overflow-hidden"
                 {...props}
             >
                 <input type="file" className="hidden" onChange={props.onUploadClick} ref={fileInput} />

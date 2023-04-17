@@ -33,7 +33,7 @@ export const useDraggableHeightHandle = ({
                 <button
                     id={`resize-handle-${id}`}
                     className={cn(
-                        'w-16 h-4 rounded-full border border-gray-300 shadow-md transition-colors duration-300',
+                        'w-16 h-4 rounded-full border border-border shadow-md transition-colors duration-300',
                         dragging ? 'bg-gray-200 cursor-grabbing' : 'bg-gray-50 hover:bg-gray-100 cursor-grab'
                     )}
                     onMouseDown={handleMouseDown}
