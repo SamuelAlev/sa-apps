@@ -53,9 +53,9 @@ export const Header = (): ReactElement => {
 
     const handleAnchorElementClick = (event: MouseEvent<HTMLAnchorElement>) => {
         const anchorElement = event.currentTarget;
-        if (anchorElement.target === '_self' && anchorElement.href.startsWith('/')) {
+        if (anchorElement.href.startsWith('/') || anchorElement.href.startsWith(window.location.origin)) {
             event.preventDefault();
-            router.navigate(anchorElement.href ?? '');
+            router.navigate(anchorElement.href.replace(window.location.origin, '') ?? '');
         }
     };
 
@@ -259,7 +259,10 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
                     documentOrLink.linkSettings?.iconUrl !== undefined && (
                         <img
                             src={documentOrLink.linkSettings.iconUrl}
-                            className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4')}
+                            className={cn(
+                                documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2',
+                                'h-4 w-4 text-white '
+                            )}
                         />
                     )}
             </a>
