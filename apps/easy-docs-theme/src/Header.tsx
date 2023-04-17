@@ -60,7 +60,7 @@ export const Header = (): ReactElement => {
     };
 
     return (
-        <header className="sticky z-40 w-full border-b bg-background/80">
+        <header className="sticky z-40 w-full border-b border-b-border bg-background/80">
             <div className="sa-container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
                 <div className="flex gap-6 md:gap-10">
                     <a className="hidden items-center space-x-2 md:flex" href="/">

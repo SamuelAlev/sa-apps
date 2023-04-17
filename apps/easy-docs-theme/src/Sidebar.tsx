@@ -18,7 +18,7 @@ export const Sidebar = (): ReactElement => {
     const uncategorizedDocumentPages = getUncategorizedPages();
 
     return (
-        <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r md:sticky md:block">
+        <aside className="fixed top-14 z-30 hidden h-[calc(100vh-3.5rem)] w-full shrink-0 overflow-y-auto border-r border-r-border md:sticky md:block">
             <ScrollArea>
                 <div className="relative overflow-hidden pr-6 lg:py-10">
                     {getSortedDocumentCategories.map((documentCategory) => (
