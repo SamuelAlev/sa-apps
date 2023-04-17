@@ -6,9 +6,38 @@
     padding-left: 1.5rem;
 }
 
+@media (min-width: 1024px) {
+    .t-container {
+        width: calc(100% - 3rem);
+        max-width: 1024px;
+    }
+}
+
+@media (min-width: 1280px) {
+    .t-container {
+        width: calc(100% - 3rem);
+        max-width: 1280px;
+    }
+}
+
 @media (min-width: 1440px) {
     .t-container {
+        width: calc(100% - 3rem);
         max-width: 1440px;
+    }
+}
+
+@media (min-width: 1536px) {
+    .t-container {
+        width: calc(100% - 3rem);
+        max-width: 1536px;
+    }
+}
+
+@media (min-width: 1600px) {
+    .t-container {
+        width: calc(100% - 3rem);
+        max-width: 1600px;
     }
 }
 
