@@ -112,10 +112,7 @@ export const MasonryItemMenu = ({
                             {t('unlinkAsset')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                            className="text-red-600 dark:text-red-600"
-                            onClick={handleDropdownDeleteClick}
-                        >
+                        <DropdownMenuItem className="text-red-600" onClick={handleDropdownDeleteClick}>
                             <Trash className="mr-2 h-4 w-4" />
                             {t('delete')}
                             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>

@@ -97,10 +97,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
                             {t('styles')}
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
-                        <DropdownMenuItem
-                            className="text-destructive dark:text-destructive hover:text-destructive dark:hover:text-destructive"
-                            onClick={handleDropdownDeleteClick}
-                        >
+                        <DropdownMenuItem className="text-destructive" onClick={handleDropdownDeleteClick}>
                             <Trash className="mr-2 h-4 w-4" />
                             {t('delete')}
                             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
