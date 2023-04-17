@@ -84,7 +84,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
                 <DropdownMenu>
                     <DropdownMenuTrigger data-no-dnd={true} asChild onClick={(event) => event.stopPropagation()}>
                         <PopoverTrigger data-no-dnd={true} asChild>
-                            <Button size="sm" variant="subtle" ref={itemDropdownRef}>
+                            <Button size="sm" variant="secondary" ref={itemDropdownRef}>
                                 <Menu className="max-w-[20px] w-[20px] max-h-[20px] h-[20px]" />
                             </Button>
                         </PopoverTrigger>
@@ -98,7 +98,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
                         </DropdownMenuItem>
                         <DropdownMenuSeparator />
                         <DropdownMenuItem
-                            className="text-red-600 dark:text-red-600"
+                            className="text-destructive dark:text-destructive hover:text-destructive dark:hover:text-destructive"
                             onClick={handleDropdownDeleteClick}
                         >
                             <Trash className="mr-2 h-4 w-4" />
@@ -114,8 +114,8 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
                     >
                         <div className="flex flex-col gap-8">
                             <div className="space-y-2">
-                                <h4 className="font-medium leading-none dark:text-slate-50">{t('styles')}</h4>
-                                <p className="text-sm text-slate-500 dark:text-slate-50">{t('stylesDescription')}.</p>
+                                <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{t('styles')}</h4>
+                                <p className="text-sm text-muted-foreground">{t('stylesDescription')}.</p>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <div className="flex flex-col gap-4 w-full">

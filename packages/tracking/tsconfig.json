@@ -2,7 +2,7 @@
     "compilerOptions": {
         "esModuleInterop": true,
         "isolatedModules": true,
-        "module": "commonjs",
+        "module": "ESNext",
         "moduleResolution": "node",
         "noImplicitAny": true,
         "noImplicitReturns": true,
@@ -12,6 +12,7 @@
         "target": "es6",
         "jsx": "react-jsx",
         "lib": ["ES2021", "DOM"],
+        "types": ["vite/client"],
         "resolveJsonModule": true,
         "skipLibCheck": true
     },

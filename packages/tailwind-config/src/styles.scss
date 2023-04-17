@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --sa-background: 0 0% 100%;
+        --sa-foreground: 222.2 47.4% 11.2%;
+
+        --sa-muted: 210 40% 96.1%;
+        --sa-muted-foreground: 215.4 16.3% 46.9%;
+
+        --sa-popover: 0 0% 100%;
+        --sa-popover-foreground: 222.2 47.4% 11.2%;
+
+        --sa-card: 0 0% 100%;
+        --sa-card-foreground: 222.2 47.4% 11.2%;
+
+        --sa-border: 214.3 31.8% 91.4%;
+        --sa-input: 214.3 31.8% 91.4%;
+
+        --sa-primary: 222.2 47.4% 11.2%;
+        --sa-primary-foreground: 210 40% 98%;
+
+        --sa-secondary: 210 40% 96.1%;
+        --sa-secondary-foreground: 222.2 47.4% 11.2%;
+
+        --sa-accent: 210 40% 96.1%;
+        --sa-accent-foreground: 222.2 47.4% 11.2%;
+
+        --sa-destructive: 0 100% 50%;
+        --sa-destructive-foreground: 210 40% 98%;
+
+        --sa-ring: 215 20.2% 65.1%;
+
+        --sa-radius: 0.5rem;
+    }
+
+    .dark {
+        --sa-background: 224 71% 4%;
+        --sa-foreground: 213 31% 91%;
+
+        --sa-muted: 223 47% 11%;
+        --sa-muted-foreground: 215.4 16.3% 56.9%;
+
+        --sa-popover: 224 71% 4%;
+        --sa-popover-foreground: 215 20.2% 65.1%;
+
+        --sa-card: 0 0% 100%;
+        --sa-card-foreground: 222.2 47.4% 11.2%;
+
+        --sa-border: 216 34% 17%;
+        --sa-input: 216 34% 17%;
+
+        --sa-primary: 210 40% 98%;
+        --sa-primary-foreground: 222.2 47.4% 1.2%;
+
+        --sa-secondary: 222.2 47.4% 11.2%;
+        --sa-secondary-foreground: 210 40% 98%;
+
+        --sa-accent: 216 34% 17%;
+        --sa-accent-foreground: 210 40% 98%;
+
+        --sa-destructive: 0 63% 31%;
+        --sa-destructive-foreground: 210 40% 98%;
+
+        --sa-ring: 216 34% 17%;
+
+        --sa-radius: 0.5rem;
+    }
+}
+
+@layer base {
+    * {
+        @apply border-border;
+    }
+
+    body {
+        font-feature-settings: 'rlig' 1, 'calt' 1;
+    }
+}

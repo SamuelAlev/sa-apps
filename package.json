@@ -2,11 +2,11 @@
     "name": "@sa-apps/root",
     "private": true,
     "scripts": {
-        "lint": "pnpm --stream --filter {packages/**} --filter {apps/**} --parallel lint",
-        "lint:fix": "pnpm --stream --filter {packages/**} --filter {apps/**} --parallel lint:fix",
-        "prettier": "pnpm --stream --filter {packages/**} --filter {apps/**} --parallel prettier",
-        "prettier:fix": "pnpm --stream --filter {packages/**} --filter {apps/**} --parallel prettier:fix",
-        "test": "pnpm --stream --filter {packages/**} --filter {apps/**} --parallel test",
-        "typecheck": "pnpm --stream --filter {packages/**} --filter {apps/**} --parallel typecheck"
+        "lint": "pnpm --stream --filter {packages/**} --filter {apps/**} lint",
+        "lint:fix": "pnpm --stream --filter {packages/**} --filter {apps/**} lint:fix",
+        "prettier": "pnpm --stream --filter {packages/**} --filter {apps/**} prettier",
+        "prettier:fix": "pnpm --stream --filter {packages/**} --filter {apps/**} prettier:fix",
+        "test": "pnpm --stream --filter {packages/**} --filter {apps/**} test",
+        "typecheck": "pnpm --stream --filter {packages/**} --filter {apps/**} typecheck"
     }
 }

@@ -1,0 +1,25 @@
+{
+    "name": "@sa-apps/tailwind-config",
+    "private": true,
+    "author": "Samuel Alev <samuel.alev@protonmail.com>",
+    "version": "1.0.0",
+    "sideEffects": false,
+    "main": "src/index.js",
+    "exports": {
+        ".": "./src/index.js",
+        "./styles": "./src/styles.scss"
+    },
+    "scripts": {
+        "lint": "eslint .",
+        "lint:fix": "eslint --fix ."
+    },
+    "devDependencies": {
+        "@frontify/eslint-config-basic": "^0.17.2",
+        "eslint": "^8.38.0",
+        "prettier": "^2.8.7",
+        "tailwindcss": "^3.3.1"
+    },
+    "dependencies": {
+        "tailwindcss-animate": "^1.0.5"
+    }
+}

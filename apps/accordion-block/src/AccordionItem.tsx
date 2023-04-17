@@ -9,8 +9,6 @@ import { AccordionItemTrigger } from './AccordionItemTrigger';
 import { AccordionItemMenu } from './AccordionItemMenu';
 import { contentPaddingClasses, headerPaddingClasses, itemBorderClasses } from './constant';
 
-import css from './styles.module.css';
-
 export const AccordionItem = ({
     id,
     triggerIcon,
@@ -72,7 +70,10 @@ export const AccordionItem = ({
                 </Accordion.Trigger>
             </Accordion.Header>
 
-            <Accordion.Content data-test-id="accordion-item-content" className={css.accordionContent}>
+            <Accordion.Content
+                data-test-id="accordion-item-content"
+                className="overflow-y-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+            >
                 <div className={contentPaddingClasses}>
                     <RichTextEditor id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
                 </div>

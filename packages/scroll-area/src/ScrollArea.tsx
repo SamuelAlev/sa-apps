@@ -14,7 +14,7 @@ export const ScrollArea = forwardRef<
         <ScrollAreaPrimitive.Corner />
     </ScrollAreaPrimitive.Root>
 ));
-ScrollArea.displayName = 'SAScrollArea';
+ScrollArea.displayName = ScrollAreaPrimitive.Root.displayName;
 
 export const ScrollBar = forwardRef<
     ElementRef<typeof ScrollAreaPrimitive.ScrollAreaScrollbar>,
@@ -31,7 +31,7 @@ export const ScrollBar = forwardRef<
         )}
         {...props}
     >
-        <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-slate-300 dark:bg-slate-700" />
+        <ScrollAreaPrimitive.ScrollAreaThumb className="relative flex-1 rounded-full bg-border" />
     </ScrollAreaPrimitive.ScrollAreaScrollbar>
 ));
 ScrollBar.displayName = 'SAScrollBar';

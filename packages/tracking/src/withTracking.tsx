@@ -1,4 +1,5 @@
 import { ComponentType, FC, ReactElement, useEffect } from 'react';
+
 import { init } from './tracking';
 
 export const withTracking =
@@ -15,7 +16,7 @@ export const withTracking =
                     }
                 };
 
-                initTracking();
+                import.meta.env.PROD && initTracking();
             }, []);
 
             return <Component {...(props as P)} />;

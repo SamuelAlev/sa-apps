@@ -94,7 +94,7 @@ export const MasonryItemMenu = ({
                 <DropdownMenu>
                     <DropdownMenuTrigger data-no-dnd={true} asChild className="absolute top-4 right-4">
                         <PopoverTrigger data-no-dnd={true} asChild>
-                            <Button size="sm" variant="subtle" ref={itemDropdownRef}>
+                            <Button size="sm" variant="secondary" ref={itemDropdownRef}>
                                 <Menu className="max-w-[20px] w-[20px] max-h-[20px] h-[20px]" />
                             </Button>
                         </PopoverTrigger>
