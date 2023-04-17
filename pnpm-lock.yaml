@@ -849,6 +849,9 @@ importers:
 
   packages/tailwind-config:
     dependencies:
+      tailwindcss:
+        specifier: ^3.3.1
+        version: 3.3.1(postcss@8.4.21)
       tailwindcss-animate:
         specifier: ^1.0.5
         version: 1.0.5(tailwindcss@3.3.1)
@@ -862,9 +865,6 @@ importers:
       prettier:
         specifier: ^2.8.7
         version: 2.8.7
-      tailwindcss:
-        specifier: ^3.3.1
-        version: 3.3.1(postcss@8.4.21)
 
   packages/text-input:
     dependencies:

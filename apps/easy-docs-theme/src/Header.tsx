@@ -61,7 +61,7 @@ export const Header = (): ReactElement => {
 
     return (
         <header className="sticky z-40 w-full border-b border-b-slate-200 bg-white dark:border-b-slate-700 dark:bg-slate-900">
-            <div className="t-container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
+            <div className="sa-container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
                 <div className="flex gap-6 md:gap-10">
                     <a className="hidden items-center space-x-2 md:flex" href="/">
                         {window.application.sandbox.config.context.brand?.image !== undefined && (
