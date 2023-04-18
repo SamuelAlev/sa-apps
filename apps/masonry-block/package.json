@@ -39,7 +39,7 @@
         "vitest": "^0.30.0"
     },
     "dependencies": {
-        "@frontify/app-bridge": "^3.0.0-beta.61",
+        "@frontify/app-bridge": "^3.0.0-beta.63",
         "@frontify/guideline-blocks-settings": "^0.26.2",
         "@sa-apps/alert-dialog": "workspace:*",
         "@sa-apps/button": "workspace:*",

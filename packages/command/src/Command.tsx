@@ -17,21 +17,29 @@ export const Command = forwardRef<
         {...props}
     />
 ));
-Command.displayName = CommandPrimitive.displayName;
+Command.displayName = 'SACommand';
 
 type CommandDialogProps = ComponentPropsWithoutRef<typeof Dialog>;
 
-export const CommandDialog = ({ children, ...props }: CommandDialogProps) => {
+export const CommandDialog = ({
+    children,
+    commandProps,
+    ...props
+}: CommandDialogProps & { commandProps: ComponentPropsWithoutRef<typeof Command> }) => {
     return (
         <Dialog {...props}>
             <DialogContent className="overflow-hidden p-0 shadow-2xl">
-                <Command className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-6 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5">
+                <Command
+                    className="[&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground [&_[cmdk-group]:not([hidden])_~[cmdk-group]]:pt-0 [&_[cmdk-group]]:px-2 [&_[cmdk-input-wrapper]_svg]:h-5 [&_[cmdk-input-wrapper]_svg]:w-5 [&_[cmdk-input]]:h-6 [&_[cmdk-item]]:px-2 [&_[cmdk-item]]:py-3 [&_[cmdk-item]_svg]:h-5 [&_[cmdk-item]_svg]:w-5"
+                    {...commandProps}
+                >
                     {children}
                 </Command>
             </DialogContent>
         </Dialog>
     );
 };
+CommandDialog.displayName = 'SACommandDialog';
 
 export const CommandInput = forwardRef<
     ElementRef<typeof CommandPrimitive.Input>,
@@ -50,8 +58,7 @@ export const CommandInput = forwardRef<
         />
     </div>
 ));
-
-CommandInput.displayName = CommandPrimitive.Input.displayName;
+CommandInput.displayName = 'SACommandInput';
 
 export const CommandList = forwardRef<
     ElementRef<typeof CommandPrimitive.List>,
@@ -63,15 +70,23 @@ export const CommandList = forwardRef<
         {...props}
     />
 ));
-
-CommandList.displayName = CommandPrimitive.List.displayName;
+CommandList.displayName = 'SACommandList';
 
 export const CommandEmpty = forwardRef<
     ElementRef<typeof CommandPrimitive.Empty>,
     ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
 >((props, ref) => <CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} />);
+CommandEmpty.displayName = 'SACommandEmpty';
 
-CommandEmpty.displayName = CommandPrimitive.Empty.displayName;
+export const CommandLoading = forwardRef<
+    ElementRef<typeof CommandPrimitive.Loading>,
+    ComponentPropsWithoutRef<typeof CommandPrimitive.Loading>
+>(({ children, ...props }, ref) => (
+    <CommandPrimitive.Loading ref={ref} {...props}>
+        <span className="flex w-full py-6 justify-center text-sm">{children}</span>
+    </CommandPrimitive.Loading>
+));
+CommandLoading.displayName = 'SACommandLoading';
 
 export const CommandGroup = forwardRef<
     ElementRef<typeof CommandPrimitive.Group>,

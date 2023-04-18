@@ -41,7 +41,7 @@
         "vitest": "^0.30.1"
     },
     "dependencies": {
-        "@frontify/app-bridge": "^3.0.0-beta.61",
+        "@frontify/app-bridge": "^3.0.0-beta.63",
         "@frontify/guideline-themes": "link:../../packages/tmp-guideline-themes",
         "@sa-apps/alert-dialog": "workspace:*",
         "@sa-apps/api": "workspace:*",
