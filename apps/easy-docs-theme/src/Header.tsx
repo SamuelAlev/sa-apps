@@ -1,10 +1,12 @@
 import { MouseEvent, ReactElement, useMemo, useState } from 'react';
-import { ChevronDown, Laptop, Menu, Moon, Sun, X } from 'lucide-react';
+import { ChevronDown, Laptop, LogOut, Menu, Moon, Sun, X } from 'lucide-react';
 import { Button } from '@sa-apps/button';
 import { cn } from '@sa-apps/utilities';
 import { useTranslations } from '@sa-apps/i18n';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@sa-apps/dropdown-menu';
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@sa-apps/collapsible';
+import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
+import sdk from '@sa-apps/api';
 import {
     CoverPage,
     Document,
@@ -17,6 +19,7 @@ import {
 
 import { useThemeMode } from './hooks';
 import { useThemeContext } from './Context';
+import { Search } from './Search';
 
 type HeaderDocumentOrDocumentGroupProps = {
     documentOrDocumentGroup: Document | DocumentGroup;
@@ -34,6 +37,12 @@ export const shouldShowCoverPage = (coverPage: CoverPage, isEditing: boolean): b
 };
 
 export const Header = (): ReactElement => {
+    const {
+        data: dataCurrentUser,
+        isLoading: isLoadingCurrentUser,
+        error: errorCurrentUser,
+    } = sdk.useCurrentUser('currentUser', undefined);
+
     const { t } = useTranslations();
     const [isDark, setThemeMode] = useThemeMode();
     const { appBridge, router } = useThemeContext();
@@ -57,6 +66,16 @@ export const Header = (): ReactElement => {
             event.preventDefault();
             router.navigate(anchorElement.href.replace(window.location.origin, '') ?? '');
         }
+    };
+
+    const handleLogInClick = () => {
+        window.location.href = `/auth/?referer=${encodeURIComponent(
+            window.location.href.replace(window.location.origin, '')
+        )}`;
+    };
+
+    const handleLogOutClick = () => {
+        window.location.href = '/api/user/logout';
     };
 
     return (
@@ -140,32 +159,61 @@ export const Header = (): ReactElement => {
                     )}
                 </div>
                 <div className="flex flex-1 items-center space-x-4 sm:justify-end">
-                    <DropdownMenu>
-                        <DropdownMenuTrigger>
-                            <Button
-                                size="sm"
-                                variant="ghost"
-                                title={t('toggleModeMenu')}
-                                aria-label={t('toggleModeMenu')}
-                            >
-                                {isDark ? <Moon /> : <Sun />}
+                    <div className="flex-1 sm:grow-0">
+                        <Search />
+                    </div>
+
+                    <nav className="flex space-x-4">
+                        <DropdownMenu>
+                            <DropdownMenuTrigger>
+                                <Button
+                                    size="sm"
+                                    variant="ghost"
+                                    title={t('toggleModeMenu')}
+                                    aria-label={t('toggleModeMenu')}
+                                >
+                                    {isDark ? <Moon /> : <Sun />}
+                                </Button>
+                            </DropdownMenuTrigger>
+                            <DropdownMenuContent align="end">
+                                <DropdownMenuItem onClick={() => setThemeMode('light')}>
+                                    <Sun className="mr-2 h-4 w-4" />
+                                    {t('light')}
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setThemeMode('dark')}>
+                                    <Moon className="mr-2 h-4 w-4" />
+                                    {t('dark')}
+                                </DropdownMenuItem>
+                                <DropdownMenuItem onClick={() => setThemeMode('system')}>
+                                    <Laptop className="mr-2 h-4 w-4" />
+                                    {t('system')}
+                                </DropdownMenuItem>
+                            </DropdownMenuContent>
+                        </DropdownMenu>
+
+                        {dataCurrentUser && !isLoadingCurrentUser && !errorCurrentUser ? (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <Avatar>
+                                        <AvatarImage src={dataCurrentUser.currentUser.avatar} />
+                                        <AvatarFallback>{dataCurrentUser.currentUser.name?.slice(0, 1)}</AvatarFallback>
+                                    </Avatar>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                    <DropdownMenuItem onClick={handleLogOutClick}>
+                                        <LogOut className="mr-2 h-4 w-4" />
+                                        {t('logOut')}
+                                    </DropdownMenuItem>
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        ) : null}
+
+                        {!isLoadingCurrentUser && !dataCurrentUser ? (
+                            <Button size="sm" onClick={handleLogInClick}>
+                                {t('logIn')}
                             </Button>
-                        </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
-                            <DropdownMenuItem onClick={() => setThemeMode('light')}>
-                                <Sun className="mr-2 h-4 w-4" />
-                                {t('light')}
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => setThemeMode('dark')}>
-                                <Moon className="mr-2 h-4 w-4" />
-                                {t('dark')}
-                            </DropdownMenuItem>
-                            <DropdownMenuItem onClick={() => setThemeMode('system')}>
-                                <Laptop className="mr-2 h-4 w-4" />
-                                {t('system')}
-                            </DropdownMenuItem>
-                        </DropdownMenuContent>
-                    </DropdownMenu>
+                        ) : null}
+                    </nav>
                 </div>
             </div>
         </header>

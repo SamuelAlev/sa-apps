@@ -1,5 +1,5 @@
 {
-    "name": "@sa-apps/alert-dialog",
+    "name": "@sa-apps/avatar",
     "private": true,
     "author": "Samuel Alev <samuel.alev@protonmail.com>",
     "version": "1.0.0",
@@ -16,8 +16,7 @@
         "react-dom": "^18.2.0"
     },
     "dependencies": {
-        "@radix-ui/react-alert-dialog": "^1.0.3",
-        "@sa-apps/button": "workspace:*",
+        "@radix-ui/react-avatar": "^1.0.2",
         "@sa-apps/utilities": "workspace:*"
     },
     "devDependencies": {

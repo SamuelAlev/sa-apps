@@ -1,5 +1,5 @@
 {
-    "name": "@sa-apps/alert-dialog",
+    "name": "@sa-apps/dialog",
     "private": true,
     "author": "Samuel Alev <samuel.alev@protonmail.com>",
     "version": "1.0.0",
@@ -16,9 +16,9 @@
         "react-dom": "^18.2.0"
     },
     "dependencies": {
-        "@radix-ui/react-alert-dialog": "^1.0.3",
-        "@sa-apps/button": "workspace:*",
-        "@sa-apps/utilities": "workspace:*"
+        "@radix-ui/react-dialog": "^1.0.3",
+        "@sa-apps/utilities": "workspace:*",
+        "lucide-react": "^0.138.0"
     },
     "devDependencies": {
         "@frontify/eslint-config-react": "^0.15.7",
