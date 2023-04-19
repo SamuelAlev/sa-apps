@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import {
     CommandDialog,
     CommandEmpty,
@@ -27,6 +27,7 @@ export const Search = () => {
     useEffect(() => {
         const down = (event: KeyboardEvent) => {
             if (event.key === 'k' && event.metaKey) {
+                event.preventDefault();
                 setOpen((open) => !open);
             }
         };
@@ -35,13 +36,15 @@ export const Search = () => {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
-    const debouncedSearch = debounce(async (searchValue: string) => {
-        const result = await appBridge.searchInGuideline(searchValue);
+    const debouncedSearch = useCallback(
+        debounce(async (searchValue: string) => {
+            const result = await appBridge.searchInGuideline(searchValue);
 
-        setLoading(false);
-
-        return result;
-    }, 300);
+            setSearchResults(result);
+            setLoading(false);
+        }, 300),
+        [appBridge]
+    );
 
     const handleSuggestionGoToLibraries = () => {
         window.location.href = `/brands/${appBridge.getBrandId()}/undefined/libraries`;
@@ -63,12 +66,12 @@ export const Search = () => {
         }
     };
 
-    const handleInputInput = async (newSearchValue: string) => {
+    const handleInputInput = (newSearchValue: string) => {
         setLoading(true);
         setSearchValue(newSearchValue);
 
         if (newSearchValue.length > 0) {
-            setSearchResults(await debouncedSearch(newSearchValue));
+            debouncedSearch(newSearchValue);
         } else {
             setLoading(false);
             setSearchResults([]);
@@ -95,16 +98,14 @@ export const Search = () => {
                     onValueChange={handleInputInput}
                 />
 
-                {loading && searchValue.length > 0 ? (
-                    <CommandList>
+                <CommandList>
+                    {loading && searchValue.length > 0 ? (
                         <CommandLoading>{t('loadingDotDotDot')}</CommandLoading>
-                    </CommandList>
-                ) : (
-                    <CommandEmpty>{t('noResultsFoundDot')}</CommandEmpty>
-                )}
+                    ) : (
+                        <CommandEmpty>{t('noResultsFoundDot')}</CommandEmpty>
+                    )}
 
-                {searchResults.length > 0 && searchValue.length > 0 && !loading && (
-                    <CommandList>
+                    {!loading && searchResults.length > 0 && searchValue.length > 0 && (
                         <CommandGroup heading={t('results')}>
                             {searchResults.map((searchResult) => (
                                 <CommandItem
@@ -130,16 +131,16 @@ export const Search = () => {
                                 </CommandItem>
                             ))}
                         </CommandGroup>
-                    </CommandList>
-                )}
+                    )}
 
-                {searchValue.length === 0 && !loading && (
-                    <CommandGroup heading={t('suggestions')}>
-                        <CommandItem onSelect={handleSuggestionGoToLibraries}>{t('goToLibraries')}</CommandItem>
-                        <CommandItem onSelect={handleSuggestionGoToProjects}>{t('goToProjects')}</CommandItem>
-                        <CommandItem onSelect={handleSuggestionGoToGuidelines}>{t('goToGuidelines')}</CommandItem>
-                    </CommandGroup>
-                )}
+                    {searchValue.length === 0 && !loading && (
+                        <CommandGroup heading={t('suggestions')}>
+                            <CommandItem onSelect={handleSuggestionGoToLibraries}>{t('goToLibraries')}</CommandItem>
+                            <CommandItem onSelect={handleSuggestionGoToProjects}>{t('goToProjects')}</CommandItem>
+                            <CommandItem onSelect={handleSuggestionGoToGuidelines}>{t('goToGuidelines')}</CommandItem>
+                        </CommandGroup>
+                    )}
+                </CommandList>
             </CommandDialog>
         </>
     );
