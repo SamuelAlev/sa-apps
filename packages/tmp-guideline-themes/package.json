@@ -25,7 +25,7 @@
         "@frontify/sidebar-settings": "^0.2.0"
     },
     "peerDependencies": {
-        "@frontify/app-bridge": "^3 || ^3.0.0-beta.61",
+        "@frontify/app-bridge": "^3 || ^3.0.0-beta.63",
         "react": "^17 || ^18",
         "react-dom": "^17 || ^18"
     }
