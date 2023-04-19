@@ -1,6 +1,7 @@
 /**
  * @vitest-environment jsdom
  */
+
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
 
@@ -14,7 +15,11 @@ describe('useThemeMode', () => {
     });
 
     it('should initialize with the system preference for dark mode', () => {
-        vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: true } as unknown as MediaQueryList);
+        vi.spyOn(window, 'matchMedia').mockReturnValue({
+            matches: true,
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+        } as unknown as MediaQueryList);
 
         const { result } = renderHook(() => useThemeMode());
 
@@ -23,7 +28,11 @@ describe('useThemeMode', () => {
     });
 
     it('should initialize with the system preference for light mode', () => {
-        vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false } as unknown as MediaQueryList);
+        vi.spyOn(window, 'matchMedia').mockReturnValue({
+            matches: false,
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+        } as unknown as MediaQueryList);
 
         const { result } = renderHook(() => useThemeMode());
 
@@ -158,7 +167,11 @@ describe('useThemeMode', () => {
     });
 
     it('should add the dark class when toggling system and system is dark', () => {
-        vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: true } as unknown as MediaQueryList);
+        vi.spyOn(window, 'matchMedia').mockReturnValue({
+            matches: true,
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+        } as unknown as MediaQueryList);
         const { result } = renderHook(() => useThemeMode());
 
         act(() => {
@@ -177,7 +190,11 @@ describe('useThemeMode', () => {
     });
 
     it('should remove the dark class when toggling system and system is light', () => {
-        vi.spyOn(window, 'matchMedia').mockReturnValue({ matches: false } as unknown as MediaQueryList);
+        vi.spyOn(window, 'matchMedia').mockReturnValue({
+            matches: false,
+            addEventListener: vi.fn(),
+            removeEventListener: vi.fn(),
+        } as unknown as MediaQueryList);
         const { result } = renderHook(() => useThemeMode());
 
         act(() => {

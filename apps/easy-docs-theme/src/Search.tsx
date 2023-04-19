@@ -36,6 +36,7 @@ export const Search = () => {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSearch = useCallback(
         debounce(async (searchValue: string) => {
             const result = await appBridge.searchInGuideline(searchValue);

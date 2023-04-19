@@ -1,3 +1,7 @@
+/**
+ * @vitest-environment jsdom
+ */
+
 import { describe, expect, it } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
 
@@ -15,6 +19,7 @@ describe('useCurrentPath', () => {
         const newPath = '/new-path#hash';
         act(() => {
             window.history.pushState({}, '', newPath);
+            window.dispatchEvent(new Event('popstate'));
         });
 
         expect(result.current).toBe(newPath);

@@ -9,8 +9,12 @@ export const useCurrentPath = (): string => {
         };
 
         window.addEventListener('popstate', handleLocationChange);
+        window.addEventListener('pushstate', handleLocationChange);
 
-        return () => window.removeEventListener('popstate', handleLocationChange);
+        return () => {
+            window.removeEventListener('popstate', handleLocationChange);
+            window.removeEventListener('pushstate', handleLocationChange);
+        };
     }, []);
 
     return currentPath;

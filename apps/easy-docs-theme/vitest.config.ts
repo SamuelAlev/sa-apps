@@ -5,7 +5,6 @@ import { resolve } from 'node:path';
 export default defineConfig({
     plugins: [react()],
     test: {
-        environment: 'jsdom',
         coverage: {
             all: true,
             provider: 'c8',

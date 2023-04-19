@@ -1,4 +1,5 @@
 overwrite: true
+
 generates:
     src/generated.ts:
         schema:

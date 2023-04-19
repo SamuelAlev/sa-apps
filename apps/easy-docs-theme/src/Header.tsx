@@ -37,8 +37,6 @@ export const shouldShowCoverPage = (coverPage: CoverPage, isEditing: boolean): b
     return (!coverPage.hideInNav && !coverPage.draft) || isEditing;
 };
 
-const isLoggedIn = window.application.sandbox.config.context.authenticated;
-
 export const Header = (): ReactElement => {
     const { t } = useTranslations();
     const [isDark, setThemeMode] = useThemeMode();
@@ -50,6 +48,7 @@ export const Header = (): ReactElement => {
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
     const portalId = appBridge.getPortalId();
+    const isLoggedIn = window.application.sandbox.config.context.authenticated;
 
     const {
         data: dataCurrentUser,
