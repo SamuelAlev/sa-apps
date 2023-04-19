@@ -36,12 +36,14 @@ export const shouldShowCoverPage = (coverPage: CoverPage, isEditing: boolean): b
     return (!coverPage.hideInNav && !coverPage.draft) || isEditing;
 };
 
+const isLoggedIn = window.application.sandbox.config.context.authenticated;
+
 export const Header = (): ReactElement => {
     const {
         data: dataCurrentUser,
         isLoading: isLoadingCurrentUser,
         error: errorCurrentUser,
-    } = sdk.useCurrentUser('currentUser', undefined);
+    } = sdk.useCurrentUser(isLoggedIn ? 'currentUser' : null, undefined);
 
     const { t } = useTranslations();
     const [isDark, setThemeMode] = useThemeMode();
