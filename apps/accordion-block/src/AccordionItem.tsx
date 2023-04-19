@@ -44,7 +44,7 @@ export const AccordionItem = ({
                 <Accordion.Trigger
                     className={cn(
                         headerPaddingClasses,
-                        'group/trigger w-full flex gap-2 items-center group ltr:flex-row rtl:flex-row-reverse'
+                        'group/trigger w-full flex gap-2 items-center ltr:flex-row rtl:flex-row-reverse'
                     )}
                     data-test-id="accordion-item-trigger"
                 >
