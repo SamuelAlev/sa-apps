@@ -31,6 +31,9 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
+            - name: Generate files
+              run: pnpm generate
+
             - name: Lint files
               run: pnpm lint
 
@@ -56,6 +59,9 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
+
+            - name: Generate files
+              run: pnpm generate
 
             - name: Typecheck files
               run: pnpm typecheck
@@ -83,6 +89,9 @@ jobs:
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
 
+            - name: Generate files
+              run: pnpm generate
+
             - name: Test files
               run: pnpm test
 
@@ -109,6 +118,9 @@ jobs:
 
             - name: Install dependencies
               run: pnpm install --frozen-lockfile
+
+            - name: Generate files
+              run: pnpm generate
 
             - name: Deploy apps
               uses: SamuelAlev/frontify-app-deploy@v1.0.1
