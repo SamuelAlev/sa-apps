@@ -6,6 +6,7 @@ export const messages: Messages = {
         light: 'Light',
         dark: 'Dark',
         system: 'System',
+        menu: 'Menu',
         onThisPage: 'On this page',
         logIn: 'Log in',
         logOut: 'Log out',

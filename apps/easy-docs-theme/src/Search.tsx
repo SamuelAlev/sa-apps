@@ -10,11 +10,11 @@ import {
 } from '@sa-apps/command';
 import { useTranslations } from '@sa-apps/i18n';
 import type { GuidelineSearchResult } from '@frontify/app-bridge';
+import { debounce } from '@sa-apps/utilities';
+import { File } from 'lucide-react';
 
 import { useThemeContext } from './Context';
 import { getLinkFromGuidelineSearchResult } from './helpers';
-import { debounce } from '@sa-apps/utilities';
-import { File } from 'lucide-react';
 
 export const Search = () => {
     const { appBridge, router } = useThemeContext();

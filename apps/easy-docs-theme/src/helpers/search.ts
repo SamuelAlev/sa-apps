@@ -21,12 +21,12 @@ export const getDocumentBlockUrl = ({
     documentId,
     pageCategorySlug,
     pageSlug,
-    blockId,
+    objectId,
 }: GuidelineSearchResult): string => {
     const documentPrefix = `/document/${documentId}`;
     const pageCategoryPrefix = pageCategorySlug ? `${pageCategorySlug}/` : '';
 
-    return `${documentPrefix}#/${pageCategoryPrefix}${pageSlug}:${blockId}`;
+    return `${documentPrefix}#/${pageCategoryPrefix}${pageSlug}:${objectId}`;
 };
 
 const getDocumentSectionUrl = ({ documentId, pageCategorySlug, pageSlug }: GuidelineSearchResult): string => {

@@ -1,6 +1,6 @@
 import { MouseEvent, ReactElement, useMemo, useState } from 'react';
 import { ChevronDown, Laptop, LogOut, Menu, Moon, Sun, X } from 'lucide-react';
-import { Button } from '@sa-apps/button';
+import { Button, buttonVariants } from '@sa-apps/button';
 import { cn } from '@sa-apps/utilities';
 import { useTranslations } from '@sa-apps/i18n';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@sa-apps/dropdown-menu';
@@ -20,6 +20,7 @@ import {
 import { useThemeMode } from './hooks';
 import { useThemeContext } from './Context';
 import { Search } from './Search';
+import { getLinkFromLanguage } from './helpers';
 
 type HeaderDocumentOrDocumentGroupProps = {
     documentOrDocumentGroup: Document | DocumentGroup;
@@ -39,12 +40,6 @@ export const shouldShowCoverPage = (coverPage: CoverPage, isEditing: boolean): b
 const isLoggedIn = window.application.sandbox.config.context.authenticated;
 
 export const Header = (): ReactElement => {
-    const {
-        data: dataCurrentUser,
-        isLoading: isLoadingCurrentUser,
-        error: errorCurrentUser,
-    } = sdk.useCurrentUser(isLoggedIn ? 'currentUser' : null, undefined);
-
     const { t } = useTranslations();
     const [isDark, setThemeMode] = useThemeMode();
     const { appBridge, router } = useThemeContext();
@@ -53,6 +48,20 @@ export const Header = (): ReactElement => {
     const { coverPage, isLoading } = useCoverPage(appBridge);
     const isEditing = useEditorState(appBridge);
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
+
+    const portalId = appBridge.getPortalId();
+
+    const {
+        data: dataCurrentUser,
+        isLoading: isLoadingCurrentUser,
+        error: errorCurrentUser,
+    } = sdk.useCurrentUser(isLoggedIn ? 'currentUser' : null, undefined);
+
+    const {
+        data: dataPortal,
+        isLoading: isLoadingPortal,
+        error: errorPortal,
+    } = sdk.usePortal(isLoggedIn ? `portal-${portalId}` : null, { portalId });
 
     const documentsAndGroups = useMemo(
         () =>
@@ -78,6 +87,10 @@ export const Header = (): ReactElement => {
 
     const handleLogOutClick = () => {
         window.location.href = '/api/user/logout';
+    };
+
+    const handleLanguageClick = (language: string) => {
+        window.location.href = getLinkFromLanguage(language);
     };
 
     return (
@@ -119,7 +132,7 @@ export const Header = (): ReactElement => {
                         onClick={() => setShowMobileMenu(!showMobileMenu)}
                     >
                         {showMobileMenu ? <X /> : <Menu />}
-                        <span className="font-bold">Menu</span>
+                        <span className="font-bold">{t('menu')}</span>
                     </button>
                     {showMobileMenu && (
                         <div className="fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden">
@@ -166,16 +179,37 @@ export const Header = (): ReactElement => {
                     </div>
 
                     <nav className="flex space-x-4">
+                        {dataPortal?.i18n_enabled && !isLoadingPortal && !errorPortal ? (
+                            <DropdownMenu>
+                                <DropdownMenuTrigger>
+                                    <span className="text-sm font-medium">
+                                        {
+                                            dataPortal.i18n_settings.languages.find(
+                                                (lang) => lang.language === document.documentElement.lang
+                                            )?.label
+                                        }
+                                    </span>
+                                </DropdownMenuTrigger>
+                                <DropdownMenuContent align="end">
+                                    {dataPortal.i18n_settings.languages.map((language) => (
+                                        <DropdownMenuItem
+                                            key={language.language}
+                                            onClick={() => handleLanguageClick(language.language)}
+                                        >
+                                            {language.label}
+                                        </DropdownMenuItem>
+                                    ))}
+                                </DropdownMenuContent>
+                            </DropdownMenu>
+                        ) : null}
+
                         <DropdownMenu>
-                            <DropdownMenuTrigger>
-                                <Button
-                                    size="sm"
-                                    variant="ghost"
-                                    title={t('toggleModeMenu')}
-                                    aria-label={t('toggleModeMenu')}
-                                >
-                                    {isDark ? <Moon /> : <Sun />}
-                                </Button>
+                            <DropdownMenuTrigger
+                                className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+                                title={t('toggleModeMenu')}
+                                aria-label={t('toggleModeMenu')}
+                            >
+                                {isDark ? <Moon /> : <Sun />}
                             </DropdownMenuTrigger>
                             <DropdownMenuContent align="end">
                                 <DropdownMenuItem onClick={() => setThemeMode('light')}>
@@ -231,14 +265,13 @@ const HeaderDocumentOrDocumentGroup = ({
         return (
             <DropdownMenu>
                 <DropdownMenuTrigger className="group flex items-center break-keep shrink-0">
-                    <a
+                    <span
                         key={documentOrDocumentGroup.id}
-                        href="#"
                         title={documentOrDocumentGroup.name}
                         aria-label={documentOrDocumentGroup.name}
                     >
                         {documentOrDocumentGroup.name}
-                    </a>
+                    </span>
                     <ChevronDown className="ml-2 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
