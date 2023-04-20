@@ -3,6 +3,7 @@ import { Messages } from '@sa-apps/i18n';
 export const messages: Messages = {
     en: {
         toggleModeMenu: 'Toggle mode menu',
+        toggleLanguageMenu: 'Toggle language menu',
         light: 'Light',
         dark: 'Dark',
         system: 'System',

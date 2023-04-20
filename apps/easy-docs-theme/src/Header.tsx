@@ -88,7 +88,9 @@ export const Header = (): ReactElement => {
         window.location.href = '/api/user/logout';
     };
 
-    const handleLanguageClick = (language: string) => {
+    const handleLanguageClick = (event: MouseEvent, language: string) => {
+        event.preventDefault();
+        alert('Language switcher is not yet implemented 🥲');
         window.location.href = getLinkFromLanguage(language);
     };
 
@@ -180,20 +182,22 @@ export const Header = (): ReactElement => {
                     <nav className="flex space-x-4">
                         {dataPortal?.i18n_enabled && !isLoadingPortal && !errorPortal ? (
                             <DropdownMenu>
-                                <DropdownMenuTrigger>
-                                    <span className="text-sm font-medium">
-                                        {
-                                            dataPortal.i18n_settings.languages.find(
-                                                (lang) => lang.language === document.documentElement.lang
-                                            )?.label
-                                        }
-                                    </span>
+                                <DropdownMenuTrigger
+                                    className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+                                    title={t('toggleLanguageMenu')}
+                                    aria-label={t('toggleLanguageMenu')}
+                                >
+                                    {
+                                        dataPortal.i18n_settings.languages.find(
+                                            (lang) => lang.language === document.documentElement.lang
+                                        )?.label
+                                    }
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
                                     {dataPortal.i18n_settings.languages.map((language) => (
                                         <DropdownMenuItem
                                             key={language.language}
-                                            onClick={() => handleLanguageClick(language.language)}
+                                            onClick={(event) => handleLanguageClick(event, language.language)}
                                         >
                                             {language.label}
                                         </DropdownMenuItem>
