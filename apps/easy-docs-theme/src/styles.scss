@@ -5,8 +5,8 @@
 
 .dark {
     // Powerbar
-    .co-powerbar__frontify {
-        filter: invert(1) brightness(200%);
+    .co-powerbar__frontify svg > path {
+        fill: theme('colors.primary.DEFAULT');
     }
 
     .co-powerbar,
