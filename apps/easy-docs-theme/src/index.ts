@@ -1,5 +1,5 @@
 import '@sa-apps/tailwind-config/styles';
-import './styles.css';
+import './styles.scss';
 import { defineTheme } from '@frontify/guideline-themes';
 import { withTranslations } from '@sa-apps/i18n';
 import { withTracking } from '@sa-apps/tracking';

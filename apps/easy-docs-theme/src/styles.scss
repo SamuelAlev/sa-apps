@@ -1,0 +1,169 @@
+.co-powerbar__frontify {
+    height: theme('spacing.16');
+    transition: none;
+}
+
+.dark {
+    // Powerbar
+    .co-powerbar__frontify {
+        filter: invert(1) brightness(200%);
+    }
+
+    .co-powerbar,
+    .co-powerbar__scroll-container,
+    .co-powerbar__section,
+    .co-powerbar__menu {
+        border-color: theme('colors.border');
+    }
+
+    .co-powerbar__container,
+    .co-powerbar__menu {
+        background-color: theme('colors.background');
+    }
+
+    .co-powerbar__item {
+        &,
+        & .co-powerbar__usage--label {
+            color: theme('colors.primary.DEFAULT/20');
+        }
+
+        &:not(.co-powerbar__frontify):hover,
+        &:not(.co-powerbar__frontify):focus {
+            background-color: theme('colors.accent.DEFAULT');
+            color: theme('colors.primary.DEFAULT');
+        }
+
+        &.state-active,
+        &.state-open {
+            background-color: theme('colors.accent.DEFAULT');
+            color: theme('colors.primary.DEFAULT');
+        }
+    }
+
+    .co-powerbar__menu-item {
+        & {
+            border-color: theme('colors.border');
+        }
+
+        & .co-powerbar__menu-title {
+            color: theme('colors.primary.DEFAULT');
+        }
+
+        & .co-powerbar__menu-desc {
+            color: theme('colors.primary.DEFAULT/0.75');
+        }
+
+        & .co-powerbar__menu-link:hover {
+            background-color: theme('colors.accent.DEFAULT');
+            color: theme('colors.primary.foreground');
+        }
+    }
+
+    .co-power-bar-user-menu {
+        & {
+            background-color: theme('colors.background');
+            border-color: theme('colors.border');
+        }
+
+        & .co-power-bar-user-menu__footer {
+            background-color: theme('colors.background');
+            border-top: 1px solid theme('colors.border');
+        }
+
+        & .co-powerbar__menu-title,
+        & .co-power-bar-user-menu__user-name,
+        & .co-power-bar-user-menu__user-email,
+        & .co-power-bar-user-menu__category-title,
+        & .cm-menu-card__title {
+            color: theme('colors.primary.DEFAULT');
+        }
+
+        & .co-powerbar__menu-desc,
+        & .cm-menu-card__description {
+            color: theme('colors.primary.DEFAULT/0.75');
+        }
+
+        & .cm-menu-card:hover {
+            background-color: theme('colors.accent.DEFAULT');
+            color: theme('colors.primary.foreground');
+        }
+    }
+
+    .co-powerbar__drawer {
+        &,
+        & .co-settings__fieldset,
+        & .cm-setting,
+        & .cm-setting__elem,
+        & .cm-feature-hook--setting,
+        & .cm-tabs--shadow .cm-tabs__header {
+            background-color: theme('colors.background');
+            border-color: theme('colors.border');
+        }
+
+        &[data-id='navigation-manager'] {
+            &,
+            & .tw-text-heading-large,
+            & .tw-text-text,
+            & .tw-text-button-icon {
+                color: theme('colors.primary.DEFAULT');
+            }
+
+            & .tw-text-text:hover,
+            & .tw-group:hover .tw-text-button-icon {
+                color: theme('colors.primary.foreground');
+            }
+        }
+
+        & .o-appearance__font-search-item {
+            background-color: theme('colors.background');
+        }
+
+        & .co-powerbar__drawer-title,
+        & .cm-tabs__link,
+        & .co-settings__fieldset-title,
+        & .cm-setting__label,
+        & .cm-setting__label--inline,
+        & .o-stats__summary-number,
+        & .o-appearance__fsi-name {
+            color: theme('colors.primary.DEFAULT');
+        }
+
+        & .cm-setting__input::placeholder,
+        & .co-settings__sorted-by,
+        & .o-stats__summary-label,
+        & .o-appearance__fsi-value {
+            color: theme('colors.primary.DEFAULT/0.75');
+        }
+
+        & .o-stats__chart {
+            filter: hue-rotate(270deg) invert(100%) brightness(200%);
+        }
+    }
+
+    // Content area
+    .page-title,
+    .a-navigation-categories,
+    .m-pager__btn-wrapper,
+    .m-pager__item-link,
+    .page-footer,
+    .page-placeholder .placeholder-title,
+    .section-title-content,
+    .page-placeholder p {
+        color: theme('colors.primary.DEFAULT');
+    }
+
+    .m-pager__meta .a-p {
+        color: theme('colors.primary.DEFAULT/0.75');
+    }
+
+    .m-pager__item:hover {
+        .m-pager__item-link .m-pager__btn-wrapper,
+        .m-pager__category-title {
+            color: theme('colors.primary.DEFAULT/0.75');
+        }
+
+        .m-pager__meta .a-p {
+            color: theme('colors.primary.DEFAULT/0.50');
+        }
+    }
+}

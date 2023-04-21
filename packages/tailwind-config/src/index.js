@@ -10,38 +10,38 @@ module.exports = {
     theme: {
         extend: {
             colors: {
-                border: 'hsl(var(--sa-border))',
-                input: 'hsl(var(--sa-input))',
-                ring: 'hsl(var(--sa-ring))',
-                background: 'hsl(var(--sa-background))',
-                foreground: 'hsl(var(--sa-foreground))',
+                border: 'hsl(var(--sa-border) / <alpha-value>)',
+                input: 'hsl(var(--sa-input) / <alpha-value>)',
+                ring: 'hsl(var(--sa-ring) / <alpha-value>)',
+                background: 'hsl(var(--sa-background) / <alpha-value>)',
+                foreground: 'hsl(var(--sa-foreground) / <alpha-value>)',
                 primary: {
-                    DEFAULT: 'hsl(var(--sa-primary))',
-                    foreground: 'hsl(var(--sa-primary-foreground))',
+                    DEFAULT: 'hsl(var(--sa-primary) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-primary-foreground) / <alpha-value>)',
                 },
                 secondary: {
-                    DEFAULT: 'hsl(var(--sa-secondary))',
-                    foreground: 'hsl(var(--sa-secondary-foreground))',
+                    DEFAULT: 'hsl(var(--sa-secondary) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-secondary-foreground) / <alpha-value>)',
                 },
                 destructive: {
-                    DEFAULT: 'hsl(var(--sa-destructive))',
-                    foreground: 'hsl(var(--sa-destructive-foreground))',
+                    DEFAULT: 'hsl(var(--sa-destructive) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-destructive-foreground) / <alpha-value>)',
                 },
                 muted: {
-                    DEFAULT: 'hsl(var(--sa-muted))',
-                    foreground: 'hsl(var(--sa-muted-foreground))',
+                    DEFAULT: 'hsl(var(--sa-muted) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-muted-foreground) / <alpha-value>)',
                 },
                 accent: {
-                    DEFAULT: 'hsl(var(--sa-accent))',
-                    foreground: 'hsl(var(--sa-accent-foreground))',
+                    DEFAULT: 'hsl(var(--sa-accent) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-accent-foreground) / <alpha-value>)',
                 },
                 popover: {
-                    DEFAULT: 'hsl(var(--sa-popover))',
-                    foreground: 'hsl(var(--sa-popover-foreground))',
+                    DEFAULT: 'hsl(var(--sa-popover) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-popover-foreground) / <alpha-value>)',
                 },
                 card: {
-                    DEFAULT: 'hsl(var(--sa-card))',
-                    foreground: 'hsl(var(--sa-card-foreground))',
+                    DEFAULT: 'hsl(var(--sa-card) / <alpha-value>)',
+                    foreground: 'hsl(var(--sa-card-foreground) / <alpha-value>)',
                 },
             },
             borderRadius: {
