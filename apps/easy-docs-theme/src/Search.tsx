@@ -10,7 +10,7 @@ import {
 } from '@sa-apps/command';
 import { useTranslations } from '@sa-apps/i18n';
 import type { GuidelineSearchResult } from '@frontify/app-bridge';
-import { debounce } from '@sa-apps/utilities';
+import { debounce, isWindows } from '@sa-apps/utilities';
 import { File } from 'lucide-react';
 
 import { useThemeContext } from './Context';
@@ -26,7 +26,7 @@ export const Search = () => {
 
     useEffect(() => {
         const down = (event: KeyboardEvent) => {
-            if (event.key === 'k' && event.metaKey) {
+            if (event.key === 'k' && (event.metaKey || event.ctrlKey)) {
                 event.preventDefault();
                 setOpen((open) => !open);
             }
@@ -88,7 +88,7 @@ export const Search = () => {
                 <span className="hidden lg:inline-flex">{t('searchInGuidelineDotDotDot')}</span>
                 <span className="inline-flex lg:hidden">{t('searchDotDotDot')}</span>
                 <kbd className="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none items-center gap-1 rounded border border-input bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-                    <span className="text-xs">⌘</span>K
+                    {isWindows() ? 'ctrl ' : <span className="text-xs">⌘ </span>}K
                 </kbd>
             </button>
 
