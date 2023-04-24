@@ -53,7 +53,8 @@ export type ValueOrPromisedValue<T> = ValueOrPromisedValueSidebarSettings<AppBri
 
 type FrontifyRouter = { navigate: (path: string) => void };
 type FrontifyContext = { templateId?: string } & (
-    | { documentId: number; template: 'documentPage' | 'library' }
+    | { documentPageId: number; documentId: number; template: 'documentPage' }
+    | { documentId: number; template: 'library' }
     | { template: 'cover' }
 );
 
