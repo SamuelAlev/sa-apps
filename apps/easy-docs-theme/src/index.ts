@@ -16,7 +16,7 @@ export default defineTheme({
                 settings,
             },
         },
-        document: {
+        documentPage: {
             default: {
                 component: withTracking('gmjf13ophj')(withTranslations(messages)(EasyDocsTheme)),
                 settings,
