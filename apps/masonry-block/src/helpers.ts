@@ -1,8 +1,8 @@
-import { CSSProperties } from 'react';
+import type { CSSProperties } from 'react';
 
+import type { useBlockAssets } from '@frontify/app-bridge';
 import type { BlockSettings, MasonryItem } from './types';
 import { DEFAULT_RTE_CONTENT } from './constant';
-import type { useBlockAssets } from '@frontify/app-bridge';
 
 export const isLastMasonryItemEmpty = (
     masonryItems: MasonryItem[],

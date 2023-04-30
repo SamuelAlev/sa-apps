@@ -1,4 +1,5 @@
-import { ChangeEvent, forwardRef, useRef } from 'react';
+import type { ChangeEvent } from 'react';
+import { forwardRef, useRef } from 'react';
 import { Album, Upload } from 'lucide-react';
 import { useTranslations, withTranslations } from '@sa-apps/i18n';
 
@@ -20,12 +21,12 @@ export const Dropzone = withTranslations(messages)(
         return (
             <div
                 ref={ref}
-                className="flex w-full h-[calc(100%-16px)] bg-gray-100 border border-border border-dashed rounded-2xl m-2 overflow-hidden"
+                className="m-2 flex h-[calc(100%-16px)] w-full overflow-hidden rounded-2xl border border-dashed border-border bg-gray-100"
                 {...props}
             >
                 <input type="file" className="hidden" onChange={props.onUploadClick} ref={fileInput} />
                 <button
-                    className="w-full flex items-center justify-center rounded-2xl gap-2 text-slate-800 hover:text-slate-900 active:text-slate-950 m-4 hover:bg-gray-200/75 active:bg-gray-200 transition-colors ease-out duration-300"
+                    className="m-4 flex w-full items-center justify-center gap-2 rounded-2xl text-slate-800 transition-colors duration-300 ease-out hover:bg-gray-200/75 hover:text-slate-900 active:bg-gray-200 active:text-slate-950"
                     onClick={handleClick}
                     aria-label={t('upload')}
                 >
@@ -33,10 +34,10 @@ export const Dropzone = withTranslations(messages)(
                     {t('upload')}
                 </button>
 
-                <div className="w-px my-4 border-r border-r-gray-300" />
+                <div className="my-4 w-px border-r border-r-gray-300" />
 
                 <button
-                    className="w-full flex items-center justify-center rounded-2xl gap-2 text-slate-800 hover:text-slate-900 active:text-slate-950 m-4 hover:bg-gray-200/75 active:bg-gray-200 transition-colors ease-out duration-300"
+                    className="m-4 flex w-full items-center justify-center gap-2 rounded-2xl text-slate-800 transition-colors duration-300 ease-out hover:bg-gray-200/75 hover:text-slate-900 active:bg-gray-200 active:text-slate-950"
                     onClick={props.onBrowseAssetClick}
                     aria-label={t('browse')}
                 >

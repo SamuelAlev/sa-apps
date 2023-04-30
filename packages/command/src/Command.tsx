@@ -1,4 +1,5 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';
 import { cn } from '@sa-apps/utilities';
@@ -83,7 +84,7 @@ export const CommandLoading = forwardRef<
     ComponentPropsWithoutRef<typeof CommandPrimitive.Loading>
 >(({ children, ...props }, ref) => (
     <CommandPrimitive.Loading ref={ref} {...props}>
-        <span className="flex w-full py-6 justify-center text-sm">{children}</span>
+        <span className="flex w-full justify-center py-6 text-sm">{children}</span>
     </CommandPrimitive.Loading>
 ));
 CommandLoading.displayName = 'SACommandLoading';

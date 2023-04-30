@@ -1,4 +1,5 @@
-import { Children, ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import { Children } from 'react';
 
 import { range } from './utilities';
 
@@ -14,7 +15,7 @@ export const Masonry = ({ columnCount, children }: MasonryProps): ReactElement =
     return (
         <div className="flex gap-[var(--masonry-items-gap)]">
             {range(columnCount).map((columnIndex) => (
-                <div key={columnIndex} className="flex flex-col flex-1 gap-[var(--masonry-items-gap)]">
+                <div key={columnIndex} className="flex flex-1 flex-col gap-[var(--masonry-items-gap)]">
                     {range(columnIndex, childrenArray.length, columnCount).map((itemIndex) => childrenArray[itemIndex])}
                 </div>
             ))}

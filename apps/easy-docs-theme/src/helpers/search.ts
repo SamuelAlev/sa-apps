@@ -1,4 +1,4 @@
-//TODO: Rely on @frontify/guideline-themes when released
+// TODO: Rely on @frontify/guideline-themes when released
 
 import type { GuidelineSearchResult } from '@frontify/app-bridge';
 

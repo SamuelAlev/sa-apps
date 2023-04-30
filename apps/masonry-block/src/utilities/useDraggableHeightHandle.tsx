@@ -1,4 +1,5 @@
-import { ReactElement, ReactNode, useCallback, useEffect, useRef, useState } from 'react';
+import type { ReactElement, ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { cn } from '@sa-apps/utilities';
 
 type UseDraggableHeightHandleProps = {
@@ -28,13 +29,13 @@ export const useDraggableHeightHandle = ({
         return (
             <div
                 data-no-dnd={true}
-                className={cn('z-50 absolute -bottom-2 left-0 right-0 flex justify-center', !enabled && 'hidden')}
+                className={cn('absolute -bottom-2 left-0 right-0 z-50 flex justify-center', !enabled && 'hidden')}
             >
                 <button
                     id={`resize-handle-${id}`}
                     className={cn(
-                        'w-16 h-4 rounded-full border border-border shadow-md transition-colors duration-300',
-                        dragging ? 'bg-gray-200 cursor-grabbing' : 'bg-gray-50 hover:bg-gray-100 cursor-grab'
+                        'h-4 w-16 rounded-full border border-border shadow-md transition-colors duration-300',
+                        dragging ? 'cursor-grabbing bg-gray-200' : 'cursor-grab bg-gray-50 hover:bg-gray-100'
                     )}
                     onMouseDown={handleMouseDown}
                     onTouchStart={handleTouchStart}

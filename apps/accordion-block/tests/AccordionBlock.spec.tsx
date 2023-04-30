@@ -3,7 +3,7 @@ import { withAppBridgeBlockStubs } from '@frontify/app-bridge';
 import { fireEvent, getByTestId, getByText, render, waitFor } from '@testing-library/react';
 
 import { AccordionBlock } from '../src/AccordionBlock';
-import { BlockSettings } from '../src/types';
+import type { BlockSettings } from '../src/types';
 
 const ACCORDION_BLOCK_TEST_ID = 'accordion-block';
 const ACCORDION_ITEM_HEADING_TEST_ID = 'accordion-item-heading';

@@ -1,7 +1,8 @@
 import type { ReactElement } from 'react';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import { useAssetChooser, useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
-import { DragAndDropSortableContext, DragEndEvent, SwappableItem } from '@sa-apps/drag-and-drop';
+import type { DragEndEvent } from '@sa-apps/drag-and-drop';
+import { DragAndDropSortableContext, SwappableItem } from '@sa-apps/drag-and-drop';
 import { arraySwap } from '@sa-apps/utilities';
 
 import { Masonry } from './Masonry';
@@ -29,7 +30,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         } else {
             newMasonryItems.push({ ...DEFAULT_MASONRY_ITEM, id, content });
         }
-        setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems });
+
+        setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
+            console.error("Couldn't save the block setttings")
+        );
     };
 
     const handleDeleteClick = (id: string) => {
@@ -37,7 +41,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         if (masonryItemsIndex !== -1) {
             const newMasonryItems = structuredClone(masonryItems);
             newMasonryItems.splice(masonryItemsIndex, 1);
-            setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems });
+
+            setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
+                console.error("Couldn't save the block setttings")
+            );
         }
     };
 
@@ -48,10 +55,11 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
 
         if (over && active.id !== over.id && oldIndex !== undefined && newIndex !== undefined) {
             const newMasonryItems = structuredClone(masonryItems);
+
             setBlockSettings({
                 ...blockSettings,
                 masonryItems: arraySwap(newMasonryItems, oldIndex, newIndex),
-            });
+            }).catch(() => console.error("Couldn't save the block setttings"));
         }
     };
 
@@ -59,17 +67,17 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         deleteAssetIdsFromKey(
             `masonry-item-${id}`,
             blockAssets[`masonry-item-${id}`]?.map((asset) => asset.id)
-        );
+        ).catch(() => console.error("Couldn't unlink the asset from the block"));
     };
 
     const handleUploadClick = (id: string) => {
-        //TODO
+        // TODO
         console.log(id);
     };
 
     const handleBrowseAssetClick = (id: string) => {
         openAssetChooser(
-            async (result) => {
+            (result) => {
                 const masonryItemsIndex = masonryItems.findIndex((masonryItems) => masonryItems.id === id);
                 if (masonryItemsIndex === -1) {
                     setBlockSettings({
@@ -78,10 +86,12 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                             ...(blockSettings.masonryItems ? blockSettings.masonryItems : []),
                             { ...DEFAULT_MASONRY_ITEM, id },
                         ],
-                    });
+                    }).catch(() => console.error("Couldn't save the block setttings"));
                 }
 
-                await updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]);
+                updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]).catch(() =>
+                    console.error("Couldn't add the asset to the block")
+                );
                 closeAssetChooser();
             },
             { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id }
@@ -96,7 +106,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         } else {
             newMasonryItems.push({ ...DEFAULT_MASONRY_ITEM, id, style });
         }
-        setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems });
+
+        setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
+            console.error("Couldn't save the block setttings")
+        );
     };
 
     return (

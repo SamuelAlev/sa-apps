@@ -72,7 +72,7 @@ export const Search = () => {
         setSearchValue(newSearchValue);
 
         if (newSearchValue.length > 0) {
-            debouncedSearch(newSearchValue);
+            debouncedSearch(newSearchValue).catch(() => console.error('Error searching in guideline'));
         } else {
             setLoading(false);
             setSearchResults([]);
@@ -82,7 +82,7 @@ export const Search = () => {
     return (
         <>
             <button
-                className="inline-flex h-auto items-center font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none ring-offset-background border border-input hover:bg-accent hover:text-accent-foreground py-2 px-4 relative w-full justify-start rounded-[0.5rem] text-sm text-muted-foreground sm:w-64 sm:pr-12"
+                className="relative inline-flex h-auto w-full items-center justify-start rounded-[0.5rem] border border-input px-4 py-2 text-sm font-medium text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:w-64 sm:pr-12"
                 onClick={() => setOpen(true)}
             >
                 <span className="hidden lg:inline-flex">{t('searchInGuidelineDotDotDot')}</span>
@@ -117,14 +117,14 @@ export const Search = () => {
                                 >
                                     <File className="mr-4 h-4 w-4 shrink-0" />
                                     <div className="flex flex-col items-start">
-                                        <span className="mb-1 pb-1 border-b border-b-input">
+                                        <span className="mb-1 border-b border-b-input pb-1">
                                             {searchResult.pageTitle}
                                         </span>
 
                                         {searchResult.highlights.map((highlight, index) => (
                                             <span
                                                 key={index}
-                                                className="[&>em]:font-bold [&>em]:underline [&>em]:not-italic"
+                                                className="[&>em]:font-bold [&>em]:not-italic [&>em]:underline"
                                                 dangerouslySetInnerHTML={{ __html: highlight }}
                                             />
                                         ))}

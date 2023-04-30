@@ -4,6 +4,7 @@ export const debounce = <T extends unknown[], U>(callback: (...args: T) => Promi
     return (...args: T): Promise<U> => {
         clearTimeout(timer);
         return new Promise((resolve) => {
+            // eslint-disable-next-line n/no-callback-literal
             timer = window.setTimeout(() => resolve(callback(...args)), wait);
         });
     };

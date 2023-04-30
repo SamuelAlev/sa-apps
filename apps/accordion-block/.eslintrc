@@ -1,8 +1,8 @@
 {
-    "extends": ["@frontify/eslint-config-react"],
+    "extends": ["@salev/eslint-config"],
     "settings": {
-        "react": {
-            "version": "detect"
+        "tailwindcss": {
+            "callees": ["classnames", "clsx", "ctl", "merge", "cn"]
         }
     }
 }

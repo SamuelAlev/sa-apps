@@ -1,4 +1,5 @@
-import { MouseEvent, ReactElement, useRef, useState } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
+import { useRef, useState } from 'react';
 import { Button, buttonVariants } from '@sa-apps/button';
 import {
     AlertDialog,
@@ -21,13 +22,14 @@ import {
 } from '@sa-apps/dropdown-menu';
 import { useTranslations } from '@sa-apps/i18n';
 import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
-import { RgbaColorPicker, RgbaColorPickerProps } from '@sa-apps/color-picker';
+import type { RgbaColorPickerProps } from '@sa-apps/color-picker';
+import { RgbaColorPicker } from '@sa-apps/color-picker';
 import { Label } from '@sa-apps/label';
 import { debounce, hex8ToRgbaObject, rgbaObjectToHex8 } from '@sa-apps/utilities';
 import { TextInput } from '@sa-apps/text-input';
 import { Menu, Paintbrush2, Trash, Unlink } from 'lucide-react';
 
-import { MasonryItemProps } from './types';
+import type { MasonryItemProps } from './types';
 
 type MasonryItemMenuProps = {
     style: MasonryItemProps['style'];
@@ -92,10 +94,10 @@ export const MasonryItemMenu = ({
         <>
             <Popover open={isStylePopoverOpen}>
                 <DropdownMenu>
-                    <DropdownMenuTrigger data-no-dnd={true} asChild className="absolute top-4 right-4">
+                    <DropdownMenuTrigger data-no-dnd={true} asChild className="absolute right-4 top-4">
                         <PopoverTrigger data-no-dnd={true} asChild>
                             <Button size="sm" variant="secondary" ref={itemDropdownRef}>
-                                <Menu className="max-w-[20px] w-[20px] max-h-[20px] h-[20px]" />
+                                <Menu className="h-[20px] max-h-[20px] w-[20px] max-w-[20px]" />
                             </Button>
                         </PopoverTrigger>
                     </DropdownMenuTrigger>
@@ -130,10 +132,11 @@ export const MasonryItemMenu = ({
                                 <p className="text-sm text-muted-foreground">{t('stylesDescription')}.</p>
                             </div>
                             <div className="flex flex-col gap-2">
-                                <div className="flex flex-col gap-4 w-full">
+                                <div className="flex w-full flex-col gap-4">
                                     <Label>{t('backgroundColor')}</Label>
                                     <RgbaColorPicker
                                         color={style?.backgroundColor ?? { r: 0, g: 0, b: 0, a: 1 }}
+                                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
                                         onColorChange={debounce((backgroundColor) => {
                                             setLocalBackgroundColor(backgroundColor);
                                             handleStyleChange({ backgroundColor });
@@ -150,7 +153,7 @@ export const MasonryItemMenu = ({
                                     />
                                 </div>
                             </div>
-                            <div className="flex justify-end w-full pt-4">
+                            <div className="flex w-full justify-end pt-4">
                                 <Button onClick={handlePopoverCancelClick} size="lg">
                                     {t('close')}
                                 </Button>

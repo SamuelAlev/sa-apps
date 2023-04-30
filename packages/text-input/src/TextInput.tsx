@@ -1,4 +1,5 @@
-import { InputHTMLAttributes, forwardRef } from 'react';
+import type { InputHTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 import { cn } from '@sa-apps/utilities';
 
 export type TextInputProps = InputHTMLAttributes<HTMLInputElement>;

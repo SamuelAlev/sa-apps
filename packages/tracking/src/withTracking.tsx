@@ -1,6 +1,6 @@
-import { ComponentType, FC, ReactElement, useEffect } from 'react';
-
-import { init } from './tracking';
+import type { ComponentType, FC, ReactElement } from 'react';
+import { useEffect } from 'react';
+import { clarity } from 'clarity-js';
 
 export const withTracking =
     (id: string) =>
@@ -8,9 +8,9 @@ export const withTracking =
         return function withTracking(props): ReactElement {
             // eslint-disable-next-line react-hooks/rules-of-hooks
             useEffect(() => {
-                const initTracking = async () => {
+                const initTracking = () => {
                     try {
-                        await init(id);
+                        clarity.start({ projectId: id });
                     } catch {
                         // Do nothing
                     }
@@ -19,6 +19,6 @@ export const withTracking =
                 import.meta.env.PROD && initTracking();
             }, []);
 
-            return <Component {...(props as P)} />;
+            return <Component {...props} />;
         };
     };

@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode } from 'react';
+import type { ReactElement, ReactNode } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
@@ -27,7 +27,7 @@ export const VerticalItem = ({ id, children, disabled }: VerticalItemProps): Rea
                 {...attributes}
                 {...listeners}
                 disabled={disabled}
-                className="disabled:hidden absolute -left-8 top-0 bottom-0 hover:cursor-grab active:cursor-grabbing text-slate-700 hover:text-slate-800 active:text-slate-900"
+                className="absolute inset-y-0 -left-8 text-slate-700 hover:cursor-grab hover:text-slate-800 active:cursor-grabbing active:text-slate-900 disabled:hidden"
             >
                 <GripVertical />
             </button>

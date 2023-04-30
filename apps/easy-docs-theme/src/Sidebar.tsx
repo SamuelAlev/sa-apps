@@ -1,9 +1,9 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { ScrollArea } from '@sa-apps/scroll-area';
 import { useDocumentCategories, useDocumentPages } from '@frontify/app-bridge';
 
-import { useThemeContext } from './Context';
 import { cn } from '@sa-apps/utilities';
+import { useThemeContext } from './Context';
 import { useCurrentPath } from './hooks';
 
 export const Sidebar = (): ReactElement => {
@@ -23,13 +23,13 @@ export const Sidebar = (): ReactElement => {
                 <div className="relative overflow-hidden pr-6 lg:py-10">
                     {getSortedDocumentCategories.map((documentCategory) => (
                         <div key={documentCategory.id} className="pb-6">
-                            <h4 className="pb-2 pt-1 px-2 text-sm font-semibold">{documentCategory.title}</h4>
+                            <h4 className="px-2 pb-2 pt-1 text-sm font-semibold">{documentCategory.title}</h4>
                             <div className="grid grid-flow-row auto-rows-max text-sm">
                                 {getCategorizedPages(documentCategory.id).map((documentPage) => (
                                     <a
                                         key={documentPage.id}
                                         className={cn(
-                                            'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-accent',
+                                            'group flex w-full items-center rounded-md px-2 py-1.5 text-sm hover:bg-accent',
                                             currentPath ===
                                                 `/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}` &&
                                                 'bg-accent'
@@ -49,7 +49,7 @@ export const Sidebar = (): ReactElement => {
                                 <a
                                     key={documentPage.id}
                                     className={cn(
-                                        'text-sm group flex w-full items-center rounded-md py-1.5 px-2 hover:bg-accent',
+                                        'group flex w-full items-center rounded-md px-2 py-1.5 text-sm hover:bg-accent',
                                         currentPath === `/document/${documentId}#/${documentPage.slug}` && 'bg-accent'
                                     )}
                                     href={`/document/${documentId}#/${documentPage.slug}`}

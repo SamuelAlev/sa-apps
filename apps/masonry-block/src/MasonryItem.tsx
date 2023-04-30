@@ -1,8 +1,9 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { cn } from '@sa-apps/utilities';
 import { RichTextEditor } from '@sa-apps/rich-text-editor';
 import { Dropzone } from '@sa-apps/dropzone';
-import { FileExtension, FileExtensionSets } from '@frontify/app-bridge';
+import type { FileExtension } from '@frontify/app-bridge';
+import { FileExtensionSets } from '@frontify/app-bridge';
 
 import type { MasonryItemProps } from './types';
 import { isMasonryItemEmpty, prepareImageUrl, prepareVideoUrl, rgbaObjectToString } from './helpers';
@@ -38,6 +39,7 @@ export const MasonryItem = ({
     const isEmpty = isMasonryItemEmpty({ id, content }, coverAsset ? { [`masonry-item-${id}`]: [coverAsset] } : {});
 
     const handleUploadClick = () => {
+        // eslint-disable-next-line no-alert
         alert('Not yet implemented 😢\nPlease the "Browse" button instead.');
         onUploadClick();
     };
@@ -73,7 +75,7 @@ export const MasonryItem = ({
                     backgroundColor: style?.backgroundColor ? rgbaObjectToString(style.backgroundColor) : undefined,
                 }}
                 className={cn(
-                    'relative group/masonryItem flex overflow-auto',
+                    'group/masonryItem relative flex overflow-auto',
                     contentPosition === 'top' ? 'flex-col-reverse' : 'flex-col',
                     itemBorderClasses,
                     itemCornerRadiusClasses,
@@ -84,14 +86,14 @@ export const MasonryItem = ({
                     !FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
                         <img
                             draggable={false}
-                            className="overflow-hidden select-none object-cover h-full flex-grow"
+                            className="h-full flex-grow select-none overflow-hidden object-cover"
                             src={prepareImageUrl(coverAsset.previewUrl)}
                         />
                     )}
 
                 {coverAsset?.previewUrl && FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
                     <Video
-                        className="overflow-hidden select-none object-cover h-full flex-grow"
+                        className="h-full flex-grow select-none overflow-hidden object-cover"
                         draggable={false}
                         controls={showControls}
                         loop={loopVideo}
@@ -103,7 +105,7 @@ export const MasonryItem = ({
                 {!coverAsset?.previewUrl && readonly && <div className="flex-grow" />}
 
                 {!coverAsset?.previewUrl && !readonly && (
-                    <div className="min-h-[120px] h-[120px] w-full flex items-center justify-center">
+                    <div className="flex h-[120px] min-h-[120px] w-full items-center justify-center">
                         <Dropzone onUploadClick={handleUploadClick} onBrowseAssetClick={handleBrowseAssetClick} />
                     </div>
                 )}
@@ -120,7 +122,7 @@ export const MasonryItem = ({
                 <div
                     className={cn(
                         contentPaddingClasses,
-                        content === DEFAULT_MASONRY_ITEM['content'] && readonly && 'hidden'
+                        content === DEFAULT_MASONRY_ITEM.content && readonly && 'hidden'
                     )}
                 >
                     <RichTextEditor id={id} content={content} onTextChange={onContentChange} readonly={readonly} />

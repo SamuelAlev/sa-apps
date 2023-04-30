@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 import { RgbaColorPicker as ReactColofulRgbaColorPicker } from 'react-colorful';
 
 export type RgbaColorPickerProps = {

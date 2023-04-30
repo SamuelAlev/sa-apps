@@ -1,4 +1,5 @@
-import { MouseEvent, ReactElement, useMemo, useState } from 'react';
+import type { MouseEvent, ReactElement } from 'react';
+import { useMemo, useState } from 'react';
 import { ChevronDown, Laptop, LogOut, Menu, Moon, Sun, X } from 'lucide-react';
 import { Button, buttonVariants } from '@sa-apps/button';
 import { cn } from '@sa-apps/utilities';
@@ -7,15 +8,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@sa-apps/collapsible';
 import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
 import sdk from '@sa-apps/api';
-import {
-    CoverPage,
-    Document,
-    DocumentGroup,
-    useCoverPage,
-    useDocumentGroups,
-    useDocuments,
-    useEditorState,
-} from '@frontify/app-bridge';
+import type { CoverPage, Document, DocumentGroup } from '@frontify/app-bridge';
+import { useCoverPage, useDocumentGroups, useDocuments, useEditorState } from '@frontify/app-bridge';
 
 import { useThemeMode } from './hooks';
 import { useThemeContext } from './Context';
@@ -90,6 +84,7 @@ export const Header = (): ReactElement => {
 
     const handleLanguageClick = (event: MouseEvent, language: string) => {
         event.preventDefault();
+        // eslint-disable-next-line no-alert
         alert('Language switcher is not yet implemented 🥲');
         window.location.href = getLinkFromLanguage(language);
     };
@@ -107,7 +102,7 @@ export const Header = (): ReactElement => {
                             />
                         )}
                     </a>
-                    <nav className="hidden space-x-6 md:flex items-center text-sm font-semibold">
+                    <nav className="hidden items-center space-x-6 text-sm font-semibold md:flex">
                         {!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
                             <a
                                 href={coverPage.url}
@@ -267,7 +262,7 @@ const HeaderDocumentOrDocumentGroup = ({
     if ('documents' in documentOrDocumentGroup) {
         return (
             <DropdownMenu>
-                <DropdownMenuTrigger className="group flex items-center break-keep shrink-0">
+                <DropdownMenuTrigger className="group flex shrink-0 items-center break-keep">
                     <span
                         key={documentOrDocumentGroup.id}
                         title={documentOrDocumentGroup.name}
@@ -299,7 +294,7 @@ const MobileHeaderDocumentOrDocumentGroup = ({
     if ('documents' in documentOrDocumentGroup) {
         return (
             <Collapsible>
-                <CollapsibleTrigger className="group flex items-center break-keep shrink-0">
+                <CollapsibleTrigger className="group flex shrink-0 items-center break-keep">
                     <a
                         key={documentOrDocumentGroup.id}
                         href="#"
@@ -336,7 +331,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
                 onClick={onLinkClick}
                 title={documentOrLink.title}
                 aria-label={documentOrLink.title}
-                className="flex items-center break-keep shrink-0"
+                className="flex shrink-0 items-center break-keep"
                 target={documentOrLink.linkSettings?.newTab ? '_blank' : '_self'}
                 rel="noreferrer"
             >
@@ -362,7 +357,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
             onClick={onLinkClick}
             title={documentOrLink.title}
             aria-label={documentOrLink.title}
-            className="break-keep shrink-0"
+            className="shrink-0 break-keep"
         >
             {documentOrLink.title}
         </a>
@@ -378,7 +373,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
                 onClick={onLinkClick}
                 title={documentOrLink.title}
                 aria-label={documentOrLink.title}
-                className="break-keep shrink-0 flex w-full items-center rounded-md p-2 text-sm hover:underline"
+                className="flex w-full shrink-0 items-center break-keep rounded-md p-2 text-sm hover:underline"
                 target={documentOrLink.linkSettings?.newTab ? '_blank' : '_self'}
                 rel="noreferrer"
             >
@@ -401,7 +396,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
             onClick={onLinkClick}
             title={documentOrLink.title}
             aria-label={documentOrLink.title}
-            className="break-keep shrink-0 flex w-full items-center rounded-md p-2 text-sm hover:underline"
+            className="flex w-full shrink-0 items-center break-keep rounded-md p-2 text-sm hover:underline"
         >
             {documentOrLink.title}
         </a>

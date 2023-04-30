@@ -1,4 +1,4 @@
-import { Asset } from '@frontify/app-bridge';
+import type { Asset } from '@frontify/app-bridge';
 
 export type BlockSettings = {
     masonryItems?: MasonryItem[];

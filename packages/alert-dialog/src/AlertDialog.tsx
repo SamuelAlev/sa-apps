@@ -1,4 +1,5 @@
-import { ComponentPropsWithoutRef, ElementRef, HTMLAttributes, forwardRef } from 'react';
+import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 import * as AlertDialogPrimitive from '@radix-ui/react-alert-dialog';
 import { cn } from '@sa-apps/utilities';
 import { buttonVariants } from '@sa-apps/button';
@@ -62,7 +63,7 @@ export const AlertDialogTitle = forwardRef<
     ElementRef<typeof AlertDialogPrimitive.Title>,
     ComponentPropsWithoutRef<typeof AlertDialogPrimitive.Title>
 >(({ className, ...props }, ref) => (
-    <AlertDialogPrimitive.Title ref={ref} className={cn('text-primary text-lg font-semibold', className)} {...props} />
+    <AlertDialogPrimitive.Title ref={ref} className={cn('text-lg font-semibold text-primary', className)} {...props} />
 ));
 AlertDialogTitle.displayName = 'SAAlertDialogTitle';
 

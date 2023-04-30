@@ -1,11 +1,10 @@
 import type { KeyboardEvent, MouseEvent, ReactElement, ReactNode } from 'react';
+import type { DragEndEvent as DndKitDragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
 import {
     DndContext,
-    DragEndEvent as DndKitDragEndEvent,
     KeyboardSensor as LibKeyboardSensor,
     MouseSensor as LibMouseSensor,
     TouchSensor,
-    UniqueIdentifier,
     closestCenter,
     useSensor,
     useSensors,
@@ -18,12 +17,7 @@ import {
 } from '@dnd-kit/sortable';
 
 export type DragEndEvent = DndKitDragEndEvent;
-type ItemsArray = (
-    | UniqueIdentifier
-    | {
-          id: UniqueIdentifier;
-      }
-)[];
+type ItemsArray = (UniqueIdentifier | { id: UniqueIdentifier })[];
 
 type DragAndDropSortableContextProps = {
     items: ItemsArray;

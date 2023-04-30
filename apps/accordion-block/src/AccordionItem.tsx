@@ -1,7 +1,7 @@
 import { RichTextEditor } from '@sa-apps/rich-text-editor';
 import { cn } from '@sa-apps/utilities';
 import * as Accordion from '@radix-ui/react-accordion';
-import { ReactElement } from 'react';
+import type { ReactElement } from 'react';
 
 import type { AccordionItemProps } from './types';
 import { isAccordionItemEmpty, rgbaObjectToString } from './helpers';
@@ -44,19 +44,19 @@ export const AccordionItem = ({
                 <Accordion.Trigger
                     className={cn(
                         headerPaddingClasses,
-                        'group/trigger w-full flex gap-2 items-center ltr:flex-row rtl:flex-row-reverse'
+                        'group/trigger flex w-full items-center gap-2 ltr:flex-row rtl:flex-row-reverse'
                     )}
                     data-test-id="accordion-item-trigger"
                 >
                     {triggerDirection === 'left' && <AccordionItemTrigger icon={triggerIcon} />}
 
-                    <div className="hidden rtl:flex rtl:flex-grow" />
+                    <div className="hidden rtl:flex rtl:grow" />
 
                     <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
 
-                    <div className="flex flex-grow rtl:hidden" />
+                    <div className="flex grow rtl:hidden" />
 
-                    <div className="flex gap-4 items-center">
+                    <div className="flex items-center gap-4">
                         {onDeleteClick && !isEmpty && !readonly ? (
                             <AccordionItemMenu
                                 style={style}

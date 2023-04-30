@@ -21,7 +21,8 @@ import {
     UnderlinePlugin,
     UnorderedListPlugin,
 } from '@frontify/fondue';
-import { ReactElement, useMemo } from 'react';
+import type { ReactElement } from 'react';
+import { useMemo } from 'react';
 import { cn } from '@sa-apps/utilities';
 
 type RichTextEditorProps = {

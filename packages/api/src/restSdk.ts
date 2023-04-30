@@ -1,10 +1,11 @@
-import useSWR, { SWRConfiguration as SWRConfigInterface, Key as SWRKeyInterface } from 'swr';
+import type { SWRConfiguration as SWRConfigInterface, Key as SWRKeyInterface } from 'swr';
+import useSWR from 'swr';
 import { getCsrfToken } from './csrf';
 
-const fetcher = (url: string) =>
+const fetcher = <T>(url: string) =>
     fetch(url, { headers: new Headers({ 'X-CSRF-TOKEN': getCsrfToken() }) })
         .then((response) => response.json())
-        .then((response) => response.data);
+        .then((response: { data: T }) => response.data);
 
 type Portal = {
     id: number;

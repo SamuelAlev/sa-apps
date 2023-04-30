@@ -1,14 +1,5 @@
-import {
-    ComponentProps,
-    ComponentType,
-    FC,
-    ReactElement,
-    ReactNode,
-    createContext,
-    useContext,
-    useEffect,
-    useState,
-} from 'react';
+import type { ComponentProps, ComponentType, FC, ReactElement, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 export type Messages = { [key in string | 'en']: Record<string, string> };
 
@@ -29,7 +20,7 @@ export const TranslationsProvider = <M extends Messages>({
     children,
     messages,
 }: TranslationProviderProps<M>): ReactElement => {
-    const [language, setLanguage] = useState<string>((document.documentElement.lang.substring(0, 2) as string) || 'en');
+    const [language, setLanguage] = useState<string>(document.documentElement.lang.substring(0, 2) || 'en');
 
     const t = (key: keyof Messages['en']) => messages[language][key];
 
@@ -56,7 +47,7 @@ export const withTranslations =
         return function withTranslations(props): ReactElement {
             return (
                 <TranslationsProvider messages={messages}>
-                    <Component {...(props as P)} />
+                    <Component {...props} />
                 </TranslationsProvider>
             );
         };

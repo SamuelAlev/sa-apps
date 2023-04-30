@@ -1,4 +1,5 @@
-import { ReactElement, useEffect, useState } from 'react';
+import type { ReactElement } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslations } from '@sa-apps/i18n';
 import { cn } from '@sa-apps/utilities';
 
@@ -102,10 +103,10 @@ export const TableOfContent = (): ReactElement | null => {
                                 aria-label={section.title}
                                 onClick={() => handleSectionClick(section.id)}
                                 className={cn(
-                                    'inline-block no-underline text-sm transition-colors',
+                                    'inline-block text-sm no-underline transition-colors',
                                     section.id === activeItem
                                         ? 'font-medium text-primary'
-                                        : 'text-sm text-muted-foreground hover:text-primary cursor-pointer'
+                                        : 'cursor-pointer text-sm text-muted-foreground hover:text-primary'
                                 )}
                             >
                                 {section.title}

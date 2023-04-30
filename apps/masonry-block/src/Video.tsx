@@ -1,4 +1,5 @@
-import { VideoHTMLAttributes, forwardRef, useRef, useState } from 'react';
+import type { VideoHTMLAttributes } from 'react';
+import { forwardRef, useRef, useState } from 'react';
 import { Loader2 } from 'lucide-react';
 
 import { prepareImageUrl } from './helpers';
@@ -26,16 +27,16 @@ export const Video = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoE
             {state === 'init' && (
                 <img
                     draggable={false}
-                    className="overflow-hidden select-none object-cover h-full flex-grow"
+                    className="h-full flex-grow select-none overflow-hidden object-cover"
                     src={props?.src ? prepareImageUrl(props.src) : undefined}
                 />
             )}
 
             {state === 'loading' && (
-                <div className="h-full w-full flex items-center justify-center relative">
+                <div className="relative flex h-full w-full items-center justify-center">
                     <img
                         draggable={false}
-                        className="grayscale overflow-hidden select-none object-cover h-full flex-grow blur-sm"
+                        className="h-full flex-grow select-none overflow-hidden object-cover blur-sm grayscale"
                         src={props?.src ? prepareImageUrl(props.src) : undefined}
                     />
                     <div className="absolute inset-0 flex items-center justify-center">
