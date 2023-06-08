@@ -1,1 +1,1 @@
-# Accordion Block
+# Easy Docs Theme
