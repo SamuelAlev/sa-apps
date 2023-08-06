@@ -45,7 +45,7 @@
         "@babel/core": "^7.21.5",
         "@frontify/frontify-cli": "^5.3.12",
         "@sa-apps/tailwind-config": "workspace:*",
-        "@salev/eslint-config": "^0.0.9",
+        "@salev/eslint-config": "^0.0.14",
         "@testing-library/react": "^14.0.0",
         "@types/react": "^18.2.0",
         "@types/react-dom": "^18.2.1",

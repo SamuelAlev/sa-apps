@@ -26,7 +26,7 @@
         "@graphql-codegen/typescript": "^3.0.3",
         "@graphql-codegen/typescript-graphql-request": "^4.5.9",
         "@graphql-codegen/typescript-operations": "^3.0.3",
-        "@salev/eslint-config": "^0.0.9",
+        "@salev/eslint-config": "^0.0.14",
         "dotenv-cli": "^7.2.1",
         "eslint": "^8.38.0",
         "graphql": "^16.6.0",

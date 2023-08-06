@@ -20,7 +20,7 @@
     },
     "devDependencies": {
         "@frontify/app-bridge": "^3.0.0-beta.66",
-        "@salev/eslint-config": "^0.0.9",
+        "@salev/eslint-config": "^0.0.14",
         "@types/react": "18.2.0",
         "@types/react-dom": "18.2.1",
         "eslint": "8.39.0",

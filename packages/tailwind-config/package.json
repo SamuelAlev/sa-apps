@@ -20,7 +20,7 @@
         "tailwindcss-animate": "^1.0.5"
     },
     "devDependencies": {
-        "@salev/eslint-config": "^0.0.9",
+        "@salev/eslint-config": "^0.0.14",
         "eslint": "^8.38.0",
         "prettier": "^2.8.7",
         "prettier-plugin-tailwindcss": "^0.2.8",

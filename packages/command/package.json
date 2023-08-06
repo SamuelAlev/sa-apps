@@ -23,7 +23,7 @@
     },
     "devDependencies": {
         "@sa-apps/tailwind-config": "workspace:*",
-        "@salev/eslint-config": "^0.0.9",
+        "@salev/eslint-config": "^0.0.14",
         "@types/react": "^18.0.34",
         "@types/react-dom": "^18.0.11",
         "eslint": "^8.38.0",

@@ -16,7 +16,7 @@
         "tailwind-merge": "^1.12.0"
     },
     "devDependencies": {
-        "@salev/eslint-config": "^0.0.9",
+        "@salev/eslint-config": "^0.0.14",
         "eslint": "^8.38.0",
         "prettier": "^2.8.7",
         "typescript": "^5.0.4"
