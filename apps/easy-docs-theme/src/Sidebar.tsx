@@ -32,7 +32,7 @@ export const Sidebar = (): ReactElement => {
                                             'group flex w-full items-center rounded-md px-2 py-1.5 text-sm hover:bg-accent',
                                             currentPath ===
                                                 `/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}` &&
-                                                'bg-accent'
+                                                'bg-accent',
                                         )}
                                         href={`/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}`}
                                     >
@@ -50,7 +50,7 @@ export const Sidebar = (): ReactElement => {
                                     key={documentPage.id}
                                     className={cn(
                                         'group flex w-full items-center rounded-md px-2 py-1.5 text-sm hover:bg-accent',
-                                        currentPath === `/document/${documentId}#/${documentPage.slug}` && 'bg-accent'
+                                        currentPath === `/document/${documentId}#/${documentPage.slug}` && 'bg-accent',
                                     )}
                                     href={`/document/${documentId}#/${documentPage.slug}`}
                                 >

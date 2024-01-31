@@ -2,7 +2,7 @@
     "extends": ["@salev/eslint-config"],
     "settings": {
         "tailwindcss": {
-            "callees": ["classnames", "clsx", "ctl", "merge", "cn"]
-        }
-    }
+            "callees": ["classnames", "clsx", "ctl", "merge", "cn"],
+        },
+    },
 }

@@ -59,9 +59,9 @@ export const Header = (): ReactElement => {
     const documentsAndGroups = useMemo(
         () =>
             [...getUngroupedDocuments(), ...documentGroups.values()].sort((a, b) =>
-                a.sort && b.sort ? a.sort - b.sort : 0
+                a.sort && b.sort ? a.sort - b.sort : 0,
             ),
-        [documentGroups, getUngroupedDocuments]
+        [documentGroups, getUngroupedDocuments],
     );
 
     const handleAnchorElementClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -74,7 +74,7 @@ export const Header = (): ReactElement => {
 
     const handleLogInClick = () => {
         window.location.href = `/auth/?referer=${encodeURIComponent(
-            window.location.href.replace(window.location.origin, '')
+            window.location.href.replace(window.location.origin, ''),
         )}`;
     };
 
@@ -184,7 +184,7 @@ export const Header = (): ReactElement => {
                                 >
                                     {
                                         dataPortal.i18n_settings.languages.find(
-                                            (lang) => lang.language === document.documentElement.lang
+                                            (lang) => lang.language === document.documentElement.lang,
                                         )?.label
                                     }
                                 </DropdownMenuTrigger>
@@ -342,7 +342,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
                             src={documentOrLink.linkSettings.iconUrl}
                             className={cn(
                                 documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2',
-                                'h-4 w-4 text-white '
+                                'h-4 w-4 text-white ',
                             )}
                         />
                     )}

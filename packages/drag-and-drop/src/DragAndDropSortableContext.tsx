@@ -81,7 +81,7 @@ export const DragAndDropSortableContext = ({
         useSensor(TouchSensor),
         useSensor(KeyboardSensor, {
             coordinateGetter: sortableKeyboardCoordinates,
-        })
+        }),
     );
 
     return (

@@ -44,7 +44,7 @@ export const Search = () => {
             setSearchResults(result);
             setLoading(false);
         }, 300),
-        [appBridge]
+        [appBridge],
     );
 
     const handleSuggestionGoToLibraries = () => {

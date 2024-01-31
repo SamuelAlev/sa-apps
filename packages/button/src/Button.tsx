@@ -26,7 +26,7 @@ export const buttonVariants = cva(
             variant: 'default',
             size: 'default',
         },
-    }
+    },
 );
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & VariantProps<typeof buttonVariants>;

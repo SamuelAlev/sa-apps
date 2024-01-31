@@ -1,8 +1,10 @@
-const { fontFamily } = require('tailwindcss/defaultTheme');
-const plugin = require('tailwindcss/plugin');
+import { fontFamily } from 'tailwindcss/defaultTheme';
+import plugin from 'tailwindcss/plugin';
+import { type Config } from 'tailwindcss';
+import tailwindAnimate from 'tailwindcss-animate';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
+    content: [],
     darkMode: 'class',
     corePlugins: {
         preflight: false,
@@ -54,12 +56,12 @@ module.exports = {
             },
             keyframes: {
                 'accordion-down': {
-                    from: { height: 0 },
+                    from: { height: '0' },
                     to: { height: 'var(--radix-accordion-content-height)' },
                 },
                 'accordion-up': {
                     from: { height: 'var(--radix-accordion-content-height)' },
-                    to: { height: 0 },
+                    to: { height: '0' },
                 },
             },
             animation: {
@@ -69,9 +71,10 @@ module.exports = {
         },
     },
     plugins: [
-        require('tailwindcss-animate'),
+        tailwindAnimate,
         plugin(({ addVariant, e }) => {
             addVariant('expanded', ({ modifySelectors, separator }) => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
                 modifySelectors(({ className }) => {
                     return `.${e(`expanded${separator}${className}`)}[aria-expanded='true']`;
                 });
@@ -85,4 +88,4 @@ module.exports = {
             });
         }),
     ],
-};
+} satisfies Config;

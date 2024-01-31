@@ -11,23 +11,23 @@
         "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
-        "@frontify/app-bridge": "^3 || ^3.0.0-beta.66",
-        "react": "^18",
-        "react-dom": "^18"
+        "@frontify/app-bridge": "^3.1.0 || ^4.0.0-alpha.0",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0"
     },
     "dependencies": {
-        "@frontify/sidebar-settings": "^0.3.3"
+        "@frontify/sidebar-settings": "^0.9.1"
     },
     "devDependencies": {
-        "@frontify/app-bridge": "^3.0.0-beta.66",
-        "@salev/eslint-config": "^0.0.9",
-        "@types/react": "18.2.0",
-        "@types/react-dom": "18.2.1",
-        "eslint": "8.39.0",
-        "prettier": "2.8.8",
+        "@frontify/app-bridge": "^3.1.0",
+        "@salev/eslint-config": "^0.0.14",
+        "@types/react": "18.2.48",
+        "@types/react-dom": "18.2.18",
+        "eslint": "8.56.0",
+        "prettier": "3.2.4",
         "react": "18.2.0",
         "react-dom": "18.2.0",
-        "sinon": "15.0.4",
-        "typescript": "5.0.4"
+        "sinon": "17.0.1",
+        "typescript": "5.3.3"
     }
 }

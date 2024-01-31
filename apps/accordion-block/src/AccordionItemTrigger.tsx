@@ -11,7 +11,7 @@ const PlusMinusIcon = ({ className }: { className?: string }): ReactElement => {
             <svg
                 className={cn(
                     'h-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-w-[var(--accordion-trigger-size)] stroke-[number:var(--accordion-trigger-thickness)]',
-                    className
+                    className,
                 )}
                 viewBox="0 0 24 24"
                 fill="none"
@@ -49,7 +49,7 @@ export const AccordionItemTrigger = ({ icon }: AccordionItemTriggerProps): React
                 <ChevronRight
                     className={cn(
                         "h-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-w-[var(--accordion-trigger-size)] stroke-[number:var(--accordion-trigger-thickness)] transition-transform ease-out group-[[data-state='open']]/trigger:rotate-90 motion-reduce:transition-none",
-                        triggerBorderClasses
+                        triggerBorderClasses,
                     )}
                     aria-hidden
                 />
@@ -59,7 +59,7 @@ export const AccordionItemTrigger = ({ icon }: AccordionItemTriggerProps): React
                 <ChevronRight
                     className={cn(
                         "h-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-w-[var(--accordion-trigger-size)] rotate-180 stroke-[number:var(--accordion-trigger-thickness)] transition-transform ease-out group-[[data-state='open']]/trigger:rotate-90 motion-reduce:transition-none",
-                        triggerBorderClasses
+                        triggerBorderClasses,
                     )}
                     aria-hidden
                 />

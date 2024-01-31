@@ -13,7 +13,7 @@ const useSections = (): { id: string; title: string | undefined }[] => {
                 [...selected].map((node) => ({
                     id: node.id,
                     title: node.querySelector('.js-b-section__title')?.textContent?.trim(),
-                }))
+                })),
             );
         }
 
@@ -24,7 +24,7 @@ const useSections = (): { id: string; title: string | undefined }[] => {
                     [...selected].map((node) => ({
                         id: node.id,
                         title: node.querySelector('.js-b-section__title')?.textContent?.trim(),
-                    }))
+                    })),
                 );
             }
         });
@@ -55,7 +55,7 @@ const useActiveItem = (itemIds: string[]) => {
                     }
                 }
             },
-            { rootMargin: '0% 0% -80% 0%' }
+            { rootMargin: '0% 0% -80% 0%' },
         );
 
         for (const id of itemIds) {
@@ -106,7 +106,7 @@ export const TableOfContent = (): ReactElement | null => {
                                     'inline-block text-sm no-underline transition-colors',
                                     section.id === activeItem
                                         ? 'font-medium text-primary'
-                                        : 'cursor-pointer text-sm text-muted-foreground hover:text-primary'
+                                        : 'cursor-pointer text-sm text-muted-foreground hover:text-primary',
                                 )}
                             >
                                 {section.title}

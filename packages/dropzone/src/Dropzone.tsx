@@ -46,5 +46,5 @@ export const Dropzone = withTranslations(messages)(
                 </button>
             </div>
         );
-    })
+    }),
 );

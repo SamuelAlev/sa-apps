@@ -60,7 +60,7 @@ export const getAccordionRootStyles = (blockSettings: BlockSettings) =>
         '--accordion-trigger-thickness': blockSettings.triggerThicknessCustomEnabled
             ? blockSettings.triggerThicknessCustom
             : blockSettings.triggerThicknessSimple,
-    } as CSSProperties);
+    }) as CSSProperties;
 
 export const getNewAccordionItemId = () => Date.now().toString();
 

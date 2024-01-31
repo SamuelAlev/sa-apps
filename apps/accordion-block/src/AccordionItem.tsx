@@ -10,6 +10,7 @@ import { AccordionItemMenu } from './AccordionItemMenu';
 import { contentPaddingClasses, headerPaddingClasses, itemBorderClasses } from './constant';
 
 export const AccordionItem = ({
+    appBridge,
     id,
     triggerIcon,
     triggerDirection,
@@ -44,7 +45,7 @@ export const AccordionItem = ({
                 <Accordion.Trigger
                     className={cn(
                         headerPaddingClasses,
-                        'group/trigger flex w-full items-center gap-2 ltr:flex-row rtl:flex-row-reverse'
+                        'group/trigger flex w-full items-center gap-2 ltr:flex-row rtl:flex-row-reverse',
                     )}
                     data-test-id="accordion-item-trigger"
                 >
@@ -52,7 +53,13 @@ export const AccordionItem = ({
 
                     <div className="hidden rtl:flex rtl:grow" />
 
-                    <RichTextEditor id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
+                    <RichTextEditor
+                        appBridge={appBridge}
+                        id={id}
+                        content={heading}
+                        readonly={readonly}
+                        onTextChange={onHeadingChange}
+                    />
 
                     <div className="flex grow rtl:hidden" />
 
@@ -75,7 +82,13 @@ export const AccordionItem = ({
                 className="overflow-y-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
             >
                 <div className={contentPaddingClasses}>
-                    <RichTextEditor id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
+                    <RichTextEditor
+                        appBridge={appBridge}
+                        id={id}
+                        content={content}
+                        readonly={readonly}
+                        onTextChange={onContentChange}
+                    />
                 </div>
             </Accordion.Content>
         </Accordion.Item>

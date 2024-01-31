@@ -17,23 +17,23 @@
         "react-dom": "^18.2.0"
     },
     "dependencies": {
-        "graphql-request": "^5.1.0",
+        "graphql-request": "^6.1.0",
         "graphql-tag": "^2.12.6",
-        "swr": "^2.1.3"
+        "swr": "^2.2.4"
     },
     "devDependencies": {
-        "@graphql-codegen/cli": "^3.3.0",
-        "@graphql-codegen/typescript": "^3.0.3",
+        "@graphql-codegen/cli": "^3.3.1",
+        "@graphql-codegen/typescript": "^3.0.4",
         "@graphql-codegen/typescript-graphql-request": "^4.5.9",
-        "@graphql-codegen/typescript-operations": "^3.0.3",
-        "@salev/eslint-config": "^0.0.9",
-        "dotenv-cli": "^7.2.1",
-        "eslint": "^8.38.0",
-        "graphql": "^16.6.0",
-        "graphql-codegen-plugin-typescript-swr": "0.8.3",
-        "prettier": "^2.8.7",
+        "@graphql-codegen/typescript-operations": "^3.0.4",
+        "@salev/eslint-config": "^0.0.14",
+        "dotenv-cli": "^7.3.0",
+        "eslint": "^8.56.0",
+        "graphql": "^16.8.1",
+        "graphql-codegen-plugin-typescript-swr": "0.8.5",
+        "prettier": "^3.2.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "typescript": "^5.0.4"
+        "typescript": "^5.3.3"
     }
 }

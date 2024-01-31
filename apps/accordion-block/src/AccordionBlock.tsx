@@ -29,7 +29,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
         }
 
         setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-            console.error("Couldn't save the block setttings")
+            console.error("Couldn't save the block setttings"),
         );
     };
 
@@ -43,7 +43,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
         }
 
         setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-            console.error("Couldn't save the block setttings")
+            console.error("Couldn't save the block setttings"),
         );
     };
 
@@ -54,7 +54,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             newAccordionItems.splice(accordionItemIndex, 1);
 
             setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-                console.error("Couldn't save the block setttings")
+                console.error("Couldn't save the block setttings"),
             );
         }
     };
@@ -66,7 +66,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
 
         if (over && active.id !== over.id && oldIndex !== undefined && newIndex !== undefined) {
             setBlockSettings({ ...blockSettings, accordionItems: arrayMove(accordionItems, oldIndex, newIndex) }).catch(
-                () => console.error("Couldn't save the block setttings")
+                () => console.error("Couldn't save the block setttings"),
             );
         }
     };
@@ -80,7 +80,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             newAccordionItems.push({ ...DEFAULT_ACCORDION_ITEM, id, style });
         }
         setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-            console.error("Couldn't save the block setttings")
+            console.error("Couldn't save the block setttings"),
         );
     };
 
@@ -95,6 +95,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                 {accordionItems.map((accordionItem) => (
                     <VerticalItem key={accordionItem.id} id={accordionItem.id} disabled={!isEditing}>
                         <AccordionItem
+                            appBridge={appBridge}
                             triggerIcon={blockSettings.triggerIcon}
                             triggerDirection={blockSettings.triggerDirection}
                             onHeadingChange={(value) => handleHeadingChange(accordionItem.id, value)}
@@ -109,6 +110,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
 
                 {(!isLastItemEmpty || isAccordionItemsEmpty) && isEditing && (
                     <AccordionItem
+                        appBridge={appBridge}
                         id={getNewAccordionItemId()}
                         triggerIcon={blockSettings.triggerIcon}
                         triggerDirection={blockSettings.triggerDirection}

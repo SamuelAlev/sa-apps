@@ -79,7 +79,7 @@ export const MasonryItem = ({
                     contentPosition === 'top' ? 'flex-col-reverse' : 'flex-col',
                     itemBorderClasses,
                     itemCornerRadiusClasses,
-                    itemBoxShadowClasses[boxShadow]
+                    itemBoxShadowClasses[boxShadow],
                 )}
             >
                 {coverAsset?.previewUrl &&
@@ -122,7 +122,7 @@ export const MasonryItem = ({
                 <div
                     className={cn(
                         contentPaddingClasses,
-                        content === DEFAULT_MASONRY_ITEM.content && readonly && 'hidden'
+                        content === DEFAULT_MASONRY_ITEM.content && readonly && 'hidden',
                     )}
                 >
                     <RichTextEditor id={id} content={content} onTextChange={onContentChange} readonly={readonly} />

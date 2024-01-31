@@ -5,25 +5,26 @@
     "author": "Samuel Alev <samuel.alev@protonmail.com>",
     "sideEffects": false,
     "exports": {
-        ".": "./src/index.js",
+        ".": "./src/index.ts",
         "./src/*": "./src/*"
     },
-    "main": "src/index.js",
+    "main": "src/index.ts",
     "scripts": {
         "lint": "eslint .",
         "lint:fix": "eslint --fix ."
     },
     "peerDependencies": {
-        "tailwindcss": "^3.3.1"
+        "tailwindcss": "^3.4.1"
     },
     "dependencies": {
-        "tailwindcss-animate": "^1.0.5"
+        "tailwindcss-animate": "^1.0.7"
     },
     "devDependencies": {
-        "@salev/eslint-config": "^0.0.9",
-        "eslint": "^8.38.0",
-        "prettier": "^2.8.7",
-        "prettier-plugin-tailwindcss": "^0.2.8",
-        "tailwindcss": "^3.3.1"
+        "@salev/eslint-config": "^0.0.14",
+        "eslint": "^8.56.0",
+        "prettier": "^3.2.4",
+        "prettier-plugin-tailwindcss": "^0.5.11",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5.3.3"
     }
 }

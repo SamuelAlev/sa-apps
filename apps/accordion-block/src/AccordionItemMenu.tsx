@@ -43,7 +43,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
     const [isStylePopoverOpen, setIsStylePopoverOpen] = useState(false);
     const itemDropdownRef = useRef<HTMLButtonElement>(null);
     const [localBackgroundColor, setLocalBackgroundColor] = useState<RgbaColorPickerProps['color'] | undefined>(
-        style?.backgroundColor
+        style?.backgroundColor,
     );
 
     const handleModalCancelClick = () => {

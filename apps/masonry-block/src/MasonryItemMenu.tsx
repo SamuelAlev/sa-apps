@@ -49,7 +49,7 @@ export const MasonryItemMenu = ({
     const [isStylePopoverOpen, setIsStylePopoverOpen] = useState(false);
     const itemDropdownRef = useRef<HTMLButtonElement>(null);
     const [localBackgroundColor, setLocalBackgroundColor] = useState<RgbaColorPickerProps['color'] | undefined>(
-        style?.backgroundColor
+        style?.backgroundColor,
     );
 
     const handleModalCancelClick = () => {
@@ -129,7 +129,7 @@ export const MasonryItemMenu = ({
                         <div className="flex flex-col gap-8">
                             <div className="space-y-2">
                                 <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{t('styles')}</h4>
-                                <p className="text-sm text-muted-foreground">{t('stylesDescription')}.</p>
+                                <p className="text-muted-foreground text-sm">{t('stylesDescription')}.</p>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <div className="flex w-full flex-col gap-4">

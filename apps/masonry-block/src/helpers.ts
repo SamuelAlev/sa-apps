@@ -6,12 +6,12 @@ import { DEFAULT_RTE_CONTENT } from './constant';
 
 export const isLastMasonryItemEmpty = (
     masonryItems: MasonryItem[],
-    blockAssets: ReturnType<typeof useBlockAssets>['blockAssets']
+    blockAssets: ReturnType<typeof useBlockAssets>['blockAssets'],
 ) => isMasonryItemEmpty(masonryItems[masonryItems.length - 1], blockAssets);
 
 export const isMasonryItemEmpty = (
     masonryItem: MasonryItem,
-    blockAssets: ReturnType<typeof useBlockAssets>['blockAssets']
+    blockAssets: ReturnType<typeof useBlockAssets>['blockAssets'],
 ) => masonryItem.content === DEFAULT_RTE_CONTENT && blockAssets[`masonry-item-${masonryItem.id}`] === undefined;
 
 export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
@@ -55,7 +55,7 @@ export const getMasonryRootStyles = (blockSettings: BlockSettings) =>
         '--masonry-items-corner-radius-bottom-left': blockSettings.itemsCornerRadiusCustomEnabled
             ? blockSettings.itemsCornerRadiusCustomBottomLeft
             : blockSettings.itemsCornerRadiusSimple,
-    } as CSSProperties);
+    }) as CSSProperties;
 
 export const getNewMasonryItemId = () => Date.now().toString();
 

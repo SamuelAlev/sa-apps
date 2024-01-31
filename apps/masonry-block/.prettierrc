@@ -5,5 +5,14 @@
     "arrowParens": "always",
     "endOfLine": "lf",
     "plugins": ["prettier-plugin-tailwindcss"],
-    "pluginSearchDirs": false
+    "pluginSearchDirs": false,
+    "overrides": [
+        {
+            "files": ["tsconfig.json"],
+            "options": {
+                "parser": "json",
+                "trailingComma": "none"
+            }
+        }
+    ]
 }

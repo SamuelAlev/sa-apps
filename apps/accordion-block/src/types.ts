@@ -1,3 +1,5 @@
+import { type AppBridgeBlock } from '@frontify/app-bridge';
+
 export type BlockSettings = {
     accordionItems?: AccordionItem[];
 
@@ -55,6 +57,7 @@ export type AccordionItem = {
 };
 
 export type AccordionItemProps = AccordionItem & {
+    appBridge: AppBridgeBlock;
     readonly: boolean;
     triggerIcon: 'plus' | 'chevron-right' | 'chevron-left';
     triggerDirection: 'left' | 'right';

@@ -32,7 +32,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         }
 
         setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
-            console.error("Couldn't save the block setttings")
+            console.error("Couldn't save the block setttings"),
         );
     };
 
@@ -43,7 +43,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
             newMasonryItems.splice(masonryItemsIndex, 1);
 
             setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
-                console.error("Couldn't save the block setttings")
+                console.error("Couldn't save the block setttings"),
             );
         }
     };
@@ -66,7 +66,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     const handleUnlinkAssetClick = (id: string) => {
         deleteAssetIdsFromKey(
             `masonry-item-${id}`,
-            blockAssets[`masonry-item-${id}`]?.map((asset) => asset.id)
+            blockAssets[`masonry-item-${id}`]?.map((asset) => asset.id),
         ).catch(() => console.error("Couldn't unlink the asset from the block"));
     };
 
@@ -90,11 +90,11 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 }
 
                 updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]).catch(() =>
-                    console.error("Couldn't add the asset to the block")
+                    console.error("Couldn't add the asset to the block"),
                 );
                 closeAssetChooser();
             },
-            { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id }
+            { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id },
         );
     };
 
@@ -108,7 +108,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         }
 
         setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
-            console.error("Couldn't save the block setttings")
+            console.error("Couldn't save the block setttings"),
         );
     };
 
@@ -119,7 +119,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                     columnCount={parseInt(
                         blockSettings.columnsCountCustomEnabled
                             ? blockSettings.columnsCountCustom
-                            : blockSettings.columnsCountSimple
+                            : blockSettings.columnsCountSimple,
                     )}
                 >
                     {masonryItems.map((masonryItem) => (

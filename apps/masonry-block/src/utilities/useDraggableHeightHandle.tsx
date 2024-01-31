@@ -34,8 +34,8 @@ export const useDraggableHeightHandle = ({
                 <button
                     id={`resize-handle-${id}`}
                     className={cn(
-                        'h-4 w-16 rounded-full border border-border shadow-md transition-colors duration-300',
-                        dragging ? 'cursor-grabbing bg-gray-200' : 'cursor-grab bg-gray-50 hover:bg-gray-100'
+                        'border-border h-4 w-16 rounded-full border shadow-md transition-colors duration-300',
+                        dragging ? 'cursor-grabbing bg-gray-200' : 'cursor-grab bg-gray-50 hover:bg-gray-100',
                     )}
                     onMouseDown={handleMouseDown}
                     onTouchStart={handleTouchStart}
@@ -46,7 +46,7 @@ export const useDraggableHeightHandle = ({
 
     const ResizeWrapper = useCallback(
         ({ children }: { children: ReactNode }): ReactElement => <div className="relative">{children}</div>,
-        []
+        [],
     );
 
     const handleMouseMove = useCallback(
@@ -57,7 +57,7 @@ export const useDraggableHeightHandle = ({
                 dragYRef.current = event.clientY;
             }
         },
-        [dragging]
+        [dragging],
     );
 
     const handleTouchMove = useCallback(
@@ -69,7 +69,7 @@ export const useDraggableHeightHandle = ({
                 dragYRef.current = touch.clientY;
             }
         },
-        [dragging]
+        [dragging],
     );
 
     const handleMouseDown = useCallback(
@@ -79,7 +79,7 @@ export const useDraggableHeightHandle = ({
                 dragYRef.current = event.clientY;
             }
         },
-        [enabled, id]
+        [enabled, id],
     );
 
     const handleTouchStart = useCallback(
@@ -90,7 +90,7 @@ export const useDraggableHeightHandle = ({
                 dragYRef.current = touch.clientY;
             }
         },
-        [enabled, id]
+        [enabled, id],
     );
 
     const handleMouseUp = useCallback(() => {

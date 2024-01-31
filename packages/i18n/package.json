@@ -16,13 +16,13 @@
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
-        "@salev/eslint-config": "^0.0.9",
-        "@types/react": "^18.0.34",
-        "@types/react-dom": "^18.0.11",
-        "eslint": "^8.38.0",
-        "prettier": "^2.8.7",
+        "@salev/eslint-config": "^0.0.14",
+        "@types/react": "^18.2.48",
+        "@types/react-dom": "^18.2.18",
+        "eslint": "^8.56.0",
+        "prettier": "^3.2.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
-        "typescript": "^5.0.4"
+        "typescript": "^5.3.3"
     }
 }

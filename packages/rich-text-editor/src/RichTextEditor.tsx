@@ -1,74 +1,28 @@
-import {
-    AlignCenterPlugin,
-    AlignJustifyPlugin,
-    AlignLeftPlugin,
-    AlignRightPlugin,
-    BoldPlugin,
-    ButtonPlugin,
-    CheckboxListPlugin,
-    CodePlugin,
-    EmojiPlugin,
-    RichTextEditor as FondueRichTextEditor,
-    ItalicPlugin,
-    LinkPlugin,
-    OrderedListPlugin,
-    ParagraphPlugin,
-    PluginComposer,
-    ResetFormattingPlugin,
-    SoftBreakPlugin,
-    StrikethroughPlugin,
-    TextStylePlugin,
-    UnderlinePlugin,
-    UnorderedListPlugin,
-} from '@frontify/fondue';
+import { RichTextEditor as FondueRichTextEditor } from '@frontify/fondue';
 import type { ReactElement } from 'react';
 import { useMemo } from 'react';
 import { cn } from '@sa-apps/utilities';
+import { type AppBridgeBlock } from '@frontify/app-bridge';
+import { getPlugins } from './getPlugins';
 
 type RichTextEditorProps = {
+    appBridge: AppBridgeBlock;
     id: string;
     readonly?: boolean;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    designTokens?: any;
     content?: string;
     placeholder?: string;
     onTextChange?: (value: string) => void;
 };
 
 export const RichTextEditor = ({
-    readonly = false,
+    appBridge,
     id,
-    // designTokens,
+    readonly = false,
     content = '',
     placeholder = 'Enter your text...',
     onTextChange,
 }: RichTextEditorProps): ReactElement => {
-    const plugins = useMemo(() => {
-        const pluginsComposer = new PluginComposer();
-        pluginsComposer.setPlugin([new SoftBreakPlugin(), new ParagraphPlugin(), new TextStylePlugin()]);
-        pluginsComposer.setPlugin([
-            new BoldPlugin(),
-            new ItalicPlugin(),
-            new UnderlinePlugin(),
-            new StrikethroughPlugin(),
-            new LinkPlugin(),
-            new ButtonPlugin(),
-            new CodePlugin(),
-        ]);
-        pluginsComposer.setPlugin([
-            new AlignLeftPlugin(),
-            new AlignCenterPlugin(),
-            new AlignRightPlugin(),
-            new AlignJustifyPlugin(),
-            new UnorderedListPlugin(),
-            new CheckboxListPlugin(),
-            new OrderedListPlugin(),
-            new ResetFormattingPlugin(),
-            new EmojiPlugin(),
-        ]);
-
-        return pluginsComposer;
-    }, []);
+    const plugins = useMemo(() => getPlugins(appBridge), [appBridge]);
 
     return (
         <div
@@ -77,15 +31,14 @@ export const RichTextEditor = ({
             className={cn(!readonly && 'cursor-text', 'w-full items-start [&]:text-left')}
         >
             <FondueRichTextEditor
-                readonly={readonly}
                 id={id}
-                // designTokens={designTokens}
+                readonly={readonly}
                 value={content}
-                border={false}
+                plugins={plugins}
                 placeholder={placeholder}
                 onTextChange={onTextChange}
                 onBlur={onTextChange}
-                plugins={plugins}
+                border={false}
             />
         </div>
     );
