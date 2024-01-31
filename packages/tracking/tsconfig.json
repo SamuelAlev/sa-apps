@@ -3,7 +3,7 @@
         "esModuleInterop": true,
         "isolatedModules": true,
         "module": "ESNext",
-        "moduleResolution": "node",
+        "moduleResolution": "bundler",
         "noImplicitAny": true,
         "noImplicitReturns": true,
         "noImplicitThis": true,
@@ -14,8 +14,8 @@
         "lib": ["ES2021", "DOM"],
         "types": ["vite/client"],
         "resolveJsonModule": true,
-        "skipLibCheck": true
+        "skipLibCheck": true,
     },
     "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"]
+    "exclude": ["node_modules", "dist"],
 }
