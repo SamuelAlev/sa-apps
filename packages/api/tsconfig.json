@@ -10,11 +10,10 @@
         "sourceMap": true,
         "strict": true,
         "target": "es6",
-        "jsx": "react-jsx",
         "lib": ["ES2021", "DOM"],
         "resolveJsonModule": true,
         "skipLibCheck": true
     },
-    "include": ["src/**/*"],
+    "include": ["src/**/*", "scripts/**/*"],
     "exclude": ["node_modules", "dist"]
 }

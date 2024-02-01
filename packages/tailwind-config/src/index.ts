@@ -72,14 +72,6 @@ export default {
     },
     plugins: [
         tailwindAnimate,
-        plugin(({ addVariant, e }) => {
-            addVariant('expanded', ({ modifySelectors, separator }) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-call
-                modifySelectors(({ className }) => {
-                    return `.${e(`expanded${separator}${className}`)}[aria-expanded='true']`;
-                });
-            });
-        }),
         plugin(({ matchUtilities }) => {
             matchUtilities({
                 'border-style': (value) => ({
