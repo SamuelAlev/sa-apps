@@ -19,6 +19,7 @@ import { MasonryItemMenu } from './MasonryItemMenu';
 import { Video } from './Video';
 
 export const MasonryItem = ({
+    appBridge,
     id,
     readonly,
     coverAsset,
@@ -125,7 +126,13 @@ export const MasonryItem = ({
                         content === DEFAULT_MASONRY_ITEM.content && readonly && 'hidden',
                     )}
                 >
-                    <RichTextEditor id={id} content={content} onTextChange={onContentChange} readonly={readonly} />
+                    <RichTextEditor
+                        appBridge={appBridge}
+                        id={id}
+                        content={content}
+                        onTextChange={onContentChange}
+                        readonly={readonly}
+                    />
                 </div>
             </div>
 

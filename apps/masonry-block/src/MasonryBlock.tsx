@@ -125,6 +125,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                     {masonryItems.map((masonryItem) => (
                         <SwappableItem key={masonryItem.id} id={masonryItem.id} disabled={!isEditing}>
                             <MasonryItem
+                                appBridge={appBridge}
                                 onContentChange={(value) => handleContentChange(masonryItem.id, value)}
                                 onStyleChange={(value) => handleStyleChange(masonryItem.id, value)}
                                 onBrowseAssetClick={() => handleBrowseAssetClick(masonryItem.id)}
@@ -145,6 +146,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
 
                     {(!isLastItemEmpty || isMasonryItemsEmpty) && isEditing && (
                         <MasonryItem
+                            appBridge={appBridge}
                             id={getNewMasonryItemId()}
                             onContentChange={(value) => handleContentChange(getNewMasonryItemId(), value)}
                             onBrowseAssetClick={() => handleBrowseAssetClick(getNewMasonryItemId())}

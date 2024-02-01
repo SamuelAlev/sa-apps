@@ -1,4 +1,4 @@
-import type { Asset } from '@frontify/app-bridge';
+import type { AppBridgeBlock, Asset } from '@frontify/app-bridge';
 
 export type BlockSettings = {
     masonryItems?: MasonryItem[];
@@ -50,6 +50,7 @@ export type MasonryItem = {
 };
 
 export type MasonryItemProps = MasonryItem & {
+    appBridge: AppBridgeBlock;
     coverAsset?: Asset;
     showControls: boolean;
     loopVideo: boolean;
