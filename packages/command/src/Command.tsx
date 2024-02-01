@@ -1,22 +1,12 @@
-import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes } from 'react';
-import { forwardRef } from 'react';
+import { Dialog, DialogContent } from '@sa-apps/dialog';
+import { cn } from '@sa-apps/utilities';
 import { Command as CommandPrimitive } from 'cmdk';
 import { Search } from 'lucide-react';
-import { cn } from '@sa-apps/utilities';
-import { Dialog, DialogContent } from '@sa-apps/dialog';
+import type { ComponentPropsWithoutRef, ElementRef, HTMLAttributes } from 'react';
+import { forwardRef } from 'react';
 
-export const Command = forwardRef<
-    ElementRef<typeof CommandPrimitive>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive>
->(({ className, ...props }, ref) => (
-    <CommandPrimitive
-        ref={ref}
-        className={cn(
-            'flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground',
-            className,
-        )}
-        {...props}
-    />
+export const Command = forwardRef<ElementRef<typeof CommandPrimitive>, ComponentPropsWithoutRef<typeof CommandPrimitive>>(({ className, ...props }, ref) => (
+    <CommandPrimitive ref={ref} className={cn('flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground', className)} {...props} />
 ));
 Command.displayName = 'SACommand';
 
@@ -26,7 +16,9 @@ export const CommandDialog = ({
     children,
     commandProps,
     ...props
-}: CommandDialogProps & { commandProps: ComponentPropsWithoutRef<typeof Command> }) => {
+}: CommandDialogProps & {
+    commandProps: ComponentPropsWithoutRef<typeof Command>;
+}) => {
     return (
         <Dialog {...props}>
             <DialogContent className="overflow-hidden p-0 shadow-2xl">
@@ -42,11 +34,7 @@ export const CommandDialog = ({
 };
 CommandDialog.displayName = 'SACommandDialog';
 
-export const CommandInput = forwardRef<
-    ElementRef<typeof CommandPrimitive.Input>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
->(({ className, ...props }, ref) => (
-    // eslint-disable-next-line react/no-unknown-property
+export const CommandInput = forwardRef<ElementRef<typeof CommandPrimitive.Input>, ComponentPropsWithoutRef<typeof CommandPrimitive.Input>>(({ className, ...props }, ref) => (
     <div className="flex items-center border-b border-b-input px-3" cmdk-input-wrapper="">
         <Search className="mr-2 h-4 w-4 shrink-0 opacity-50" />
         <CommandPrimitive.Input
@@ -61,38 +49,24 @@ export const CommandInput = forwardRef<
 ));
 CommandInput.displayName = 'SACommandInput';
 
-export const CommandList = forwardRef<
-    ElementRef<typeof CommandPrimitive.List>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.List>
->(({ className, ...props }, ref) => (
-    <CommandPrimitive.List
-        ref={ref}
-        className={cn('max-h-[300px] overflow-y-auto overflow-x-hidden', className)}
-        {...props}
-    />
+export const CommandList = forwardRef<ElementRef<typeof CommandPrimitive.List>, ComponentPropsWithoutRef<typeof CommandPrimitive.List>>(({ className, ...props }, ref) => (
+    <CommandPrimitive.List ref={ref} className={cn('max-h-[300px] overflow-y-auto overflow-x-hidden', className)} {...props} />
 ));
 CommandList.displayName = 'SACommandList';
 
-export const CommandEmpty = forwardRef<
-    ElementRef<typeof CommandPrimitive.Empty>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>
->((props, ref) => <CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} />);
+export const CommandEmpty = forwardRef<ElementRef<typeof CommandPrimitive.Empty>, ComponentPropsWithoutRef<typeof CommandPrimitive.Empty>>((props, ref) => (
+    <CommandPrimitive.Empty ref={ref} className="py-6 text-center text-sm" {...props} />
+));
 CommandEmpty.displayName = 'SACommandEmpty';
 
-export const CommandLoading = forwardRef<
-    ElementRef<typeof CommandPrimitive.Loading>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.Loading>
->(({ children, ...props }, ref) => (
+export const CommandLoading = forwardRef<ElementRef<typeof CommandPrimitive.Loading>, ComponentPropsWithoutRef<typeof CommandPrimitive.Loading>>(({ children, ...props }, ref) => (
     <CommandPrimitive.Loading ref={ref} {...props}>
         <span className="flex w-full justify-center py-6 text-sm">{children}</span>
     </CommandPrimitive.Loading>
 ));
 CommandLoading.displayName = 'SACommandLoading';
 
-export const CommandGroup = forwardRef<
-    ElementRef<typeof CommandPrimitive.Group>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
->(({ className, ...props }, ref) => (
+export const CommandGroup = forwardRef<ElementRef<typeof CommandPrimitive.Group>, ComponentPropsWithoutRef<typeof CommandPrimitive.Group>>(({ className, ...props }, ref) => (
     <CommandPrimitive.Group
         ref={ref}
         className={cn(
@@ -105,18 +79,12 @@ export const CommandGroup = forwardRef<
 
 CommandGroup.displayName = CommandPrimitive.Group.displayName;
 
-export const CommandSeparator = forwardRef<
-    ElementRef<typeof CommandPrimitive.Separator>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
->(({ className, ...props }, ref) => (
-    <CommandPrimitive.Separator ref={ref} className={cn('-mx-1 h-px bg-border', className)} {...props} />
-));
+export const CommandSeparator = forwardRef<ElementRef<typeof CommandPrimitive.Separator>, ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>>(
+    ({ className, ...props }, ref) => <CommandPrimitive.Separator ref={ref} className={cn('-mx-1 h-px bg-border', className)} {...props} />,
+);
 CommandSeparator.displayName = CommandPrimitive.Separator.displayName;
 
-export const CommandItem = forwardRef<
-    ElementRef<typeof CommandPrimitive.Item>,
-    ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
->(({ className, ...props }, ref) => (
+export const CommandItem = forwardRef<ElementRef<typeof CommandPrimitive.Item>, ComponentPropsWithoutRef<typeof CommandPrimitive.Item>>(({ className, ...props }, ref) => (
     <CommandPrimitive.Item
         ref={ref}
         className={cn(

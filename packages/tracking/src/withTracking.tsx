@@ -1,12 +1,12 @@
+import { clarity } from 'clarity-js';
 import type { ComponentType, FC, ReactElement } from 'react';
 import { useEffect } from 'react';
-import { clarity } from 'clarity-js';
 
 export const withTracking =
     (id: string) =>
     <P extends object>(Component: ComponentType<P>): FC<P> => {
         return function withTracking(props): ReactElement {
-            // eslint-disable-next-line react-hooks/rules-of-hooks
+            // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
             useEffect(() => {
                 const initTracking = () => {
                     try {

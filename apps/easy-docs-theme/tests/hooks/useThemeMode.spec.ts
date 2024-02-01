@@ -2,8 +2,8 @@
  * @vitest-environment jsdom
  */
 
-import { afterEach, describe, expect, it, vi } from 'vitest';
 import { act, renderHook } from '@testing-library/react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { useThemeMode } from '../../src/hooks/useThemeMode';
 
@@ -151,7 +151,12 @@ describe('useThemeMode', () => {
 
         act(() => {
             localStorage.setItem('themeMode', 'dark');
-            window.dispatchEvent(new StorageEvent('storage', { key: 'themeMode', newValue: 'dark' }));
+            window.dispatchEvent(
+                new StorageEvent('storage', {
+                    key: 'themeMode',
+                    newValue: 'dark',
+                }),
+            );
         });
 
         expect(result.current[0]).toBe(true);
@@ -159,7 +164,12 @@ describe('useThemeMode', () => {
 
         act(() => {
             localStorage.setItem('themeMode', 'light');
-            window.dispatchEvent(new StorageEvent('storage', { key: 'themeMode', newValue: 'light' }));
+            window.dispatchEvent(
+                new StorageEvent('storage', {
+                    key: 'themeMode',
+                    newValue: 'light',
+                }),
+            );
         });
 
         expect(result.current[0]).toBe(false);

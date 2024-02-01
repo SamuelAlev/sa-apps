@@ -1,15 +1,15 @@
-import type { ReactElement } from 'react';
-import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import { useAssetChooser, useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
+import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, SwappableItem } from '@sa-apps/drag-and-drop';
 import { arraySwap } from '@sa-apps/utilities';
+import type { ReactElement } from 'react';
 
 import { Masonry } from './Masonry';
-import type { BlockSettings, MasonryItem as MasonryItemType } from './types';
 import { MasonryItem } from './MasonryItem';
 import { DEFAULT_MASONRY_ITEM } from './constant';
 import { getMasonryRootStyles, getNewMasonryItemId, isLastMasonryItemEmpty } from './helpers';
+import type { BlockSettings, MasonryItem as MasonryItemType } from './types';
 
 export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
@@ -31,9 +31,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
             newMasonryItems.push({ ...DEFAULT_MASONRY_ITEM, id, content });
         }
 
-        setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
-            console.error("Couldn't save the block setttings"),
-        );
+        setBlockSettings({
+            ...blockSettings,
+            masonryItems: newMasonryItems,
+        }).catch(() => console.error("Couldn't save the block setttings"));
     };
 
     const handleDeleteClick = (id: string) => {
@@ -42,9 +43,10 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
             const newMasonryItems = structuredClone(masonryItems);
             newMasonryItems.splice(masonryItemsIndex, 1);
 
-            setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
-                console.error("Couldn't save the block setttings"),
-            );
+            setBlockSettings({
+                ...blockSettings,
+                masonryItems: newMasonryItems,
+            }).catch(() => console.error("Couldn't save the block setttings"));
         }
     };
 
@@ -82,16 +84,11 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 if (masonryItemsIndex === -1) {
                     setBlockSettings({
                         ...blockSettings,
-                        masonryItems: [
-                            ...(blockSettings.masonryItems ? blockSettings.masonryItems : []),
-                            { ...DEFAULT_MASONRY_ITEM, id },
-                        ],
+                        masonryItems: [...(blockSettings.masonryItems ? blockSettings.masonryItems : []), { ...DEFAULT_MASONRY_ITEM, id }],
                     }).catch(() => console.error("Couldn't save the block setttings"));
                 }
 
-                updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]).catch(() =>
-                    console.error("Couldn't add the asset to the block"),
-                );
+                updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]).catch(() => console.error("Couldn't add the asset to the block"));
                 closeAssetChooser();
             },
             { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id },
@@ -102,26 +99,24 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         const masonryItemsIndex = masonryItems.findIndex((masonryItems) => masonryItems.id === id);
         const newMasonryItems = structuredClone(masonryItems);
         if (masonryItemsIndex !== -1) {
-            newMasonryItems[masonryItemsIndex].style = { ...newMasonryItems[masonryItemsIndex].style, ...style };
+            newMasonryItems[masonryItemsIndex].style = {
+                ...newMasonryItems[masonryItemsIndex].style,
+                ...style,
+            };
         } else {
             newMasonryItems.push({ ...DEFAULT_MASONRY_ITEM, id, style });
         }
 
-        setBlockSettings({ ...blockSettings, masonryItems: newMasonryItems }).catch(() =>
-            console.error("Couldn't save the block setttings"),
-        );
+        setBlockSettings({
+            ...blockSettings,
+            masonryItems: newMasonryItems,
+        }).catch(() => console.error("Couldn't save the block setttings"));
     };
 
     return (
         <div style={getMasonryRootStyles(blockSettings)} data-test-id="masonry-block">
             <DragAndDropSortableContext items={masonryItems} strategy="rect-swapping" onDragEnd={handleDragEnd}>
-                <Masonry
-                    columnCount={parseInt(
-                        blockSettings.columnsCountCustomEnabled
-                            ? blockSettings.columnsCountCustom
-                            : blockSettings.columnsCountSimple,
-                    )}
-                >
+                <Masonry columnCount={parseInt(blockSettings.columnsCountCustomEnabled ? blockSettings.columnsCountCustom : blockSettings.columnsCountSimple)}>
                     {masonryItems.map((masonryItem) => (
                         <SwappableItem key={masonryItem.id} id={masonryItem.id} disabled={!isEditing}>
                             <MasonryItem

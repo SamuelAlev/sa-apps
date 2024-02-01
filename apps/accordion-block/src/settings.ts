@@ -1,10 +1,4 @@
-import {
-    IconEnum,
-    appendUnit,
-    defineSettings,
-    minimumPixelRule,
-    numericalOrPixelRule,
-} from '@frontify/guideline-blocks-settings';
+import { IconEnum, appendUnit, defineSettings, minimumPixelRule, numericalOrPixelRule } from '@frontify/guideline-blocks-settings';
 
 export const settings = defineSettings({
     main: [
@@ -23,7 +17,14 @@ export const settings = defineSettings({
             ],
         },
     ],
-    basics: [{ id: 'accordionMultiple', type: 'switch', label: 'Allow multiple items open', defaultValue: false }],
+    basics: [
+        {
+            id: 'accordionMultiple',
+            type: 'switch',
+            label: 'Allow multiple items open',
+            defaultValue: false,
+        },
+    ],
     layout: [
         {
             id: 'itemsLayoutSection',
@@ -284,7 +285,14 @@ export const settings = defineSettings({
                     type: 'switch',
                     label: 'Size',
                     switchLabel: 'Custom',
-                    on: [{ id: 'triggerSizeCustom', type: 'input', placeholder: '16px', rules: [minimumPixelRule(0)] }],
+                    on: [
+                        {
+                            id: 'triggerSizeCustom',
+                            type: 'input',
+                            placeholder: '16px',
+                            rules: [minimumPixelRule(0)],
+                        },
+                    ],
                     off: [
                         {
                             id: 'triggerSizeSimple',

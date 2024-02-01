@@ -16,6 +16,11 @@
         "skipLibCheck": true,
         "types": ["vite/client"]
     },
-    "include": ["src/**/*", "tests/**/*", "vitest.config.ts", "tailwind.config.ts"],
+    "include": [
+        "src/**/*",
+        "tests/**/*",
+        "vitest.config.ts",
+        "tailwind.config.ts"
+    ],
     "exclude": ["node_modules", "dist"]
 }

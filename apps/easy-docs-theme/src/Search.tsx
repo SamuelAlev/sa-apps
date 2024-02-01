@@ -1,17 +1,9 @@
-import { useCallback, useEffect, useState } from 'react';
-import {
-    CommandDialog,
-    CommandEmpty,
-    CommandGroup,
-    CommandInput,
-    CommandItem,
-    CommandList,
-    CommandLoading,
-} from '@sa-apps/command';
-import { useTranslations } from '@sa-apps/i18n';
 import type { GuidelineSearchResult } from '@frontify/app-bridge';
+import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandLoading } from '@sa-apps/command';
+import { useTranslations } from '@sa-apps/i18n';
 import { debounce, isWindows } from '@sa-apps/utilities';
 import { File } from 'lucide-react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useThemeContext } from './Context';
 import { getLinkFromGuidelineSearchResult } from './helpers';
@@ -36,7 +28,6 @@ export const Search = () => {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSearch = useCallback(
         debounce(async (searchValue: string) => {
             const result = await appBridge.searchInGuideline(searchValue);
@@ -82,6 +73,7 @@ export const Search = () => {
     return (
         <>
             <button
+                type="button"
                 className="relative inline-flex h-auto w-full items-center justify-start rounded-[0.5rem] border border-input px-4 py-2 text-sm font-medium text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:w-64 sm:pr-12"
                 onClick={() => setOpen(true)}
             >
@@ -93,18 +85,10 @@ export const Search = () => {
             </button>
 
             <CommandDialog open={open} onOpenChange={setOpen} commandProps={{ shouldFilter: false }}>
-                <CommandInput
-                    placeholder={t('searchPlaceholderDotDotDot')}
-                    value={searchValue}
-                    onValueChange={handleInputInput}
-                />
+                <CommandInput placeholder={t('searchPlaceholderDotDotDot')} value={searchValue} onValueChange={handleInputInput} />
 
                 <CommandList>
-                    {loading && searchValue.length > 0 ? (
-                        <CommandLoading>{t('loadingDotDotDot')}</CommandLoading>
-                    ) : (
-                        <CommandEmpty>{t('noResultsFoundDot')}</CommandEmpty>
-                    )}
+                    {loading && searchValue.length > 0 ? <CommandLoading>{t('loadingDotDotDot')}</CommandLoading> : <CommandEmpty>{t('noResultsFoundDot')}</CommandEmpty>}
 
                     {!loading && searchResults.length > 0 && searchValue.length > 0 && (
                         <CommandGroup heading={t('results')}>
@@ -117,15 +101,17 @@ export const Search = () => {
                                 >
                                     <File className="mr-4 h-4 w-4 shrink-0" />
                                     <div className="flex flex-col items-start">
-                                        <span className="mb-1 border-b border-b-input pb-1">
-                                            {searchResult.pageTitle}
-                                        </span>
+                                        <span className="mb-1 border-b border-b-input pb-1">{searchResult.pageTitle}</span>
 
                                         {searchResult.highlights.map((highlight, index) => (
                                             <span
+                                                // biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
                                                 key={index}
                                                 className="[&>em]:font-bold [&>em]:not-italic [&>em]:underline"
-                                                dangerouslySetInnerHTML={{ __html: highlight }}
+                                                // biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
+                                                dangerouslySetInnerHTML={{
+                                                    __html: highlight,
+                                                }}
                                             />
                                         ))}
                                     </div>

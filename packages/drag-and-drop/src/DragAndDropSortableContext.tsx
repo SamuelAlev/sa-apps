@@ -1,20 +1,7 @@
-import type { KeyboardEvent, MouseEvent, ReactElement, ReactNode } from 'react';
 import type { DragEndEvent as DndKitDragEndEvent, UniqueIdentifier } from '@dnd-kit/core';
-import {
-    DndContext,
-    KeyboardSensor as LibKeyboardSensor,
-    MouseSensor as LibMouseSensor,
-    TouchSensor,
-    closestCenter,
-    useSensor,
-    useSensors,
-} from '@dnd-kit/core';
-import {
-    SortableContext,
-    rectSwappingStrategy,
-    sortableKeyboardCoordinates,
-    verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
+import { DndContext, KeyboardSensor as LibKeyboardSensor, MouseSensor as LibMouseSensor, TouchSensor, closestCenter, useSensor, useSensors } from '@dnd-kit/core';
+import { SortableContext, rectSwappingStrategy, sortableKeyboardCoordinates, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import type { KeyboardEvent, MouseEvent, ReactElement, ReactNode } from 'react';
 
 export type DragEndEvent = DndKitDragEndEvent;
 type ItemsArray = (UniqueIdentifier | { id: UniqueIdentifier })[];
@@ -31,6 +18,7 @@ const sortingStrategy = {
     'rect-swapping': rectSwappingStrategy,
 };
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class MouseSensor extends LibMouseSensor {
     static activators = [
         {
@@ -42,6 +30,7 @@ export class MouseSensor extends LibMouseSensor {
     ];
 }
 
+// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class KeyboardSensor extends LibKeyboardSensor {
     static activators = [
         {
@@ -57,7 +46,7 @@ function shouldHandleEvent(element: HTMLElement | null) {
     let cur = element;
 
     while (cur) {
-        if (cur.dataset && cur.dataset.noDnd) {
+        if (cur.dataset?.noDnd) {
             return false;
         }
         cur = cur.parentElement;
@@ -66,12 +55,7 @@ function shouldHandleEvent(element: HTMLElement | null) {
     return true;
 }
 
-export const DragAndDropSortableContext = ({
-    items,
-    children,
-    strategy,
-    onDragEnd,
-}: DragAndDropSortableContextProps): ReactElement => {
+export const DragAndDropSortableContext = ({ items, children, strategy, onDragEnd }: DragAndDropSortableContextProps): ReactElement => {
     const sensors = useSensors(
         useSensor(MouseSensor, {
             activationConstraint: {

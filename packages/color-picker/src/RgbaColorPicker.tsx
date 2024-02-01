@@ -3,7 +3,12 @@ import { RgbaColorPicker as ReactColofulRgbaColorPicker } from 'react-colorful';
 
 export type RgbaColorPickerProps = {
     color: { r: number; g: number; b: number; a: number };
-    onColorChange: (color: { r: number; g: number; b: number; a: number }) => void;
+    onColorChange: (color: {
+        r: number;
+        g: number;
+        b: number;
+        a: number;
+    }) => void;
 };
 
 export const RgbaColorPicker = ({ color, onColorChange }: RgbaColorPickerProps): ReactElement => {

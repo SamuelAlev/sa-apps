@@ -1,7 +1,7 @@
-import type { ReactElement } from 'react';
-import { useEffect, useState } from 'react';
 import { useTranslations } from '@sa-apps/i18n';
 import { cn } from '@sa-apps/utilities';
+import type { ReactElement } from 'react';
+import { useEffect, useState } from 'react';
 
 const useSections = (): { id: string; title: string | undefined }[] => {
     const [sections, setSections] = useState<{ id: string; title: string | undefined }[]>([]);
@@ -99,14 +99,13 @@ export const TableOfContent = (): ReactElement | null => {
                     {sections.map((section) => (
                         <li key={section.id} className="mt-0 pt-2">
                             <button
+                                type="button"
                                 title={section.title}
                                 aria-label={section.title}
                                 onClick={() => handleSectionClick(section.id)}
                                 className={cn(
                                     'inline-block text-sm no-underline transition-colors',
-                                    section.id === activeItem
-                                        ? 'font-medium text-primary'
-                                        : 'cursor-pointer text-sm text-muted-foreground hover:text-primary',
+                                    section.id === activeItem ? 'font-medium text-primary' : 'cursor-pointer text-sm text-muted-foreground hover:text-primary',
                                 )}
                             >
                                 {section.title}

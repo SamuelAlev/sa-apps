@@ -1,6 +1,6 @@
+import { Loader2 } from 'lucide-react';
 import type { VideoHTMLAttributes } from 'react';
 import { forwardRef, useRef, useState } from 'react';
-import { Loader2 } from 'lucide-react';
 
 import { prepareImageUrl } from './helpers';
 
@@ -25,15 +25,13 @@ export const Video = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoE
     return (
         <>
             {state === 'init' && (
-                <img
-                    draggable={false}
-                    className="h-full flex-grow select-none overflow-hidden object-cover"
-                    src={props?.src ? prepareImageUrl(props.src) : undefined}
-                />
+                // biome-ignore lint/a11y/useAltText: <explanation>
+                <img draggable={false} className="h-full flex-grow select-none overflow-hidden object-cover" src={props?.src ? prepareImageUrl(props.src) : undefined} />
             )}
 
             {state === 'loading' && (
                 <div className="relative flex h-full w-full items-center justify-center">
+                    {/* biome-ignore lint/a11y/useAltText: <explanation> */}
                     <img
                         draggable={false}
                         className="h-full flex-grow select-none overflow-hidden object-cover blur-sm grayscale"
@@ -48,7 +46,10 @@ export const Video = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoE
             <video
                 poster={props?.src ? prepareImageUrl(props.src) : undefined}
                 /* Using `style` as the `block` class is used in Clarify */
-                style={{ display: state === 'ready' ? 'block' : 'none', ...style }}
+                style={{
+                    display: state === 'ready' ? 'block' : 'none',
+                    ...style,
+                }}
                 {...props}
                 ref={ref}
                 onLoadStart={handleLoadStart}

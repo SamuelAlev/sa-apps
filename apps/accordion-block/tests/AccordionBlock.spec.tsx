@@ -1,6 +1,6 @@
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { withAppBridgeBlockStubs } from '@frontify/app-bridge/testing';
 import { fireEvent, getByTestId, getByText, render, waitFor } from '@testing-library/react';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AccordionBlock } from '../src/AccordionBlock';
 import type { BlockSettings } from '../src/types';

@@ -7,6 +7,7 @@ export const useThemeMode = () => {
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('themeMode') as ThemeMode | null;
+
         if (storedTheme === 'system' || !storedTheme) {
             const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
             setThemeMode(systemPreference);

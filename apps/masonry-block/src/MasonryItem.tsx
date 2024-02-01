@@ -1,22 +1,16 @@
-import type { ReactElement } from 'react';
-import { cn } from '@sa-apps/utilities';
-import { RichTextEditor } from '@sa-apps/rich-text-editor';
-import { Dropzone } from '@sa-apps/dropzone';
 import type { FileExtension } from '@frontify/app-bridge';
 import { FileExtensionSets } from '@frontify/app-bridge';
+import { Dropzone } from '@sa-apps/dropzone';
+import { RichTextEditor } from '@sa-apps/rich-text-editor';
+import { cn } from '@sa-apps/utilities';
+import type { ReactElement } from 'react';
 
-import type { MasonryItemProps } from './types';
-import { isMasonryItemEmpty, prepareImageUrl, prepareVideoUrl, rgbaObjectToString } from './helpers';
-import {
-    DEFAULT_MASONRY_ITEM,
-    contentPaddingClasses,
-    itemBorderClasses,
-    itemBoxShadowClasses,
-    itemCornerRadiusClasses,
-} from './constant';
-import { useDraggableHeightHandle } from './utilities';
 import { MasonryItemMenu } from './MasonryItemMenu';
 import { Video } from './Video';
+import { DEFAULT_MASONRY_ITEM, contentPaddingClasses, itemBorderClasses, itemBoxShadowClasses, itemCornerRadiusClasses } from './constant';
+import { isMasonryItemEmpty, prepareImageUrl, prepareVideoUrl, rgbaObjectToString } from './helpers';
+import type { MasonryItemProps } from './types';
+import { useDraggableHeightHandle } from './utilities';
 
 export const MasonryItem = ({
     appBridge,
@@ -40,7 +34,6 @@ export const MasonryItem = ({
     const isEmpty = isMasonryItemEmpty({ id, content }, coverAsset ? { [`masonry-item-${id}`]: [coverAsset] } : {});
 
     const handleUploadClick = () => {
-        // eslint-disable-next-line no-alert
         alert('Not yet implemented 😢\nPlease the "Browse" button instead.');
         onUploadClick();
     };
@@ -83,14 +76,10 @@ export const MasonryItem = ({
                     itemBoxShadowClasses[boxShadow],
                 )}
             >
-                {coverAsset?.previewUrl &&
-                    !FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
-                        <img
-                            draggable={false}
-                            className="h-full flex-grow select-none overflow-hidden object-cover"
-                            src={prepareImageUrl(coverAsset.previewUrl)}
-                        />
-                    )}
+                {coverAsset?.previewUrl && !FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
+                    // biome-ignore lint/a11y/useAltText: <explanation>
+                    <img draggable={false} className="h-full flex-grow select-none overflow-hidden object-cover" src={prepareImageUrl(coverAsset.previewUrl)} />
+                )}
 
                 {coverAsset?.previewUrl && FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
                     <Video
@@ -112,27 +101,11 @@ export const MasonryItem = ({
                 )}
 
                 {onDeleteClick && !isEmpty && !readonly ? (
-                    <MasonryItemMenu
-                        style={style}
-                        onStyleChange={handleStyleChange}
-                        onUnlinkAsset={handleUnlinkAsset}
-                        onDeleteClick={handleDeleteClick}
-                    />
+                    <MasonryItemMenu style={style} onStyleChange={handleStyleChange} onUnlinkAsset={handleUnlinkAsset} onDeleteClick={handleDeleteClick} />
                 ) : null}
 
-                <div
-                    className={cn(
-                        contentPaddingClasses,
-                        content === DEFAULT_MASONRY_ITEM.content && readonly && 'hidden',
-                    )}
-                >
-                    <RichTextEditor
-                        appBridge={appBridge}
-                        id={id}
-                        content={content}
-                        onTextChange={onContentChange}
-                        readonly={readonly}
-                    />
+                <div className={cn(contentPaddingClasses, content === DEFAULT_MASONRY_ITEM.content && readonly && 'hidden')}>
+                    <RichTextEditor appBridge={appBridge} id={id} content={content} onTextChange={onContentChange} readonly={readonly} />
                 </div>
             </div>
 

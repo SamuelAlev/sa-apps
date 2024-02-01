@@ -17,12 +17,7 @@ export const getLinkFromGuidelineSearchResult = (searchResult: GuidelineSearchRe
     }
 };
 
-export const getDocumentBlockUrl = ({
-    documentId,
-    pageCategorySlug,
-    pageSlug,
-    objectId,
-}: GuidelineSearchResult): string => {
+export const getDocumentBlockUrl = ({ documentId, pageCategorySlug, pageSlug, objectId }: GuidelineSearchResult): string => {
     const documentPrefix = `/document/${documentId}`;
     const pageCategoryPrefix = pageCategorySlug ? `${pageCategorySlug}/` : '';
 

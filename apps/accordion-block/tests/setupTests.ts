@@ -1,5 +1,5 @@
-import { afterEach, beforeAll } from 'vitest';
 import { cleanup, configure } from '@testing-library/react';
+import { afterEach, beforeAll } from 'vitest';
 
 globalThis.ResizeObserver = class ResizeObserver {
     observe() {

@@ -1,6 +1,0 @@
-{
-    "extends": ["@salev/eslint-config"],
-    "rules": {
-        "import/export": "off",
-    },
-}

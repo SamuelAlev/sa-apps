@@ -1,12 +1,12 @@
-import '@sa-apps/tailwind-config/src/styles.scss';
-import './styles.scss';
 import { defineTheme } from '@frontify/guideline-themes';
 import { withTranslations } from '@sa-apps/i18n';
+import '@sa-apps/tailwind-config/src/styles.scss';
 import { withTracking } from '@sa-apps/tracking';
+import './styles.scss';
 
 import { EasyDocsTheme } from './EasyDocsTheme';
-import { settings } from './settings';
 import { messages } from './i18n';
+import { settings } from './settings';
 
 export default defineTheme({
     templates: {

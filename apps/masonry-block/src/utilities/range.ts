@@ -1,7 +1,10 @@
 type RangeArgs = [length: number] | [start: number, end: number] | [start: number, end: number, step: number];
 
 export const range = (...args: RangeArgs) => {
-    let start: number, end: number, step: number;
+    let start: number;
+    let end: number;
+    let step: number;
+
     if (args.length === 1) {
         start = 0;
         end = args[0];

@@ -1,4 +1,3 @@
-import type { FC } from 'react';
 import type { AppBridgeTheme } from '@frontify/app-bridge';
 import type {
     AssetInputBlock as AssetInputBlockSidebarSettings,
@@ -24,6 +23,7 @@ import type {
     TextareaBlock as TextareaBlockSidebarSettings,
     ValueOrPromisedValue as ValueOrPromisedValueSidebarSettings,
 } from '@frontify/sidebar-settings';
+import type { FC } from 'react';
 
 export * from '@frontify/sidebar-settings';
 
@@ -34,8 +34,7 @@ export type ChecklistBlock = ChecklistBlockSidebarSettings<AppBridgeTheme>;
 export type ChoicesType = ChoicesTypeSidebarSettings<AppBridgeTheme>;
 export type ColorInputBlock = ColorInputBlockSidebarSettings<AppBridgeTheme>;
 export type DropdownBlock = DropdownBlockSidebarSettings<AppBridgeTheme>;
-export type DynamicSettingBlock<Block extends DynamicSupportedBlock = DynamicSupportedBlock> =
-    DynamicSettingBlockSidebarSettings<AppBridgeTheme, Block>;
+export type DynamicSettingBlock<Block extends DynamicSupportedBlock = DynamicSupportedBlock> = DynamicSettingBlockSidebarSettings<AppBridgeTheme, Block>;
 export type DynamicSupportedBlock = DynamicSupportedBlockSidebarSettings<AppBridgeTheme>;
 export type InputBlock = InputBlockSidebarSettings<AppBridgeTheme>;
 export type LegacyAssetInputBlock = LegacyAssetInputBlockSidebarSettings<AppBridgeTheme>;
@@ -58,7 +57,9 @@ type FrontifyContext = { templateId?: string } & (
     | { template: 'cover' }
 );
 
-export type ThemeSettingsStructureExport = { [customSectionName: string]: SettingBlock[] };
+export type ThemeSettingsStructureExport = {
+    [customSectionName: string]: SettingBlock[];
+};
 
 export type ThemeProps = {
     appBridge: AppBridgeTheme;
@@ -88,5 +89,4 @@ export const defineTheme = (config: ThemeConfigExport): ThemeConfigExport => con
 /**
  * Type helper to make it easier to export theme's settings structure, accepts a direct {@link ThemeSettingsStructureExport} object.
  */
-export const defineSettings = (settingsStructure: ThemeSettingsStructureExport): ThemeSettingsStructureExport =>
-    settingsStructure;
+export const defineSettings = (settingsStructure: ThemeSettingsStructureExport): ThemeSettingsStructureExport => settingsStructure;

@@ -16,10 +16,7 @@ type TranslationsContextType = {
 
 const TranslationsContext = createContext<TranslationsContextType>({} as TranslationsContextType);
 
-export const TranslationsProvider = <M extends Messages>({
-    children,
-    messages,
-}: TranslationProviderProps<M>): ReactElement => {
+export const TranslationsProvider = <M extends Messages>({ children, messages }: TranslationProviderProps<M>): ReactElement => {
     const [language, setLanguage] = useState<string>(document.documentElement.lang.substring(0, 2) || 'en');
 
     const t = (key: keyof Messages['en']) => messages[language][key];

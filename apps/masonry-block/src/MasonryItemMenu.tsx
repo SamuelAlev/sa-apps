@@ -1,6 +1,3 @@
-import type { MouseEvent, ReactElement } from 'react';
-import { useRef, useState } from 'react';
-import { Button, buttonVariants } from '@sa-apps/button';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -11,23 +8,18 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@sa-apps/alert-dialog';
-import {
-    DropdownMenu,
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuLabel,
-    DropdownMenuSeparator,
-    DropdownMenuShortcut,
-    DropdownMenuTrigger,
-} from '@sa-apps/dropdown-menu';
-import { useTranslations } from '@sa-apps/i18n';
-import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
+import { Button, buttonVariants } from '@sa-apps/button';
 import type { RgbaColorPickerProps } from '@sa-apps/color-picker';
 import { RgbaColorPicker } from '@sa-apps/color-picker';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuTrigger } from '@sa-apps/dropdown-menu';
+import { useTranslations } from '@sa-apps/i18n';
 import { Label } from '@sa-apps/label';
-import { debounce, hex8ToRgbaObject, rgbaObjectToHex8 } from '@sa-apps/utilities';
+import { Popover, PopoverContent, PopoverTrigger } from '@sa-apps/popover';
 import { TextInput } from '@sa-apps/text-input';
+import { debounce, hex8ToRgbaObject, rgbaObjectToHex8 } from '@sa-apps/utilities';
 import { Menu, Paintbrush2, Trash, Unlink } from 'lucide-react';
+import type { MouseEvent, ReactElement } from 'react';
+import { useRef, useState } from 'react';
 
 import type { MasonryItemProps } from './types';
 
@@ -38,19 +30,12 @@ type MasonryItemMenuProps = {
     onDeleteClick: MasonryItemProps['onDeleteClick'];
 };
 
-export const MasonryItemMenu = ({
-    style,
-    onStyleChange,
-    onUnlinkAsset,
-    onDeleteClick,
-}: MasonryItemMenuProps): ReactElement => {
+export const MasonryItemMenu = ({ style, onStyleChange, onUnlinkAsset, onDeleteClick }: MasonryItemMenuProps): ReactElement => {
     const { t } = useTranslations();
     const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
     const [isStylePopoverOpen, setIsStylePopoverOpen] = useState(false);
     const itemDropdownRef = useRef<HTMLButtonElement>(null);
-    const [localBackgroundColor, setLocalBackgroundColor] = useState<RgbaColorPickerProps['color'] | undefined>(
-        style?.backgroundColor,
-    );
+    const [localBackgroundColor, setLocalBackgroundColor] = useState<RgbaColorPickerProps['color'] | undefined>(style?.backgroundColor);
 
     const handleModalCancelClick = () => {
         setIsDeleteAlertOpen(false);
@@ -120,35 +105,38 @@ export const MasonryItemMenu = ({
                             <DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
                         </DropdownMenuItem>
                     </DropdownMenuContent>
-                    <PopoverContent
-                        asChild
-                        data-no-dnd={true}
-                        onEscapeKeyDown={handlePopoverCancelClick}
-                        onInteractOutside={(event) => handlePopoverClickOutside(event.target)}
-                    >
+                    <PopoverContent asChild data-no-dnd={true} onEscapeKeyDown={handlePopoverCancelClick} onInteractOutside={(event) => handlePopoverClickOutside(event.target)}>
                         <div className="flex flex-col gap-8">
                             <div className="space-y-2">
                                 <h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{t('styles')}</h4>
-                                <p className="text-muted-foreground text-sm">{t('stylesDescription')}.</p>
+                                <p className="text-sm text-muted-foreground">{t('stylesDescription')}.</p>
                             </div>
                             <div className="flex flex-col gap-2">
                                 <div className="flex w-full flex-col gap-4">
                                     <Label>{t('backgroundColor')}</Label>
                                     <RgbaColorPicker
-                                        color={style?.backgroundColor ?? { r: 0, g: 0, b: 0, a: 1 }}
-                                        // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                                        color={
+                                            style?.backgroundColor ?? {
+                                                r: 0,
+                                                g: 0,
+                                                b: 0,
+                                                a: 1,
+                                            }
+                                        }
                                         onColorChange={debounce((backgroundColor) => {
                                             setLocalBackgroundColor(backgroundColor);
-                                            handleStyleChange({ backgroundColor });
+                                            handleStyleChange({
+                                                backgroundColor,
+                                            });
                                         }, 300)}
                                     />
                                     <TextInput
                                         className="w-[calc(100%-24px)]"
-                                        value={
-                                            localBackgroundColor ? rgbaObjectToHex8(localBackgroundColor) : undefined
-                                        }
+                                        value={localBackgroundColor ? rgbaObjectToHex8(localBackgroundColor) : undefined}
                                         onChange={(event) =>
-                                            handleStyleChange({ backgroundColor: hex8ToRgbaObject(event.target.value) })
+                                            handleStyleChange({
+                                                backgroundColor: hex8ToRgbaObject(event.target.value),
+                                            })
                                         }
                                     />
                                 </div>
@@ -172,7 +160,9 @@ export const MasonryItemMenu = ({
                         <AlertDialogCancel onClick={handleModalCancelClick}>{t('cancel')}</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleModalDeleteClick}
-                            className={buttonVariants({ variant: 'destructive' })}
+                            className={buttonVariants({
+                                variant: 'destructive',
+                            })}
                         >
                             {t('delete')}
                         </AlertDialogAction>

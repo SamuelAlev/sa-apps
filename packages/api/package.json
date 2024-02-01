@@ -7,8 +7,7 @@
     "main": "src/index.ts",
     "types": "src/index.ts",
     "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix .",
+        "format": "biome ci .",
         "generate": "graphql-codegen",
         "typecheck": "tsc --noEmit"
     },
@@ -22,17 +21,15 @@
         "swr": "^2.2.4"
     },
     "devDependencies": {
+        "@biomejs/biome": "^1.5.3",
         "@graphql-codegen/cli": "^5.0.0",
         "@graphql-codegen/typescript": "^4.0.1",
         "@graphql-codegen/typescript-graphql-request": "^6.1.0",
         "@graphql-codegen/typescript-operations": "^4.0.1",
-        "@salev/eslint-config": "^0.0.14",
         "@types/node": "^20.11.16",
         "dotenv-cli": "^7.3.0",
-        "eslint": "^8.56.0",
         "graphql": "^16.8.1",
         "graphql-codegen-plugin-typescript-swr": "0.8.5",
-        "prettier": "^3.2.4",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "tsx": "^4.7.0",

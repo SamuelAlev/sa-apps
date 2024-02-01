@@ -1,6 +1,6 @@
-import { createContext, useContext } from 'react';
 import type { AppBridgeTheme } from '@frontify/app-bridge';
 import type { ThemeProps } from '@frontify/guideline-themes';
+import { createContext, useContext } from 'react';
 
 type ThemeContextType = {
     appBridge: AppBridgeTheme;

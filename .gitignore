@@ -3,3 +3,4 @@
 **/.DS_Store
 
 .pnpm-debug.log
+packages/api/src/generated.ts

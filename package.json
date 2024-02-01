@@ -3,11 +3,11 @@
     "private": true,
     "scripts": {
         "generate": "pnpm --stream --filter {packages/**} --filter {apps/**} generate",
-        "lint": "pnpm --stream --filter {packages/**} --filter {apps/**} lint",
-        "lint:fix": "pnpm --stream --filter {packages/**} --filter {apps/**} lint:fix",
-        "prettier": "pnpm --stream --filter {packages/**} --filter {apps/**} prettier",
-        "prettier:fix": "pnpm --stream --filter {packages/**} --filter {apps/**} prettier:fix",
+        "format": "pnpm --stream --filter {packages/**} --filter {apps/**} format",
         "test": "pnpm --stream --filter {packages/**} --filter {apps/**} test",
         "typecheck": "pnpm --stream --filter {packages/**} --filter {apps/**} typecheck"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^1.5.3"
     }
 }

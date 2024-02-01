@@ -1,13 +1,14 @@
-import type { ReactElement } from 'react';
-import { ChevronRight } from 'lucide-react';
 import { cn } from '@sa-apps/utilities';
+import { ChevronRight } from 'lucide-react';
+import type { ReactElement } from 'react';
 
-import type { AccordionItemTriggerProps } from './types';
 import { triggerBorderClasses } from './constant';
+import type { AccordionItemTriggerProps } from './types';
 
 const PlusMinusIcon = ({ className }: { className?: string }): ReactElement => {
     return (
         <div>
+            {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
             <svg
                 className={cn(
                     'h-[var(--accordion-trigger-size)] max-h-[var(--accordion-trigger-size)] w-[var(--accordion-trigger-size)] max-w-[var(--accordion-trigger-size)] stroke-[number:var(--accordion-trigger-thickness)]',

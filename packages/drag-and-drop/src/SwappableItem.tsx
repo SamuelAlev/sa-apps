@@ -1,7 +1,7 @@
-import type { ReactNode } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { cn } from '@sa-apps/utilities';
+import type { ReactNode } from 'react';
 
 type SwappableItemProps = {
     id: string;

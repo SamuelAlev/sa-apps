@@ -7,8 +7,7 @@
     "main": "src/index.ts",
     "types": "src/index.ts",
     "scripts": {
-        "lint": "eslint .",
-        "lint:fix": "eslint --fix .",
+        "format": "biome ci .",
         "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
@@ -20,13 +19,10 @@
         "lucide-react": "^0.320.0"
     },
     "devDependencies": {
+        "@biomejs/biome": "^1.5.3",
         "@sa-apps/tailwind-config": "workspace:*",
-        "@salev/eslint-config": "^0.0.14",
         "@types/react": "^18.2.51",
         "@types/react-dom": "^18.2.18",
-        "eslint": "^8.56.0",
-        "prettier": "^3.2.4",
-        "prettier-plugin-tailwindcss": "^0.5.11",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "tailwindcss": "^3.4.1",

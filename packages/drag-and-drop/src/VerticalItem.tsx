@@ -1,7 +1,7 @@
-import type { ReactElement, ReactNode } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
+import type { ReactElement, ReactNode } from 'react';
 
 type VerticalItemProps = {
     id: string;
@@ -23,6 +23,7 @@ export const VerticalItem = ({ id, children, disabled }: VerticalItemProps): Rea
     return (
         <div ref={setNodeRef} style={style} className="relative">
             <button
+                type="button"
                 ref={setDraggableNodeRef}
                 {...attributes}
                 {...listeners}

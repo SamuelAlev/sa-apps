@@ -1,6 +1,6 @@
+import { cn } from '@sa-apps/utilities';
 import type { ReactElement, ReactNode } from 'react';
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { cn } from '@sa-apps/utilities';
 
 type UseDraggableHeightHandleProps = {
     id: string;
@@ -15,26 +15,19 @@ type UseDraggableHeightHandleReturn = {
     height: number;
 };
 
-export const useDraggableHeightHandle = ({
-    id,
-    initialHeight,
-    enabled,
-    onMouseUp,
-}: UseDraggableHeightHandleProps): UseDraggableHeightHandleReturn => {
+export const useDraggableHeightHandle = ({ id, initialHeight, enabled, onMouseUp }: UseDraggableHeightHandleProps): UseDraggableHeightHandleReturn => {
     const [height, setHeight] = useState(initialHeight);
     const [dragging, setDragging] = useState(false);
     const dragYRef = useRef<number | null>(null);
 
     const ResizeHandle = (): ReactElement => {
         return (
-            <div
-                data-no-dnd={true}
-                className={cn('absolute -bottom-2 left-0 right-0 z-50 flex justify-center', !enabled && 'hidden')}
-            >
+            <div data-no-dnd={true} className={cn('absolute -bottom-2 left-0 right-0 z-50 flex justify-center', !enabled && 'hidden')}>
                 <button
+                    type="button"
                     id={`resize-handle-${id}`}
                     className={cn(
-                        'border-border h-4 w-16 rounded-full border shadow-md transition-colors duration-300',
+                        'h-4 w-16 rounded-full border border-border shadow-md transition-colors duration-300',
                         dragging ? 'cursor-grabbing bg-gray-200' : 'cursor-grab bg-gray-50 hover:bg-gray-100',
                     )}
                     onMouseDown={handleMouseDown}
@@ -44,10 +37,7 @@ export const useDraggableHeightHandle = ({
         );
     };
 
-    const ResizeWrapper = useCallback(
-        ({ children }: { children: ReactNode }): ReactElement => <div className="relative">{children}</div>,
-        [],
-    );
+    const ResizeWrapper = useCallback(({ children }: { children: ReactNode }): ReactElement => <div className="relative">{children}</div>, []);
 
     const handleMouseMove = useCallback(
         (event: MouseEvent) => {
@@ -121,7 +111,7 @@ export const useDraggableHeightHandle = ({
             window.document.removeEventListener('touchmove', handleTouchMove);
             window.document.removeEventListener('touchend', handleTouchEnd);
         };
-    }, [dragging, enabled, handleMouseMove, handleMouseUp, handleTouchEnd, handleTouchMove]);
+    }, [enabled, handleMouseMove, handleMouseUp, handleTouchEnd, handleTouchMove]);
 
     return { height, ResizeHandle, ResizeWrapper };
 };

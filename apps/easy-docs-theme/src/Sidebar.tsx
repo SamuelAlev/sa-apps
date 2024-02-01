@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
-import { ScrollArea } from '@sa-apps/scroll-area';
 import { useDocumentCategories, useDocumentPages } from '@frontify/app-bridge';
+import { ScrollArea } from '@sa-apps/scroll-area';
+import type { ReactElement } from 'react';
 
 import { cn } from '@sa-apps/utilities';
 import { useThemeContext } from './Context';
@@ -30,9 +30,7 @@ export const Sidebar = (): ReactElement => {
                                         key={documentPage.id}
                                         className={cn(
                                             'group flex w-full items-center rounded-md px-2 py-1.5 text-sm hover:bg-accent',
-                                            currentPath ===
-                                                `/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}` &&
-                                                'bg-accent',
+                                            currentPath === `/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}` && 'bg-accent',
                                         )}
                                         href={`/document/${documentId}#/${documentCategory.slug}/${documentPage.slug}`}
                                     >

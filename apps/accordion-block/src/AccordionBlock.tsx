@@ -1,10 +1,10 @@
-import type { ReactElement } from 'react';
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';
-import { arrayMove } from '@sa-apps/utilities';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, VerticalItem } from '@sa-apps/drag-and-drop';
+import { arrayMove } from '@sa-apps/utilities';
+import type { ReactElement } from 'react';
 
 import { AccordionItem } from './AccordionItem';
 import { DEFAULT_ACCORDION_ITEM, DEFAULT_RTE_CONTENT, DEFAULT_RTE_HEADING } from './constant';
@@ -28,9 +28,10 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             newAccordionItems.push({ ...DEFAULT_ACCORDION_ITEM, id, content });
         }
 
-        setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-            console.error("Couldn't save the block setttings"),
-        );
+        setBlockSettings({
+            ...blockSettings,
+            accordionItems: newAccordionItems,
+        }).catch(() => console.error("Couldn't save the block setttings"));
     };
 
     const handleHeadingChange = (id: string, heading: string) => {
@@ -42,9 +43,10 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             newAccordionItems.push({ ...DEFAULT_ACCORDION_ITEM, id, heading });
         }
 
-        setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-            console.error("Couldn't save the block setttings"),
-        );
+        setBlockSettings({
+            ...blockSettings,
+            accordionItems: newAccordionItems,
+        }).catch(() => console.error("Couldn't save the block setttings"));
     };
 
     const handleDeleteClick = (id: string) => {
@@ -53,9 +55,10 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
             const newAccordionItems = structuredClone(accordionItems);
             newAccordionItems.splice(accordionItemIndex, 1);
 
-            setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-                console.error("Couldn't save the block setttings"),
-            );
+            setBlockSettings({
+                ...blockSettings,
+                accordionItems: newAccordionItems,
+            }).catch(() => console.error("Couldn't save the block setttings"));
         }
     };
 
@@ -65,9 +68,10 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
         const newIndex = accordionItems.findIndex((accordionItem) => accordionItem.id === over?.id);
 
         if (over && active.id !== over.id && oldIndex !== undefined && newIndex !== undefined) {
-            setBlockSettings({ ...blockSettings, accordionItems: arrayMove(accordionItems, oldIndex, newIndex) }).catch(
-                () => console.error("Couldn't save the block setttings"),
-            );
+            setBlockSettings({
+                ...blockSettings,
+                accordionItems: arrayMove(accordionItems, oldIndex, newIndex),
+            }).catch(() => console.error("Couldn't save the block setttings"));
         }
     };
 
@@ -75,13 +79,17 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
         const accordionItemIndex = accordionItems.findIndex((accordionItem) => accordionItem.id === id);
         const newAccordionItems = structuredClone(accordionItems);
         if (accordionItemIndex !== -1) {
-            newAccordionItems[accordionItemIndex].style = { ...newAccordionItems[accordionItemIndex].style, ...style };
+            newAccordionItems[accordionItemIndex].style = {
+                ...newAccordionItems[accordionItemIndex].style,
+                ...style,
+            };
         } else {
             newAccordionItems.push({ ...DEFAULT_ACCORDION_ITEM, id, style });
         }
-        setBlockSettings({ ...blockSettings, accordionItems: newAccordionItems }).catch(() =>
-            console.error("Couldn't save the block setttings"),
-        );
+        setBlockSettings({
+            ...blockSettings,
+            accordionItems: newAccordionItems,
+        }).catch(() => console.error("Couldn't save the block setttings"));
     };
 
     return (
@@ -114,12 +122,8 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                         id={getNewAccordionItemId()}
                         triggerIcon={blockSettings.triggerIcon}
                         triggerDirection={blockSettings.triggerDirection}
-                        onHeadingChange={(value) =>
-                            value !== DEFAULT_RTE_HEADING && handleHeadingChange(getNewAccordionItemId(), value)
-                        }
-                        onContentChange={(value) =>
-                            value !== DEFAULT_RTE_CONTENT && handleContentChange(getNewAccordionItemId(), value)
-                        }
+                        onHeadingChange={(value) => value !== DEFAULT_RTE_HEADING && handleHeadingChange(getNewAccordionItemId(), value)}
+                        onContentChange={(value) => value !== DEFAULT_RTE_CONTENT && handleContentChange(getNewAccordionItemId(), value)}
                         onStyleChange={(value) => handleStyleChange(getNewAccordionItemId(), value)}
                         readonly={false}
                         {...DEFAULT_ACCORDION_ITEM}

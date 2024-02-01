@@ -7,7 +7,6 @@ const config: CodegenConfig = {
             schema: {
                 'https://frontify.alev.cloud/graphql': {
                     headers: {
-                        // eslint-disable-next-line no-template-curly-in-string
                         Authorization: '${GRAPHQL_API_BEARER_TOKEN}',
                     },
                 },

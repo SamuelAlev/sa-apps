@@ -1,20 +1,20 @@
-import type { MouseEvent, ReactElement } from 'react';
-import { useMemo, useState } from 'react';
-import { ChevronDown, Laptop, LogOut, Menu, Moon, Sun, X } from 'lucide-react';
-import { Button, buttonVariants } from '@sa-apps/button';
-import { cn } from '@sa-apps/utilities';
-import { useTranslations } from '@sa-apps/i18n';
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@sa-apps/dropdown-menu';
-import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@sa-apps/collapsible';
-import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
-import sdk from '@sa-apps/api';
 import type { CoverPage, Document, DocumentGroup } from '@frontify/app-bridge';
 import { useCoverPage, useDocumentGroups, useDocuments, useEditorState } from '@frontify/app-bridge';
+import sdk from '@sa-apps/api';
+import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
+import { Button, buttonVariants } from '@sa-apps/button';
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from '@sa-apps/collapsible';
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from '@sa-apps/dropdown-menu';
+import { useTranslations } from '@sa-apps/i18n';
+import { cn } from '@sa-apps/utilities';
+import { ChevronDown, Laptop, LogOut, Menu, Moon, Sun, X } from 'lucide-react';
+import type { MouseEvent, ReactElement } from 'react';
+import { useMemo, useState } from 'react';
 
-import { useThemeMode } from './hooks';
 import { useThemeContext } from './Context';
 import { Search } from './Search';
 import { getLinkFromLanguage } from './helpers';
+import { useThemeMode } from './hooks';
 
 type HeaderDocumentOrDocumentGroupProps = {
     documentOrDocumentGroup: Document | DocumentGroup;
@@ -44,23 +44,12 @@ export const Header = (): ReactElement => {
     const portalId = appBridge.getPortalId();
     const isLoggedIn = window.application.sandbox.config.context.authenticated;
 
-    const {
-        data: dataCurrentUser,
-        isLoading: isLoadingCurrentUser,
-        error: errorCurrentUser,
-    } = sdk.useCurrentUser(isLoggedIn ? 'currentUser' : null, undefined);
+    const { data: dataCurrentUser, isLoading: isLoadingCurrentUser, error: errorCurrentUser } = sdk.useCurrentUser(isLoggedIn ? 'currentUser' : null, undefined);
 
-    const {
-        data: dataPortal,
-        isLoading: isLoadingPortal,
-        error: errorPortal,
-    } = sdk.usePortal(isLoggedIn ? `portal-${portalId}` : null, { portalId });
+    const { data: dataPortal, isLoading: isLoadingPortal, error: errorPortal } = sdk.usePortal(isLoggedIn ? `portal-${portalId}` : null, { portalId });
 
     const documentsAndGroups = useMemo(
-        () =>
-            [...getUngroupedDocuments(), ...documentGroups.values()].sort((a, b) =>
-                a.sort && b.sort ? a.sort - b.sort : 0,
-            ),
+        () => [...getUngroupedDocuments(), ...documentGroups.values()].sort((a, b) => (a.sort && b.sort ? a.sort - b.sort : 0)),
         [documentGroups, getUngroupedDocuments],
     );
 
@@ -73,9 +62,7 @@ export const Header = (): ReactElement => {
     };
 
     const handleLogInClick = () => {
-        window.location.href = `/auth/?referer=${encodeURIComponent(
-            window.location.href.replace(window.location.origin, ''),
-        )}`;
+        window.location.href = `/auth/?referer=${encodeURIComponent(window.location.href.replace(window.location.origin, ''))}`;
     };
 
     const handleLogOutClick = () => {
@@ -84,7 +71,6 @@ export const Header = (): ReactElement => {
 
     const handleLanguageClick = (event: MouseEvent, language: string) => {
         event.preventDefault();
-        // eslint-disable-next-line no-alert
         alert('Language switcher is not yet implemented 🥲');
         window.location.href = getLinkFromLanguage(language);
     };
@@ -95,21 +81,13 @@ export const Header = (): ReactElement => {
                 <div className="flex gap-6 md:gap-10">
                     <a className="hidden items-center space-x-2 md:flex" href="/">
                         {window.application.sandbox.config.context.brand?.image !== undefined && (
-                            <img
-                                src={window.application.sandbox.config.context.brand.image}
-                                className="aspect-auto h-12"
-                                alt="Logo"
-                            />
+                            <img src={window.application.sandbox.config.context.brand.image} className="aspect-auto h-12" alt="Logo" />
                         )}
                     </a>
                     <nav className="hidden items-center space-x-6 text-sm font-semibold md:flex">
                         {!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
-                            <a
-                                href={coverPage.url}
-                                onClick={handleAnchorElementClick}
-                                title={coverPage.title}
-                                aria-label={coverPage.title}
-                            >
+                            // biome-ignore lint/a11y/useValidAnchor: <explanation>
+                            <a href={coverPage.url} onClick={handleAnchorElementClick} title={coverPage.title} aria-label={coverPage.title}>
                                 {coverPage.title}
                             </a>
                         )}
@@ -123,10 +101,7 @@ export const Header = (): ReactElement => {
                             />
                         ))}
                     </nav>
-                    <button
-                        className="flex items-center space-x-2 md:hidden"
-                        onClick={() => setShowMobileMenu(!showMobileMenu)}
-                    >
+                    <button type="button" className="flex items-center space-x-2 md:hidden" onClick={() => setShowMobileMenu(!showMobileMenu)}>
                         {showMobileMenu ? <X /> : <Menu />}
                         <span className="font-bold">{t('menu')}</span>
                     </button>
@@ -135,16 +110,13 @@ export const Header = (): ReactElement => {
                             <div className="relative z-20 grid gap-6 rounded-md bg-background p-4 shadow-md">
                                 <a className="flex items-center space-x-2" href="/">
                                     {window.application.sandbox.config.context.brand?.image !== undefined && (
-                                        <img
-                                            src={window.application.sandbox.config.context.brand.image}
-                                            className="aspect-auto h-12"
-                                            alt="Logo"
-                                        />
+                                        <img src={window.application.sandbox.config.context.brand.image} className="aspect-auto h-12" alt="Logo" />
                                     )}
                                 </a>
 
                                 <nav className="grid grid-flow-row auto-rows-max text-sm">
                                     {!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
+                                        // biome-ignore lint/a11y/useValidAnchor: <explanation>
                                         <a
                                             href={coverPage.url}
                                             onClick={handleAnchorElementClick}
@@ -178,22 +150,18 @@ export const Header = (): ReactElement => {
                         {dataPortal?.i18n_enabled && !isLoadingPortal && !errorPortal ? (
                             <DropdownMenu>
                                 <DropdownMenuTrigger
-                                    className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+                                    className={buttonVariants({
+                                        variant: 'ghost',
+                                        size: 'sm',
+                                    })}
                                     title={t('toggleLanguageMenu')}
                                     aria-label={t('toggleLanguageMenu')}
                                 >
-                                    {
-                                        dataPortal.i18n_settings.languages.find(
-                                            (lang) => lang.language === document.documentElement.lang,
-                                        )?.label
-                                    }
+                                    {dataPortal.i18n_settings.languages.find((lang) => lang.language === document.documentElement.lang)?.label}
                                 </DropdownMenuTrigger>
                                 <DropdownMenuContent align="end">
                                     {dataPortal.i18n_settings.languages.map((language) => (
-                                        <DropdownMenuItem
-                                            key={language.language}
-                                            onClick={(event) => handleLanguageClick(event, language.language)}
-                                        >
+                                        <DropdownMenuItem key={language.language} onClick={(event) => handleLanguageClick(event, language.language)}>
                                             {language.label}
                                         </DropdownMenuItem>
                                     ))}
@@ -203,7 +171,10 @@ export const Header = (): ReactElement => {
 
                         <DropdownMenu>
                             <DropdownMenuTrigger
-                                className={buttonVariants({ variant: 'ghost', size: 'sm' })}
+                                className={buttonVariants({
+                                    variant: 'ghost',
+                                    size: 'sm',
+                                })}
                                 title={t('toggleModeMenu')}
                                 aria-label={t('toggleModeMenu')}
                             >
@@ -254,20 +225,12 @@ export const Header = (): ReactElement => {
     );
 };
 
-const HeaderDocumentOrDocumentGroup = ({
-    documentOrDocumentGroup,
-    getDocumentsFromDocumentGroup,
-    onLinkClick,
-}: HeaderDocumentOrDocumentGroupProps): ReactElement => {
+const HeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocumentsFromDocumentGroup, onLinkClick }: HeaderDocumentOrDocumentGroupProps): ReactElement => {
     if ('documents' in documentOrDocumentGroup) {
         return (
             <DropdownMenu>
                 <DropdownMenuTrigger className="group flex shrink-0 items-center break-keep">
-                    <span
-                        key={documentOrDocumentGroup.id}
-                        title={documentOrDocumentGroup.name}
-                        aria-label={documentOrDocumentGroup.name}
-                    >
+                    <span key={documentOrDocumentGroup.id} title={documentOrDocumentGroup.name} aria-label={documentOrDocumentGroup.name}>
                         {documentOrDocumentGroup.name}
                     </span>
                     <ChevronDown className="ml-2 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
@@ -286,11 +249,7 @@ const HeaderDocumentOrDocumentGroup = ({
     return <HeaderDocumentOrLink documentOrLink={documentOrDocumentGroup} onLinkClick={onLinkClick} />;
 };
 
-const MobileHeaderDocumentOrDocumentGroup = ({
-    documentOrDocumentGroup,
-    getDocumentsFromDocumentGroup,
-    onLinkClick,
-}: HeaderDocumentOrDocumentGroupProps): ReactElement => {
+const MobileHeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocumentsFromDocumentGroup, onLinkClick }: HeaderDocumentOrDocumentGroupProps): ReactElement => {
     if ('documents' in documentOrDocumentGroup) {
         return (
             <Collapsible>
@@ -308,11 +267,7 @@ const MobileHeaderDocumentOrDocumentGroup = ({
                 </CollapsibleTrigger>
                 <CollapsibleContent className="pl-2">
                     {getDocumentsFromDocumentGroup(documentOrDocumentGroup.id).map((document) => (
-                        <MobileHeaderDocumentOrLink
-                            key={document.id}
-                            documentOrLink={document}
-                            onLinkClick={onLinkClick}
-                        />
+                        <MobileHeaderDocumentOrLink key={document.id} documentOrLink={document} onLinkClick={onLinkClick} />
                     ))}
                 </CollapsibleContent>
             </Collapsible>
@@ -325,6 +280,7 @@ const MobileHeaderDocumentOrDocumentGroup = ({
 const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrLinkProps): ReactElement => {
     if (documentOrLink.mode === 'DEFAULT' && documentOrLink.linkUrl !== null) {
         return (
+            // biome-ignore lint/a11y/useValidAnchor: <explanation>
             <a
                 key={documentOrLink.id}
                 href={documentOrLink.linkUrl}
@@ -336,16 +292,9 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
                 rel="noreferrer"
             >
                 {documentOrLink.linkSettings?.display !== 'ICON' && documentOrLink.title}
-                {documentOrLink.linkSettings?.display !== 'TEXT' &&
-                    documentOrLink.linkSettings?.iconUrl !== undefined && (
-                        <img
-                            src={documentOrLink.linkSettings.iconUrl}
-                            className={cn(
-                                documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2',
-                                'h-4 w-4 text-white ',
-                            )}
-                        />
-                    )}
+                {documentOrLink.linkSettings?.display !== 'TEXT' && documentOrLink.linkSettings?.iconUrl !== undefined && (
+                    <img src={documentOrLink.linkSettings.iconUrl} className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4 text-white ')} />
+                )}
             </a>
         );
     }
@@ -378,13 +327,9 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
                 rel="noreferrer"
             >
                 {documentOrLink.linkSettings?.display !== 'ICON' && documentOrLink.title}
-                {documentOrLink.linkSettings?.display !== 'TEXT' &&
-                    documentOrLink.linkSettings?.iconUrl !== undefined && (
-                        <img
-                            src={documentOrLink.linkSettings.iconUrl}
-                            className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4')}
-                        />
-                    )}
+                {documentOrLink.linkSettings?.display !== 'TEXT' && documentOrLink.linkSettings?.iconUrl !== undefined && (
+                    <img src={documentOrLink.linkSettings.iconUrl} className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4')} />
+                )}
             </a>
         );
     }

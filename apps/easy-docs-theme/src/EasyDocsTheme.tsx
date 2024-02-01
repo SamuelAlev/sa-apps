@@ -1,18 +1,15 @@
-import type { ReactElement } from 'react';
 import type { ThemeProps } from '@frontify/guideline-themes';
+import type { ReactElement } from 'react';
 
-import { Header } from './Header';
 import { ThemeContext } from './Context';
+import { Header } from './Header';
 import { Sidebar } from './Sidebar';
 import { TableOfContent } from './TableOfContent';
 
 export const EasyDocsTheme = ({ appBridge, router, context, Content }: ThemeProps): ReactElement | null => {
     return (
         <ThemeContext.Provider value={{ appBridge, router, context }}>
-            <div
-                data-test-id="easy-docs-theme"
-                className="flex h-screen flex-col overflow-y-auto bg-background text-primary antialiased"
-            >
+            <div data-test-id="easy-docs-theme" className="flex h-screen flex-col overflow-y-auto bg-background text-primary antialiased">
                 <Header />
 
                 {context.template === 'documentPage' ? (

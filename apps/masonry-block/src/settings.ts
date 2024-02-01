@@ -1,11 +1,4 @@
-import {
-    IconEnum,
-    appendUnit,
-    defineSettings,
-    minimumNumericRule,
-    minimumPixelRule,
-    numericalOrPixelRule,
-} from '@frontify/guideline-blocks-settings';
+import { IconEnum, appendUnit, defineSettings, minimumNumericRule, minimumPixelRule, numericalOrPixelRule } from '@frontify/guideline-blocks-settings';
 
 export const settings = defineSettings({
     main: [

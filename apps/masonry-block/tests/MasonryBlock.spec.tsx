@@ -1,6 +1,6 @@
-import { describe, expect, it } from 'vitest';
 import { withAppBridgeBlockStubs } from '@frontify/app-bridge';
 import { render } from '@testing-library/react';
+import { describe, expect, it } from 'vitest';
 
 import { MasonryBlock } from '../src/MasonryBlock';
 

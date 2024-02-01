@@ -1,7 +1,3 @@
-/* eslint-disable eslint-comments/disable-enable-pair */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import { type AppBridgeBlock } from '@frontify/app-bridge';
 import {
     AlignCenterPlugin,
@@ -22,12 +18,7 @@ import {
     UnderlinePlugin,
     UnorderedListPlugin,
 } from '@frontify/fondue';
-import {
-    ButtonPlugin,
-    LinkPlugin,
-    TextStylePluginsWithoutImage,
-    TextStylesWithoutImage,
-} from '@frontify/guideline-blocks-settings';
+import { ButtonPlugin, LinkPlugin, TextStylePluginsWithoutImage, TextStylesWithoutImage } from '@frontify/guideline-blocks-settings';
 
 // // @ts-expect-error untyped
 // import { ButtonPlugin } from '@frontify/guideline-blocks-settings/dist/components/RichTextEditor/plugins/ButtonPlugin/createButtonPlugin.es.js';
