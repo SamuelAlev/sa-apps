@@ -19,7 +19,7 @@
     },
     "dependencies": {
         "@frontify/app-bridge": "^3.1.0",
-        "@frontify/guideline-blocks-settings": "^0.31.4",
+        "@frontify/guideline-blocks-settings": "^0.31.5",
         "@radix-ui/react-accordion": "^1.1.2",
         "@sa-apps/alert-dialog": "workspace:*",
         "@sa-apps/button": "workspace:*",
