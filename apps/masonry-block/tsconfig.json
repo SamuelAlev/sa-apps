@@ -13,8 +13,8 @@
         "jsx": "react-jsx",
         "lib": ["ES2021", "DOM"],
         "resolveJsonModule": true,
-        "skipLibCheck": true,
+        "skipLibCheck": true
     },
-    "include": ["src/**/*"],
-    "exclude": ["node_modules", "dist"],
+    "include": ["src/**/*", "tests/**/*", "vitest.config.ts", "tailwind.config.ts"],
+    "exclude": ["node_modules", "dist"]
 }
