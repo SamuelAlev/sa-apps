@@ -132,3 +132,4 @@ jobs:
                   path: "./apps/*"
                   instanceDomain: ${{ env.FRONTIFY_INSTANCE_DOMAIN }}
                   token: ${{ secrets.FRONTIFY_TOKEN }}
+                  args: '--noVerify'
