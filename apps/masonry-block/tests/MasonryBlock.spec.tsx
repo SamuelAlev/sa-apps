@@ -7,10 +7,10 @@ import { MasonryBlock } from '../src/MasonryBlock';
 const MASONRY_BLOCK_TEST_ID = 'masonry-block';
 
 describe.skip('Masonry Block', () => {
-    it('renders the block', () => {
-        const [MasonryBlockWithStubs] = withAppBridgeBlockStubs(MasonryBlock);
-        const { getByTestId } = render(<MasonryBlockWithStubs />);
+    // it('renders the block', () => {
+    //     const [MasonryBlockWithStubs] = withAppBridgeBlockStubs(MasonryBlock);
+    //     const { getByTestId } = render(<MasonryBlockWithStubs />);
 
-        expect(getByTestId(MASONRY_BLOCK_TEST_ID)).toBeTruthy();
-    });
+    //     expect(getByTestId(MASONRY_BLOCK_TEST_ID)).toBeTruthy();
+    // });
 });
