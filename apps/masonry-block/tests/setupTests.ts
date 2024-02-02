@@ -1,14 +1,5 @@
-import nodeCrypto from 'node:crypto';
 import { cleanup, configure } from '@testing-library/react';
 import { afterEach, beforeAll } from 'vitest';
-
-globalThis.crypto = {
-    // @ts-expect-error
-    getRandomValues(buffer) {
-        // @ts-expect-error
-        return nodeCrypto.randomFillSync(buffer);
-    },
-};
 
 globalThis.ResizeObserver = class ResizeObserver {
     observe() {

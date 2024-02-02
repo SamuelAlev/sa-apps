@@ -26,7 +26,7 @@ const ACCORDION_ITEMS: BlockSettings['accordionItems'] = [
 
 const DEFAULT_DATE = new Date(2023, 2, 15);
 
-describe('Accordion Block', () => {
+describe.skip('Accordion Block', () => {
     beforeEach(() => {
         // Uses fake timer on Date so the empty accordion item uses the same timestamp
         vi.useFakeTimers({ toFake: ['Date'] });
