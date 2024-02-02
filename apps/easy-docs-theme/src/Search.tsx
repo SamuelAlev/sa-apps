@@ -6,7 +6,7 @@ import { File } from 'lucide-react';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useThemeContext } from './Context';
-import { getLinkFromGuidelineSearchResult } from './helpers';
+import { getLinkFromGuidelineSearchResult } from './helpers/search';
 
 export const Search = () => {
     const { appBridge, router } = useThemeContext();
@@ -28,6 +28,7 @@ export const Search = () => {
         return () => document.removeEventListener('keydown', down);
     }, []);
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
     const debouncedSearch = useCallback(
         debounce(async (searchValue: string) => {
             const result = await appBridge.searchInGuideline(searchValue);

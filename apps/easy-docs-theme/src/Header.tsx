@@ -1,5 +1,5 @@
 import type { CoverPage, Document, DocumentGroup } from '@frontify/app-bridge';
-import { useCoverPage, useDocumentGroups, useDocuments, useEditorState } from '@frontify/app-bridge';
+import { useCoverPage, useDocumentGroups, useEditorState, useGroupedDocuments, useUngroupedDocuments } from '@frontify/app-bridge';
 import sdk from '@sa-apps/api';
 import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
 import { Button, buttonVariants } from '@sa-apps/button';
@@ -13,12 +13,12 @@ import { useMemo, useState } from 'react';
 
 import { useThemeContext } from './Context';
 import { Search } from './Search';
-import { getLinkFromLanguage } from './helpers';
-import { useThemeMode } from './hooks';
+import { getLinkFromLanguage } from './helpers/language';
+import { useThemeMode } from './hooks/useThemeMode';
+import { isDocumentGroup } from './helpers/types';
 
 type HeaderDocumentOrDocumentGroupProps = {
     documentOrDocumentGroup: Document | DocumentGroup;
-    getDocumentsFromDocumentGroup: ReturnType<typeof useDocuments>['getGroupedDocuments'];
     onLinkClick: (event: MouseEvent<HTMLAnchorElement>) => void;
 };
 
@@ -36,12 +36,12 @@ export const Header = (): ReactElement => {
     const [isDark, setThemeMode] = useThemeMode();
     const { appBridge, router } = useThemeContext();
     const { documentGroups } = useDocumentGroups(appBridge);
-    const { getUngroupedDocuments, getGroupedDocuments } = useDocuments(appBridge);
+    const { documents: ungroupedDocuments } = useUngroupedDocuments(appBridge);
     const { coverPage, isLoading } = useCoverPage(appBridge);
     const isEditing = useEditorState(appBridge);
     const [showMobileMenu, setShowMobileMenu] = useState<boolean>(false);
 
-    const portalId = appBridge.getPortalId();
+    const portalId = appBridge.context('portalId').get();
     const isLoggedIn = window.application.sandbox.config.context.authenticated;
 
     const { data: dataCurrentUser, isLoading: isLoadingCurrentUser, error: errorCurrentUser } = sdk.useCurrentUser(isLoggedIn ? 'currentUser' : null, undefined);
@@ -49,8 +49,8 @@ export const Header = (): ReactElement => {
     const { data: dataPortal, isLoading: isLoadingPortal, error: errorPortal } = sdk.usePortal(isLoggedIn ? `portal-${portalId}` : null, { portalId });
 
     const documentsAndGroups = useMemo(
-        () => [...getUngroupedDocuments(), ...documentGroups.values()].sort((a, b) => (a.sort && b.sort ? a.sort - b.sort : 0)),
-        [documentGroups, getUngroupedDocuments],
+        () => [...ungroupedDocuments, ...documentGroups.values()].sort((a, b) => (a.sort && b.sort ? a.sort - b.sort : 0)),
+        [documentGroups, ungroupedDocuments],
     );
 
     const handleAnchorElementClick = (event: MouseEvent<HTMLAnchorElement>) => {
@@ -95,7 +95,6 @@ export const Header = (): ReactElement => {
                         {documentsAndGroups.map((documentOrDocumentGroup) => (
                             <HeaderDocumentOrDocumentGroup
                                 key={documentOrDocumentGroup.id}
-                                getDocumentsFromDocumentGroup={getGroupedDocuments}
                                 documentOrDocumentGroup={documentOrDocumentGroup}
                                 onLinkClick={handleAnchorElementClick}
                             />
@@ -131,7 +130,6 @@ export const Header = (): ReactElement => {
                                     {documentsAndGroups.map((documentOrDocumentGroup) => (
                                         <MobileHeaderDocumentOrDocumentGroup
                                             key={documentOrDocumentGroup.id}
-                                            getDocumentsFromDocumentGroup={getGroupedDocuments}
                                             documentOrDocumentGroup={documentOrDocumentGroup}
                                             onLinkClick={handleAnchorElementClick}
                                         />
@@ -225,8 +223,12 @@ export const Header = (): ReactElement => {
     );
 };
 
-const HeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocumentsFromDocumentGroup, onLinkClick }: HeaderDocumentOrDocumentGroupProps): ReactElement => {
-    if ('documents' in documentOrDocumentGroup) {
+const HeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, onLinkClick }: HeaderDocumentOrDocumentGroupProps): ReactElement => {
+    const { appBridge } = useThemeContext();
+
+    const { documents: groupedDocuments } = useGroupedDocuments(appBridge, documentOrDocumentGroup.id, { enabled: isDocumentGroup(documentOrDocumentGroup) });
+
+    if (isDocumentGroup(documentOrDocumentGroup)) {
         return (
             <DropdownMenu>
                 <DropdownMenuTrigger className="group flex shrink-0 items-center break-keep">
@@ -236,7 +238,7 @@ const HeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocumentsFr
                     <ChevronDown className="ml-2 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                    {getDocumentsFromDocumentGroup(documentOrDocumentGroup.id).map((document) => (
+                    {groupedDocuments.map((document) => (
                         <DropdownMenuItem key={document.id}>
                             <HeaderDocumentOrLink documentOrLink={document} onLinkClick={onLinkClick} />
                         </DropdownMenuItem>
@@ -249,13 +251,18 @@ const HeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocumentsFr
     return <HeaderDocumentOrLink documentOrLink={documentOrDocumentGroup} onLinkClick={onLinkClick} />;
 };
 
-const MobileHeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocumentsFromDocumentGroup, onLinkClick }: HeaderDocumentOrDocumentGroupProps): ReactElement => {
-    if ('documents' in documentOrDocumentGroup) {
+const MobileHeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, onLinkClick }: HeaderDocumentOrDocumentGroupProps): ReactElement => {
+    const { appBridge } = useThemeContext();
+
+    const { documents: groupedDocuments } = useGroupedDocuments(appBridge, documentOrDocumentGroup.id, { enabled: isDocumentGroup(documentOrDocumentGroup) });
+
+    if (isDocumentGroup(documentOrDocumentGroup)) {
         return (
             <Collapsible>
                 <CollapsibleTrigger className="group flex shrink-0 items-center break-keep">
                     <a
                         key={documentOrDocumentGroup.id}
+                        // biome-ignore lint/a11y/useValidAnchor: <explanation>
                         href="#"
                         title={documentOrDocumentGroup.name}
                         aria-label={documentOrDocumentGroup.name}
@@ -266,7 +273,7 @@ const MobileHeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, getDocum
                     <ChevronDown className="ml-2 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
                 </CollapsibleTrigger>
                 <CollapsibleContent className="pl-2">
-                    {getDocumentsFromDocumentGroup(documentOrDocumentGroup.id).map((document) => (
+                    {groupedDocuments.map((document) => (
                         <MobileHeaderDocumentOrLink key={document.id} documentOrLink={document} onLinkClick={onLinkClick} />
                     ))}
                 </CollapsibleContent>
@@ -293,6 +300,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
             >
                 {documentOrLink.linkSettings?.display !== 'ICON' && documentOrLink.title}
                 {documentOrLink.linkSettings?.display !== 'TEXT' && documentOrLink.linkSettings?.iconUrl !== undefined && (
+                    // biome-ignore lint/a11y/useAltText: <explanation>
                     <img src={documentOrLink.linkSettings.iconUrl} className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4 text-white ')} />
                 )}
             </a>
@@ -300,6 +308,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
     }
 
     return (
+        // biome-ignore lint/a11y/useValidAnchor: <explanation>
         <a
             key={documentOrLink.id}
             href={`/document/${documentOrLink.id}`}
@@ -316,6 +325,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
 const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrLinkProps): ReactElement => {
     if (documentOrLink.mode === 'DEFAULT' && documentOrLink.linkUrl !== null) {
         return (
+            // biome-ignore lint/a11y/useValidAnchor: <explanation>
             <a
                 key={documentOrLink.id}
                 href={documentOrLink.linkUrl}
@@ -328,6 +338,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
             >
                 {documentOrLink.linkSettings?.display !== 'ICON' && documentOrLink.title}
                 {documentOrLink.linkSettings?.display !== 'TEXT' && documentOrLink.linkSettings?.iconUrl !== undefined && (
+                    // biome-ignore lint/a11y/useAltText: <explanation>
                     <img src={documentOrLink.linkSettings.iconUrl} className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4')} />
                 )}
             </a>
@@ -335,6 +346,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
     }
 
     return (
+        // biome-ignore lint/a11y/useValidAnchor: <explanation>
         <a
             key={documentOrLink.id}
             href={`/document/${documentOrLink.id}`}
