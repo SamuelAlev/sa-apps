@@ -7,8 +7,8 @@
     "scripts": {
         "dev": "frontify-cli serve --entryPath src/index.ts",
         "deploy": "frontify-cli deploy --entryPath src/index.ts",
-        "format": "exit 0 && biome ci .",
-        "typecheck": "exit 0 && tsc --noEmit",
+        "format": "biome ci .",
+        "typecheck": "tsc --noEmit",
         "test": "vitest run",
         "test:coverage": "vitest run --coverage",
         "test:ui": "vitest --ui",

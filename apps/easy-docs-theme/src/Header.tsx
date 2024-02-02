@@ -14,8 +14,8 @@ import { useMemo, useState } from 'react';
 import { useThemeContext } from './Context';
 import { Search } from './Search';
 import { getLinkFromLanguage } from './helpers/language';
-import { useThemeMode } from './hooks/useThemeMode';
 import { isDocumentGroup } from './helpers/types';
+import { useThemeMode } from './hooks/useThemeMode';
 
 type HeaderDocumentOrDocumentGroupProps = {
     documentOrDocumentGroup: Document | DocumentGroup;
