@@ -17,7 +17,7 @@
         "react-dom": "^18.2.0"
     },
     "dependencies": {
-        "@frontify/fondue": "12.0.0-beta.400",
+        "@frontify/fondue": "12.0.0-beta-16",
         "@frontify/fondue-tokens": "^3.4.0",
         "@sa-apps/utilities": "workspace:*"
     },
