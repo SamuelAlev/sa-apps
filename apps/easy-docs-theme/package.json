@@ -34,7 +34,7 @@
         "@sa-apps/text-input": "workspace:*",
         "@sa-apps/tracking": "workspace:*",
         "@sa-apps/utilities": "workspace:*",
-        "lucide-react": "^0.321.0",
+        "lucide-react": "^0.330.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
