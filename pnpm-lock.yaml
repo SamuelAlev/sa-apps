@@ -63,8 +63,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/utilities
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -184,8 +184,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/utilities
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -302,8 +302,8 @@ importers:
         specifier: workspace:*
         version: link:../../packages/utilities
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
       react:
         specifier: ^18.2.0
         version: 18.2.0
@@ -597,8 +597,8 @@ importers:
         specifier: ^0.2.1
         version: 0.2.1(@types/react@18.2.51)(react-dom@18.2.0)(react@18.2.0)
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.5.3
@@ -634,8 +634,8 @@ importers:
         specifier: workspace:*
         version: link:../utilities
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.5.3
@@ -677,8 +677,8 @@ importers:
         specifier: workspace:*
         version: link:../utilities
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.5.3
@@ -714,8 +714,8 @@ importers:
         specifier: workspace:*
         version: link:../utilities
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.5.3
@@ -748,8 +748,8 @@ importers:
         specifier: workspace:*
         version: link:../i18n
       lucide-react:
-        specifier: ^0.321.0
-        version: 0.321.0(react@18.2.0)
+        specifier: ^0.330.0
+        version: 0.330.0(react@18.2.0)
     devDependencies:
       '@biomejs/biome':
         specifier: ^1.5.3
@@ -11157,8 +11157,8 @@ packages:
       yallist: 4.0.0
     dev: true
 
-  /lucide-react@0.321.0(react@18.2.0):
-    resolution: {integrity: sha512-Fi9VahIna6642U+2nAGSjnXwUBV3WyfFFPQq4yi3w30jtqxDLfSyiYCtCYCYQZ2KWNZc1MDI+rcsa0t+ChdYpw==}
+  /lucide-react@0.330.0(react@18.2.0):
+    resolution: {integrity: sha512-CQwY+Fpbt2kxCoVhuN0RCZDCYlbYnqB870Bl/vIQf3ER/cnDDQ6moLmEkguRyruAUGd4j3Lc4mtnJosXnqHheA==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0
     dependencies:
