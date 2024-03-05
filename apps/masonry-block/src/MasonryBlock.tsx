@@ -2,8 +2,8 @@ import { useAssetChooser, useBlockAssets, useBlockSettings, useEditorState } fro
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, SwappableItem } from '@sa-apps/drag-and-drop';
-import { arraySwap } from '@sa-apps/utilities';
 import { trackEvent } from '@sa-apps/tracking';
+import { arraySwap } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 
 import { Masonry } from './Masonry';

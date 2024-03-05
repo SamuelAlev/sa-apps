@@ -1,6 +1,5 @@
 /* (c) Copyright Frontify Ltd., all rights reserved. */
 
-import type { FC } from 'react';
 import type { AppBridgeTheme, ThemeTemplate } from '@frontify/app-bridge';
 import type {
     AssetInputBlock as AssetInputBlockSidebarSettings,
@@ -26,6 +25,7 @@ import type {
     TextareaBlock as TextareaBlockSidebarSettings,
     ValueOrPromisedValue as ValueOrPromisedValueSidebarSettings,
 } from '@frontify/sidebar-settings';
+import type { FC } from 'react';
 
 export * from '@frontify/sidebar-settings';
 

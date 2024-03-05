@@ -3,8 +3,8 @@ import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, VerticalItem } from '@sa-apps/drag-and-drop';
-import { arrayMove } from '@sa-apps/utilities';
 import { trackEvent } from '@sa-apps/tracking';
+import { arrayMove } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 
 import { AccordionItem } from './AccordionItem';
