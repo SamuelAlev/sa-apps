@@ -8,7 +8,7 @@ import { useCurrentPath } from './hooks/useCurrentPath';
 
 export const Sidebar = (): ReactElement => {
     const { appBridge, context } = useThemeContext();
-    const documentId = context.template !== 'cover' ? context.documentId : 0;
+    const documentId = context.template?.type !== 'cover' && context.template?.document.id ? context.template?.document.id : 0;
     const currentPath = useCurrentPath();
 
     const { documentCategories } = useDocumentCategories(appBridge, documentId);

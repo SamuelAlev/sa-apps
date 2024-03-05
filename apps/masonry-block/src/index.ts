@@ -8,6 +8,6 @@ import { messages } from './i18n';
 import { settings } from './settings';
 
 export default defineBlock({
-    block: withTracking('gmjf13ophj')(withTranslations(messages)(MasonryBlock)),
+    block: withTracking('c7a25632-ffb8-4b71-abf8-6f8ebfa09fce')(withTranslations(messages)(MasonryBlock)),
     settings,
 });

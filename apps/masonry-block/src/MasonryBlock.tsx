@@ -3,6 +3,7 @@ import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, SwappableItem } from '@sa-apps/drag-and-drop';
 import { arraySwap } from '@sa-apps/utilities';
+import { trackEvent } from '@sa-apps/tracking';
 import type { ReactElement } from 'react';
 
 import { Masonry } from './Masonry';
@@ -47,6 +48,8 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 ...blockSettings,
                 masonryItems: newMasonryItems,
             }).catch(() => console.error("Couldn't save the block setttings"));
+
+            trackEvent('deleted masonry item');
         }
     };
 
@@ -62,6 +65,8 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 ...blockSettings,
                 masonryItems: arraySwap(newMasonryItems, oldIndex, newIndex),
             }).catch(() => console.error("Couldn't save the block setttings"));
+
+            trackEvent('drag and dropped masonry item');
         }
     };
 
@@ -93,6 +98,8 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
             },
             { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id },
         );
+
+        trackEvent('open asset chooser masonry item');
     };
 
     const handleStyleChange = (id: string, style: Partial<MasonryItemType['style']>) => {

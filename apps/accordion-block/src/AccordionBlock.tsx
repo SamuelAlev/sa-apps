@@ -4,6 +4,7 @@ import * as Accordion from '@radix-ui/react-accordion';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, VerticalItem } from '@sa-apps/drag-and-drop';
 import { arrayMove } from '@sa-apps/utilities';
+import { trackEvent } from '@sa-apps/tracking';
 import type { ReactElement } from 'react';
 
 import { AccordionItem } from './AccordionItem';
@@ -59,6 +60,8 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                 ...blockSettings,
                 accordionItems: newAccordionItems,
             }).catch(() => console.error("Couldn't save the block setttings"));
+
+            trackEvent('deleted accordion item');
         }
     };
 
@@ -72,6 +75,8 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                 ...blockSettings,
                 accordionItems: arrayMove(accordionItems, oldIndex, newIndex),
             }).catch(() => console.error("Couldn't save the block setttings"));
+
+            trackEvent('drag and dropped accordion item');
         }
     };
 

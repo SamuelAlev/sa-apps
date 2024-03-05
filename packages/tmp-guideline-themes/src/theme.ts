@@ -1,4 +1,7 @@
-import type { AppBridgeTheme } from '@frontify/app-bridge';
+/* (c) Copyright Frontify Ltd., all rights reserved. */
+
+import type { FC } from 'react';
+import type { AppBridgeTheme, ThemeTemplate } from '@frontify/app-bridge';
 import type {
     AssetInputBlock as AssetInputBlockSidebarSettings,
     BaseBlock as BaseBlockSidebarSettings,
@@ -23,7 +26,6 @@ import type {
     TextareaBlock as TextareaBlockSidebarSettings,
     ValueOrPromisedValue as ValueOrPromisedValueSidebarSettings,
 } from '@frontify/sidebar-settings';
-import type { FC } from 'react';
 
 export * from '@frontify/sidebar-settings';
 
@@ -51,21 +53,24 @@ export type TextareaBlock = TextareaBlockSidebarSettings<AppBridgeTheme>;
 export type ValueOrPromisedValue<T> = ValueOrPromisedValueSidebarSettings<AppBridgeTheme, T>;
 
 type FrontifyRouter = { navigate: (path: string) => void };
-type FrontifyContext = { templateId?: string } & (
-    | { documentPageId: number; documentId: number; template: 'documentPage' }
-    | { documentId: number; template: 'library' }
-    | { template: 'cover' }
-);
 
-export type ThemeSettingsStructureExport = {
-    [customSectionName: string]: SettingBlock[];
+export type SearchIconChoice = 'variant1' | 'variant2' | 'variant3' | 'variant4';
+export type SearchSettings = { searchIconChoice: SearchIconChoice };
+
+export type ContentAreaWidthChoice = '1200px' | '1000px' | '800px';
+export type ContentAreaWidthTemplateSettings = {
+    contentAreaWidthChoice?: ContentAreaWidthChoice;
+    contentAreaWidthCustom?: string;
+    contentAreaWidthCustomEnabled?: boolean;
 };
+
+export type ThemeSettingsStructure = Record<ThemeTemplate, ThemeSettingsStructureExport>;
+export type ThemeSettingsStructureExport = { [customSectionName: string]: SettingBlock[] };
 
 export type ThemeProps = {
     appBridge: AppBridgeTheme;
     Content: FC;
     router: FrontifyRouter;
-    context: FrontifyContext;
 };
 
 export type ThemeTemplateExport = {
@@ -79,7 +84,7 @@ export type ThemeConfigExport = {
         documentPage: { default: ThemeTemplateExport } & Record<string, ThemeTemplateExport>;
         library: { default: ThemeTemplateExport } & Record<string, ThemeTemplateExport>;
     };
-    settings: ThemeSettingsStructureExport;
+    settings: ThemeSettingsStructure;
 };
 
 /**

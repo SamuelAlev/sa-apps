@@ -1,11 +1,11 @@
-import type { AppBridgeTheme } from '@frontify/app-bridge';
+import type { AppBridgeTheme, ThemeContext as AppBridgeThemeContext } from '@frontify/app-bridge';
 import type { ThemeProps } from '@frontify/guideline-themes';
 import { createContext, useContext } from 'react';
 
 type ThemeContextType = {
     appBridge: AppBridgeTheme;
     router: ThemeProps['router'];
-    context: ThemeProps['context'];
+    context: AppBridgeThemeContext;
 };
 
 export const ThemeContext = createContext<ThemeContextType>({
@@ -13,7 +13,7 @@ export const ThemeContext = createContext<ThemeContextType>({
     router: {
         navigate: () => console.error('Router is not mounted in context'),
     },
-    context: (() => console.error('Context is not mounted in context')) as unknown as ThemeProps['context'],
+    context: (() => console.error('Context is not mounted in context')) as unknown as AppBridgeThemeContext,
 });
 
 export const useThemeContext = (): ThemeContextType => useContext(ThemeContext);
