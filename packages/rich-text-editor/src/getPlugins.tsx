@@ -20,17 +20,6 @@ import {
 } from '@frontify/fondue';
 import { ButtonPlugin, LinkPlugin, TextStylePluginsWithoutImage, TextStylesWithoutImage } from '@frontify/guideline-blocks-settings';
 
-// // @ts-expect-error untyped
-// import { ButtonPlugin } from '@frontify/guideline-blocks-settings/dist/components/RichTextEditor/plugins/ButtonPlugin/createButtonPlugin.es.js';
-
-// // @ts-expect-error untyped
-// import { LinkPlugin } from '@frontify/guideline-blocks-settings/dist/components/RichTextEditor/plugins/LinkPlugin/index.es.js';
-// import {
-//     TextStylePluginsWithoutImage,
-//     TextStylesWithoutImage,
-//     // @ts-expect-error untyped
-// } from '@frontify/guideline-blocks-settings/dist/components/RichTextEditor/plugins/TextStylePlugins/helpers.es.js';
-
 export const getPlugins = (appBridge: AppBridgeBlock): PluginComposer => {
     const plugins = new PluginComposer();
 
