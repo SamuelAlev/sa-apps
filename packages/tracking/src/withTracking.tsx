@@ -9,6 +9,10 @@ export const withTracking =
         return function withTracking(props): ReactElement {
             useEffect(() => {
                 const initTracking = () => {
+                    if (document.querySelector(`script[src="https://analytics.alev.dev/script.js"][data-website-id="${import.meta.env.PROD ? websiteId : WEBSITE_ID_DEV}"]`)) {
+                        return;
+                    }
+
                     const script = document.createElement('script');
                     script.setAttribute('src', 'https://analytics.alev.dev/script.js');
                     script.setAttribute('data-website-id', import.meta.env.PROD ? websiteId : WEBSITE_ID_DEV);
