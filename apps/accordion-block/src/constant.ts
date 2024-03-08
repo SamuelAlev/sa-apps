@@ -9,7 +9,7 @@ export const DEFAULT_ACCORDION_ITEM: Omit<AccordionItem, 'id'> = {
 };
 
 export const itemBorderClasses =
-    'border-[length:var(--accordion-items-border-disabled,var(--accordion-items-border-width))] border-[color:var(--accordion-items-border-disabled,var(--accordion-items-border-color))] border-style-[var(--accordion-items-border-disabled,var(--accordion-items-border-style))]';
+    'border-[length:var(--accordion-items-border-disabled,var(--accordion-items-border-width))] [border-color:var(--accordion-items-border-disabled,var(--accordion-items-border-color))] border-style-[var(--accordion-items-border-disabled,var(--accordion-items-border-style))]';
 export const headerPaddingClasses =
     'pt-[var(--accordion-item-heading-padding-top)] pr-[var(--accordion-item-heading-padding-right)] pb-[var(--accordion-item-heading-padding-bottom)] pl-[var(--accordion-item-heading-padding-left)] max-w-[calc(100%-var(--accordion-item-heading-padding-left)*2)]';
 export const contentPaddingClasses =

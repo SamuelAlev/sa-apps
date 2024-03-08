@@ -11,7 +11,7 @@ export const DEFAULT_MASONRY_ITEM: Omit<MasonryItem, 'id'> = {
 };
 
 export const itemBorderClasses =
-    'border-[length:var(--masonry-items-border-disabled,var(--masonry-items-border-width))] border-[color:var(--masonry-items-border-disabled,var(--masonry-items-border-color))] border-style-[var(--masonry-items-border-disabled,var(--masonry-items-border-style))]';
+    'border-[length:var(--masonry-items-border-disabled,var(--masonry-items-border-width))] [border-color:var(--masonry-items-border-disabled,var(--masonry-items-border-color))] border-style-[var(--masonry-items-border-disabled,var(--masonry-items-border-style))]';
 
 export const contentPaddingClasses =
     'pt-[var(--masonry-item-content-padding-top)] pr-[var(--masonry-item-content-padding-right)] pb-[var(--masonry-item-content-padding-bottom)] pl-[var(--masonry-item-content-padding-left)]';
