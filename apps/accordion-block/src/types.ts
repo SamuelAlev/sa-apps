@@ -1,4 +1,4 @@
-import { type AppBridgeBlock } from '@frontify/app-bridge';
+import type { AppBridgeBlock } from '@frontify/app-bridge';
 
 export type BlockSettings = {
     accordionItems?: AccordionItem[];

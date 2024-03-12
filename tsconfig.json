@@ -9,7 +9,7 @@
         "noImplicitThis": true,
         "sourceMap": true,
         "strict": true,
-        "resolveJsonModule": true,
+        "resolveJsonModule": true
     },
-    "exclude": ["**/dist", "**/node_modules"],
+    "exclude": ["**/dist", "**/node_modules"]
 }

@@ -123,7 +123,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     return (
         <div style={getMasonryRootStyles(blockSettings)} data-test-id="masonry-block">
             <DragAndDropSortableContext items={masonryItems} strategy="rect-swapping" onDragEnd={handleDragEnd}>
-                <Masonry columnCount={parseInt(blockSettings.columnsCountCustomEnabled ? blockSettings.columnsCountCustom : blockSettings.columnsCountSimple)}>
+                <Masonry columnCount={Number.parseInt(blockSettings.columnsCountCustomEnabled ? blockSettings.columnsCountCustom : blockSettings.columnsCountSimple)}>
                     {masonryItems.map((masonryItem) => (
                         <SwappableItem key={masonryItem.id} id={masonryItem.id} disabled={!isEditing}>
                             <MasonryItem

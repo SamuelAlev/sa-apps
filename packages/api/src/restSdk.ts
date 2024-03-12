@@ -1,4 +1,4 @@
-import type { Key as SWRKeyInterface, SWRConfiguration as SWRConfigInterface } from 'swr';
+import type { SWRConfiguration as SWRConfigInterface, Key as SWRKeyInterface } from 'swr';
 import useSWR from 'swr';
 import { getCsrfToken } from './csrf';
 
