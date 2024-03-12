@@ -308,7 +308,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
     }
 
     return (
-        // biome-ignore lint/a11y/useValidAnchor: <explanation>
+        // biome-ignore lint/a11y/useValidAnchor: intercepting the click on link to use internal router
         <a
             key={documentOrLink.id}
             href={`/document/${documentOrLink.id}`}
@@ -325,7 +325,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
 const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrLinkProps): ReactElement => {
     if (documentOrLink.mode === 'DEFAULT' && documentOrLink.linkUrl !== null) {
         return (
-            // biome-ignore lint/a11y/useValidAnchor: <explanation>
+            // biome-ignore lint/a11y/useValidAnchor: intercepting the click on link to use internal router
             <a
                 key={documentOrLink.id}
                 href={documentOrLink.linkUrl}
@@ -338,7 +338,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
             >
                 {documentOrLink.linkSettings?.display !== 'ICON' && documentOrLink.title}
                 {documentOrLink.linkSettings?.display !== 'TEXT' && documentOrLink.linkSettings?.iconUrl !== undefined && (
-                    // biome-ignore lint/a11y/useAltText: <explanation>
+                    // biome-ignore lint/a11y/useAltText: icon doesn't have alt here
                     <img src={documentOrLink.linkSettings.iconUrl} className={cn(documentOrLink.linkSettings?.display !== 'ICON' && 'ml-2', 'h-4 w-4')} />
                 )}
             </a>
@@ -346,7 +346,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
     }
 
     return (
-        // biome-ignore lint/a11y/useValidAnchor: <explanation>
+        // biome-ignore lint/a11y/useValidAnchor: intercepting the click on link to use internal router
         <a
             key={documentOrLink.id}
             href={`/document/${documentOrLink.id}`}
