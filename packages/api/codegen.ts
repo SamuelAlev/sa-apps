@@ -5,7 +5,7 @@ const config: CodegenConfig = {
     generates: {
         './src/generated.ts': {
             schema: {
-                'https://frontify.alev.cloud/graphql': {
+                'https://frontify.alev.dev/graphql': {
                     headers: {
                         Authorization: '${GRAPHQL_API_BEARER_TOKEN}',
                     },
