@@ -1,5 +1,5 @@
-import { type CSSProperties } from 'react';
-import { type BlockSettings } from './types';
+import type { CSSProperties } from 'react';
+import type { BlockSettings } from './types';
 
 export const getMermaidRootStyle = (blockSettings: BlockSettings) => {
     return {

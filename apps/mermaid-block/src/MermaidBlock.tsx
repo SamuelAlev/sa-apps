@@ -1,14 +1,19 @@
-import { useAssetUpload, useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
+import { useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import { Button } from '@sa-apps/button';
 import { useTranslations } from '@sa-apps/i18n';
+import { trackEvent } from '@sa-apps/tracking';
 import { cn } from '@sa-apps/utilities';
+import { Loader2 } from 'lucide-react';
 import mermaid from 'mermaid';
-import { ChangeEvent, type ReactElement, useEffect, useRef, useState } from 'react';
+import { type FormEventHandler, type ReactElement, useEffect, useRef, useState } from 'react';
 import { borderClasses } from './constants';
 import { getMermaidRootStyle } from './helpers';
 import { MERMAID_FILE_ID } from './settings';
-import { BlockSettings } from './types';
+import type { BlockSettings } from './types';
+import { useMermaidAsset } from './useMermaidAsset';
+import { usePrettyCode } from './usePrettyCode';
+import { useUploadFile } from './useUploadFile';
 import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
 
 export const MermaidBlock = ({ appBridge }: BlockProps): ReactElement => {
@@ -16,23 +21,31 @@ export const MermaidBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
     const { blockAssets, updateAssetIdsFromKey } = useBlockAssets(appBridge);
     const isEditing = useEditorState(appBridge);
-    const [uploadFile, { results: uploadResults, doneAll }] = useAssetUpload({
-        onUploadProgress: () => !loading && setLoading(true),
-    });
 
+    const mermaidInputElementRef = useRef<HTMLTextAreaElement>(null);
     const mermaidOutputElementRef = useRef<HTMLPreElement>(null);
-    const [code, setCode] = useState(blockSettings.code ?? '');
-    const [loading, setLoading] = useState(false);
+    const [showCode, setShowCode] = useState(false);
 
-    const handleInput = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        setCode(event.currentTarget.value);
-    };
+    const { uploadFile, loading } = useUploadFile((assetId) => updateAssetIdsFromKey(MERMAID_FILE_ID, [assetId]));
+    const prettyCode = usePrettyCode(blockSettings.code ?? '');
+    const mermaidSvgAsset = useMermaidAsset(blockAssets);
 
     const handleHeightChange = (height: number) => {
         setBlockSettings({ height: `${height}px` }).catch(() => console.error("Couldn't save the block setttings"));
+        trackEvent('changed height of mermaid block');
     };
 
-    const handleMermaidSave = () => {
+    const handleMermaidSave: FormEventHandler<HTMLFormElement> = (event) => {
+        event.preventDefault();
+
+        const form = event.target as HTMLFormElement;
+        const formData = new FormData(form);
+        const formObject = Object.fromEntries(formData.entries());
+        const mermaidCode = formObject['mermaid-code'];
+        if (typeof mermaidCode !== 'string') {
+            throw new Error('Expected the form textarea value to be a string');
+        }
+
         if (mermaidOutputElementRef.current) {
             const svg = mermaidOutputElementRef.current.innerHTML;
             const blob = new Blob([svg], { type: 'image/svg+xml' });
@@ -40,75 +53,104 @@ export const MermaidBlock = ({ appBridge }: BlockProps): ReactElement => {
 
             uploadFile(file);
 
-            setBlockSettings({ code });
+            setBlockSettings({ code: mermaidCode });
 
-            setLoading(false);
+            trackEvent('saved code in mermaid block');
         }
     };
 
-    useEffect(() => {
-        mermaid.initialize({ startOnLoad: false, flowchart: { useMaxWidth: true } });
-    }, []);
+    const handleShowCode = () => {
+        setShowCode((showCode) => !showCode);
+        trackEvent('toggled code in mermaid block', { value: `${showCode}` });
+    };
 
-    useEffect(() => {
-        const renderMermaid = async () => {
-            if (code && mermaidOutputElementRef.current) {
-                mermaidOutputElementRef.current.removeAttribute('data-processed');
-                await mermaid.run({ nodes: [mermaidOutputElementRef.current] });
-            }
-        };
-
-        isEditing && renderMermaid();
-    }, [isEditing, code]);
-
-    // biome-ignore lint/correctness/useExhaustiveDependencies: otherwise it goes into an infinite loop
-    useEffect(() => {
-        if (doneAll) {
-            (async (uploadResults) => {
-                const assetsId = uploadResults.map((uploadResult) => uploadResult.id);
-                await updateAssetIdsFromKey(MERMAID_FILE_ID, assetsId);
-                setLoading(false);
-            })(uploadResults);
+    const renderMermaid = async () => {
+        if (mermaidOutputElementRef.current && mermaidInputElementRef.current) {
+            mermaidOutputElementRef.current.removeAttribute('data-processed');
+            mermaidOutputElementRef.current.textContent = mermaidInputElementRef.current.value;
+            await mermaid.run({ nodes: [mermaidOutputElementRef.current] });
         }
-    }, [doneAll, uploadResults]);
+    };
 
     const { height, ResizeHandle, ResizeWrapper } = useDraggableHeightHandle({
         id: 'draggable',
-        initialHeight: parseInt(blockSettings.height) ?? 0,
+        initialHeight: Number.parseInt(blockSettings.height) ?? 0,
         enabled: isEditing,
         onMouseUp: (height) => handleHeightChange(height),
     });
 
+    useEffect(() => {
+        isEditing && renderMermaid();
+    }, [isEditing, renderMermaid]);
+
     return (
-        <div data-test-id="mermaid-block" className="flex flex-col gap-6" style={getMermaidRootStyle(blockSettings)}>
+        <div data-test-id="mermaid-block" className="mermaid-block w-full flex flex-col gap-6" style={getMermaidRootStyle(blockSettings)}>
             {isEditing ? (
                 <>
                     <ResizeWrapper>
-                        <pre
-                            ref={mermaidOutputElementRef}
-                            data-test-id="mermaid-output"
-                            style={{ height: `${height}px` }}
-                            className={cn('w-full [&>svg]:!max-w-full [&>svg]:h-full aspect-auto', borderClasses)}
-                        >
-                            {code}
-                        </pre>
+                        <div className="relative">
+                            <pre
+                                ref={mermaidOutputElementRef}
+                                data-test-id="mermaid-output"
+                                style={{ height: `${height}px` }}
+                                className={cn('w-full [&>svg]:!max-w-full [&>svg]:h-full aspect-auto', borderClasses, loading && 'blur-sm grayscale')}
+                            />
+
+                            {loading && (
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <Loader2 className="animate-spin text-white" size={32} />
+                                </div>
+                            )}
+                        </div>
                         <ResizeHandle />
                     </ResizeWrapper>
 
-                    <h3>Mermaid Code</h3>
-                    <textarea rows={10} placeholder={t('enterYourMermaidCode')} className="border" onInput={handleInput} value={code} data-test-id="mermaid-input" />
+                    <form className="px-6 flex flex-col gap-6" onSubmit={handleMermaidSave}>
+                        <h3>Mermaid Code</h3>
+                        <textarea
+                            name="mermaid-code"
+                            ref={mermaidInputElementRef}
+                            defaultValue={blockSettings.code}
+                            rows={10}
+                            placeholder={t('enterYourMermaidCode')}
+                            className="border rounded px-2 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                            style={{ fontFamily: "'JetBrains Mono', monospace" }}
+                            data-test-id="mermaid-code"
+                            onInput={renderMermaid}
+                        />
 
-                    <div className="flex justify-end rtl:justify-start">
-                        <Button size="sm" onClick={handleMermaidSave} disabled={loading}>
-                            {t('saveCode')}
-                        </Button>
-                    </div>
+                        <div className="flex justify-end rtl:justify-start">
+                            <Button size="sm" type="submit" disabled={loading}>
+                                {t('saveCode')}
+                            </Button>
+                        </div>
+                    </form>
                 </>
-            ) : (
-                <div style={{ height: blockSettings.height }} className={cn('w-full flex items-center justify-center', borderClasses)}>
-                    <img src={blockAssets[MERMAID_FILE_ID]?.[0]?.genericUrl} alt="Mermaid diagram" className="object-contain h-full w-full" />
+            ) : mermaidSvgAsset && blockAssets[MERMAID_FILE_ID]?.[0] ? (
+                <div className="flex flex-col w-full group" data-show-code={blockSettings.alwaysShowCode || showCode}>
+                    <div style={{ height: blockSettings.height }} className={cn('relative w-full flex items-center justify-center', borderClasses)}>
+                        <div
+                            className="w-full [&>svg]:!max-w-full [&>svg]:h-full aspect-auto"
+                            // biome-ignore lint/security/noDangerouslySetInnerHtml: data generated by mermaid and saved as SVG
+                            dangerouslySetInnerHTML={{ __html: mermaidSvgAsset }}
+                        />
+
+                        {!blockSettings.alwaysShowCode && blockSettings.displayShowCodeButton && (
+                            <div className="absolute bottom-0 right-0 p-2 bg-white bg-opacity-50">
+                                <Button size="sm" onClick={handleShowCode}>
+                                    {showCode ? t('hideCode') : t('showCode')}
+                                </Button>
+                            </div>
+                        )}
+                    </div>
+
+                    <div
+                        className="overflow-hidden h-full max-h-0 group-data-[show-code=true]:max-h-[100dvh] transition-[max-height]"
+                        // biome-ignore lint/security/noDangerouslySetInnerHtml: data generated by mermaid and rendered by shiki
+                        dangerouslySetInnerHTML={{ __html: prettyCode }}
+                    />
                 </div>
-            )}
+            ) : null}
         </div>
     );
 };

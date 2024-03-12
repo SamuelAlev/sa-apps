@@ -2,6 +2,7 @@ import { defineBlock } from '@frontify/guideline-blocks-settings';
 import { withTranslations } from '@sa-apps/i18n';
 import '@sa-apps/tailwind-config/src/styles.scss';
 import { withTracking } from '@sa-apps/tracking';
+import './styles.scss';
 
 import { MermaidBlock } from './MermaidBlock';
 import { messages } from './i18n';

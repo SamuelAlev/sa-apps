@@ -19,7 +19,7 @@
         "tailwindcss-animate": "^1.0.7"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.5.3",
+        "@biomejs/biome": "^1.6.1",
         "tailwindcss": "^3.4.1",
         "typescript": "^5.3.3"
     }

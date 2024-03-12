@@ -1,0 +1,17 @@
+@import url(https://fonts.bunny.net/css?family=jetbrains-mono:400);
+
+// prevent overwriting of the code block font by Frontify CSS
+.page-content .mermaid-block code {
+    background: unset !important;
+    border-radius: unset !important;
+    color: unset !important;
+    display: unset !important;
+    font-family: unset !important;
+    font-size: unset !important;
+    margin: unset !important;
+    padding: unset !important;
+}
+
+.shiki {
+    padding: 1rem;
+}

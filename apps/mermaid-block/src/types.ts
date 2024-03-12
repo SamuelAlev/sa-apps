@@ -1,5 +1,9 @@
 export type BlockSettings = {
+    alwaysShowCode?: boolean;
+    displayShowCodeButton?: boolean;
+
     height: string;
+
     borderEnabled: boolean;
     borderStyle: 'solid' | 'dashed' | 'dotted';
     borderWidth: string;
@@ -8,3 +12,11 @@ export type BlockSettings = {
     // Private
     code: string;
 };
+
+export type ShikiCodeToHtml = (
+    code: string,
+    options: {
+        lang: string;
+        theme: string;
+    },
+) => Promise<string>;

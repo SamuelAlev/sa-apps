@@ -19,6 +19,21 @@ export const settings = defineSettings({
             ],
         },
     ],
+    basics: [
+        {
+            id: 'alwaysShowCode',
+            type: 'switch',
+            label: 'Always show code',
+            defaultValue: false,
+        },
+        {
+            id: 'displayShowCodeButton',
+            type: 'switch',
+            label: 'Show code button',
+            defaultValue: false,
+            show: (bundle) => bundle.getBlock('alwaysShowCode')?.value === false,
+        },
+    ],
     style: [
         {
             id: 'height',
