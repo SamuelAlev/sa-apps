@@ -74,7 +74,7 @@ importers:
     devDependencies:
       '@frontify/frontify-cli':
         specifier: ^5.6.10
-        version: 5.6.10(sass@1.71.1)
+        version: 5.6.11(sass@1.71.1)
       '@sa-apps/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -195,7 +195,7 @@ importers:
         version: 1.6.1
       '@frontify/frontify-cli':
         specifier: ^5.6.10
-        version: 5.6.10(sass@1.71.1)
+        version: 5.6.11(sass@1.71.1)
       '@sa-apps/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -307,7 +307,7 @@ importers:
     devDependencies:
       '@frontify/frontify-cli':
         specifier: ^5.6.10
-        version: 5.6.10(sass@1.71.1)
+        version: 5.6.11(sass@1.71.1)
       '@sa-apps/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -392,7 +392,7 @@ importers:
     devDependencies:
       '@frontify/frontify-cli':
         specifier: ^5.6.10
-        version: 5.6.10(sass@1.71.1)
+        version: 5.6.11(sass@1.71.1)
       '@sa-apps/tailwind-config':
         specifier: workspace:*
         version: link:../../packages/tailwind-config
@@ -2690,8 +2690,8 @@ packages:
       - zustand
     dev: false
 
-  /@frontify/frontify-cli@5.6.10(sass@1.71.1):
-    resolution: {integrity: sha512-YtB4KgGM5RK0IVLylfe7ahMt5pOtxYnu2HicRyJ1NTzVczwav/iBIVnU+xs5DNplwxHk7xaeG+0bKVlgh7TOvg==}
+  /@frontify/frontify-cli@5.6.11(sass@1.71.1):
+    resolution: {integrity: sha512-jA2uRoQzHN7uf/+IRShmpPnbqJiCbkW7acbGeV3zqE0gwYgsJL0KkKJVxdG3COzcQnrUfeFGOG8ZqdKuNnBDPQ==}
     engines: {node: '>=16'}
     hasBin: true
     dependencies:
