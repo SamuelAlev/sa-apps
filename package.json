@@ -8,6 +8,6 @@
         "typecheck": "pnpm --stream --filter {packages/**} --filter {apps/**} typecheck"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.6.1"
+        "@biomejs/biome": "^1.6.2"
     }
 }

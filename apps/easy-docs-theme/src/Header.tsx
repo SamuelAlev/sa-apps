@@ -86,7 +86,6 @@ export const Header = (): ReactElement => {
                     </a>
                     <nav className="hidden items-center space-x-6 text-sm font-semibold md:flex">
                         {!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
-                            // biome-ignore lint/a11y/useValidAnchor: <explanation>
                             <a href={coverPage.url} onClick={handleAnchorElementClick} title={coverPage.title} aria-label={coverPage.title}>
                                 {coverPage.title}
                             </a>
@@ -115,7 +114,6 @@ export const Header = (): ReactElement => {
 
                                 <nav className="grid grid-flow-row auto-rows-max text-sm">
                                     {!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
-                                        // biome-ignore lint/a11y/useValidAnchor: <explanation>
                                         <a
                                             href={coverPage.url}
                                             onClick={handleAnchorElementClick}
@@ -287,7 +285,6 @@ const MobileHeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, onLinkCl
 const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrLinkProps): ReactElement => {
     if (documentOrLink.mode === 'DEFAULT' && documentOrLink.linkUrl !== null) {
         return (
-            // biome-ignore lint/a11y/useValidAnchor: <explanation>
             <a
                 key={documentOrLink.id}
                 href={documentOrLink.linkUrl}
@@ -308,7 +305,6 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
     }
 
     return (
-        // biome-ignore lint/a11y/useValidAnchor: intercepting the click on link to use internal router
         <a
             key={documentOrLink.id}
             href={`/document/${documentOrLink.id}`}
@@ -325,7 +321,6 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
 const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrLinkProps): ReactElement => {
     if (documentOrLink.mode === 'DEFAULT' && documentOrLink.linkUrl !== null) {
         return (
-            // biome-ignore lint/a11y/useValidAnchor: intercepting the click on link to use internal router
             <a
                 key={documentOrLink.id}
                 href={documentOrLink.linkUrl}
@@ -346,7 +341,6 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
     }
 
     return (
-        // biome-ignore lint/a11y/useValidAnchor: intercepting the click on link to use internal router
         <a
             key={documentOrLink.id}
             href={`/document/${documentOrLink.id}`}
