@@ -8,6 +8,6 @@ import { messages } from './i18n';
 import { settings } from './settings';
 
 export default defineBlock({
-    block: withTracking('c7a25632-ffb8-4b71-abf8-6f8ebfa09fce')(withTranslations(messages)(AccordionBlock)),
+    block: withTracking('32c00ef3-3595-4b6c-8c5f-44034e1b3608')(withTranslations(messages)(AccordionBlock)),
     settings,
 });
