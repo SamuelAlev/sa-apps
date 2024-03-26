@@ -1,4 +1,3 @@
-import { type FormEventHandler, type ReactElement, useEffect, useRef, useState } from 'react';
 import { useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import { Button } from '@sa-apps/button';
@@ -7,6 +6,7 @@ import { trackEvent } from '@sa-apps/tracking';
 import { cn } from '@sa-apps/utilities';
 import { Loader2 } from 'lucide-react';
 import type mermaid from 'mermaid';
+import { type FormEventHandler, type ReactElement, useEffect, useRef, useState } from 'react';
 
 import packageJson from '../package.json';
 
