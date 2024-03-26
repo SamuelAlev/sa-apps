@@ -1,15 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
-import type { ShikiCodeToHtml } from 'shiki';
+import type { codeToHtml } from 'shiki';
 
 import packageJson from '../package.json';
 
 export const usePrettyCode = (code: string, options: { language: string; theme: string } = { language: 'mermaid', theme: 'github-dark' }) => {
-    const shikiCodeToHtml = useRef<ShikiCodeToHtml | null>(null);
+    const shikiCodeToHtml = useRef<typeof codeToHtml | null>(null);
     const [prettyCode, setPrettyCode] = useState('');
 
     useEffect(() => {
         const renderPrettyCode = async () => {
-            // @ts-expect-error Loading from CDN with treeshaking
             shikiCodeToHtml.current ??= await import(/* @vite-ignore */ `https://esm.sh/shiki@${packageJson.dependencies.shiki}`).then((mod) => mod.codeToHtml);
             if (shikiCodeToHtml.current) {
                 const renderedCode = await shikiCodeToHtml.current(`\`\`\`mermaid\n${code}\n\`\`\``, {

@@ -12,11 +12,3 @@ export type BlockSettings = {
     // Private
     code: string;
 };
-
-export type ShikiCodeToHtml = (
-    code: string,
-    options: {
-        lang: string;
-        theme: string;
-    },
-) => Promise<string>;

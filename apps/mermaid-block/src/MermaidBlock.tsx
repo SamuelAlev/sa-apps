@@ -25,7 +25,7 @@ export const MermaidBlock = ({ appBridge }: BlockProps): ReactElement => {
     const { blockAssets, updateAssetIdsFromKey } = useBlockAssets(appBridge);
     const isEditing = useEditorState(appBridge);
 
-    const mermaidImport = useRef<mermaid | null>(null);
+    const mermaidImport = useRef<typeof mermaid | null>(null);
     const mermaidInputElementRef = useRef<HTMLTextAreaElement>(null);
     const mermaidOutputElementRef = useRef<HTMLPreElement>(null);
     const [showCode, setShowCode] = useState(false);
@@ -69,10 +69,10 @@ export const MermaidBlock = ({ appBridge }: BlockProps): ReactElement => {
     };
 
     const renderMermaid = async () => {
-        if (mermaidOutputElementRef.current && mermaidInputElementRef.current) {
+        mermaidImport.current ??= await import(/* @vite-ignore */ `https://esm.sh/mermaid@${packageJson.dependencies.mermaid}`).then((mod) => mod.default);
+        if (mermaidImport.current && mermaidOutputElementRef.current && mermaidInputElementRef.current) {
             mermaidOutputElementRef.current.removeAttribute('data-processed');
             mermaidOutputElementRef.current.textContent = mermaidInputElementRef.current.value;
-            mermaidImport.current ??= await import(/* @vite-ignore */ `https://esm.sh/mermaid@${packageJson.dependencies.mermaid}`).then((mod) => mod.default);
             await mermaidImport.current.run({ nodes: [mermaidOutputElementRef.current] });
         }
     };
