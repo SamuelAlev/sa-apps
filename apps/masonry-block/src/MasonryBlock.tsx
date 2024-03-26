@@ -49,7 +49,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 masonryItems: newMasonryItems,
             }).catch(() => console.error("Couldn't save the block setttings"));
 
-            trackEvent('deleted masonry item');
+            trackEvent('deleted item');
         }
     };
 
@@ -66,7 +66,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                 masonryItems: arraySwap(newMasonryItems, oldIndex, newIndex),
             }).catch(() => console.error("Couldn't save the block setttings"));
 
-            trackEvent('drag and dropped masonry item');
+            trackEvent('drag and dropped item');
         }
     };
 
@@ -99,7 +99,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
             { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id },
         );
 
-        trackEvent('open asset chooser masonry item');
+        trackEvent('open asset chooser item');
     };
 
     const handleStyleChange = (id: string, style: Partial<MasonryItemType['style']>) => {

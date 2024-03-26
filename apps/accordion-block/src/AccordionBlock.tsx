@@ -61,7 +61,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                 accordionItems: newAccordionItems,
             }).catch(() => console.error("Couldn't save the block setttings"));
 
-            trackEvent('deleted accordion item');
+            trackEvent('deleted item');
         }
     };
 
@@ -76,7 +76,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
                 accordionItems: arrayMove(accordionItems, oldIndex, newIndex),
             }).catch(() => console.error("Couldn't save the block setttings"));
 
-            trackEvent('drag and dropped accordion item');
+            trackEvent('drag and dropped item');
         }
     };
 
