@@ -1,4 +1,7 @@
-import { appendUnit, defineSettings, minimumPixelRule, numericalOrPixelRule } from '@frontify/guideline-blocks-settings';
+import { appendUnit, createFooter, defineSettings, minimumPixelRule, numericalOrPixelRule } from '@frontify/guideline-blocks-settings';
+
+import packageJson from '../package.json';
+import manifestJson from '../manifest.json';
 
 export const MERMAID_FILE_ID = 'mermaid-file';
 
@@ -17,15 +20,6 @@ export const settings = defineSettings({
                     label: 'Mermaid',
                 },
             ],
-        },
-        {
-            id: 'trackingInformation',
-            type: 'notification',
-            title: 'Tracking information',
-            text: 'This block anonymously tracks page views, print counts, and various emitted events. Your privacy is ensured as no personal data is collected.',
-            styles: {
-                type: 'info',
-            },
         },
     ],
     basics: [
@@ -98,6 +92,56 @@ export const settings = defineSettings({
                 },
             ],
             off: [],
+        },
+    ],
+    informations: [
+        {
+            id: 'trackingInformationHeading',
+            type: 'sectionHeading',
+            label: 'Tracking information',
+            blocks: [
+                {
+                    id: 'trackingInformation',
+                    type: 'notification',
+                    text: 'This block anonymously tracks page views, print counts, and various emitted events. Your privacy is ensured as no personal data is collected.',
+                    styles: {
+                        type: 'info',
+                    },
+                },
+            ],
+        },
+        {
+            id: 'versionInformationHeading',
+            type: 'sectionHeading',
+            label: 'Marketplace link',
+            blocks: [
+                {
+                    id: 'versionInformation',
+                    type: 'notification',
+                    footer: createFooter({
+                        label: 'View on Marketplace',
+                        href: `${window.location.origin}/marketplace/app/${manifestJson.appId}`,
+                    }),
+                    styles: {
+                        type: 'info',
+                    },
+                },
+            ],
+        },
+        {
+            id: 'versionInformationHeading',
+            type: 'sectionHeading',
+            label: 'Block version',
+            blocks: [
+                {
+                    id: 'versionInformation',
+                    type: 'notification',
+                    text: packageJson.version,
+                    styles: {
+                        type: 'info',
+                    },
+                },
+            ],
         },
     ],
 });
