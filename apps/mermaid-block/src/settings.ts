@@ -18,6 +18,15 @@ export const settings = defineSettings({
                 },
             ],
         },
+        {
+            id: 'trackingInformation',
+            type: 'notification',
+            title: 'Tracking information',
+            text: 'This block anonymously tracks page views, print counts, and various emitted events. Your privacy is ensured as no personal data is collected.',
+            styles: {
+                type: 'info',
+            },
+        },
     ],
     basics: [
         {
