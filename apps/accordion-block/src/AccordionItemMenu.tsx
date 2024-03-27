@@ -153,12 +153,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel onClick={handleModalCancelClick}>{t('cancel')}</AlertDialogCancel>
-                        <AlertDialogAction
-                            onClick={handleModalDeleteClick}
-                            className={buttonVariants({
-                                variant: 'destructive',
-                            })}
-                        >
+                        <AlertDialogAction onClick={handleModalDeleteClick} className={buttonVariants({ variant: 'destructive' })}>
                             {t('delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>
