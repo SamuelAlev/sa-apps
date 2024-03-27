@@ -1,7 +1,7 @@
 import { IconEnum, createFooter, defineSettings } from '@frontify/guideline-themes';
 
-import packageJson from '../package.json';
 import manifestJson from '../manifest.json';
+import packageJson from '../package.json';
 
 export const settings = defineSettings({
     main: [

@@ -1,7 +1,7 @@
 import { appendUnit, createFooter, defineSettings, minimumPixelRule, numericalOrPixelRule } from '@frontify/guideline-blocks-settings';
 
-import packageJson from '../package.json';
 import manifestJson from '../manifest.json';
+import packageJson from '../package.json';
 
 export const MERMAID_FILE_ID = 'mermaid-file';
 

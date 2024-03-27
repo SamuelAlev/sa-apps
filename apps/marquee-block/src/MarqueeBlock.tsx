@@ -1,4 +1,5 @@
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
+import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import {
     AlertDialog,
     AlertDialogAction,
@@ -9,14 +10,13 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@sa-apps/alert-dialog';
-import type { BlockProps } from '@frontify/guideline-blocks-settings';
+import { Button, buttonVariants } from '@sa-apps/button';
 import { useTranslations } from '@sa-apps/i18n';
 import { TextInput } from '@sa-apps/text-input';
-import { Button, buttonVariants } from '@sa-apps/button';
-import { useState, type ChangeEvent, type ReactElement, type FormEventHandler } from 'react';
+import { cn } from '@sa-apps/utilities';
+import { type FormEventHandler, type ReactElement, useState } from 'react';
 import Marquee from 'react-fast-marquee';
 import type { BlockSettings } from './types';
-import { cn } from '@sa-apps/utilities';
 
 export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
     const { t } = useTranslations();
