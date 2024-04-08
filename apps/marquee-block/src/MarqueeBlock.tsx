@@ -1,26 +1,23 @@
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
-import {
-    AlertDialog,
-    AlertDialogAction,
-    AlertDialogCancel,
-    AlertDialogContent,
-    AlertDialogDescription,
-    AlertDialogFooter,
-    AlertDialogHeader,
-    AlertDialogTitle,
-} from '@sa-apps/alert-dialog';
-import { Button, buttonVariants } from '@sa-apps/button';
-import { useTranslations } from '@sa-apps/i18n';
-import { TextInput } from '@sa-apps/text-input';
 import { cn } from '@sa-apps/utilities';
-import { type FormEventHandler, type ReactElement, useState } from 'react';
+import type { ReactElement } from 'react';
 import Marquee from 'react-fast-marquee';
+import { trackEvent } from '@sa-apps/tracking';
+
+import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
+import { ContentTextsEdit } from './ContentTextsEdit';
 import type { BlockSettings } from './types';
+import { getMarqueeRootStyle } from './helpers';
+import { borderClasses, borderRadiusClasses } from './constants';
+import { ContentTextsView } from './ContentTextsView';
+import { ContentAssetsEdit } from './ContentAssetsEdit';
+import { ContentAssetsView } from './ContentAssetsView';
+import { useBlockAssets } from './utilities/useBlockAssets';
 
 export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
-    const { t } = useTranslations();
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
+    const { blockAssets, updateAssetIdsFromKey, addAssetIdsToKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge, { enabled: blockSettings.type === 'asset' });
     const isEditing = useEditorState(appBridge);
 
     const handleTextChange = (index: number, value: string) => {
@@ -35,101 +32,59 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
         setBlockSettings({ contentTexts: cloneContent });
     };
 
-    const handleAddText = () => {
-        setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), ''] });
+    const handleAddText = (value: string) => {
+        setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), value] });
     };
+
+    const handleHeightChange = (height: number) => {
+        setBlockSettings({ height: `${height}px` }).catch(() => console.error("Couldn't save the block setttings"));
+        trackEvent('changed height');
+    };
+
+    const { height, ResizeHandle, ResizeWrapper } = useDraggableHeightHandle({
+        id: 'draggable',
+        initialHeight: Number.parseInt(blockSettings.height) ?? 0,
+        enabled: isEditing,
+        onMouseUp: (height) => handleHeightChange(height),
+    });
 
     return (
-        <div data-test-id="marquee-block">
-            <Marquee
-                className="overflow-y-hidden"
-                loop={0}
-                autoFill={blockSettings.autoFill}
-                speed={blockSettings.speed ? Number.parseInt(blockSettings.speed) : undefined}
-                direction={blockSettings.directionHV === 'horizontal' ? blockSettings.directionH : blockSettings.directionV}
-                pauseOnHover={blockSettings.pauseHover}
-                pauseOnClick={blockSettings.pauseClick}
-            >
-                {blockSettings.contentTexts?.map((contentText) => (
-                    <span className={cn(blockSettings.directionHV === 'horizontal' ? 'mx-6' : 'my-6')}>{contentText}</span>
-                ))}
-            </Marquee>
+        <div data-test-id="marquee-block" style={getMarqueeRootStyle(blockSettings)}>
+            <ResizeWrapper>
+                <Marquee
+                    style={{ height: `${height}px` }}
+                    className={cn('overflow-y-hidden h-[--height] [&_.rfm-child]:flex', borderClasses, borderRadiusClasses)}
+                    loop={0}
+                    autoFill={blockSettings.autoFill}
+                    speed={blockSettings.speed ? Number.parseInt(blockSettings.speed) : undefined}
+                    direction={blockSettings.directionHV === 'horizontal' ? blockSettings.directionH : blockSettings.directionV}
+                    pauseOnHover={blockSettings.pauseHover}
+                    pauseOnClick={blockSettings.pauseClick}
+                >
+                    {blockSettings.type === 'text' ? (
+                        <ContentTextsView values={blockSettings.contentTexts} direction={blockSettings.directionHV} />
+                    ) : (
+                        <ContentAssetsView values={blockAssets.items} direction={blockSettings.directionHV} />
+                    )}
+                </Marquee>
+                <ResizeHandle />
+            </ResizeWrapper>
 
-            {isEditing ? <ContentTextEdit values={blockSettings.contentTexts} onSaveItem={handleTextChange} onAddItem={handleAddText} onRemoveItem={handleRemoveText} /> : null}
-        </div>
-    );
-};
-
-const ContentTextEdit = ({
-    values,
-    onSaveItem,
-    onAddItem,
-    onRemoveItem,
-}: { values?: string[]; onSaveItem: (index: number, value: string) => void; onAddItem: () => void; onRemoveItem: (index: number) => void }) => {
-    return (
-        <>
-            <div className="pt-8 flex flex-col gap-4 w-full">
-                {values?.map((value, index) => (
-                    <ContentTextRowEdit value={value} onSave={(value) => onSaveItem(index, value)} onRemove={() => onRemoveItem(index)} />
-                ))}
-
-                <div>
-                    <Button size="sm" onClick={onAddItem}>
-                        Add item
-                    </Button>
-                </div>
-            </div>
-        </>
-    );
-};
-
-const ContentTextRowEdit = ({ value, onSave, onRemove }: { value: string; onSave: (value: string) => void; onRemove: () => void }) => {
-    const { t } = useTranslations();
-    const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
-
-    const handleSave: FormEventHandler<HTMLFormElement> = (event) => {
-        event.preventDefault();
-        onSave((event.target as unknown as { text: HTMLInputElement }).text.value);
-    };
-
-    const handleModalCancelClick = () => {
-        setIsDeleteAlertOpen(false);
-    };
-
-    const handleDropdownDeleteClick = () => {
-        setIsDeleteAlertOpen(true);
-    };
-
-    return (
-        <div className="flex relative">
-            <form onSubmit={handleSave} className="flex w-full">
-                <TextInput defaultValue={value} name="text" placeholder="My Text" />
-
-                <div className="absolute top-0 bottom-0 right-2 flex items-center justify-center gap-2">
-                    <Button size="sm" type="submit">
-                        Save
-                    </Button>
-
-                    <Button size="sm" variant="destructive" onClick={handleDropdownDeleteClick}>
-                        Delete
-                    </Button>
-                </div>
-            </form>
-
-            <AlertDialog open={isDeleteAlertOpen}>
-                <AlertDialogContent onClick={(event) => event.stopPropagation()}>
-                    <AlertDialogHeader>
-                        <AlertDialogTitle>{t('deleteItemQuestion')}</AlertDialogTitle>
-                        <AlertDialogDescription>{t('areYouSureDeleteItem')}</AlertDialogDescription>
-                    </AlertDialogHeader>
-                    <AlertDialogFooter>
-                        <AlertDialogCancel onClick={handleModalCancelClick}>{t('cancel')}</AlertDialogCancel>
-                        <AlertDialogAction onClick={onRemove} className={buttonVariants({ variant: 'destructive' })}>
-                            {t('delete')}
-                        </AlertDialogAction>
-                    </AlertDialogFooter>
-                </AlertDialogContent>
-            </AlertDialog>
+            {isEditing ? (
+                blockSettings.type === 'text' ? (
+                    <ContentTextsEdit values={blockSettings.contentTexts} onSaveItem={handleTextChange} onAddItem={handleAddText} onRemoveItem={handleRemoveText} />
+                ) : (
+                    <ContentAssetsEdit
+                        appBridge={appBridge}
+                        values={blockAssets.items}
+                        onSaveItem={(index, asset) => {
+                            // TODO
+                        }}
+                        onAddItem={(asset) => addAssetIdsToKey('items', [asset.id])}
+                        onRemoveItem={(index) => deleteAssetIdsFromKey('items', [blockAssets.items[index].id])}
+                    />
+                )
+            ) : null}
         </div>
     );
 };

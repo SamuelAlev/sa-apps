@@ -259,6 +259,9 @@ importers:
       '@sa-apps/button':
         specifier: workspace:^
         version: link:../../packages/button
+      '@sa-apps/dropzone':
+        specifier: workspace:^
+        version: link:../../packages/dropzone
       '@sa-apps/i18n':
         specifier: workspace:*
         version: link:../../packages/i18n

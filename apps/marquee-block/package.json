@@ -19,6 +19,7 @@
         "@frontify/guideline-blocks-settings": "^0.34.10",
         "@sa-apps/alert-dialog": "workspace:^",
         "@sa-apps/button": "workspace:^",
+        "@sa-apps/dropzone": "workspace:^",
         "@sa-apps/i18n": "workspace:*",
         "@sa-apps/text-input": "workspace:^",
         "@sa-apps/tracking": "workspace:*",

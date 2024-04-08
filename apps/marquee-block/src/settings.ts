@@ -6,16 +6,20 @@ import packageJson from '../package.json';
 export const settings = defineSettings({
     main: [
         {
-            id: 'marquee',
+            id: 'type',
             type: 'dropdown',
-            defaultValue: 'marquee',
+            defaultValue: 'asset',
             size: 'large',
-            disabled: true,
             choices: [
                 {
-                    value: 'marquee',
+                    value: 'asset',
                     icon: 'Icon',
-                    label: 'Marquee',
+                    label: 'Asset',
+                },
+                {
+                    value: 'text',
+                    icon: 'Icon',
+                    label: 'Text',
                 },
             ],
         },
@@ -152,6 +156,66 @@ export const settings = defineSettings({
                 },
             ],
             off: [],
+        },
+        {
+            id: 'borderRadiusCustomEnabled',
+            label: 'Corner radius',
+            type: 'switch',
+            defaultValue: false,
+            switchLabel: 'Custom',
+            on: [
+                {
+                    id: 'borderRadiusMultiInput',
+                    type: 'multiInput',
+                    blocks: [
+                        {
+                            id: 'borderRadiusCustomTopLeft',
+                            type: 'input',
+                            label: 'Top',
+                            placeholder: '8px',
+                            onChange: (bundle) => appendUnit(bundle, 'borderRadiusTopLeft'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'borderRadiusCustomTopRight',
+                            type: 'input',
+                            label: 'Left',
+                            placeholder: '8px',
+                            onChange: (bundle) => appendUnit(bundle, 'borderRadiusCustomTopRight'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'borderRadiusCustomBottomLeft',
+                            type: 'input',
+                            label: 'Right',
+                            placeholder: '8px',
+                            onChange: (bundle) => appendUnit(bundle, 'borderRadiusCustomBottomLeft'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                        {
+                            id: 'borderRadiusCustomBottomRight',
+                            type: 'input',
+                            label: 'Bottom',
+                            placeholder: '8px',
+                            onChange: (bundle) => appendUnit(bundle, 'borderRadiusCustomBottomRight'),
+                            rules: [numericalOrPixelRule, minimumPixelRule(0)],
+                        },
+                    ],
+                },
+            ],
+            off: [
+                {
+                    id: 'borderRadiusSimple',
+                    type: 'slider',
+                    defaultValue: '8px',
+                    choices: [
+                        { value: '0px', label: 'None' },
+                        { value: '4px', label: 'S' },
+                        { value: '8px', label: 'M' },
+                        { value: '12px', label: 'L' },
+                    ],
+                },
+            ],
         },
     ],
     informations: [
