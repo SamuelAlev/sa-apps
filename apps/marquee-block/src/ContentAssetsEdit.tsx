@@ -1,6 +1,7 @@
 import { type AppBridgeBlock, type Asset, AssetChooserObjectType, useAssetChooser } from '@frontify/app-bridge';
 import { ContentAssetsRowAdd } from './ContentAssetsRowAdd';
 import { ContentAssetsRowEdit } from './ContentAssetsRowEdit';
+import { useUploadFile } from './useUploadFile';
 
 type ContentAssetsEditProps = {
     appBridge: AppBridgeBlock;
@@ -8,21 +9,26 @@ type ContentAssetsEditProps = {
     contentTexts?: string[];
     onUpdateAsset: (index: number, value: Asset) => Promise<void>;
     onUpdateContentText: (index: number, value: string) => Promise<void>;
-    onAddItem: (value: Asset) => Promise<void>;
+    onAddItem: (assetId: number) => Promise<void>;
     onRemoveItem: (index: number) => Promise<void>;
 };
 
 export const ContentAssetsEdit = ({ appBridge, assets, contentTexts, onUpdateAsset, onUpdateContentText, onAddItem, onRemoveItem }: ContentAssetsEditProps) => {
     const { openAssetChooser, closeAssetChooser } = useAssetChooser(appBridge);
+    const { uploadFile, loading: loadingUpload } = useUploadFile(async (assetId) => await onAddItem(assetId));
 
     const handleBrowseAsset = () => {
         openAssetChooser(
             (selectedAssets) => {
-                onAddItem(selectedAssets[0]);
+                onAddItem(selectedAssets[0].id);
                 closeAssetChooser();
             },
             { objectTypes: [AssetChooserObjectType.ImageVideo] },
         );
+    };
+
+    const handleUploadAsset = (files: File | FileList) => {
+        uploadFile(files);
     };
 
     return (
@@ -38,7 +44,9 @@ export const ContentAssetsEdit = ({ appBridge, assets, contentTexts, onUpdateAss
                     />
                 ))}
 
-                <ContentAssetsRowAdd onBrowseAssetClick={handleBrowseAsset} onUploadClick={() => {}} />
+                {loadingUpload && <div>Uploading...</div>}
+
+                <ContentAssetsRowAdd onBrowseAssetClick={handleBrowseAsset} onUploadClick={handleUploadAsset} />
             </div>
         </>
     );

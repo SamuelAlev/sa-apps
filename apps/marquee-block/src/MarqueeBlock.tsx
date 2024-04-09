@@ -86,9 +86,9 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
                             cloneContent[index] = contentText;
                             setBlockSettings({ contentTexts: cloneContent });
                         }}
-                        onAddItem={async (asset) => {
+                        onAddItem={async (assetId) => {
                             await setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), ''] });
-                            await addAssetIdsToKey('items', [asset.id]);
+                            await addAssetIdsToKey('items', [assetId]);
                         }}
                         onRemoveItem={async (index) => {
                             const cloneContent = [...(blockSettings.contentTexts ?? [])];

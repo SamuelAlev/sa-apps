@@ -1,14 +1,17 @@
 import { Dropzone } from '@sa-apps/dropzone';
+import type { ChangeEvent } from 'react';
 
 type ContentAssetsRowAddProps = {
-    onUploadClick?: () => void;
+    onUploadClick: (file: File) => void;
     onBrowseAssetClick: () => void;
 };
 
 export const ContentAssetsRowAdd = ({ onUploadClick, onBrowseAssetClick }: ContentAssetsRowAddProps) => {
-    const handleUploadClick = () => {
-        alert('Not yet implemented 😢\nPlease the "Browse" button instead.');
-        onUploadClick?.();
+    const handleUploadClick = (event: ChangeEvent<HTMLInputElement>) => {
+        const file = event.currentTarget.files?.[0];
+        if (file) {
+            onUploadClick(file);
+        }
     };
 
     const handleBrowseAssetClick = () => {
