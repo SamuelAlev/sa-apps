@@ -61,7 +61,7 @@ export type MasonryItemProps = MasonryItem & {
     onContentChange: (content: string) => void;
     onStyleChange: (style: MasonryItem['style']) => void;
     onDeleteClick?: () => void;
-    onUploadClick: () => void;
+    onUploadedFile: (assetId: number) => Promise<void>;
     onUnlinkAsset: () => void;
     onBrowseAssetClick: () => void;
 };

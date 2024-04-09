@@ -14,7 +14,7 @@ import type { BlockSettings, MasonryItem as MasonryItemType } from './types';
 
 export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
-    const { blockAssets, updateAssetIdsFromKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge);
+    const { blockAssets, updateAssetIdsFromKey, deleteAssetIdsFromKey, addAssetIdsToKey } = useBlockAssets(appBridge);
     const { openAssetChooser, closeAssetChooser } = useAssetChooser(appBridge);
     const isEditing = useEditorState(appBridge);
 
@@ -77,9 +77,21 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
         ).catch(() => console.error("Couldn't unlink the asset from the block"));
     };
 
-    const handleUploadClick = (id: string) => {
-        // TODO
-        console.log(id);
+    const handleUploadedFile = async (id: string, assetId: number) => {
+        if (masonryItems.findIndex((masonryItem) => masonryItem.id === id) !== -1) {
+            await updateAssetIdsFromKey(`masonry-item-${id}`, [assetId]).catch(() => console.error("Couldn't add the asset to the block"));
+        } else {
+            const newMasonryItems = structuredClone(masonryItems);
+            newMasonryItems.push({ ...DEFAULT_MASONRY_ITEM, id });
+            await setBlockSettings({
+                ...blockSettings,
+                masonryItems: newMasonryItems,
+            }).catch(() => console.error("Couldn't save the block setttings"));
+
+            await addAssetIdsToKey(`masonry-item-${id}`, [assetId]).catch(() => console.error("Couldn't add the asset to the block"));
+        }
+
+        trackEvent('uploaded file');
     };
 
     const handleBrowseAssetClick = (id: string) => {
@@ -131,7 +143,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                                 onContentChange={(value) => handleContentChange(masonryItem.id, value)}
                                 onStyleChange={(value) => handleStyleChange(masonryItem.id, value)}
                                 onBrowseAssetClick={() => handleBrowseAssetClick(masonryItem.id)}
-                                onUploadClick={() => handleUploadClick(masonryItem.id)}
+                                onUploadedFile={async (assetId) => await handleUploadedFile(masonryItem.id, assetId)}
                                 onUnlinkAsset={() => handleUnlinkAssetClick(masonryItem.id)}
                                 onDeleteClick={() => handleDeleteClick(masonryItem.id)}
                                 readonly={!isEditing}
@@ -152,7 +164,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
                             id={getNewMasonryItemId()}
                             onContentChange={(value) => handleContentChange(getNewMasonryItemId(), value)}
                             onBrowseAssetClick={() => handleBrowseAssetClick(getNewMasonryItemId())}
-                            onUploadClick={() => handleUploadClick(getNewMasonryItemId())}
+                            onUploadedFile={async (assetId) => await handleUploadedFile(getNewMasonryItemId(), assetId)}
                             onStyleChange={() => null}
                             onUnlinkAsset={() => null}
                             readonly={false}
