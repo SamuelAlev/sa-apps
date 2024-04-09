@@ -1,51 +1,61 @@
 import type { Asset } from '@frontify/app-bridge';
-import { useState, type FormEventHandler } from 'react';
 import {
     AlertDialog,
-    AlertDialogHeader,
-    AlertDialogDescription,
-    AlertDialogFooter,
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
     AlertDialogTitle,
 } from '@sa-apps/alert-dialog';
 import { Button, buttonVariants } from '@sa-apps/button';
 import { useTranslations } from '@sa-apps/i18n';
 import { TextInput } from '@sa-apps/text-input';
+import { type FormEventHandler, useState } from 'react';
 import { prepareImageUrl } from './helpers';
 
 type ContentAssetsRowEditProps = {
-    value: Asset;
-    onSave: () => void;
+    asset: Asset;
+    contentText?: string;
+    onUpdateAsset: (asset: Asset) => void;
+    onUpdateContentText: (contentText: string) => void;
     onRemove: () => void;
 };
 
-export const ContentAssetsRowEdit = ({ value, onSave, onRemove }: ContentAssetsRowEditProps) => {
+export const ContentAssetsRowEdit = ({ asset, contentText, onUpdateAsset, onUpdateContentText, onRemove }: ContentAssetsRowEditProps) => {
     const { t } = useTranslations();
     const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
 
-    const handleSave: FormEventHandler<HTMLFormElement> = (event) => {
+    const handleUpdateContentText: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
+        onUpdateContentText((event.target as unknown as { contentText: HTMLInputElement }).contentText.value);
     };
 
     const handleModalCancelClick = () => {
         setIsDeleteAlertOpen(false);
     };
 
-    const handleDropdownDeleteClick = () => {
+    const handleFirstDeleteClick = () => {
         setIsDeleteAlertOpen(true);
+    };
+
+    const handleSecondDeleteClick = () => {
+        onRemove();
+        setIsDeleteAlertOpen(false);
     };
 
     return (
         <div className="flex relative">
-            <form onSubmit={handleSave} className="flex w-full">
-                <div className="h-48">
-                    <img draggable={false} className="h-full w-full object-cover" src={prepareImageUrl(value.previewUrl)} alt="TODO" />
+            <form onSubmit={handleUpdateContentText} className="grid w-full gap-6 items-center grid-cols-[140px_minmax(200px,1fr)] h-48">
+                <img draggable={false} className="h-full w-full object-contain" src={prepareImageUrl(asset.previewUrl)} alt={contentText} />
+
+                <div className="w-full flex">
+                    <TextInput defaultValue={contentText} name="contentText" placeholder="Content text (alt)" />
                 </div>
 
                 <div className="absolute top-0 bottom-0 right-2 flex items-center justify-center gap-2">
-                    <Button size="sm" variant="destructive" onClick={handleDropdownDeleteClick}>
+                    <Button size="sm" variant="destructive" onClick={handleFirstDeleteClick}>
                         Delete
                     </Button>
 
@@ -63,7 +73,7 @@ export const ContentAssetsRowEdit = ({ value, onSave, onRemove }: ContentAssetsR
                     </AlertDialogHeader>
                     <AlertDialogFooter>
                         <AlertDialogCancel onClick={handleModalCancelClick}>{t('cancel')}</AlertDialogCancel>
-                        <AlertDialogAction onClick={onRemove} className={buttonVariants({ variant: 'destructive' })}>
+                        <AlertDialogAction onClick={handleSecondDeleteClick} className={buttonVariants({ variant: 'destructive' })}>
                             {t('delete')}
                         </AlertDialogAction>
                     </AlertDialogFooter>

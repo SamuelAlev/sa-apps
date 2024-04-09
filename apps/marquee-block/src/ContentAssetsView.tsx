@@ -3,14 +3,15 @@ import { cn } from '@sa-apps/utilities';
 import { prepareImageUrl } from './helpers';
 
 type ContentTextViewProps = {
-    values?: Asset[];
+    assets?: Asset[];
+    contentTexts?: string[];
     direction: 'horizontal' | 'vertical';
 };
 
-export const ContentAssetsView = ({ values, direction }: ContentTextViewProps) => {
-    return values?.map((value) => (
+export const ContentAssetsView = ({ assets, contentTexts, direction }: ContentTextViewProps) => {
+    return assets?.map((value, index) => (
         <div className={cn('flex h-[--height]', direction === 'horizontal' ? 'mx-6' : 'my-6')}>
-            <img draggable={false} className="h-full flex-grow select-none overflow-hidden object-cover" src={prepareImageUrl(value.previewUrl)} alt="TODO" />
+            <img draggable={false} className="h-full flex-grow select-none overflow-hidden object-cover" src={prepareImageUrl(value.previewUrl)} alt={contentTexts?.[index]} />
         </div>
     ));
 };

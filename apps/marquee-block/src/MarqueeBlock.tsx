@@ -1,19 +1,19 @@
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
+import { trackEvent } from '@sa-apps/tracking';
 import { cn } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 import Marquee from 'react-fast-marquee';
-import { trackEvent } from '@sa-apps/tracking';
 
-import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
-import { ContentTextsEdit } from './ContentTextsEdit';
-import type { BlockSettings } from './types';
-import { getMarqueeRootStyle } from './helpers';
-import { borderClasses, borderRadiusClasses } from './constants';
-import { ContentTextsView } from './ContentTextsView';
 import { ContentAssetsEdit } from './ContentAssetsEdit';
 import { ContentAssetsView } from './ContentAssetsView';
+import { ContentTextsEdit } from './ContentTextsEdit';
+import { ContentTextsView } from './ContentTextsView';
+import { borderClasses, borderRadiusClasses } from './constants';
+import { getMarqueeRootStyle } from './helpers';
+import type { BlockSettings } from './types';
 import { useBlockAssets } from './utilities/useBlockAssets';
+import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
 
 export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
@@ -62,9 +62,9 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
                     pauseOnClick={blockSettings.pauseClick}
                 >
                     {blockSettings.type === 'text' ? (
-                        <ContentTextsView values={blockSettings.contentTexts} direction={blockSettings.directionHV} />
+                        <ContentTextsView contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
                     ) : (
-                        <ContentAssetsView values={blockAssets.items} direction={blockSettings.directionHV} />
+                        <ContentAssetsView assets={blockAssets.items} contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
                     )}
                 </Marquee>
                 <ResizeHandle />
@@ -72,16 +72,30 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
 
             {isEditing ? (
                 blockSettings.type === 'text' ? (
-                    <ContentTextsEdit values={blockSettings.contentTexts} onSaveItem={handleTextChange} onAddItem={handleAddText} onRemoveItem={handleRemoveText} />
+                    <ContentTextsEdit values={blockSettings.contentTexts} onUpdateItem={handleTextChange} onAddItem={handleAddText} onRemoveItem={handleRemoveText} />
                 ) : (
                     <ContentAssetsEdit
                         appBridge={appBridge}
-                        values={blockAssets.items}
-                        onSaveItem={(index, asset) => {
+                        assets={blockAssets.items}
+                        contentTexts={blockSettings.contentTexts}
+                        onUpdateAsset={async (index, asset) => {
                             // TODO
                         }}
-                        onAddItem={(asset) => addAssetIdsToKey('items', [asset.id])}
-                        onRemoveItem={(index) => deleteAssetIdsFromKey('items', [blockAssets.items[index].id])}
+                        onUpdateContentText={async (index, contentText) => {
+                            const cloneContent = [...(blockSettings.contentTexts ?? [])];
+                            cloneContent[index] = contentText;
+                            setBlockSettings({ contentTexts: cloneContent });
+                        }}
+                        onAddItem={async (asset) => {
+                            await setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), ''] });
+                            await addAssetIdsToKey('items', [asset.id]);
+                        }}
+                        onRemoveItem={async (index) => {
+                            const cloneContent = [...(blockSettings.contentTexts ?? [])];
+                            cloneContent.splice(index, 1);
+                            setBlockSettings({ contentTexts: cloneContent });
+                            await deleteAssetIdsFromKey('items', [blockAssets.items[index].id]);
+                        }}
                     />
                 )
             ) : null}

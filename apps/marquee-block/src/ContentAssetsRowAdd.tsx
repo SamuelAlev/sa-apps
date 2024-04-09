@@ -16,7 +16,7 @@ export const ContentAssetsRowAdd = ({ onUploadClick, onBrowseAssetClick }: Conte
     };
 
     return (
-        <div className="flex w-full">
+        <div className="flex h-[120px] min-h-[120px] w-full items-center justify-center">
             <Dropzone onUploadClick={handleUploadClick} onBrowseAssetClick={handleBrowseAssetClick} />
         </div>
     );

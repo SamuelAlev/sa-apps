@@ -1,31 +1,31 @@
-import { useState, type FormEventHandler } from 'react';
 import {
     AlertDialog,
-    AlertDialogHeader,
-    AlertDialogDescription,
-    AlertDialogFooter,
     AlertDialogAction,
     AlertDialogCancel,
     AlertDialogContent,
+    AlertDialogDescription,
+    AlertDialogFooter,
+    AlertDialogHeader,
     AlertDialogTitle,
 } from '@sa-apps/alert-dialog';
 import { Button, buttonVariants } from '@sa-apps/button';
 import { useTranslations } from '@sa-apps/i18n';
 import { TextInput } from '@sa-apps/text-input';
+import { type FormEventHandler, useState } from 'react';
 
 type ContentTextRowEditProps = {
     value: string;
-    onSave: (value: string) => void;
+    onUpdate: (value: string) => void;
     onRemove: () => void;
 };
 
-export const ContentTextsRowEdit = ({ value, onSave, onRemove }: ContentTextRowEditProps) => {
+export const ContentTextsRowEdit = ({ value, onUpdate, onRemove }: ContentTextRowEditProps) => {
     const { t } = useTranslations();
     const [isDeleteAlertOpen, setIsDeleteAlertOpen] = useState(false);
 
     const handleSave: FormEventHandler<HTMLFormElement> = (event) => {
         event.preventDefault();
-        onSave((event.target as unknown as { text: HTMLInputElement }).text.value);
+        onUpdate((event.target as unknown as { text: HTMLInputElement }).text.value);
     };
 
     const handleModalCancelClick = () => {

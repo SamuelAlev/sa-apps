@@ -1,16 +1,18 @@
-import { type AppBridgeBlock, useAssetChooser, type Asset, AssetChooserObjectType } from '@frontify/app-bridge';
+import { type AppBridgeBlock, type Asset, AssetChooserObjectType, useAssetChooser } from '@frontify/app-bridge';
 import { ContentAssetsRowAdd } from './ContentAssetsRowAdd';
 import { ContentAssetsRowEdit } from './ContentAssetsRowEdit';
 
 type ContentAssetsEditProps = {
     appBridge: AppBridgeBlock;
-    values?: Asset[];
-    onSaveItem: (index: number, value: Asset) => void;
-    onAddItem: (value: Asset) => void;
-    onRemoveItem: (index: number) => void;
+    assets?: Asset[];
+    contentTexts?: string[];
+    onUpdateAsset: (index: number, value: Asset) => Promise<void>;
+    onUpdateContentText: (index: number, value: string) => Promise<void>;
+    onAddItem: (value: Asset) => Promise<void>;
+    onRemoveItem: (index: number) => Promise<void>;
 };
 
-export const ContentAssetsEdit = ({ appBridge, values, onSaveItem, onAddItem, onRemoveItem }: ContentAssetsEditProps) => {
+export const ContentAssetsEdit = ({ appBridge, assets, contentTexts, onUpdateAsset, onUpdateContentText, onAddItem, onRemoveItem }: ContentAssetsEditProps) => {
     const { openAssetChooser, closeAssetChooser } = useAssetChooser(appBridge);
 
     const handleBrowseAsset = () => {
@@ -26,8 +28,14 @@ export const ContentAssetsEdit = ({ appBridge, values, onSaveItem, onAddItem, on
     return (
         <>
             <div className="pt-8 flex flex-col gap-4 w-full">
-                {values?.map((value, index) => (
-                    <ContentAssetsRowEdit value={value} onSave={onSaveItem} onRemove={() => onRemoveItem(index)} />
+                {assets?.map((asset, index) => (
+                    <ContentAssetsRowEdit
+                        asset={asset}
+                        contentText={contentTexts?.[index]}
+                        onUpdateAsset={(asset) => onUpdateAsset(index, asset)}
+                        onUpdateContentText={(contentText) => onUpdateContentText(index, contentText)}
+                        onRemove={() => onRemoveItem(index)}
+                    />
                 ))}
 
                 <ContentAssetsRowAdd onBrowseAssetClick={handleBrowseAsset} onUploadClick={() => {}} />
