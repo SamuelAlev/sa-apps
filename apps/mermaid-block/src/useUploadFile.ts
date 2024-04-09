@@ -1,8 +1,5 @@
-import { useAssetUpload, type useBlockAssets } from '@frontify/app-bridge';
+import { useAssetUpload } from '@frontify/app-bridge';
 import { useEffect, useState } from 'react';
-import { MERMAID_FILE_ID } from './settings';
-
-type UpdateAssetIdsFromKeyFn = ReturnType<typeof useBlockAssets>['updateAssetIdsFromKey'];
 
 // Have to pass the function as an argument because it also update the block assets state.
 export const useUploadFile = (callback: (assetId: number) => Promise<void>) => {
