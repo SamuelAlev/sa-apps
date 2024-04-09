@@ -1,8 +1,8 @@
 import { type AppBridgeBlock, type Asset, AssetChooserObjectType, useAssetChooser } from '@frontify/app-bridge';
+import { trackEvent } from '@sa-apps/tracking';
 import { ContentAssetsRowAdd } from './ContentAssetsRowAdd';
 import { ContentAssetsRowEdit } from './ContentAssetsRowEdit';
 import { useUploadFile } from './useUploadFile';
-import { trackEvent } from '@sa-apps/tracking';
 
 type ContentAssetsEditProps = {
     appBridge: AppBridgeBlock;
