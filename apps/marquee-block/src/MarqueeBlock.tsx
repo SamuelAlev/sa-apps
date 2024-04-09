@@ -17,7 +17,7 @@ import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
 
 export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
-    const { blockAssets, updateAssetIdsFromKey, addAssetIdsToKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge, { enabled: blockSettings.type === 'asset' });
+    const { blockAssets, addAssetIdsToKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge, { enabled: blockSettings.type === 'asset' });
     const isEditing = useEditorState(appBridge);
 
     const handleTextChange = (index: number, value: string) => {
@@ -30,10 +30,12 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
         const cloneContent = [...(blockSettings.contentTexts ?? [])];
         cloneContent.splice(index, 1);
         setBlockSettings({ contentTexts: cloneContent });
+        trackEvent('deleted item');
     };
 
     const handleAddText = (value: string) => {
         setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), value] });
+        trackEvent('added item');
     };
 
     const handleHeightChange = (height: number) => {
@@ -89,12 +91,14 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
                         onAddItem={async (assetId) => {
                             await setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), ''] });
                             await addAssetIdsToKey('items', [assetId]);
+                            trackEvent('added item');
                         }}
                         onRemoveItem={async (index) => {
                             const cloneContent = [...(blockSettings.contentTexts ?? [])];
                             cloneContent.splice(index, 1);
                             setBlockSettings({ contentTexts: cloneContent });
                             await deleteAssetIdsFromKey('items', [blockAssets.items[index].id]);
+                            trackEvent('deleted item');
                         }}
                     />
                 )

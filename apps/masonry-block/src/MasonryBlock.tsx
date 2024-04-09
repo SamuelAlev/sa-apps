@@ -107,6 +107,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
 
                 updateAssetIdsFromKey(`masonry-item-${id}`, [result[0].id]).catch(() => console.error("Couldn't add the asset to the block"));
                 closeAssetChooser();
+                trackEvent('chose asset');
             },
             { selectedValueId: blockAssets[`masonry-item-${id}`]?.[0]?.id },
         );

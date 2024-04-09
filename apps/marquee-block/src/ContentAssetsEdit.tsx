@@ -2,6 +2,7 @@ import { type AppBridgeBlock, type Asset, AssetChooserObjectType, useAssetChoose
 import { ContentAssetsRowAdd } from './ContentAssetsRowAdd';
 import { ContentAssetsRowEdit } from './ContentAssetsRowEdit';
 import { useUploadFile } from './useUploadFile';
+import { trackEvent } from '@sa-apps/tracking';
 
 type ContentAssetsEditProps = {
     appBridge: AppBridgeBlock;
@@ -22,13 +23,17 @@ export const ContentAssetsEdit = ({ appBridge, assets, contentTexts, onUpdateAss
             (selectedAssets) => {
                 onAddItem(selectedAssets[0].id);
                 closeAssetChooser();
+                trackEvent('chose asset');
             },
             { objectTypes: [AssetChooserObjectType.ImageVideo] },
         );
+
+        trackEvent('open asset chooser item');
     };
 
     const handleUploadAsset = (files: File | FileList) => {
         uploadFile(files);
+        trackEvent('uploaded file');
     };
 
     return (
