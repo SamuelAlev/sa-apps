@@ -41,6 +41,7 @@ export const ContentAssetsEdit = ({ appBridge, assets, contentTexts, onUpdateAss
             <div className="pt-8 flex flex-col gap-4 w-full">
                 {assets?.map((asset, index) => (
                     <ContentAssetsRowEdit
+                        key={asset.id}
                         asset={asset}
                         contentText={contentTexts?.[index]}
                         onUpdateAsset={(asset) => onUpdateAsset(index, asset)}

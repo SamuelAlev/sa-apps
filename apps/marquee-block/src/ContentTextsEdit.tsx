@@ -13,6 +13,7 @@ export const ContentTextsEdit = ({ values, onUpdateItem, onAddItem, onRemoveItem
         <>
             <div className="pt-8 flex flex-col gap-4 w-full">
                 {values?.map((value, index) => (
+                    // biome-ignore lint/correctness/useJsxKeyInIterable: no proper key
                     <ContentTextsRowEdit value={value} onUpdate={(value) => onUpdateItem(index, value)} onRemove={() => onRemoveItem(index)} />
                 ))}
 

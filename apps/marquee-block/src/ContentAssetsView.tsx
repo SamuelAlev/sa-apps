@@ -9,9 +9,9 @@ type ContentTextViewProps = {
 };
 
 export const ContentAssetsView = ({ assets, contentTexts, direction }: ContentTextViewProps) => {
-    return assets?.map((value, index) => (
-        <div className={cn('flex h-[--height]', direction === 'horizontal' ? 'mx-6' : 'my-6')}>
-            <img draggable={false} className="h-full flex-grow select-none overflow-hidden object-cover" src={prepareImageUrl(value.previewUrl)} alt={contentTexts?.[index]} />
+    return assets?.map((asset, index) => (
+        <div key={asset.id} className={cn('flex h-[--height]', direction === 'horizontal' ? 'mx-6' : 'my-6')}>
+            <img draggable={false} className="h-full flex-grow select-none overflow-hidden object-cover" src={prepareImageUrl(asset.previewUrl)} alt={contentTexts?.[index]} />
         </div>
     ));
 };
