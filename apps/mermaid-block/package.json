@@ -17,8 +17,10 @@
     "dependencies": {
         "@frontify/app-bridge": "^3.5.8",
         "@frontify/guideline-blocks-settings": "^0.34.11",
+        "@sa-apps/blocks": "workspace:^",
         "@sa-apps/button": "workspace:^",
         "@sa-apps/i18n": "workspace:*",
+        "@sa-apps/online-users": "workspace:^",
         "@sa-apps/tracking": "workspace:*",
         "@sa-apps/utilities": "workspace:*",
         "lucide-react": "^0.370.0",

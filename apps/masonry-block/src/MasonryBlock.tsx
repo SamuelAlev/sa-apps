@@ -3,6 +3,8 @@ import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, SwappableItem } from '@sa-apps/drag-and-drop';
 import { trackEvent } from '@sa-apps/tracking';
+import { useBlockFocus } from '@sa-apps/blocks';
+import { OnlineUsersProvider } from '@sa-apps/online-users';
 import { arraySwap } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 
@@ -17,6 +19,9 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
     const { blockAssets, updateAssetIdsFromKey, deleteAssetIdsFromKey, addAssetIdsToKey } = useBlockAssets(appBridge);
     const { openAssetChooser, closeAssetChooser } = useAssetChooser(appBridge);
     const isEditing = useEditorState(appBridge);
+
+    const isBlockFocused = useBlockFocus(appBridge);
+    const roomName = `mermaid-block-${appBridge.context('blockId').get()}`;
 
     const masonryItems: MasonryItemType[] = blockSettings.masonryItems ?? [];
     const isMasonryItemsEmpty = masonryItems.length === 0;
@@ -135,50 +140,59 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
 
     return (
         <div style={getMasonryRootStyles(blockSettings)} data-test-id="masonry-block">
-            <DragAndDropSortableContext items={masonryItems} strategy="rect-swapping" onDragEnd={handleDragEnd}>
-                <Masonry columnCount={Number.parseInt(blockSettings.columnsCountCustomEnabled ? blockSettings.columnsCountCustom : blockSettings.columnsCountSimple)}>
-                    {masonryItems.map((masonryItem) => (
-                        <SwappableItem key={masonryItem.id} id={masonryItem.id} disabled={!isEditing}>
+            <OnlineUsersProvider
+                visible={isEditing}
+                isUserVisible={isBlockFocused}
+                roomName={roomName}
+                // @ts-expect-error the hook makes a fetch request :(
+                user={{ name: window.application.sandbox.config.context.user.name, avatar: window.application.sandbox.config.context.user.preview_url_without_placeholder }}
+            >
+                {' '}
+                <DragAndDropSortableContext items={masonryItems} strategy="rect-swapping" onDragEnd={handleDragEnd}>
+                    <Masonry columnCount={Number.parseInt(blockSettings.columnsCountCustomEnabled ? blockSettings.columnsCountCustom : blockSettings.columnsCountSimple)}>
+                        {masonryItems.map((masonryItem) => (
+                            <SwappableItem key={masonryItem.id} id={masonryItem.id} disabled={!isEditing}>
+                                <MasonryItem
+                                    appBridge={appBridge}
+                                    onContentChange={(value) => handleContentChange(masonryItem.id, value)}
+                                    onStyleChange={(value) => handleStyleChange(masonryItem.id, value)}
+                                    onBrowseAssetClick={() => handleBrowseAssetClick(masonryItem.id)}
+                                    onUploadedFile={async (assetId) => await handleUploadedFile(masonryItem.id, assetId)}
+                                    onUnlinkAsset={() => handleUnlinkAssetClick(masonryItem.id)}
+                                    onDeleteClick={() => handleDeleteClick(masonryItem.id)}
+                                    readonly={!isEditing}
+                                    coverAsset={blockAssets[`masonry-item-${masonryItem.id}`]?.[0]}
+                                    showControls={blockSettings.itemsVideoControlsEnabled}
+                                    loopVideo={blockSettings.itemsVideoLoopEnabled}
+                                    autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
+                                    contentPosition={blockSettings.itemContentPosition}
+                                    boxShadow={blockSettings.itemsBoxShadow}
+                                    {...masonryItem}
+                                />
+                            </SwappableItem>
+                        ))}
+
+                        {(!isLastItemEmpty || isMasonryItemsEmpty) && isEditing && (
                             <MasonryItem
                                 appBridge={appBridge}
-                                onContentChange={(value) => handleContentChange(masonryItem.id, value)}
-                                onStyleChange={(value) => handleStyleChange(masonryItem.id, value)}
-                                onBrowseAssetClick={() => handleBrowseAssetClick(masonryItem.id)}
-                                onUploadedFile={async (assetId) => await handleUploadedFile(masonryItem.id, assetId)}
-                                onUnlinkAsset={() => handleUnlinkAssetClick(masonryItem.id)}
-                                onDeleteClick={() => handleDeleteClick(masonryItem.id)}
-                                readonly={!isEditing}
-                                coverAsset={blockAssets[`masonry-item-${masonryItem.id}`]?.[0]}
+                                id={getNewMasonryItemId()}
+                                onContentChange={(value) => handleContentChange(getNewMasonryItemId(), value)}
+                                onBrowseAssetClick={() => handleBrowseAssetClick(getNewMasonryItemId())}
+                                onUploadedFile={async (assetId) => await handleUploadedFile(getNewMasonryItemId(), assetId)}
+                                onStyleChange={() => null}
+                                onUnlinkAsset={() => null}
+                                readonly={false}
                                 showControls={blockSettings.itemsVideoControlsEnabled}
                                 loopVideo={blockSettings.itemsVideoLoopEnabled}
                                 autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
                                 contentPosition={blockSettings.itemContentPosition}
                                 boxShadow={blockSettings.itemsBoxShadow}
-                                {...masonryItem}
+                                {...DEFAULT_MASONRY_ITEM}
                             />
-                        </SwappableItem>
-                    ))}
-
-                    {(!isLastItemEmpty || isMasonryItemsEmpty) && isEditing && (
-                        <MasonryItem
-                            appBridge={appBridge}
-                            id={getNewMasonryItemId()}
-                            onContentChange={(value) => handleContentChange(getNewMasonryItemId(), value)}
-                            onBrowseAssetClick={() => handleBrowseAssetClick(getNewMasonryItemId())}
-                            onUploadedFile={async (assetId) => await handleUploadedFile(getNewMasonryItemId(), assetId)}
-                            onStyleChange={() => null}
-                            onUnlinkAsset={() => null}
-                            readonly={false}
-                            showControls={blockSettings.itemsVideoControlsEnabled}
-                            loopVideo={blockSettings.itemsVideoLoopEnabled}
-                            autoPlayEnabled={blockSettings.itemsVideoAutoPlayEnabled}
-                            contentPosition={blockSettings.itemContentPosition}
-                            boxShadow={blockSettings.itemsBoxShadow}
-                            {...DEFAULT_MASONRY_ITEM}
-                        />
-                    )}
-                </Masonry>
-            </DragAndDropSortableContext>
+                        )}
+                    </Masonry>
+                </DragAndDropSortableContext>
+            </OnlineUsersProvider>
         </div>
     );
 };
