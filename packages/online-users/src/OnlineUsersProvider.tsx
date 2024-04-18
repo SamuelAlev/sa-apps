@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState, type ReactNode } from 'react';
-import * as Y from 'yjs';
-import { WebrtcProvider } from 'y-webrtc';
 import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
-import { cn } from '@sa-apps/utilities';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@sa-apps/tooltip';
+import { cn } from '@sa-apps/utilities';
+import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { WebrtcProvider } from 'y-webrtc';
+import * as Y from 'yjs';
 
 type User = {
     name: string;

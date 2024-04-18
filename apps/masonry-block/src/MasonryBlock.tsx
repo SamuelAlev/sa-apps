@@ -1,10 +1,10 @@
 import { useAssetChooser, useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
+import { useBlockFocus } from '@sa-apps/blocks';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, SwappableItem } from '@sa-apps/drag-and-drop';
-import { trackEvent } from '@sa-apps/tracking';
-import { useBlockFocus } from '@sa-apps/blocks';
 import { OnlineUsersProvider } from '@sa-apps/online-users';
+import { trackEvent } from '@sa-apps/tracking';
 import { arraySwap } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 

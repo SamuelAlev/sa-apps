@@ -1,10 +1,10 @@
 import { useBlockAssets, useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
+import { useBlockFocus } from '@sa-apps/blocks';
 import { Button } from '@sa-apps/button';
 import { useTranslations } from '@sa-apps/i18n';
-import { trackEvent } from '@sa-apps/tracking';
-import { useBlockFocus } from '@sa-apps/blocks';
 import { OnlineUsersProvider } from '@sa-apps/online-users';
+import { trackEvent } from '@sa-apps/tracking';
 import { cn } from '@sa-apps/utilities';
 import { Loader2 } from 'lucide-react';
 import type mermaid from 'mermaid';

@@ -1,4 +1,4 @@
-import { type AppBridgeBlock } from '@frontify/app-bridge';
+import type { AppBridgeBlock } from '@frontify/app-bridge';
 import { useEffect, useState } from 'react';
 
 export const useBlockFocus = (appBridge: AppBridgeBlock) => {

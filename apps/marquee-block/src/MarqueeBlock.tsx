@@ -1,8 +1,8 @@
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
-import { trackEvent } from '@sa-apps/tracking';
 import { useBlockFocus } from '@sa-apps/blocks';
 import { OnlineUsersProvider } from '@sa-apps/online-users';
+import { trackEvent } from '@sa-apps/tracking';
 import { cn } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 import Marquee from 'react-fast-marquee';

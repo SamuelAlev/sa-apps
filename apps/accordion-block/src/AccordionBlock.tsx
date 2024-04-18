@@ -1,11 +1,11 @@
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import * as Accordion from '@radix-ui/react-accordion';
+import { useBlockFocus } from '@sa-apps/blocks';
 import type { DragEndEvent } from '@sa-apps/drag-and-drop';
 import { DragAndDropSortableContext, VerticalItem } from '@sa-apps/drag-and-drop';
-import { trackEvent } from '@sa-apps/tracking';
-import { useBlockFocus } from '@sa-apps/blocks';
 import { OnlineUsersProvider } from '@sa-apps/online-users';
+import { trackEvent } from '@sa-apps/tracking';
 import { arrayMove } from '@sa-apps/utilities';
 import type { ReactElement } from 'react';
 

@@ -1,9 +1,8 @@
 'use client';
 
-import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
 import * as TooltipPrimitive from '@radix-ui/react-tooltip';
-
 import { cn } from '@sa-apps/utilities';
+import { type ComponentPropsWithoutRef, type ElementRef, forwardRef } from 'react';
 
 export const TooltipProvider = TooltipPrimitive.Provider;
 TooltipProvider.displayName = 'SATooltipProvider';
