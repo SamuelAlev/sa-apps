@@ -18,7 +18,6 @@
         "@frontify/app-bridge": "^3.6.1",
         "@frontify/guideline-blocks-settings": "^0.34.11",
         "@sa-apps/alert-dialog": "workspace:*",
-        "@sa-apps/blocks": "workspace:^",
         "@sa-apps/button": "workspace:*",
         "@sa-apps/color-picker": "workspace:*",
         "@sa-apps/drag-and-drop": "workspace:*",

@@ -26,9 +26,6 @@ importers:
       '@sa-apps/alert-dialog':
         specifier: workspace:*
         version: link:../../packages/alert-dialog
-      '@sa-apps/blocks':
-        specifier: workspace:^
-        version: link:../../packages/blocks
       '@sa-apps/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -262,9 +259,6 @@ importers:
       '@sa-apps/alert-dialog':
         specifier: workspace:^
         version: link:../../packages/alert-dialog
-      '@sa-apps/blocks':
-        specifier: workspace:^
-        version: link:../../packages/blocks
       '@sa-apps/button':
         specifier: workspace:^
         version: link:../../packages/button
@@ -362,9 +356,6 @@ importers:
       '@sa-apps/alert-dialog':
         specifier: workspace:*
         version: link:../../packages/alert-dialog
-      '@sa-apps/blocks':
-        specifier: workspace:^
-        version: link:../../packages/blocks
       '@sa-apps/button':
         specifier: workspace:*
         version: link:../../packages/button
@@ -474,9 +465,6 @@ importers:
       '@frontify/guideline-blocks-settings':
         specifier: ^0.34.11
         version: 0.34.11(@frontify/app-bridge@3.6.1)(@types/react-dom@18.2.25)(@types/react@18.2.79)(@udecode/plate-common@31.3.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(tailwindcss@3.4.3)(zustand@4.5.2)
-      '@sa-apps/blocks':
-        specifier: workspace:^
-        version: link:../../packages/blocks
       '@sa-apps/button':
         specifier: workspace:^
         version: link:../../packages/button
@@ -661,36 +649,6 @@ importers:
       '@biomejs/biome':
         specifier: ^1.7.0
         version: 1.7.0
-      '@sa-apps/tailwind-config':
-        specifier: workspace:*
-        version: link:../tailwind-config
-      '@types/react':
-        specifier: ^18.2.79
-        version: 18.2.79
-      '@types/react-dom':
-        specifier: ^18.2.25
-        version: 18.2.25
-      react:
-        specifier: ^18.2.0
-        version: 18.2.0
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.2.0(react@18.2.0)
-      tailwindcss:
-        specifier: ^3.4.3
-        version: 3.4.3
-      typescript:
-        specifier: ^5.4.5
-        version: 5.4.5
-
-  packages/blocks:
-    devDependencies:
-      '@biomejs/biome':
-        specifier: ^1.7.0
-        version: 1.7.0
-      '@frontify/app-bridge':
-        specifier: ^3.6.1
-        version: 3.6.1(react-dom@18.2.0)(react@18.2.0)(sinon@17.0.1)
       '@sa-apps/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config
@@ -1079,6 +1037,12 @@ importers:
       '@biomejs/biome':
         specifier: ^1.7.0
         version: 1.7.0
+      '@frontify/app-bridge':
+        specifier: ^3.6.1
+        version: 3.6.1(react-dom@18.2.0)(react@18.2.0)(sinon@17.0.1)
+      '@frontify/guideline-blocks-settings':
+        specifier: ^0.34.11
+        version: 0.34.11(@frontify/app-bridge@3.6.1)(@types/react-dom@18.2.25)(@types/react@18.2.79)(@udecode/plate-common@31.3.2)(react-dom@18.2.0)(react-native@0.73.6)(react@18.2.0)(scheduler@0.23.0)(slate-history@0.100.0)(slate-hyperscript@0.100.0)(tailwindcss@3.4.3)(zustand@4.5.2)
       '@sa-apps/tailwind-config':
         specifier: workspace:*
         version: link:../tailwind-config

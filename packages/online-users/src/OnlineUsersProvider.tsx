@@ -1,9 +1,13 @@
+import { useEditorState } from '@frontify/app-bridge';
+import type { BlockProps } from '@frontify/guideline-blocks-settings';
 import { Avatar, AvatarFallback, AvatarImage } from '@sa-apps/avatar';
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@sa-apps/tooltip';
 import { cn } from '@sa-apps/utilities';
-import { type ReactNode, useEffect, useRef, useState } from 'react';
+import { type ComponentType, type FC, type ReactElement, type ReactNode, useEffect, useRef, useState, useSyncExternalStore } from 'react';
 import { WebrtcProvider } from 'y-webrtc';
 import * as Y from 'yjs';
+
+import { useBlockFocus } from './useBlockFocus';
 
 type User = {
     name: string;
@@ -79,4 +83,24 @@ export const OnlineUsersProvider = ({ visible, isUserVisible, roomName, children
             {children}
         </div>
     );
+};
+
+export const withOnlineUsers = (Component: ComponentType<BlockProps>): FC<BlockProps> => {
+    return function withOnlineUsers(props): ReactElement {
+        const isEditing = useEditorState(props.appBridge);
+        const isBlockFocused = useBlockFocus(props.appBridge);
+        const roomName = `mermaid-block-${props.appBridge.context('blockId').get()}`;
+
+        return (
+            <OnlineUsersProvider
+                visible={isEditing}
+                isUserVisible={isBlockFocused}
+                roomName={roomName}
+                // @ts-expect-error the hook makes a fetch request :(
+                user={{ name: window.application.sandbox.config.context?.user?.name, avatar: window.application.sandbox.config.context?.user?.preview_url_without_placeholder }}
+            >
+                <Component {...props} />
+            </OnlineUsersProvider>
+        );
+    };
 };

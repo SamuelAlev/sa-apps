@@ -1,6 +1,5 @@
 import { useBlockSettings, useEditorState } from '@frontify/app-bridge';
 import type { BlockProps } from '@frontify/guideline-blocks-settings';
-import { useBlockFocus } from '@sa-apps/blocks';
 import { OnlineUsersProvider } from '@sa-apps/online-users';
 import { trackEvent } from '@sa-apps/tracking';
 import { cn } from '@sa-apps/utilities';
@@ -21,9 +20,6 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
     const { blockAssets, addAssetIdsToKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge, { enabled: blockSettings.type === 'asset' });
     const isEditing = useEditorState(appBridge);
-
-    const isBlockFocused = useBlockFocus(appBridge);
-    const roomName = `mermaid-block-${appBridge.context('blockId').get()}`;
 
     const handleTextChange = (index: number, value: string) => {
         const cloneContent = [...(blockSettings.contentTexts ?? [])];
@@ -57,65 +53,57 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
 
     return (
         <div data-test-id="marquee-block" style={getMarqueeRootStyle(blockSettings)}>
-            <OnlineUsersProvider
-                visible={isEditing}
-                isUserVisible={isBlockFocused}
-                roomName={roomName}
-                // @ts-expect-error the hook makes a fetch request :(
-                user={{ name: window.application.sandbox.config.context.user.name, avatar: window.application.sandbox.config.context.user.preview_url_without_placeholder }}
-            >
-                <ResizeWrapper>
-                    <Marquee
-                        style={{ height: `${height}px` }}
-                        className={cn('overflow-y-hidden h-[--height] [&_.rfm-child]:flex', borderClasses, borderRadiusClasses)}
-                        loop={0}
-                        autoFill={blockSettings.autoFill}
-                        speed={blockSettings.speed ? Number.parseInt(blockSettings.speed) : undefined}
-                        direction={blockSettings.directionHV === 'horizontal' ? blockSettings.directionH : blockSettings.directionV}
-                        pauseOnHover={blockSettings.pauseHover}
-                        pauseOnClick={blockSettings.pauseClick}
-                    >
-                        {blockSettings.type === 'text' ? (
-                            <ContentTextsView contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
-                        ) : (
-                            <ContentAssetsView assets={blockAssets.items} contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
-                        )}
-                    </Marquee>
-                    <ResizeHandle />
-                </ResizeWrapper>
-
-                {isEditing ? (
-                    blockSettings.type === 'text' ? (
-                        <ContentTextsEdit values={blockSettings.contentTexts} onUpdateItem={handleTextChange} onAddItem={handleAddText} onRemoveItem={handleRemoveText} />
+            <ResizeWrapper>
+                <Marquee
+                    style={{ height: `${height}px` }}
+                    className={cn('overflow-y-hidden h-[--height] [&_.rfm-child]:flex', borderClasses, borderRadiusClasses)}
+                    loop={0}
+                    autoFill={blockSettings.autoFill}
+                    speed={blockSettings.speed ? Number.parseInt(blockSettings.speed) : undefined}
+                    direction={blockSettings.directionHV === 'horizontal' ? blockSettings.directionH : blockSettings.directionV}
+                    pauseOnHover={blockSettings.pauseHover}
+                    pauseOnClick={blockSettings.pauseClick}
+                >
+                    {blockSettings.type === 'text' ? (
+                        <ContentTextsView contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
                     ) : (
-                        <ContentAssetsEdit
-                            appBridge={appBridge}
-                            assets={blockAssets.items}
-                            contentTexts={blockSettings.contentTexts}
-                            onUpdateAsset={async (index, asset) => {
-                                // TODO
-                            }}
-                            onUpdateContentText={async (index, contentText) => {
-                                const cloneContent = [...(blockSettings.contentTexts ?? [])];
-                                cloneContent[index] = contentText;
-                                setBlockSettings({ contentTexts: cloneContent });
-                            }}
-                            onAddItem={async (assetId) => {
-                                await setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), ''] });
-                                await addAssetIdsToKey('items', [assetId]);
-                                trackEvent('added item');
-                            }}
-                            onRemoveItem={async (index) => {
-                                const cloneContent = [...(blockSettings.contentTexts ?? [])];
-                                cloneContent.splice(index, 1);
-                                setBlockSettings({ contentTexts: cloneContent });
-                                await deleteAssetIdsFromKey('items', [blockAssets.items[index].id]);
-                                trackEvent('deleted item');
-                            }}
-                        />
-                    )
-                ) : null}
-            </OnlineUsersProvider>
+                        <ContentAssetsView assets={blockAssets.items} contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
+                    )}
+                </Marquee>
+                <ResizeHandle />
+            </ResizeWrapper>
+
+            {isEditing ? (
+                blockSettings.type === 'text' ? (
+                    <ContentTextsEdit values={blockSettings.contentTexts} onUpdateItem={handleTextChange} onAddItem={handleAddText} onRemoveItem={handleRemoveText} />
+                ) : (
+                    <ContentAssetsEdit
+                        appBridge={appBridge}
+                        assets={blockAssets.items}
+                        contentTexts={blockSettings.contentTexts}
+                        onUpdateAsset={async (index, asset) => {
+                            // TODO
+                        }}
+                        onUpdateContentText={async (index, contentText) => {
+                            const cloneContent = [...(blockSettings.contentTexts ?? [])];
+                            cloneContent[index] = contentText;
+                            setBlockSettings({ contentTexts: cloneContent });
+                        }}
+                        onAddItem={async (assetId) => {
+                            await setBlockSettings({ contentTexts: [...(blockSettings.contentTexts ?? []), ''] });
+                            await addAssetIdsToKey('items', [assetId]);
+                            trackEvent('added item');
+                        }}
+                        onRemoveItem={async (index) => {
+                            const cloneContent = [...(blockSettings.contentTexts ?? [])];
+                            cloneContent.splice(index, 1);
+                            setBlockSettings({ contentTexts: cloneContent });
+                            await deleteAssetIdsFromKey('items', [blockAssets.items[index].id]);
+                            trackEvent('deleted item');
+                        }}
+                    />
+                )
+            ) : null}
         </div>
     );
 };
