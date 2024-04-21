@@ -11,13 +11,13 @@
         "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
-        "@frontify/app-bridge": "^3.5.8 || ^4.0.0-alpha.0",
+        "@frontify/app-bridge": "^3.6.1 || ^4.0.0-alpha.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.7.0",
-        "@frontify/app-bridge": "^3.5.8",
+        "@frontify/app-bridge": "^3.6.1",
         "@sa-apps/tailwind-config": "workspace:*",
         "@types/react": "^18.2.79",
         "@types/react-dom": "^18.2.25",

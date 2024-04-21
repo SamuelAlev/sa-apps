@@ -15,7 +15,7 @@
         "test:watch": "vitest"
     },
     "dependencies": {
-        "@frontify/app-bridge": "^3.5.8",
+        "@frontify/app-bridge": "^3.6.1",
         "@frontify/guideline-blocks-settings": "^0.34.11",
         "@radix-ui/react-accordion": "^1.1.2",
         "@sa-apps/alert-dialog": "workspace:*",
@@ -32,13 +32,13 @@
         "@sa-apps/text-input": "workspace:*",
         "@sa-apps/tracking": "workspace:*",
         "@sa-apps/utilities": "workspace:*",
-        "lucide-react": "^0.370.0",
+        "lucide-react": "^0.372.0",
         "react": "^18.2.0",
         "react-dom": "^18.2.0"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.7.0",
-        "@frontify/frontify-cli": "^5.6.13",
+        "@frontify/frontify-cli": "^5.6.14",
         "@sa-apps/tailwind-config": "workspace:*",
         "@testing-library/react": "^15.0.2",
         "@types/react": "^18.2.79",
@@ -52,7 +52,7 @@
         "sinon": "^17.0.1",
         "tailwindcss": "^3.4.3",
         "typescript": "^5.4.5",
-        "vite": "^5.2.9",
+        "vite": "^5.2.10",
         "vitest": "^1.5.0"
     }
 }
