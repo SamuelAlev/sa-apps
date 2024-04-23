@@ -35,9 +35,7 @@ export const getPlugins = (appBridge: AppBridgeBlock): PluginComposer => {
         new ItalicPlugin(),
         new UnderlinePlugin(),
         new StrikethroughPlugin(),
-        // @ts-expect-error version missmatch?
         new LinkPlugin({ appBridge }),
-        // @ts-expect-error version missmatch?
         new ButtonPlugin({ appBridge }),
         new CodePlugin(),
     ]);
