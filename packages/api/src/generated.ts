@@ -580,6 +580,8 @@ export type Audio = Asset & Node & {
   status: AssetStatusType;
   /** List of `Tag` items linked to `Asset` */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Provides a `Url` for the custom user defined thumbnail or a system generated one when possible. */
+  thumbnailUrl?: Maybe<Scalars['Url']['output']>;
   /** Title of the `Asset`. */
   title: Scalars['String']['output'];
 };
@@ -1409,6 +1411,8 @@ export type Document = Asset & Node & {
   status: AssetStatusType;
   /** List of `Tag` items linked to `Asset` */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Provides a `Url` for the custom user defined thumbnail or a system generated one when possible. */
+  thumbnailUrl?: Maybe<Scalars['Url']['output']>;
   /** Title of the `Asset`. */
   title: Scalars['String']['output'];
   /** `Document` width in pixels. */
@@ -1444,8 +1448,8 @@ export type DocumentRelatedAssetsArgs = {
 export type DocumentLibrary = Library & Node & {
   __typename?: 'DocumentLibrary';
   /**
-   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
    */
   assetCount?: Maybe<Scalars['Int']['output']>;
   /** Search or list `Assets` in the `Library`/`Workspace`. */
@@ -1548,6 +1552,8 @@ export type EmbeddedContent = Asset & Node & {
   status: AssetStatusType;
   /** List of `Tag` items linked to `Asset` */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Provides a `Url` for the custom user defined thumbnail or a system generated one when possible. */
+  thumbnailUrl?: Maybe<Scalars['Url']['output']>;
   /** Title of the `Asset`. */
   title: Scalars['String']['output'];
 };
@@ -1632,6 +1638,8 @@ export type File = Asset & Node & {
   status: AssetStatusType;
   /** List of `Tag` items linked to `Asset` */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Provides a `Url` for the custom user defined thumbnail or a system generated one when possible. */
+  thumbnailUrl?: Maybe<Scalars['Url']['output']>;
   /** Title of the `Asset`. */
   title: Scalars['String']['output'];
 };
@@ -1740,8 +1748,8 @@ export type GuidelineLibraryPagesArgs = {
 export type IconLibrary = Library & Node & {
   __typename?: 'IconLibrary';
   /**
-   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
    */
   assetCount?: Maybe<Scalars['Int']['output']>;
   /** Search or list `Assets` in the `Library`/`Workspace`. */
@@ -1843,6 +1851,8 @@ export type Image = Asset & Node & {
   status: AssetStatusType;
   /** List of `Tag` items linked to `Asset` */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Provides a `Url` for the custom user defined thumbnail or a system generated one when possible. */
+  thumbnailUrl?: Maybe<Scalars['Url']['output']>;
   /** Title of the `Asset`. */
   title: Scalars['String']['output'];
   /** `Image` width in pixels. */
@@ -1911,8 +1921,8 @@ export type InviteProjectUserInput = {
 /** `LibraryInterface` for `Library` returnable types. */
 export type Library = {
   /**
-   * **DEPRECATED** Amount of `Assets` contained in this `Library`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Amount of `Assets` contained in this `Library`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
    */
   assetCount?: Maybe<Scalars['Int']['output']>;
   /** Search or list `Assets` in this `Library`. */
@@ -2115,8 +2125,8 @@ export type License = {
 export type LogoLibrary = Library & Node & {
   __typename?: 'LogoLibrary';
   /**
-   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
    */
   assetCount?: Maybe<Scalars['Int']['output']>;
   /** Search or list `Assets` in the `Library`/`Workspace`. */
@@ -2226,8 +2236,8 @@ export type MarkingTimeframeInput = {
 export type MediaLibrary = Library & Node & {
   __typename?: 'MediaLibrary';
   /**
-   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
    */
   assetCount?: Maybe<Scalars['Int']['output']>;
   /** Search or list `Assets` in the `Library`/`Workspace`. */
@@ -3460,6 +3470,8 @@ export type Video = Asset & Node & {
   status: AssetStatusType;
   /** List of `Tag` items linked to `Asset` */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Provides a `Url` for the custom user defined thumbnail or a system generated one when possible. */
+  thumbnailUrl?: Maybe<Scalars['Url']['output']>;
   /** Title of the `Asset`. */
   title: Scalars['String']['output'];
   /** `Video` width in pixels. */
@@ -3534,8 +3546,8 @@ export type WebhookItems = {
 export type Workspace = Node & {
   __typename?: 'Workspace';
   /**
-   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Amount of `Assets` contained in the `Library`/`Workspace`. This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `assets`.`total` instead. | Date: 2024-07-01T00:00:00.000+00:00
    */
   assetCount?: Maybe<Scalars['Int']['output']>;
   /** Search or list `Assets` in the `Library`/`Workspace`. */
