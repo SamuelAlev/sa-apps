@@ -57,7 +57,7 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
                     style={{ height: `${height}px`, transformStyle: 'preserve-3d' }}
                     tiltMaxAngleX={5}
                     tiltMaxAngleY={5}
-                    perspective={1500}
+                    perspective={1700}
                     transitionSpeed={50}
                     gyroscope={true}
                     className={cn('h-[--height] rounded-[inherit]', borderClasses, borderRadiusClasses)}
