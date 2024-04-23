@@ -1,7 +1,6 @@
+import { range } from '@sa-apps/utilities';
 import type { ReactElement, ReactNode } from 'react';
 import { Children } from 'react';
-
-import { range } from './utilities';
 
 type MasonryProps = {
     columnCount: number;

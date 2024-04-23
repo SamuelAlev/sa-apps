@@ -4,4 +4,5 @@ export * from './debounce';
 export * from './hex8ToRgbaObject';
 export * from './moveArray';
 export * from './os';
+export * from './range';
 export * from './rgbaObjectToHex8';
