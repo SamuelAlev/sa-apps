@@ -13,17 +13,17 @@ import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
 import { AssetAdd } from './AssetAdd';
 import { useUploadFile } from './useUploadFile';
 
-export const TiltImageBlock = ({ appBridge }: BlockProps): ReactElement => {
+export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement => {
     const [blockSettings, setBlockSettings] = useBlockSettings<BlockSettings>(appBridge);
     const { blockAssets, addAssetIdsToKey, deleteAssetIdsFromKey } = useBlockAssets(appBridge, { enabled: true });
     const { openAssetChooser, closeAssetChooser } = useAssetChooser(appBridge);
     const isEditing = useEditorState(appBridge);
-    const { uploadFile, loading: loadingUpload } = useUploadFile(async (assetId) => await addAssetIdsToKey('tilt-image', [assetId]));
+    const { uploadFile, loading: loadingUpload } = useUploadFile(async (assetId) => await addAssetIdsToKey('image-stack', [assetId]));
 
     const handleBrowseAsset = () => {
         openAssetChooser(
             async (selectedAssets) => {
-                await addAssetIdsToKey('tilt-image', [selectedAssets[0].id]);
+                await addAssetIdsToKey('image-stack', [selectedAssets[0].id]);
                 closeAssetChooser();
                 trackEvent('chose asset');
             },
@@ -37,6 +37,7 @@ export const TiltImageBlock = ({ appBridge }: BlockProps): ReactElement => {
         uploadFile(files);
         trackEvent('uploaded file');
     };
+
     const handleHeightChange = (height: number) => {
         setBlockSettings({ height: `${height}px` }).catch(() => console.error("Couldn't save the block setttings"));
         trackEvent('changed height');
@@ -50,19 +51,18 @@ export const TiltImageBlock = ({ appBridge }: BlockProps): ReactElement => {
     });
 
     return (
-        <div data-test-id="tilt-image-block" style={getTiltImageStyle(blockSettings)}>
+        <div data-test-id="image-stack-block" style={getTiltImageStyle(blockSettings)}>
             <ResizeWrapper>
                 <Tilt
                     style={{ height: `${height}px`, transformStyle: 'preserve-3d' }}
-                    tiltMaxAngleX={10}
-                    tiltMaxAngleY={10}
-                    perspective={800}
-                    transitionSpeed={1500}
-                    scale={1.1}
+                    tiltMaxAngleX={5}
+                    tiltMaxAngleY={5}
+                    perspective={1500}
+                    transitionSpeed={50}
                     gyroscope={true}
                     className={cn('h-[--height] rounded-[inherit]', borderClasses, borderRadiusClasses)}
                 >
-                    {blockAssets['tilt-image']?.map((asset, index) => (
+                    {blockAssets['image-stack']?.map((asset, index) => (
                         <div
                             key={asset.id}
                             className="flex h-[--height] w-full rounded-[inherit] overflow-clip"

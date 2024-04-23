@@ -6,16 +6,16 @@ import packageJson from '../package.json';
 export const settings = defineSettings({
     main: [
         {
-            id: 'tilt-image',
+            id: 'stackable-images',
             type: 'dropdown',
-            defaultValue: 'tilt-image',
+            defaultValue: 'stackable-images',
             size: 'large',
             disabled: true,
             choices: [
                 {
-                    value: 'tilt-image',
+                    value: 'stackable-images',
                     icon: 'ImageStack',
-                    label: 'tilt Image',
+                    label: 'stackable Images',
                 },
             ],
         },

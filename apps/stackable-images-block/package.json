@@ -1,5 +1,5 @@
 {
-    "name": "@sa-apps/tilt-image-block",
+    "name": "@sa-apps/stackable-images-block",
     "type": "module",
     "version": "1.0.0",
     "private": true,
