@@ -1,15 +1,11 @@
 export type BlockSettings = {
-    type: 'text' | 'asset';
-
-    contentTexts?: string[];
-    directionHV: 'horizontal' | 'vertical';
-    directionH: 'left' | 'right';
-    directionV: 'up' | 'down';
-    speed: string;
-    pauseHover: boolean;
-    pauseClick: boolean;
-    loop: boolean;
-    autoFill: boolean;
+    tiltEnabled: boolean;
+    tiltReversed: boolean;
+    tiltMaxAngleX: string;
+    tiltMaxAngleY: string;
+    tiltPerspective: string;
+    tiltScale: string;
+    tiltTransitionSpeed: string;
 
     height: string;
 

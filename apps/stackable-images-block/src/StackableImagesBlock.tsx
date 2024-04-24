@@ -61,10 +61,11 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
             <ResizeWrapper>
                 <Tilt
                     style={{ height: `${height}px`, transformStyle: 'preserve-3d' }}
-                    tiltMaxAngleX={5}
-                    tiltMaxAngleY={5}
-                    perspective={1700}
-                    transitionSpeed={50}
+                    tiltMaxAngleX={Number.parseFloat(blockSettings.tiltMaxAngleX)}
+                    tiltMaxAngleY={Number.parseFloat(blockSettings.tiltMaxAngleY)}
+                    perspective={Number.parseFloat(blockSettings.tiltPerspective)}
+                    transitionSpeed={Number.parseFloat(blockSettings.tiltTransitionSpeed)}
+                    scale={Number.parseFloat(blockSettings.tiltScale)}
                     gyroscope={true}
                     className={cn('h-[--height] rounded-[inherit]', borderClasses, borderRadiusClasses)}
                 >

@@ -20,6 +20,53 @@ export const settings = defineSettings({
             ],
         },
     ],
+    basics: [
+        {
+            id: 'tiltEnabled',
+            type: 'switch',
+            label: 'Tilt enabled',
+            defaultValue: true,
+        },
+        {
+            id: 'tiltReversed',
+            type: 'switch',
+            label: 'Tilt reversed',
+        },
+        {
+            id: 'tiltMaxAngleX',
+            type: 'input',
+            label: 'Tilt max angle X',
+            defaultValue: '5',
+            rules: [], // TODO: Add numerical rule
+        },
+        {
+            id: 'tiltMaxAngleY',
+            type: 'input',
+            label: 'Tilt max angle Y',
+            defaultValue: '5',
+            rules: [], // TODO: Add numerical rule
+        },
+        {
+            id: 'tiltPerspective',
+            type: 'input',
+            label: 'Perspective',
+            defaultValue: '1800',
+        },
+        {
+            id: 'tiltScale',
+            type: 'input',
+            label: 'Scale',
+            defaultValue: '1.0',
+            rules: [], // TODO: Add numerical rule
+        },
+        {
+            id: 'tiltTransitionSpeed',
+            type: 'input',
+            label: 'Transition speed',
+            defaultValue: '50',
+            rules: [], // TODO: Add numerical rule
+        },
+    ],
     style: [
         {
             id: 'height',
@@ -137,25 +184,7 @@ export const settings = defineSettings({
             ],
         },
     ],
-    basics: [
-        {
-            id: 'tiltEnabled',
-            type: 'switch',
-            label: 'Tilt enabled',
-        },
-        {
-            id: 'tiltReversed',
-            type: 'switch',
-            label: 'Tilt reversed',
-        },
-        {
-            id: 'scale',
-            type: 'input',
-            label: 'Scale',
-            defaultValue: '1.0',
-            rules: [], // TODO: Add numerical rule
-        },
-    ],
+
     informations: [
         {
             id: 'trackingInformationHeading',
