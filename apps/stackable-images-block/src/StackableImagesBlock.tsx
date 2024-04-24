@@ -10,7 +10,8 @@ import { getTiltImageStyle, prepareImageUrl } from './helpers';
 import type { BlockSettings } from './types';
 import { useBlockAssets } from './utilities/useBlockAssets';
 import { useDraggableHeightHandle } from './utilities/useDraggableHeightHandle';
-import { AssetAdd } from './AssetAdd';
+import { AssetRowEdit } from './AssetRowEdit';
+import { AssetRowAdd } from './AssetRowAdd';
 import { useUploadFile } from './useUploadFile';
 
 export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement => {
@@ -36,6 +37,11 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
     const handleUploadAsset = (files: File | FileList) => {
         uploadFile(files);
         trackEvent('uploaded file');
+    };
+
+    const handleAssetDelete = (assetId: number) => {
+        deleteAssetIdsFromKey('image-stack', [assetId]);
+        trackEvent('deleted asset');
     };
 
     const handleHeightChange = (height: number) => {
@@ -79,7 +85,14 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
                 </Tilt>
                 <ResizeHandle />
 
-                {isEditing && <AssetAdd onBrowseAssetClick={handleBrowseAsset} onUploadClick={handleUploadAsset} />}
+                {isEditing && (
+                    <>
+                        {blockAssets['image-stack']?.map((asset) => (
+                            <AssetRowEdit key={asset.id} asset={asset} onRemove={() => handleAssetDelete(asset.id)} onUpdate={() => {}} />
+                        ))}
+                        <AssetRowAdd onBrowseAssetClick={handleBrowseAsset} onUploadClick={handleUploadAsset} />
+                    </>
+                )}
             </ResizeWrapper>
         </div>
     );

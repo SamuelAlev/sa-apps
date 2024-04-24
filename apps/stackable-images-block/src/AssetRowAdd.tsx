@@ -1,12 +1,12 @@
 import { Dropzone } from '@sa-apps/dropzone';
 import type { ChangeEvent } from 'react';
 
-type AssetAddProps = {
+type AssetRowAddProps = {
     onUploadClick: (file: File) => void;
     onBrowseAssetClick: () => void;
 };
 
-export const AssetAdd = ({ onUploadClick, onBrowseAssetClick }: AssetAddProps) => {
+export const AssetRowAdd = ({ onUploadClick, onBrowseAssetClick }: AssetRowAddProps) => {
     const handleUploadClick = (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.currentTarget.files?.[0];
         if (file) {
