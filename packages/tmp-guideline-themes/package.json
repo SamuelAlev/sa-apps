@@ -10,21 +10,21 @@
         "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
-        "@frontify/app-bridge": "^3.6.2 || ^4.0.0-alpha.0",
+        "@frontify/app-bridge": "^3.9.1 || ^4.0.0-alpha.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
     "dependencies": {
-        "@frontify/sidebar-settings": "^0.9.15"
+        "@frontify/sidebar-settings": "^0.9.16"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.7.2",
-        "@frontify/app-bridge": "^3.6.2",
-        "@types/react": "^18.3.1",
+        "@biomejs/biome": "^1.7.3",
+        "@frontify/app-bridge": "^3.9.1",
+        "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "sinon": "^17.0.1",
+        "sinon": "^18.0.0",
         "typescript": "^5.4.5"
     }
 }

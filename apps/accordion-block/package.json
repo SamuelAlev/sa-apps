@@ -15,8 +15,8 @@
         "test:watch": "vitest"
     },
     "dependencies": {
-        "@frontify/app-bridge": "^3.6.2",
-        "@frontify/guideline-blocks-settings": "^0.34.13",
+        "@frontify/app-bridge": "^3.9.1",
+        "@frontify/guideline-blocks-settings": "^0.34.15",
         "@radix-ui/react-accordion": "^1.1.2",
         "@sa-apps/alert-dialog": "workspace:*",
         "@sa-apps/button": "workspace:*",
@@ -31,27 +31,27 @@
         "@sa-apps/text-input": "workspace:*",
         "@sa-apps/tracking": "workspace:*",
         "@sa-apps/utilities": "workspace:*",
-        "lucide-react": "^0.376.0",
+        "lucide-react": "^0.381.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.7.2",
-        "@frontify/frontify-cli": "^5.6.16",
+        "@biomejs/biome": "^1.7.3",
+        "@frontify/frontify-cli": "^5.6.18",
         "@sa-apps/tailwind-config": "workspace:*",
-        "@testing-library/react": "^15.0.5",
-        "@types/react": "^18.3.1",
+        "@testing-library/react": "^15.0.7",
+        "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
-        "@vitejs/plugin-react": "^4.2.1",
-        "@vitest/ui": "^1.5.3",
+        "@vitejs/plugin-react": "^4.3.0",
+        "@vitest/ui": "^1.6.0",
         "autoprefixer": "^10.4.19",
-        "jsdom": "^24.0.0",
+        "jsdom": "^24.1.0",
         "postcss": "^8.4.38",
-        "sass": "^1.76.0",
-        "sinon": "^17.0.1",
+        "sass": "^1.77.4",
+        "sinon": "^18.0.0",
         "tailwindcss": "^3.4.3",
         "typescript": "^5.4.5",
-        "vite": "^5.2.10",
-        "vitest": "^1.5.3"
+        "vite": "^5.2.12",
+        "vitest": "^1.6.0"
     }
 }

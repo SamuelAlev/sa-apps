@@ -22,7 +22,7 @@ type OnlineUsersProviderProps = {
     user: User[];
 };
 
-const SIGNALING_SERVER = 'wss://frontify-apps-signaling.alev.dev';
+const SIGNALING_SERVER = 'wss://signaling.alev.dev';
 
 export const OnlineUsersProvider = ({ visible, isUserVisible, roomName, children, user }: OnlineUsersProviderProps) => {
     const ydoc = useRef<Y.Doc | null>(null);

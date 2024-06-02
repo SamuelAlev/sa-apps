@@ -20,14 +20,14 @@
         "@sa-apps/tooltip": "workspace:^",
         "@sa-apps/utilities": "workspace:*",
         "y-webrtc": "^10.3.0",
-        "yjs": "^13.6.14"
+        "yjs": "^13.6.15"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.7.2",
-        "@frontify/app-bridge": "^3.6.2",
-        "@frontify/guideline-blocks-settings": "^0.34.13",
+        "@biomejs/biome": "^1.7.3",
+        "@frontify/app-bridge": "^3.9.1",
+        "@frontify/guideline-blocks-settings": "^0.34.15",
         "@sa-apps/tailwind-config": "workspace:*",
-        "@types/react": "^18.3.1",
+        "@types/react": "^18.3.3",
         "@types/react-dom": "^18.3.0",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
