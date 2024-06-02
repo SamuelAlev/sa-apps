@@ -15,7 +15,6 @@ export const Masonry = ({ columnCount, children }: MasonryProps): ReactElement =
         <div className="flex gap-[var(--masonry-items-gap)]">
             {range(columnCount).map((columnIndex) => (
                 <div key={columnIndex} className="flex flex-1 flex-col gap-[var(--masonry-items-gap)]">
-                    {/* biome-ignore lint/correctness/useJsxKeyInIterable: no proper key */}
                     {range(columnIndex, childrenArray.length, columnCount).map((itemIndex) => childrenArray[itemIndex])}
                 </div>
             ))}
