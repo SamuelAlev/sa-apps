@@ -18,7 +18,7 @@
         "@sa-apps/dialog": "workspace:*",
         "@sa-apps/utilities": "workspace:*",
         "cmdk": "^1.0.0",
-        "lucide-react": "^0.381.0"
+        "lucide-react": "^0.436.0"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.7.3",

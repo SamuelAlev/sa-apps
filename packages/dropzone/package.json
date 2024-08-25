@@ -16,7 +16,7 @@
     },
     "dependencies": {
         "@sa-apps/i18n": "workspace:*",
-        "lucide-react": "^0.381.0"
+        "lucide-react": "^0.436.0"
     },
     "devDependencies": {
         "@biomejs/biome": "^1.7.3",
