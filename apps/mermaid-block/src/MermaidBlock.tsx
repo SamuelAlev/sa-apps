@@ -10,6 +10,7 @@ import { type FormEventHandler, type ReactElement, useEffect, useRef, useState }
 
 import packageJson from '../package.json';
 
+import { useCallback } from 'react';
 import { borderClasses } from './constants';
 import { getMermaidRootStyle } from './helpers';
 import { MERMAID_FILE_ID } from './settings';
@@ -68,14 +69,14 @@ export const MermaidBlock = ({ appBridge }: BlockProps): ReactElement => {
         trackEvent('toggled code', { value: `${showCode}` });
     };
 
-    const renderMermaid = async () => {
+    const renderMermaid = useCallback(async () => {
         mermaidImport.current ??= await import(/* @vite-ignore */ `https://esm.sh/mermaid@${packageJson.dependencies.mermaid}`).then((mod) => mod.default);
         if (mermaidImport.current && mermaidOutputElementRef.current && mermaidInputElementRef.current) {
             mermaidOutputElementRef.current.removeAttribute('data-processed');
             mermaidOutputElementRef.current.textContent = mermaidInputElementRef.current.value;
             await mermaidImport.current.run({ nodes: [mermaidOutputElementRef.current] });
         }
-    };
+    }, []);
 
     const { height, ResizeHandle, ResizeWrapper } = useDraggableHeightHandle({
         id: 'draggable',

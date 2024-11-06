@@ -18,7 +18,6 @@ const sortingStrategy = {
     'rect-swapping': rectSwappingStrategy,
 };
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class MouseSensor extends LibMouseSensor {
     static activators = [
         {
@@ -30,7 +29,6 @@ export class MouseSensor extends LibMouseSensor {
     ];
 }
 
-// biome-ignore lint/complexity/noStaticOnlyClass: <explanation>
 export class KeyboardSensor extends LibKeyboardSensor {
     static activators = [
         {
