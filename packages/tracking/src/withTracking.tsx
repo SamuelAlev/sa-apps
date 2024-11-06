@@ -42,7 +42,7 @@ export const withTracking =
 
             useEffect(() => {
                 if (loaded && websiteId) {
-                    store.websiteId = import.meta.env.PROD ? websiteId ?? '' : WEBSITE_ID_DEV;
+                    store.websiteId = import.meta.env.PROD ? (websiteId ?? '') : WEBSITE_ID_DEV;
                     window.umami?.track((props) => ({ ...props, website: store.websiteId }));
                 }
             }, [websiteId, loaded]);
