@@ -11,25 +11,25 @@
         "typecheck": "tsc --noEmit"
     },
     "peerDependencies": {
-        "@frontify/app-bridge": "^3.9.1 || ^4.0.0-alpha.0",
-        "@frontify/guideline-blocks-settings": "^0.34.15",
+        "@frontify/app-bridge": "^3.11.0 || ^4.0.0-alpha.0",
+        "@frontify/guideline-blocks-settings": "^0.36.11",
         "react": "^18.3.1",
         "react-dom": "^18.3.1"
     },
     "dependencies": {
-        "@frontify/fondue": "^12.1.2",
+        "@frontify/fondue": "^12.2.17",
         "@sa-apps/utilities": "workspace:*"
     },
     "devDependencies": {
-        "@biomejs/biome": "^1.7.3",
-        "@frontify/app-bridge": "^3.9.1",
-        "@frontify/guideline-blocks-settings": "^0.34.15",
+        "@biomejs/biome": "^1.9.4",
+        "@frontify/app-bridge": "^3.11.0",
+        "@frontify/guideline-blocks-settings": "^0.36.11",
         "@sa-apps/tailwind-config": "workspace:*",
-        "@types/react": "^18.3.3",
-        "@types/react-dom": "^18.3.0",
+        "@types/react": "^18.3.12",
+        "@types/react-dom": "^18.3.1",
         "react": "^18.3.1",
         "react-dom": "^18.3.1",
-        "tailwindcss": "^3.4.3",
-        "typescript": "^5.4.5"
+        "tailwindcss": "^3.4.14",
+        "typescript": "^5.6.3"
     }
 }
