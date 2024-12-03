@@ -207,7 +207,7 @@ export type Asset = {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** `Asset` expiration date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
@@ -215,6 +215,8 @@ export type Asset = {
   id: Scalars['ID']['output'];
   /** List of `Asset`'s licenses. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** Metadata values details. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -397,6 +399,52 @@ export type AssetItems = {
   total: Scalars['Int']['output'];
 };
 
+export type AssetLocation = {
+  __typename?: 'AssetLocation';
+  /** `Brand` location of the `Asset`. */
+  brand?: Maybe<AssetLocationBrand>;
+  /** `Folder` location of the `Asset`. */
+  folder?: Maybe<AssetLocationFolder>;
+  /** `Library` location of the `Asset`. */
+  library?: Maybe<AssetLocationLibrary>;
+  /** `WorkspaceProject` location of the `Asset`. */
+  workspaceProject?: Maybe<AssetLocationWorkspaceProject>;
+};
+
+export type AssetLocationBrand = {
+  __typename?: 'AssetLocationBrand';
+  /** `Brand` Id. */
+  id: Scalars['ID']['output'];
+  /** `Brand` name. */
+  name: Scalars['String']['output'];
+};
+
+export type AssetLocationFolder = {
+  __typename?: 'AssetLocationFolder';
+  /** A list of `Breadcrumb` items representing the parent folders structure for the current `Folder`. */
+  breadcrumbs: Array<Breadcrumb>;
+  /** `Folder` Id. */
+  id: Scalars['ID']['output'];
+  /** `Folder` name. */
+  name: Scalars['String']['output'];
+};
+
+export type AssetLocationLibrary = {
+  __typename?: 'AssetLocationLibrary';
+  /** `Library` Id. */
+  id: Scalars['ID']['output'];
+  /** `Library` name. */
+  name?: Maybe<Scalars['String']['output']>;
+};
+
+export type AssetLocationWorkspaceProject = {
+  __typename?: 'AssetLocationWorkspaceProject';
+  /** `WorkspaceProject` Id. */
+  id: Scalars['ID']['output'];
+  /** `WorkspaceProject` name. */
+  name?: Maybe<Scalars['String']['output']>;
+};
+
 export type AssetPreviewProcessingJob = {
   __typename?: 'AssetPreviewProcessingJob';
   /** `Asset` Id. */
@@ -547,13 +595,16 @@ export type Audio = Asset & Node & {
   description?: Maybe<Scalars['String']['output']>;
   /** Signed `Url` to download the original `Audio` type file. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
-  /** `Asset` expiry date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** Extension of the `Asset` `File`. */
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /** `ExternalProduct` items linked to `Asset`. */
+  /**
+   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   */
   externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
@@ -561,6 +612,8 @@ export type Audio = Asset & Node & {
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -794,13 +847,15 @@ export type CreateAssetCommentInput = {
 export type CreateAssetInput = {
   /** Represents the Author of the `Asset`. Example: Photographer Name */
   author?: InputMaybe<Scalars['String']['input']>;
+  /** `Asset` will become available only during the interval.When undefined or `null` the `Asset` will be immediately and indefinitely available. */
+  availability?: InputMaybe<DateTimeRangeInput>;
   /** Add `Asset` copyright details. */
   copyright?: InputMaybe<CreateCopyrightInput>;
   /** `Asset` description. */
   description?: InputMaybe<Scalars['String']['input']>;
   /** An array of strings representing the directory, if a folder does not exist, it is created. Example: ["My Folder", "Sub-Folder"] will create the necessary folders if they do not yet exist and place the `Asset` in it. **Important:** Cannot be used in conjunction with `parentId` that is from a `Folder`. */
   directory?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  /** Expiry Date. `Asset` will expire once the defined date is reached. */
+  /** `Asset` will expire once the defined date is reached. */
   expiresAt?: InputMaybe<Scalars['DateTime']['input']>;
   /** `Asset` external Id. */
   externalId?: InputMaybe<Scalars['ID']['input']>;
@@ -1016,7 +1071,7 @@ export type CustomMetadataInput = {
   value?: InputMaybe<Scalars['Any']['input']>;
 };
 
-export type CustomMetadataProperty = {
+export type CustomMetadataProperty = Node & {
   __typename?: 'CustomMetadataProperty';
   /** `DateTime` of the `CustomMetadataProperty` creation. */
   createdAt: Scalars['DateTime']['output'];
@@ -1232,6 +1287,13 @@ export type CustomMetadataValues = CustomMetadata & {
   values: Array<Maybe<Scalars['Any']['output']>>;
 };
 
+export type DateTimeRangeInput = {
+  /** Start `DateTime` of the range. */
+  from?: InputMaybe<Scalars['DateTime']['input']>;
+  /** End `DateTime` of the range. */
+  to?: InputMaybe<Scalars['DateTime']['input']>;
+};
+
 export type DeleteAsset = {
   __typename?: 'DeleteAsset';
   /**
@@ -1372,13 +1434,16 @@ export type Document = Asset & Node & {
   description?: Maybe<Scalars['String']['output']>;
   /** Signed `Url` to download the original `Document` type file. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
-  /** `Asset` expiry date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** Extension of the `Asset` `File`. */
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /** `ExternalProduct` items linked to `Asset`. */
+  /**
+   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   */
   externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
@@ -1390,6 +1455,8 @@ export type Document = Asset & Node & {
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -1525,16 +1592,21 @@ export type EmbeddedContent = Asset & Node & {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** `Asset` expiry date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /** `ExternalProduct` items linked to `Asset`. */
+  /**
+   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   */
   externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** `Asset` id. */
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -1605,13 +1677,16 @@ export type File = Asset & Node & {
   description?: Maybe<Scalars['String']['output']>;
   /** Signed `Url` to download the original `File` type file. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
-  /** `Asset` expiry date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** Extension of the `Asset` `File`. */
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /** `ExternalProduct` items linked to `Asset`. */
+  /**
+   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   */
   externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
@@ -1619,6 +1694,8 @@ export type File = Asset & Node & {
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -1684,8 +1761,8 @@ export type Folder = {
   /** `Folder` name. */
   name: Scalars['String']['output'];
   /**
-   * **DEPRECATED** The `SubFolderItems` of the current `Library`/`Workspace`/`SubFolder`. This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * **DEPRECATED** The `SubFolderItems` of the current `Library`/`Workspace`/`SubFolder`. This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
    */
   subFolders: SubFolderItems;
 };
@@ -1814,13 +1891,16 @@ export type Image = Asset & Node & {
   description?: Maybe<Scalars['String']['output']>;
   /** Signed `Url` to download the original `Image` type file. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
-  /** `Asset` expiry date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** Extension of the `Asset` `File`. */
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /** `ExternalProduct` items linked to `Asset`. */
+  /**
+   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   */
   externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
@@ -1832,6 +1912,8 @@ export type Image = Asset & Node & {
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -2066,8 +2148,8 @@ export type LibraryRootFolder = {
   /** The `FolderItems` of the current `Library`/`Workspace`. */
   folders: FolderItems;
   /**
-   * **DEPRECATED** The `SubFolderItems` of the current `Library`/`Workspace`. This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * **DEPRECATED** The `SubFolderItems` of the current `Library`/`Workspace`. This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
    */
   subFolders: SubFolderItems;
 };
@@ -2626,6 +2708,8 @@ export type ReplaceAssetInput = {
   assetId: Scalars['ID']['input'];
   /** Signed file Id returned in `uploadFile`. */
   fileId: Scalars['ID']['input'];
+  /** Skip file's EXIF metadata. When true, it will ignore all file metadata contents. */
+  skipFileMetadata?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 export type ReplyToComment = {
@@ -2733,9 +2817,9 @@ export type RootMutation = {
   installProjectWebhook?: Maybe<InstallProjectWebhook>;
   /** Invite `Project` user. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. Limitations: Does not work if User Provisioning feature is enabled. */
   inviteProjectUser?: Maybe<InviteProjectUser>;
-  /** Move existing `Asset` item(s) to the given `Library`, `Workspace` or `Folder` destination. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. */
+  /** Move existing `Asset` item(s) to the given `Library`, `Workspace` or `Folder` destination. Only moves within the same `Library`/`Workspace` are supported by this operation. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. */
   moveAssets?: Maybe<MoveAssets>;
-  /** Move existing `Folder` item(s) to the given `Library`, `Workspace` or `Folder` destination. This operation will move all of the `Asset` item(s) and `SubFolder` item(s) within the provided `Folder` item(s). Requires `basic:write` scope to be accessible and `Folder` permission level `EDIT`. */
+  /** Move existing `Folder` item(s) to the given `Library`, `Workspace` or `Folder` destination. This operation will move all of the `Asset` item(s) and `SubFolder` item(s) within the provided `Folder` item(s). Only moves within the same `Library`/`Workspace` are supported by this operation. Requires `basic:write` scope to be accessible and `Folder` permission level `EDIT`. */
   moveFolders?: Maybe<MoveFolders>;
   /** Remove an existing relation between an `Asset` and a `License`. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. */
   removeAssetLicense?: Maybe<RemoveAssetLicense>;
@@ -3142,8 +3226,8 @@ export type SubFolder = Folder & Node & {
   /** `SubFolder` name. */
   name: Scalars['String']['output'];
   /**
-   * **DEPRECATED** The `SubFolderItems` of the current `SubFolder`. This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * **DEPRECATED** The `SubFolderItems` of the current `SubFolder`. This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
    */
   subFolders: SubFolderItems;
 };
@@ -3345,11 +3429,11 @@ export type UploadFile = {
 };
 
 export type UploadFileInput = {
-  /** `File` chunk size in bytes. Value must be integer between 5MB and 1GB. */
+  /** **DEPRECATED** `File` chunk size in bytes. Value must be integer between 5MB and 1GB. Please, consider using bigger chunk sizes for huge files to prevent issues. This field will be removed. | Date: 2025-07-01T00:00:00.000+00:00 */
   chunkSize?: InputMaybe<Scalars['BigInt']['input']>;
   /** `File` name. This value will be passed on to the `fileId` input variable used in file mutations such as `createAsset`, `replaceAsset`, `createAttachment` or `addAssetPreviewImage`. */
   filename: Scalars['String']['input'];
-  /** `File` size in bytes. */
+  /** `File` size in bytes. Value must be a positive integer up to 5TB. */
   size: Scalars['BigInt']['input'];
 };
 
@@ -3435,13 +3519,16 @@ export type Video = Asset & Node & {
   downloadUrl?: Maybe<Scalars['Url']['output']>;
   /** `Video` duration in seconds. */
   duration: Scalars['Float']['output'];
-  /** `Asset` expiry date. */
+  /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** Extension of the `Asset` `File`. */
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /** `ExternalProduct` items linked to `Asset`. */
+  /**
+   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   */
   externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
@@ -3451,6 +3538,8 @@ export type Video = Asset & Node & {
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
   licenses?: Maybe<Array<Maybe<License>>>;
+  /** `Location` of the `Asset`. */
+  location: AssetLocation;
   /**
    * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
    * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
@@ -3629,8 +3718,8 @@ export type WorkspaceRootFolder = {
   /** The `FolderItems` of the current `Library`/`Workspace`. */
   folders: FolderItems;
   /**
-   * **DEPRECATED** The `SubFolderItems` of the current `Library`/`Workspace`. This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `folders` instead. | Date: 2024-07-01T00:00:00.000+00:00
+   * **DEPRECATED** The `SubFolderItems` of the current `Library`/`Workspace`. This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `folders` instead. | Date: 2025-07-01T00:00:00.000+00:00
    */
   subFolders: SubFolderItems;
 };
