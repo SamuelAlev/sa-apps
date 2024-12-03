@@ -1,7 +1,7 @@
 {
     "name": "@sa-apps/root",
     "private": true,
-    "packageManager": "pnpm@9.12.3",
+    "packageManager": "pnpm@9.14.4",
     "scripts": {
         "generate": "pnpm --stream --filter {packages/**} --filter {apps/**} generate",
         "format": "pnpm --stream --filter {packages/**} --filter {apps/**} format",
