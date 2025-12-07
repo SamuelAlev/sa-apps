@@ -191,8 +191,12 @@ export type AddCustomMetadataPropertyOptionsInput = {
 
 /** `AssetInterface` for `Asset` returnable types. */
 export type Asset = {
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** List of `Asset`'s `Attachments`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
+  /** Represents the Author of the `Asset`. Example: Photographer Name. */
+  author?: Maybe<Scalars['String']['output']>;
   /** Paginated list of `AssetComment` items for `Asset`. */
   comments?: Maybe<AssetCommentItems>;
   /** `Asset` copyright details. */
@@ -218,8 +222,8 @@ export type Asset = {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** Metadata values details. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Metadata values details. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** DateTime of the `Asset`'s last modification. */
@@ -507,8 +511,6 @@ export type AssetQueryInput = {
   search?: InputMaybe<Scalars['String']['input']>;
   /** Sort set of the matched `AssetItems`. */
   sortBy?: InputMaybe<AssetQueryFilterSortType>;
-  /** **DEPRECATED** Filter the `Asset` types present in the result set. This field will be removed. Use `types` instead. | Date: 2022-07-01T00:00:00.000+00:00 */
-  type?: InputMaybe<Array<InputMaybe<AssetType>>>;
   /** Limit the result set by the `Asset` types. */
   types?: InputMaybe<Array<InputMaybe<AssetType>>>;
 };
@@ -575,6 +577,8 @@ export type AttachmentProcessingJob = {
 
 export type Audio = Asset & Node & {
   __typename?: 'Audio';
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** `Attachment` items linked to `Asset`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
@@ -593,7 +597,7 @@ export type Audio = Asset & Node & {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Signed `Url` to download the original `Audio` type file. */
+  /** Signed `Url` to download the original `Audio` type file. Is null if the asset is download-protected and there is no approved and still valid download request. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
   /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
@@ -601,11 +605,8 @@ export type Audio = Asset & Node & {
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   */
-  externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
+  /** `DateTime` of the `Asset` `File` creation. */
+  fileCreatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
   /** `Asset` id. */
@@ -615,8 +616,8 @@ export type Audio = Asset & Node & {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** `DateTime` of the `Asset` last modification. */
@@ -673,6 +674,8 @@ export type Brand = Node & {
    * @deprecated This field will be removed. Use `rgbaColor` instead. | Date: 2023-01-01T00:00:00.000+00:00
    */
   color?: Maybe<Scalars['String']['output']>;
+  /** Retrieve all `CreativeTemplate` items. */
+  creativeTemplates: CreativeTemplateItems;
   /** `Brand` `CustomMetadataProperty` items list. */
   customMetadataProperties: Array<CustomMetadataProperty>;
   /** `Brand` Id. */
@@ -692,6 +695,13 @@ export type Brand = Node & {
   slug?: Maybe<Scalars['String']['output']>;
   /** Retrieve all `Workspace` items. */
   workspaceProjects?: Maybe<WorkspaceItems>;
+};
+
+
+export type BrandCreativeTemplatesArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  page?: InputMaybe<Scalars['Int']['input']>;
+  query?: InputMaybe<CreativeTemplateQueryInput>;
 };
 
 
@@ -719,6 +729,17 @@ export type Breadcrumb = {
   name?: Maybe<Scalars['String']['output']>;
 };
 
+export type CancelExportCreatives = {
+  __typename?: 'CancelExportCreatives';
+  /** A list of `CreativeJobs` that have been canceled successfully. */
+  canceledJobs: Array<Maybe<CreativeExport>>;
+};
+
+export type CancelExportCreativesInput = {
+  /** List of `CreativeJob` Ids that should be canceled. */
+  ids: Array<InputMaybe<Scalars['ID']['input']>>;
+};
+
 export type Collection = Node & {
   __typename?: 'Collection';
   /** `Collection`'s `Asset` items list. */
@@ -740,6 +761,7 @@ export type Collection = Node & {
 export type CollectionAssetsArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
+  query?: InputMaybe<LibraryCollectionQueryInput>;
 };
 
 export type CollectionItems = {
@@ -845,6 +867,8 @@ export type CreateAssetCommentInput = {
 };
 
 export type CreateAssetInput = {
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: InputMaybe<Scalars['String']['input']>;
   /** Represents the Author of the `Asset`. Example: Photographer Name */
   author?: InputMaybe<Scalars['String']['input']>;
   /** `Asset` will become available only during the interval.When undefined or `null` the `Asset` will be immediately and indefinitely available. */
@@ -863,16 +887,12 @@ export type CreateAssetInput = {
   fileId: Scalars['ID']['input'];
   /** The parent Id, where the `Asset` should be located in. Should either be a `Library`, `WorkspaceProject` or `Folder` Id. **Important:** Cannot be used in conjunction with `directory` if the Id is from a `Folder`. */
   parentId?: InputMaybe<Scalars['ID']['input']>;
-  /** **DEPRECATED** `Library` or `Workspace` Id. This value is ignored if `parentId` is set. This field will be removed. Use `parentId` instead. | Date: 2023-07-01T00:00:00.000+00:00 */
-  projectId?: InputMaybe<Scalars['ID']['input']>;
   /** Skip file's EXIF metadata. When true, it will ignore all file metadata contents. */
   skipFileMetadata?: InputMaybe<Scalars['Boolean']['input']>;
   /** List of tags to create with `Asset` */
   tags?: InputMaybe<Array<InputMaybe<TagInput>>>;
   /** `Asset` title or display name. */
   title: Scalars['String']['input'];
-  /** **DEPRECATED** `Asset` workflow status. Workflow logic will be automatically managed if not properly set. This field will be removed. | Date: 2022-07-01T00:00:00.000+00:00 */
-  workflowStatus?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type CreateAttachment = {
@@ -1058,6 +1078,189 @@ export type CreateWorkspaceProjectInput = {
   name: Scalars['String']['input'];
 };
 
+export type CreativeColor = {
+  __typename?: 'CreativeColor';
+  /** RGBA color value of the `Color`. */
+  color: RgbaColor;
+  /** ID of the `Color`. */
+  id: Scalars['Int']['output'];
+  /** Name of the `Color`. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** Name of the palette that the `Color` belongs to. */
+  paletteName?: Maybe<Scalars['String']['output']>;
+};
+
+export type CreativeExport = {
+  __typename?: 'CreativeExport';
+  /** `CreativeJob` Id. */
+  id: Scalars['ID']['output'];
+  /** Generated Creative. */
+  result?: Maybe<CreativeResult>;
+  /** `CreativeJob` status. */
+  status: CreativeJobStatus;
+};
+
+/** List of possible `CreativeExportOptionsInput` formats. */
+export enum CreativeExportFormat {
+  Gif = 'GIF',
+  Html = 'HTML',
+  Jpg = 'JPG',
+  Mp4 = 'MP4',
+  Pdf = 'PDF',
+  Png = 'PNG'
+}
+
+/** Compression level, affecting quality and filesize of the exported Creative. */
+export enum CreativeExportQuality {
+  High = 'HIGH',
+  Low = 'LOW',
+  Maximum = 'MAXIMUM',
+  Medium = 'MEDIUM'
+}
+
+/** List of possible `Creative Job` statuses. */
+export enum CreativeJobStatus {
+  /** The job has been canceled successfully. */
+  Canceled = 'CANCELED',
+  /** The processing of the job failed. */
+  Failed = 'FAILED',
+  /** The job has been completed successfully. */
+  Finished = 'FINISHED',
+  /** The job is currently being prepared and is awaiting rendering. */
+  Processing = 'PROCESSING',
+  /** The job is currently rendering. */
+  Rendering = 'RENDERING'
+}
+
+export type CreativeResult = {
+  __typename?: 'CreativeResult';
+  /** `Asset` details of the stored asset when save-to has been used. */
+  asset?: Maybe<File>;
+  /** Signed `Url` to download the Creative. */
+  downloadUrl: Scalars['Url']['output'];
+  /** List of signed `Url`s to download each page of the Creative. */
+  pageDownloadUrls: Array<Scalars['Url']['output']>;
+};
+
+export type CreativeTemplate = {
+  __typename?: 'CreativeTemplate';
+  /** Retrieve Asset ID. */
+  assetId?: Maybe<Scalars['ID']['output']>;
+  /** Id of the `Brand` of the `CreativeTemplate`. */
+  brandId: Scalars['ID']['output'];
+  /** Description of the `CreativeTemplate`. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Retrieve list of all `CreativeTemplateExportOption` items belonging to `CreativeTemplate`. */
+  exportOptions: Array<CreativeTemplateExportOption>;
+  /** `CreativeTemplate` id. */
+  id: Scalars['ID']['output'];
+  /** Name of the `CreativeTemplate`. */
+  name: Scalars['String']['output'];
+  /** Retrieve list of all `CreativeTemplatePage` items belonging to `CreativeTemplate`. */
+  pages: Array<CreativeTemplatePage>;
+  /** Tags of the `CreativeTemplate`. */
+  tags: Array<Maybe<Tag>>;
+  /** Retrieve a `CreativeTemplateVariable` item by `CreativeTemplateVariable` key. */
+  variable?: Maybe<CreativeTemplateVariable>;
+  /** Retrieve list of all `CreativeTemplateVariable` items belonging to `CreativeTemplate`. */
+  variables: Array<CreativeTemplateVariable>;
+};
+
+
+export type CreativeTemplateVariableArgs = {
+  key: Scalars['String']['input'];
+};
+
+export type CreativeTemplateExportOption = {
+  __typename?: 'CreativeTemplateExportOption';
+  /** Allowed format for exporting an `CreativeTemplate`, e.g., JPG. */
+  format?: Maybe<CreativeExportFormat>;
+};
+
+export type CreativeTemplateItems = {
+  __typename?: 'CreativeTemplateItems';
+  /** Indicates if a next page is available or not */
+  hasNextPage: Scalars['Boolean']['output'];
+  /** List of type `CreativeTemplate` */
+  items: Array<Maybe<CreativeTemplate>>;
+  /** Number of results per page. */
+  limit: Scalars['Int']['output'];
+  /** Current page number. */
+  page: Scalars['Int']['output'];
+  /** Total amount of results. */
+  total: Scalars['Int']['output'];
+};
+
+export type CreativeTemplatePage = {
+  __typename?: 'CreativeTemplatePage';
+  /** Height of the `CreativeTemplatePage`. */
+  height: Scalars['Int']['output'];
+  /** Name of the `CreativeTemplatePage`. */
+  name?: Maybe<Scalars['String']['output']>;
+  /** `CreativeTemplatePage` unique identifier. */
+  pageIndex: Scalars['Int']['output'];
+  /** Preview URL of `CreativeTemplatePage`. */
+  previewUrl: Scalars['Url']['output'];
+  /** Width of the `CreativeTemplatePage`. */
+  width: Scalars['Int']['output'];
+};
+
+export type CreativeTemplateQueryInput = {
+  /** Sort order of the `CreativeTemplate` query result set. */
+  sortBy?: InputMaybe<CreativeTemplateQuerySort>;
+};
+
+/** Query sorting option. Defines how the search results should be sorted. */
+export enum CreativeTemplateQuerySort {
+  /** Sorts the results by the newest entry. */
+  Newest = 'NEWEST',
+  /** Sorts the results by the oldest entry`. */
+  Oldest = 'OLDEST'
+}
+
+export type CreativeTemplateVariable = {
+  __typename?: 'CreativeTemplateVariable';
+  /** Allowed values for `CreativeTemplateVariable` value of type color. */
+  allowedColorValues: Array<CreativeColor>;
+  /** Number of template items connected to the `CreativeTemplateVariable`. */
+  connectionCount: Scalars['Int']['output'];
+  /** Description of the `CreativeTemplateVariable`. */
+  description?: Maybe<Scalars['String']['output']>;
+  /** Key of the `CreativeTemplateVariable`. */
+  key: Scalars['String']['output'];
+  /** Name of the `CreativeTemplateVariable`. */
+  name: Scalars['String']['output'];
+  /** Type of the `CreativeTemplateVariable`. */
+  type: CreativeTemplateVariableType;
+  /** Value of the `CreativeTemplateVariable`. See `CreativeTemplateVariableType` for valid formats. */
+  value?: Maybe<Scalars['Any']['output']>;
+};
+
+/** List of possible `CreativeTemplateVariable` types. */
+export enum CreativeTemplateVariableType {
+  /** Boolean Variable Type, possible values are `true` or `false` */
+  Bool = 'BOOL',
+  /** Color Variable Type, you can either pass an rgba object or a HEX value as string */
+  Color = 'COLOR',
+  /** Float Variable Type */
+  Float = 'FLOAT',
+  /** Image Variable Type, values are `AssetID`s for referencing */
+  Image = 'IMAGE',
+  /** Number Variable Type, values must be integers */
+  Number = 'NUMBER',
+  /** Position Variable Type, you need to pass an object with `left: number` and `top: number` properties */
+  Position = 'POSITION',
+  /** Text content Variable Type */
+  Text = 'TEXT'
+}
+
+export type CreativeVariableInput = {
+  /** Template variable `Key`. */
+  key: Scalars['String']['input'];
+  /** `Value` of template variable. */
+  value?: InputMaybe<Scalars['Any']['input']>;
+};
+
 /** `CustomMetadataInterface` for `CustomMetadata` returnable types. */
 export type CustomMetadata = {
   /** `CustomMetadataProperty` details. */
@@ -1095,40 +1298,6 @@ export type CustomMetadataProperty = Node & {
   type: CustomMetadataPropertyType;
 };
 
-export type CustomMetadataPropertyDateValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertyDateValueType';
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
-/** `CustomMetadataPropertyDependencyInterface` for `CustomMetadataPropertyDependency` returnable types. */
-export type CustomMetadataPropertyDependency = {
-  /** The dependee `CustomMetadataProperty` Id. */
-  propertyId: Scalars['ID']['output'];
-  /** The `CustomMetadataPropertyDependency` type. */
-  type: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertyLongTextValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertyLongTextValueType';
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertyMultiSelectValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertyMultiSelectValueType';
-  /** `MultiSelectPropertyValueType` options. */
-  options: Array<Maybe<CustomMetadataPropertyOption>>;
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertyNumberValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertyNumberValueType';
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
 export type CustomMetadataPropertyOption = {
   __typename?: 'CustomMetadataPropertyOption';
   /** `CustomMetadataPropertyOption` Id. */
@@ -1153,40 +1322,6 @@ export enum CustomMetadataPropertyPositionPlacement {
   First = 'FIRST',
   Last = 'LAST'
 }
-
-export type CustomMetadataPropertySelectValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertySelectValueType';
-  /** `SelectPropertyValueType` options. */
-  options: Array<Maybe<CustomMetadataPropertyOption>>;
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertySelectValueTypeDependencyTypeEquals = CustomMetadataPropertyDependency & {
-  __typename?: 'CustomMetadataPropertySelectValueTypeDependencyTypeEquals';
-  /** The dependee `CustomMetadataProperty` Id. */
-  propertyId: Scalars['ID']['output'];
-  /** `CustomMetadataPropertyOption` Id. */
-  propertyOptionId: Scalars['ID']['output'];
-  /** `CustomMetadataPropertyDependency` type. */
-  type: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertySelectValueTypeDependencyTypeOneOf = CustomMetadataPropertyDependency & {
-  __typename?: 'CustomMetadataPropertySelectValueTypeDependencyTypeOneOf';
-  /** The dependee `CustomMetadataProperty` Id. */
-  propertyId: Scalars['ID']['output'];
-  /** `CustomMetadataPropertyOption` property option ids. */
-  propertyOptionIds: Array<Maybe<Scalars['ID']['output']>>;
-  /** `CustomMetadataPropertyDependency` type. */
-  type: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertyTextValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertyTextValueType';
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
 
 /** `CustomMetadataPropertyTypeInterface` for `CustomMetadataPropertyType` returnable types. */
 export type CustomMetadataPropertyType = {
@@ -1249,26 +1384,6 @@ export type CustomMetadataPropertyTypeUrl = CustomMetadataPropertyType & {
   __typename?: 'CustomMetadataPropertyTypeUrl';
   /** The `CustomMetadataProperty` type name. */
   name: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertyUrlValueType = CustomMetadataPropertyValueType & {
-  __typename?: 'CustomMetadataPropertyUrlValueType';
-  /** `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
-/** `CustomMetadataPropertyValueTypeInterface` for `CustomMetadataPropertyValueType` returnable types. */
-export type CustomMetadataPropertyValueType = {
-  /** The `CustomMetadataPropertyValueType` property type. */
-  propertyType: Scalars['String']['output'];
-};
-
-export type CustomMetadataPropertyValueTypeDependencyTypeFilled = CustomMetadataPropertyDependency & {
-  __typename?: 'CustomMetadataPropertyValueTypeDependencyTypeFilled';
-  /** The dependee `CustomMetadataProperty` Id. */
-  propertyId: Scalars['ID']['output'];
-  /** `CustomMetadataPropertyDependency` type. */
-  type: Scalars['String']['output'];
 };
 
 export type CustomMetadataValue = CustomMetadata & {
@@ -1384,11 +1499,6 @@ export type DeleteLicense = {
   __typename?: 'DeleteLicense';
   /** The Id of the deleted `License`. */
   id: Scalars['ID']['output'];
-  /**
-   * **DEPRECATED** `License` details. This field will be removed. Use `id` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `id` instead. | Date: 2024-01-01T00:00:00.000+00:00
-   */
-  license: License;
 };
 
 export type DeleteLicenseInput = {
@@ -1414,6 +1524,8 @@ export type DeleteMetadataFieldInput = {
 
 export type Document = Asset & Node & {
   __typename?: 'Document';
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** `Attachment` items linked to `Asset`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
@@ -1432,7 +1544,7 @@ export type Document = Asset & Node & {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Signed `Url` to download the original `Document` type file. */
+  /** Signed `Url` to download the original `Document` type file. Is null if the asset is download-protected and there is no approved and still valid download request. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
   /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1440,11 +1552,8 @@ export type Document = Asset & Node & {
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   */
-  externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
+  /** `DateTime` of the `Asset` `File` creation. */
+  fileCreatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
   /** `Document` focal point position. Example: `[0.4803, 0.4340]`. */
@@ -1458,8 +1567,8 @@ export type Document = Asset & Node & {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** `DateTime` of the `Asset` last modification. */
@@ -1538,8 +1647,8 @@ export type DocumentLibrary = Library & Node & {
   /** `Library`/`Workspace` `License` items list. */
   licenses?: Maybe<Array<Maybe<License>>>;
   /**
-   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataFields?: Maybe<Array<Maybe<MetadataField>>>;
   /** `Library`/`Workspace` name. */
@@ -1574,6 +1683,8 @@ export type EditCommentInput = {
 
 export type EmbeddedContent = Asset & Node & {
   __typename?: 'EmbeddedContent';
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** `Attachment` items linked to `Asset`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
@@ -1596,11 +1707,6 @@ export type EmbeddedContent = Asset & Node & {
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   */
-  externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
   /** `Asset` id. */
   id: Scalars['ID']['output'];
   /** `License` items linked to `Asset`. */
@@ -1608,8 +1714,8 @@ export type EmbeddedContent = Asset & Node & {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** `DateTime` of the `Asset` last modification. */
@@ -1643,20 +1749,45 @@ export type EmbeddedContentRelatedAssetsArgs = {
   page?: InputMaybe<Scalars['Int']['input']>;
 };
 
-export type ExternalProduct = {
-  __typename?: 'ExternalProduct';
-  /** `External product` externalId. */
-  externalId?: Maybe<Scalars['ID']['output']>;
-  /** `External product` Id. */
-  id: Scalars['ID']['output'];
-  /** `External product` name. */
-  name: Scalars['String']['output'];
-  /** `External product` title. */
-  title?: Maybe<Scalars['String']['output']>;
+export type ExportCreative = {
+  __typename?: 'ExportCreative';
+  /** The newly created `CreativeJob`. */
+  job: CreativeExport;
+};
+
+export type ExportCreativeDestinationInput = {
+  /** `Project` Id destination for the exported Creative. */
+  destinationId: Scalars['ID']['input'];
+  /** `Title` of file. */
+  title: Scalars['String']['input'];
+};
+
+export type ExportCreativeInput = {
+  /** `ExportCreativeDestinationInput` where the exported file will be uploaded. */
+  destination?: InputMaybe<ExportCreativeDestinationInput>;
+  /** `ExportCreativeOptionsInput` data. */
+  options?: InputMaybe<ExportCreativeOptionsInput>;
+  /** `CreativeTemplateId` Id. */
+  templateId: Scalars['ID']['input'];
+  /** List of `CreativeVariableInput` which will be applied to the template. */
+  variables?: InputMaybe<Array<InputMaybe<CreativeVariableInput>>>;
+};
+
+export type ExportCreativeOptionsInput = {
+  /** `Format` of exported file. */
+  format?: InputMaybe<CreativeExportFormat>;
+  /** `TransparentBackground` export parameter. Supported only by `PNG` `Format`. */
+  hasTransparentBackground?: InputMaybe<Scalars['Boolean']['input']>;
+  /** List of pages to export. If provided, validates that all requested pages exist in a template before export. If not provided, all pages will be exported. */
+  pages?: InputMaybe<Array<Scalars['Int']['input']>>;
+  /** `Quality` of exported file. Supported only for `JPG` `Format`. */
+  quality?: InputMaybe<CreativeExportQuality>;
 };
 
 export type File = Asset & Node & {
   __typename?: 'File';
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** `Attachment` items linked to `Asset`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
@@ -1675,7 +1806,7 @@ export type File = Asset & Node & {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Signed `Url` to download the original `File` type file. */
+  /** Signed `Url` to download the original `File` type file. Is null if the asset is download-protected and there is no approved and still valid download request. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
   /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1683,11 +1814,8 @@ export type File = Asset & Node & {
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   */
-  externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
+  /** `DateTime` of the `Asset` `File` creation. */
+  fileCreatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
   /** `Asset` id. */
@@ -1697,8 +1825,8 @@ export type File = Asset & Node & {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** `DateTime` of the `Asset` last modification. */
@@ -1848,8 +1976,8 @@ export type IconLibrary = Library & Node & {
   /** `Library`/`Workspace` `License` items list. */
   licenses?: Maybe<Array<Maybe<License>>>;
   /**
-   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataFields?: Maybe<Array<Maybe<MetadataField>>>;
   /** `Library`/`Workspace` name. */
@@ -1871,6 +1999,8 @@ export type IconLibraryCollectionsArgs = {
 
 export type Image = Asset & Node & {
   __typename?: 'Image';
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** `Attachment` items linked to `Asset`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
@@ -1889,7 +2019,7 @@ export type Image = Asset & Node & {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Signed `Url` to download the original `Image` type file. */
+  /** Signed `Url` to download the original `Image` type file. Is null if the asset is download-protected and there is no approved and still valid download request. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
   /** `Asset` available until date. */
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1897,11 +2027,8 @@ export type Image = Asset & Node & {
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   */
-  externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
+  /** `DateTime` of the `Asset` `File` creation. */
+  fileCreatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
   /** `Image` focal point position. Example: `[0.4803, 0.4340]`. */
@@ -1915,8 +2042,8 @@ export type Image = Asset & Node & {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** `DateTime` of the `Asset` last modification. */
@@ -2026,8 +2153,8 @@ export type Library = {
   /** Retrieve list of all `Licenses` belonging to this `Library`. */
   licenses?: Maybe<Array<Maybe<License>>>;
   /**
-   * **DEPRECATED** Retrieve list of all `MetadataFields` belonging to this `Library`. This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Retrieve list of all `MetadataFields` belonging to this `Library`. This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataFields?: Maybe<Array<Maybe<MetadataField>>>;
   /** `Library` name. */
@@ -2073,6 +2200,11 @@ export type LibraryCollaborators = {
 export type LibraryCollaboratorsUsersArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   page?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type LibraryCollectionQueryInput = {
+  /** Limit the result set by the search term. */
+  term?: InputMaybe<Scalars['String']['input']>;
 };
 
 export type LibraryItems = {
@@ -2230,8 +2362,8 @@ export type LogoLibrary = Library & Node & {
   /** `Library`/`Workspace` `License` items list. */
   licenses?: Maybe<Array<Maybe<License>>>;
   /**
-   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataFields?: Maybe<Array<Maybe<MetadataField>>>;
   /** `Library`/`Workspace` name. */
@@ -2341,8 +2473,8 @@ export type MediaLibrary = Library & Node & {
   /** `Library`/`Workspace` `License` items list. */
   licenses?: Maybe<Array<Maybe<License>>>;
   /**
-   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataFields?: Maybe<Array<Maybe<MetadataField>>>;
   /** `Library`/`Workspace` name. */
@@ -2365,73 +2497,73 @@ export type MediaLibraryCollectionsArgs = {
 export type MetadataField = {
   __typename?: 'MetadataField';
   /**
-   * **DEPRECATED** Allow an empty value as a valid `SELECT` type `MetadataField` value. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Allow an empty value as a valid `SELECT` type `MetadataField` value. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   allowEmptyValue: Scalars['Boolean']['output'];
   /**
-   * **DEPRECATED** Allow multiple values in `SELECT` type `MetadataField`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Allow multiple values in `SELECT` type `MetadataField`. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   allowMultipleValues: Scalars['Boolean']['output'];
   /**
-   * **DEPRECATED** `DateTime` of the `MetadataField` creation. This field will be removed. Use `CustomMetadataProperty.createdAt` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.createdAt` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `DateTime` of the `MetadataField` creation. This field will be removed. Use `CustomMetadataProperty.createdAt` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.createdAt` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   createdAt: Scalars['DateTime']['output'];
   /**
-   * **DEPRECATED** `User` who created the `MetadataField`. This field will be removed. Use `CustomMetadataProperty.creator` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.creator` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `User` who created the `MetadataField`. This field will be removed. Use `CustomMetadataProperty.creator` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.creator` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   creator: User;
   /**
-   * **DEPRECATED** Optional default value of the `MetadataField`. This field will be removed. Use `CustomMetadataProperty.defaultValue` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.defaultValue` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Optional default value of the `MetadataField`. This field will be removed. Use `CustomMetadataProperty.defaultValue` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.defaultValue` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   defaultValue?: Maybe<Scalars['String']['output']>;
   /**
-   * **DEPRECATED** `MetadataField` Id. This field will be removed. Use `CustomMetadataProperty.id` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.id` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataField` Id. This field will be removed. Use `CustomMetadataProperty.id` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.id` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   id: Scalars['ID']['output'];
   /**
-   * **DEPRECATED** Allow users to edit `MetadataField` values. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Allow users to edit `MetadataField` values. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   isEditable: Scalars['Boolean']['output'];
   /**
-   * **DEPRECATED** Allow users to search for `MetadataField` values. This field will be removed. Use `CustomMetadataProperty.isSearchable` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.isSearchable` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Allow users to search for `MetadataField` values. This field will be removed. Use `CustomMetadataProperty.isSearchable` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.isSearchable` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   isSearchable: Scalars['Boolean']['output'];
   /**
-   * **DEPRECATED** Show/hide `MetadataField` values. This field will be removed. Use `CustomMetadataProperty.isViewable` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.isViewable` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Show/hide `MetadataField` values. This field will be removed. Use `CustomMetadataProperty.isViewable` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.isViewable` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   isVisible: Scalars['Boolean']['output'];
   /**
-   * **DEPRECATED** `MetadataField`'s name. This field will be removed. Use `CustomMetadataProperty.name` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.name` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataField`'s name. This field will be removed. Use `CustomMetadataProperty.name` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.name` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   label: Scalars['String']['output'];
   /**
-   * **DEPRECATED** `DateTime` of the `MetadataField`'s last modification. This field will be removed. Use `CustomMetadataProperty.modifiedAt` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.modifiedAt` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `DateTime` of the `MetadataField`'s last modification. This field will be removed. Use `CustomMetadataProperty.modifiedAt` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.modifiedAt` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   modifiedAt?: Maybe<Scalars['DateTime']['output']>;
   /**
-   * **DEPRECATED** `User` who last modified `MetadataField`. This field will be removed. Use `CustomMetadataProperty.modifier` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.modifier` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `User` who last modified `MetadataField`. This field will be removed. Use `CustomMetadataProperty.modifier` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.modifier` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   modifier?: Maybe<User>;
   /**
-   * **DEPRECATED** `MetadataField`'s type. This field will be removed. Use `CustomMetadataProperty.type.name` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.name` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataField`'s type. This field will be removed. Use `CustomMetadataProperty.type.name` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.name` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   type: Scalars['String']['output'];
   /**
-   * **DEPRECATED** Possible values for `SELECT` type `MetadataField`. This field will be removed. Use `CustomMetadataProperty.type.options` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.options` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Possible values for `SELECT` type `MetadataField`. This field will be removed. Use `CustomMetadataProperty.type.options` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.options` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   values?: Maybe<Array<Maybe<MetadataFieldValues>>>;
 };
@@ -2448,13 +2580,13 @@ export enum MetadataFieldType {
 export type MetadataFieldValues = {
   __typename?: 'MetadataFieldValues';
   /**
-   * **DEPRECATED** Default value for `SELECT` type `Metadata Field`. This field will be removed. Use `CustomMetadataProperty.type.options.isDefault` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.options.isDefault` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Default value for `SELECT` type `Metadata Field`. This field will be removed. Use `CustomMetadataProperty.type.options.isDefault` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.options.isDefault` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   default?: Maybe<Scalars['Boolean']['output']>;
   /**
-   * **DEPRECATED** Value of `SELECT` type `Metadata Field`. This field will be removed. Use `CustomMetadataProperty.type.options.value` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.options.value` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Value of `SELECT` type `Metadata Field`. This field will be removed. Use `CustomMetadataProperty.type.options.value` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataProperty.type.options.value` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   value?: Maybe<Scalars['String']['output']>;
 };
@@ -2469,38 +2601,38 @@ export type MetadataFieldValuesInput = {
 export type MetadataValue = {
   __typename?: 'MetadataValue';
   /**
-   * **DEPRECATED** `DateTime` of the `MetadataValue` creation. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `DateTime` of the `MetadataValue` creation. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   createdAt: Scalars['DateTime']['output'];
   /**
-   * **DEPRECATED** `User` who created the `MetadataValue`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `User` who created the `MetadataValue`. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   creator: User;
   /**
-   * **DEPRECATED** `MetadataValue` Id. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` Id. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   id: Scalars['ID']['output'];
   /**
-   * **DEPRECATED** `MetadataField` associated to `MetadataValue`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataField` associated to `MetadataValue`. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataField: MetadataField;
   /**
-   * **DEPRECATED** `DateTime` of the `MetadataValue`'s last modification. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `DateTime` of the `MetadataValue`'s last modification. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   modifiedAt?: Maybe<Scalars['DateTime']['output']>;
   /**
-   * **DEPRECATED** `User` who last modified the `MetadataValue`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `User` who last modified the `MetadataValue`. This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. | Date: 2026-07-01T00:00:00.000+00:00
    */
   modifier?: Maybe<User>;
   /**
-   * **DEPRECATED** `MetadataValue`'s value. This field will be removed. Use `CustomMetadataValueType.value` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `CustomMetadataValueType.value` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue`'s value. This field will be removed. Use `CustomMetadataValueType.value` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `CustomMetadataValueType.value` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   value: Scalars['String']['output'];
 };
@@ -2753,8 +2885,8 @@ export type RootMutation = {
   /** Add a relation between an existing `Asset` and `License`. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. */
   addAssetLicense?: Maybe<AddAssetLicense>;
   /**
-   * **DEPRECATED** Add a new relation between an existing `Asset` and an existing `MetadataField` with its value. The value will be automatically created and linked to its `MetadataField`. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. This field will be removed. Use `addCustomMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `addCustomMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Add a new relation between an existing `Asset` and an existing `MetadataField` with its value. The value will be automatically created and linked to its `MetadataField`. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. This field will be removed. Use `addCustomMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `addCustomMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   addAssetMetadataFieldValue?: Maybe<AddAssetMetadataFieldValue>;
   /** Add new `Asset` preview image. Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. */
@@ -2769,6 +2901,8 @@ export type RootMutation = {
   addCustomMetadata?: Maybe<AddCustomMetadata>;
   /** Add options to an existing `SELECT` or `MULTISELECT` type `CustomMetadataProperty`. RequiresRequires `basic:write` scope to be accessible and `CustomMetadataProperty` permission level `EDIT`. */
   addCustomMetadataPropertyOptions?: Maybe<AddCustomMetadataPropertyOptions>;
+  /** Cancels `CreativeJobs` by provided parameters. `CreativeJob` can be canceled prior to the `RENDERING` status. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. */
+  cancelExportCreatives?: Maybe<CancelExportCreatives>;
   /** Create a new `Asset`. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. */
   createAsset?: Maybe<CreateAsset>;
   /** Create a new `Asset` `Comment`. Requires `basic:write` scope to be accessible and `Asset` permission level `COMMENT`. */
@@ -2786,8 +2920,8 @@ export type RootMutation = {
   /** Create a new `Project` `License`. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. */
   createLicense?: Maybe<CreateLicense>;
   /**
-   * **DEPRECATED** Create a new `Project` `MetadataField` with your desired configuration. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. This field will be removed. Use `createCustomMetadataProperty` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `createCustomMetadataProperty` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Create a new `Project` `MetadataField` with your desired configuration. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. This field will be removed. Use `createCustomMetadataProperty` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `createCustomMetadataProperty` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   createMetadataField?: Maybe<CreateMetadataField>;
   /** Create a new `Workspace` type `Project`. Requires `basic:write` scope to be accessible. */
@@ -2807,12 +2941,14 @@ export type RootMutation = {
   /** Delete an existing `Project` `License`. This will remove all relations to that `License`. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. */
   deleteLicense?: Maybe<DeleteLicense>;
   /**
-   * **DEPRECATED** Delete an existing `Project` `MetadataField`. Existing `MetadataField`'s with the same value with be automatically removed. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. This field will be removed. Use `deleteCustomMetadataProperty` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `deleteCustomMetadataProperty` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Delete an existing `Project` `MetadataField`. Existing `MetadataField`'s with the same value with be automatically removed. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. This field will be removed. Use `deleteCustomMetadataProperty` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `deleteCustomMetadataProperty` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   deleteMetadataField?: Maybe<DeleteMetadataField>;
   /** Edit an existing `AssetComment`. Requires `basic:write` scope to be accessible and `Asset` permission level `COMMENT`. */
   editComment?: Maybe<EditComment>;
+  /** Export `CreativeTemplate` with provided parameters. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. */
+  exportCreative?: Maybe<ExportCreative>;
   /** Install `Webhook`. Requires `basic:write` and `webhook:write` scopes to be accessible and `Project` permission level `EDIT`. */
   installProjectWebhook?: Maybe<InstallProjectWebhook>;
   /** Invite `Project` user. Requires `basic:write` scope to be accessible and `Project` permission level `EDIT`. Limitations: Does not work if User Provisioning feature is enabled. */
@@ -2834,8 +2970,8 @@ export type RootMutation = {
   /** Remove options from an existing `SELECT` or `MULTISELECT` type `CustomMetadataProperty`. RequiresRequires `basic:write` scope to be accessible and `CustomMetadataProperty` permission level `EDIT`. */
   removeCustomMetadataPropertyOptions?: Maybe<RemoveCustomMetadataPropertyOptions>;
   /**
-   * **DEPRECATED** Remove existing `MetadataField` value.Existing relations to that `MetadataField` with the same value will be automatically removed.Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. This field will be removed. Use `removeCustomMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `removeCustomMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** Remove existing `MetadataField` value.Existing relations to that `MetadataField` with the same value will be automatically removed.Requires `basic:write` scope to be accessible and `Asset` permission level `EDIT`. This field will be removed. Use `removeCustomMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `removeCustomMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   removeMetadataValue?: Maybe<RemoveMetadataValue>;
   /** Reopens a resolved `AssetComment`. Requires `basic:write` scope to be accessible and `Comment` permission level `EDIT`. */
@@ -2860,7 +2996,18 @@ export type RootMutation = {
   updateCustomMetadataProperty?: Maybe<UpdateCustomMetadataProperty>;
   /** Update an existing `Folder`. Requires `basic:write` scope to be accessible and `Folder` permission level `EDIT`. */
   updateFolder?: Maybe<UpdateFolder>;
-  /** Upload a new file. This stores the binary file temporarily so it can be then permanently linked to a specific type (ie. `Asset`, `Attachment`, `Revision`) after the upload is complete by using a different mutation. Requires `basic:write` scope to be accessible. */
+  /**
+   * Upload a new file. Requires `basic:write` scope to be accessible
+   *
+   * Creates a temporary unique file Id and returns presigned URLs for uploading a binary file in multiple parts.
+   * After the upload is completed, this Id can be used (**once only**) to permanently link the file to a specific type (e.g., Asset, Attachment, Revision) via another mutation.
+   *
+   * When `chunkSize` is provided as `null` (to be the future default), the number of upload parts and thus their corresponding part size will be computed dynamically based on the specified file size, following these rules:
+   * - Maxmum of 1000 parts.
+   * - For files of 5TB (maximum): 1000 parts of 5GB each.
+   * - For files less than 15MB: 1 single part of 15MB.
+   * - Otherwise: an inclusive range of [1, 1000] parts of [15MB, 5GB] each.
+   */
   uploadFile?: Maybe<UploadFile>;
 };
 
@@ -2902,6 +3049,11 @@ export type RootMutationAddCustomMetadataArgs = {
 
 export type RootMutationAddCustomMetadataPropertyOptionsArgs = {
   input: AddCustomMetadataPropertyOptionsInput;
+};
+
+
+export type RootMutationCancelExportCreativesArgs = {
+  input: CancelExportCreativesInput;
 };
 
 
@@ -2997,6 +3149,11 @@ export type RootMutationDeleteMetadataFieldArgs = {
 
 export type RootMutationEditCommentArgs = {
   input: EditCommentInput;
+};
+
+
+export type RootMutationExportCreativeArgs = {
+  input: ExportCreativeInput;
 };
 
 
@@ -3126,6 +3283,10 @@ export type RootQuery = {
   brand?: Maybe<Brand>;
   /** Retrieve `Brand` list for current `Account`. */
   brands?: Maybe<Array<Maybe<Brand>>>;
+  /** Retrieve a `CreativeExport` item by `CreativeJob` Id. */
+  creativeExport?: Maybe<CreativeExport>;
+  /** Retrieve a `CreativeTemplate` item by Id. */
+  creativeTemplate?: Maybe<CreativeTemplate>;
   /** Get the current `User`. */
   currentUser: User;
   /** Retrieve `Library` details by Id. */
@@ -3155,6 +3316,16 @@ export type RootQueryAssetsArgs = {
 
 
 export type RootQueryBrandArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type RootQueryCreativeExportArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
+export type RootQueryCreativeTemplateArgs = {
   id: Scalars['ID']['input'];
 };
 
@@ -3298,7 +3469,12 @@ export enum TagSource {
 
 export type UninstallWebhook = {
   __typename?: 'UninstallWebhook';
-  /** `Webhook` details. */
+  /** The Id of the deleted `Webhook`. */
+  id: Scalars['ID']['output'];
+  /**
+   * **DEPRECATED** `Webhook` details. This field will be removed. Use `id` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `id` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   */
   webhook: Webhook;
 };
 
@@ -3314,6 +3490,8 @@ export type UpdateAsset = {
 };
 
 export type UpdateAssetDataInput = {
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: InputMaybe<Scalars['String']['input']>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
   author?: InputMaybe<Scalars['String']['input']>;
   /** Change `Asset` copyright details. */
@@ -3424,13 +3602,11 @@ export type UploadFile = {
   __typename?: 'UploadFile';
   /** Signed Id. */
   id: Scalars['ID']['output'];
-  /** Arrays with upload `Urls` to upload the file. */
+  /** List of presigned urls to upload the file parts. */
   urls: Array<Maybe<Scalars['Url']['output']>>;
 };
 
 export type UploadFileInput = {
-  /** **DEPRECATED** `File` chunk size in bytes. Value must be integer between 5MB and 1GB. Please, consider using bigger chunk sizes for huge files to prevent issues. This field will be removed. | Date: 2025-07-01T00:00:00.000+00:00 */
-  chunkSize?: InputMaybe<Scalars['BigInt']['input']>;
   /** `File` name. This value will be passed on to the `fileId` input variable used in file mutations such as `createAsset`, `replaceAsset`, `createAttachment` or `addAssetPreviewImage`. */
   filename: Scalars['String']['input'];
   /** `File` size in bytes. Value must be a positive integer up to 5TB. */
@@ -3439,9 +3615,15 @@ export type UploadFileInput = {
 
 /** `UserInterface` for `User` returnable types. */
 export type User = {
-  /** `User` avatar. */
+  /**
+   * **DEPRECATED** `User` avatar. This field will be removed. Use `AccountUser.avatar` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `AccountUser.avatar` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   */
   avatar?: Maybe<Scalars['Url']['output']>;
-  /** `User` email. */
+  /**
+   * **DEPRECATED** `User` email. This field will be removed. Use `AccountUser.email` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `AccountUser.email` instead. | Date: 2025-07-01T00:00:00.000+00:00
+   */
   email: Scalars['Email']['output'];
   /** `User` Id. */
   id: Scalars['ID']['output'];
@@ -3495,6 +3677,8 @@ export type UserItems = {
 
 export type Video = Asset & Node & {
   __typename?: 'Video';
+  /** Alternative text for the `Asset`. Used by screen readers when the asset is not decorative. */
+  alternativeText?: Maybe<Scalars['String']['output']>;
   /** `Attachment` items linked to `Asset`. */
   attachments?: Maybe<Array<Maybe<AssetAttachment>>>;
   /** Represents the Author of the `Asset`. Example: Photographer Name. */
@@ -3515,7 +3699,7 @@ export type Video = Asset & Node & {
   customMetadata: Array<CustomMetadata>;
   /** Description of the `Asset`. */
   description?: Maybe<Scalars['String']['output']>;
-  /** Signed `Url` to download the original `Video` type file. */
+  /** Signed `Url` to download the original `Video` type file. Is null if the asset is download-protected and there is no approved and still valid download request. */
   downloadUrl?: Maybe<Scalars['Url']['output']>;
   /** `Video` duration in seconds. */
   duration: Scalars['Float']['output'];
@@ -3525,11 +3709,8 @@ export type Video = Asset & Node & {
   extension: Scalars['String']['output'];
   /** External Id of the `Asset`. */
   externalId?: Maybe<Scalars['ID']['output']>;
-  /**
-   * **DEPRECATED** `ExternalProduct` items linked to `Asset`. This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. | Date: 2025-01-01T00:00:00.000+00:00
-   */
-  externalProducts?: Maybe<Array<Maybe<ExternalProduct>>>;
+  /** `DateTime` of the `Asset` `File` creation. */
+  fileCreatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** Original filename of the `Asset` `File`. */
   filename?: Maybe<Scalars['String']['output']>;
   /** `Video` height in pixels. */
@@ -3541,8 +3722,8 @@ export type Video = Asset & Node & {
   /** `Location` of the `Asset`. */
   location: AssetLocation;
   /**
-   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `MetadataValue` items linked to `Asset`. This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadata` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataValues?: Maybe<Array<Maybe<MetadataValue>>>;
   /** `DateTime` of the `Asset` last modification. */
@@ -3656,8 +3837,8 @@ export type Workspace = Node & {
   /** `Library`/`Workspace` `License` items list. */
   licenses?: Maybe<Array<Maybe<License>>>;
   /**
-   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
-   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2025-01-01T00:00:00.000+00:00
+   * **DEPRECATED** `Library`/`Workspace` `MetadataField` items list. This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
+   * @deprecated This field will be removed. Use `customMetadataProperties` instead. | Date: 2026-07-01T00:00:00.000+00:00
    */
   metadataFields?: Maybe<Array<Maybe<MetadataField>>>;
   /** `Library`/`Workspace` name. */
@@ -3774,8 +3955,8 @@ const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationTy
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
-    CurrentUser(variables?: CurrentUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders): Promise<CurrentUserQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<CurrentUserQuery>(CurrentUserDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'CurrentUser', 'query', variables);
+    CurrentUser(variables?: CurrentUserQueryVariables, requestHeaders?: GraphQLClientRequestHeaders, signal?: RequestInit['signal']): Promise<CurrentUserQuery> {
+      return withWrapper((wrappedRequestHeaders) => client.request<CurrentUserQuery>({ document: CurrentUserDocument, variables, requestHeaders: { ...requestHeaders, ...wrappedRequestHeaders }, signal }), 'CurrentUser', 'query', variables);
     }
   };
 }

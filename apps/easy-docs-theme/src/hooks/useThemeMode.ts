@@ -1,62 +1,62 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
-type ThemeMode = 'light' | 'dark' | 'system';
+type ThemeMode = "light" | "dark" | "system";
 
 export const useThemeMode = () => {
-    const [themeMode, setThemeMode] = useState<ThemeMode>('light');
+	const [themeMode, setThemeMode] = useState<ThemeMode>("light");
 
-    useEffect(() => {
-        const storedTheme = localStorage.getItem('themeMode') as ThemeMode | null;
+	const setMode = useCallback((mode: ThemeMode) => {
+		if (mode === "system") {
+			const systemPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			setThemeMode(systemPreference);
+			document.documentElement.classList.toggle("dark", systemPreference === "dark");
+			localStorage.setItem("themeMode", "system");
+		} else {
+			setThemeMode(mode);
+			document.documentElement.classList.toggle("dark", mode === "dark");
+			localStorage.setItem("themeMode", mode);
+		}
+	}, []);
 
-        if (storedTheme === 'system' || !storedTheme) {
-            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            setThemeMode(systemPreference);
-            document.documentElement.classList.toggle('dark', systemPreference === 'dark');
-            localStorage.setItem('themeMode', systemPreference);
-        } else if (storedTheme) {
-            setThemeMode(storedTheme);
-            document.documentElement.classList.toggle('dark', storedTheme === 'dark');
-        }
-    }, []);
+	useEffect(() => {
+		const storedTheme = localStorage.getItem("themeMode") as ThemeMode | null;
 
-    useEffect(() => {
-        const handleStorage = (event: StorageEvent) => {
-            if (event.key === 'themeMode') {
-                const newMode = event.newValue as ThemeMode;
-                setThemeMode(newMode);
-                document.documentElement.classList.toggle('dark', newMode === 'dark');
-            }
-        };
+		if (storedTheme === "system" || !storedTheme) {
+			const systemPreference = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+			setThemeMode(systemPreference);
+			document.documentElement.classList.toggle("dark", systemPreference === "dark");
+			localStorage.setItem("themeMode", systemPreference);
+		} else if (storedTheme) {
+			setThemeMode(storedTheme);
+			document.documentElement.classList.toggle("dark", storedTheme === "dark");
+		}
+	}, []);
 
-        window.addEventListener('storage', handleStorage);
+	useEffect(() => {
+		const handleStorage = (event: StorageEvent) => {
+			if (event.key === "themeMode") {
+				const newMode = event.newValue as ThemeMode;
+				setThemeMode(newMode);
+				document.documentElement.classList.toggle("dark", newMode === "dark");
+			}
+		};
 
-        return () => window.removeEventListener('storage', handleStorage);
-    }, []);
+		window.addEventListener("storage", handleStorage);
 
-    useEffect(() => {
-        const mediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
+		return () => window.removeEventListener("storage", handleStorage);
+	}, []);
 
-        const handleChange = () => {
-            setMode('system');
-        };
+	useEffect(() => {
+		const mediaQueryList = window.matchMedia("(prefers-color-scheme: dark)");
 
-        mediaQueryList.addEventListener('change', handleChange);
+		const handleChange = () => {
+			setMode("system");
+		};
 
-        return () => mediaQueryList.removeEventListener('change', handleChange);
-    }, []);
+		mediaQueryList.addEventListener("change", handleChange);
 
-    const setMode = (mode: ThemeMode) => {
-        if (mode === 'system') {
-            const systemPreference = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            setThemeMode(systemPreference);
-            document.documentElement.classList.toggle('dark', systemPreference === 'dark');
-            localStorage.setItem('themeMode', 'system');
-        } else {
-            setThemeMode(mode);
-            document.documentElement.classList.toggle('dark', mode === 'dark');
-            localStorage.setItem('themeMode', mode);
-        }
-    };
+		return () => mediaQueryList.removeEventListener("change", handleChange);
+	}, [setMode]);
 
-    return [themeMode === 'dark', setMode] as const;
+	return [themeMode === "dark", setMode] as const;
 };

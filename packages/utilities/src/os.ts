@@ -1,7 +1,7 @@
 export const isMacOs = () => {
-    return navigator.platform.includes('Mac');
+	return navigator.platform.includes("Mac");
 };
 
 export const isWindows = () => {
-    return navigator.platform.includes('Win');
+	return navigator.platform.includes("Win");
 };

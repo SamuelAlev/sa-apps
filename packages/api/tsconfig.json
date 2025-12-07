@@ -1,19 +1,19 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "module": "ESNext",
-        "moduleResolution": "Bundler",
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "sourceMap": true,
-        "strict": true,
-        "target": "es6",
-        "lib": ["ES2021", "DOM", "DOM.Iterable"],
-        "resolveJsonModule": true,
-        "skipLibCheck": true
-    },
-    "include": ["src", "scripts", "codegen.ts"],
-    "exclude": ["node_modules", "dist"]
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"module": "ESNext",
+		"moduleResolution": "Bundler",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es6",
+		"lib": ["ES2021", "DOM", "DOM.Iterable"],
+		"resolveJsonModule": true,
+		"skipLibCheck": true
+	},
+	"include": ["src", "scripts", "codegen.ts"],
+	"exclude": ["node_modules", "dist"]
 }

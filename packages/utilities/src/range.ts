@@ -1,28 +1,28 @@
 type RangeArgs = [length: number] | [start: number, end: number] | [start: number, end: number, step: number];
 
 export const range = (...args: RangeArgs) => {
-    let start: number;
-    let end: number;
-    let step: number;
+	let start: number;
+	let end: number;
+	let step: number;
 
-    if (args.length === 1) {
-        start = 0;
-        end = args[0];
-        step = 1;
-    } else if (args.length === 2) {
-        start = args[0];
-        end = args[1];
-        step = 1;
-    } else {
-        start = args[0];
-        end = args[1];
-        step = args[2];
-    }
+	if (args.length === 1) {
+		start = 0;
+		end = args[0];
+		step = 1;
+	} else if (args.length === 2) {
+		start = args[0];
+		end = args[1];
+		step = 1;
+	} else {
+		start = args[0];
+		end = args[1];
+		step = args[2];
+	}
 
-    const result = [];
-    for (let i = start; i < end; i += step) {
-        result.push(i);
-    }
+	const result = [];
+	for (let i = start; i < end; i += step) {
+		result.push(i);
+	}
 
-    return result;
+	return result;
 };

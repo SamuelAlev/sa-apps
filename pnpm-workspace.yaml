@@ -1,4 +1,9 @@
-prefer-workspace-packages: true
 packages:
-    - "apps/*"
-    - "packages/*"
+  - apps/*
+  - packages/*
+
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - esbuild
+
+prefer-workspace-packages: true

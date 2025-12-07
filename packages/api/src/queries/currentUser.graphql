@@ -1,8 +1,8 @@
 query CurrentUser {
-    currentUser {
-        id
-        email
-        avatar
-        name
-    }
+	currentUser {
+		id
+		email
+		avatar
+		name
+	}
 }

@@ -1,15 +1,15 @@
 {
-    "compilerOptions": {
-        "esModuleInterop": true,
-        "isolatedModules": true,
-        "module": "ESNext",
-        "moduleResolution": "node",
-        "noImplicitAny": true,
-        "noImplicitReturns": true,
-        "noImplicitThis": true,
-        "sourceMap": true,
-        "strict": true,
-        "resolveJsonModule": true
-    },
-    "exclude": ["**/dist", "**/node_modules"]
+	"compilerOptions": {
+		"esModuleInterop": true,
+		"isolatedModules": true,
+		"module": "ESNext",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+		"noImplicitThis": true,
+		"sourceMap": true,
+		"strict": true,
+		"resolveJsonModule": true
+	},
+	"exclude": ["**/dist", "**/node_modules"]
 }

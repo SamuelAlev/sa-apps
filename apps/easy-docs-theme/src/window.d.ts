@@ -1,26 +1,26 @@
 /// <reference types="vite/client" />
 
 interface ImportMetaEnv {
-    readonly PROD: boolean;
+	readonly PROD: boolean;
 }
 
 interface ImportMeta {
-    readonly env: ImportMetaEnv;
+	readonly env: ImportMetaEnv;
 }
 
 declare global {
-    interface Window {
-        application: {
-            sandbox: {
-                config: {
-                    context: {
-                        authenticated: boolean;
-                        brand: { image?: string };
-                    };
-                };
-            };
-        };
-    }
+	interface Window {
+		application: {
+			sandbox: {
+				config: {
+					context: {
+						authenticated: boolean;
+						brand: { image?: string };
+					};
+				};
+			};
+		};
+	}
 }
 
 export type {};

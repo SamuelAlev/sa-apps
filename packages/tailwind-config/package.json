@@ -1,26 +1,25 @@
 {
-    "name": "@sa-apps/tailwind-config",
-    "version": "1.0.0",
-    "private": true,
-    "author": "Samuel Alev <samuel.alev@protonmail.com>",
-    "sideEffects": false,
-    "exports": {
-        ".": "./src/index.ts",
-        "./src/*": "./src/*"
-    },
-    "main": "src/index.ts",
-    "scripts": {
-        "format": "biome ci ."
-    },
-    "peerDependencies": {
-        "tailwindcss": "^3.4.15"
-    },
-    "dependencies": {
-        "tailwindcss-animate": "^1.0.7"
-    },
-    "devDependencies": {
-        "@biomejs/biome": "^1.9.4",
-        "tailwindcss": "^3.4.15",
-        "typescript": "^5.7.2"
-    }
+	"name": "@sa-apps/tailwind-config",
+	"version": "1.0.0",
+	"private": true,
+	"author": "Samuel Alev <samuel.alev@protonmail.com>",
+	"sideEffects": false,
+	"exports": {
+		".": "./src/index.ts",
+		"./src/*": "./src/*"
+	},
+	"main": "src/index.ts",
+	"scripts": {
+		"format": "biome ci ."
+	},
+	"peerDependencies": {
+		"tailwindcss": "^3.4.15"
+	},
+	"dependencies": {
+		"tailwindcss-animate": "^1.0.7"
+	},
+	"devDependencies": {
+		"tailwindcss": "^3.4.15",
+		"typescript": "^5.9.3"
+	}
 }
