@@ -1,10 +1,4 @@
-import {
-	appendUnit,
-	createFooter,
-	defineSettings,
-	minimumPixelRule,
-	numericalOrPixelRule,
-} from "@frontify/guideline-blocks-settings";
+import { appendUnit, createFooter, defineSettings, minimumPixelRule, numericalOrPixelRule } from "@frontify/guideline-blocks-settings";
 
 import manifestJson from "../manifest.json";
 import packageJson from "../package.json";

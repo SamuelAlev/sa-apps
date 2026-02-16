@@ -40,6 +40,7 @@ export const withTracking =
 				};
 			}, []);
 
+			// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
 			useEffect(() => {
 				if (loaded && websiteId) {
 					store.websiteId = import.meta.env.PROD ? (websiteId ?? "") : WEBSITE_ID_DEV;

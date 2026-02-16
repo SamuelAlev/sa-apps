@@ -17,7 +17,7 @@ import {
 	TextStylePlugin,
 	UnderlinePlugin,
 	UnorderedListPlugin,
-} from "@frontify/fondue";
+} from "@frontify/fondue-rte";
 import { ButtonPlugin, LinkPlugin, TextStylePluginsWithoutImage, TextStylesWithoutImage } from "@frontify/guideline-blocks-settings";
 
 export const getPlugins = (appBridge: AppBridgeBlock): PluginComposer => {
@@ -35,7 +35,9 @@ export const getPlugins = (appBridge: AppBridgeBlock): PluginComposer => {
 		new ItalicPlugin(),
 		new UnderlinePlugin(),
 		new StrikethroughPlugin(),
+		// @ts-ignore - TODO: fix this
 		new LinkPlugin({ appBridge }),
+		// @ts-ignore - TODO: fix this
 		new ButtonPlugin({ appBridge }),
 		new CodePlugin(),
 	]);

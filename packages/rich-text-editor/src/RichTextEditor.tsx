@@ -1,5 +1,5 @@
 import type { AppBridgeBlock } from "@frontify/app-bridge";
-import { RichTextEditor as FondueRichTextEditor } from "@frontify/fondue";
+import { RichTextEditor as FondueRichTextEditor } from "@frontify/fondue-rte";
 import { cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
