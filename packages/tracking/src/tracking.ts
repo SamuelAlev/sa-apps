@@ -1,13 +1,5 @@
-import { store, WEBSITE_ID_DEV } from "./withTracking";
+import { sendEvent } from "./withTracking";
 
 export const trackEvent = (eventName: string, data: Record<string, string | number> = {}) => {
-	window.umami?.track((props) => ({
-		...props,
-		name: eventName,
-		website: import.meta.env.PROD ? store.websiteId : WEBSITE_ID_DEV,
-		data: {
-			...props.data,
-			...data,
-		},
-	}));
+	sendEvent(eventName, data);
 };

@@ -13,19 +13,19 @@ export default defineTheme({
 	templates: {
 		cover: {
 			default: {
-				component: withTracking("bdce2ef6-b3ac-470c-8bc6-37145b75fa06")(withTranslations(messages)(EasyDocsTheme)),
+				component: withTracking("easy-docs")(withTranslations(messages)(EasyDocsTheme)),
 				settings,
 			},
 		},
 		documentPage: {
 			default: {
-				component: withTracking("bdce2ef6-b3ac-470c-8bc6-37145b75fa06")(withTranslations(messages)(EasyDocsTheme)),
+				component: withTracking("easy-docs")(withTranslations(messages)(EasyDocsTheme)),
 				settings,
 			},
 		},
 		library: {
 			default: {
-				component: withTracking("bdce2ef6-b3ac-470c-8bc6-37145b75fa06")(withTranslations(messages)(EasyDocsTheme)),
+				component: withTracking("easy-docs")(withTranslations(messages)(EasyDocsTheme)),
 				settings,
 			},
 		},

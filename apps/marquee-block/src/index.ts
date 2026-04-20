@@ -8,6 +8,6 @@ import { MarqueeBlock } from "./MarqueeBlock";
 import { settings } from "./settings";
 
 export default defineBlock({
-	block: withTracking("e5ecb63e-5a2d-4958-9191-473078336236")(withTranslations(messages)(MarqueeBlock)),
+	block: withTracking("marquee")(withTranslations(messages)(MarqueeBlock)),
 	settings,
 });

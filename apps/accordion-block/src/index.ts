@@ -9,6 +9,6 @@ import { messages } from "./i18n";
 import { settings } from "./settings";
 
 export default defineBlock({
-	block: withTracking("9dbf0769-8fb0-4636-8924-04e4e9d09382")(withTranslations(messages)(AccordionBlock)),
+	block: withTracking("accordion")(withTranslations(messages)(AccordionBlock)),
 	settings,
 });
