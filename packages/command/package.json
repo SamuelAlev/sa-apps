@@ -17,7 +17,7 @@
 		"@sa-apps/dialog": "workspace:*",
 		"@sa-apps/utilities": "workspace:*",
 		"cmdk": "^1.1.1",
-		"lucide-react": "^0.564.0"
+		"lucide-react": "^1.8.0"
 	},
 	"devDependencies": {
 		"@sa-apps/tailwind-config": "workspace:*",
@@ -26,6 +26,6 @@
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
 		"tailwindcss": "^3.4.19",
-		"typescript": "^5.9.3"
+		"typescript": "^6.0.3"
 	}
 }

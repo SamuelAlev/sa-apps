@@ -3,7 +3,10 @@ import type { BlockProps } from "@frontify/guideline-blocks-settings";
 import { trackEvent } from "@sa-apps/tracking";
 import { cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
-import Marquee from "react-fast-marquee";
+import MarqueeImport from "react-fast-marquee";
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Marquee = ((MarqueeImport as any).default ?? MarqueeImport) as typeof MarqueeImport;
 
 import { ContentAssetsEdit } from "./ContentAssetsEdit";
 import { ContentAssetsView } from "./ContentAssetsView";

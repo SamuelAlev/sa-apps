@@ -1,7 +1,7 @@
 import type { ComponentType, FC, ReactElement } from "react";
 import { useEffect, useState } from "react";
 
-export const WEBSITE_ID_DEV = "4170be3f-2ec5-40bd-b781-c7a2036f7fa4";
+export const WEBSITE_ID_DEV = "212abf2f-e320-41ec-9999-8a2295d5db5a";
 
 export const store: { websiteId: string } = {
 	websiteId: "",

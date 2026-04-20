@@ -9,7 +9,6 @@
 		"noImplicitThis": true,
 		"sourceMap": true,
 		"strict": true,
-		"target": "es6",
 		"jsx": "react-jsx",
 		"lib": ["ES2021", "DOM", "DOM.Iterable"],
 		"resolveJsonModule": true,
