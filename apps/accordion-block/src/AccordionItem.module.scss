@@ -1,0 +1,102 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+// ---------------------------------------------------------------------------
+// Item
+// ---------------------------------------------------------------------------
+
+.item {
+	border-width: var(--accordion-items-border-disabled, var(--accordion-items-border-width));
+	border-color: var(--accordion-items-border-disabled, var(--accordion-items-border-color));
+	border-style: var(--accordion-items-border-disabled, var(--accordion-items-border-style));
+}
+
+// ---------------------------------------------------------------------------
+// Trigger (header) — flex row in LTR, row-reverse in RTL
+// ---------------------------------------------------------------------------
+
+.trigger {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	gap: 0.5rem;
+	flex-direction: row;
+	padding-top: var(--accordion-item-heading-padding-top);
+	padding-right: var(--accordion-item-heading-padding-right);
+	padding-bottom: var(--accordion-item-heading-padding-bottom);
+	padding-left: var(--accordion-item-heading-padding-left);
+	max-width: calc(100% - var(--accordion-item-heading-padding-left) * 2);
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([dir="rtl"]) .trigger {
+	flex-direction: row-reverse;
+}
+
+// Spacer that pushes the actions to the trailing edge in LTR layouts.
+.ltrGrowSpacer {
+	display: flex;
+	flex-grow: 1;
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([dir="rtl"]) .ltrGrowSpacer {
+	display: none;
+}
+
+// Spacer that pushes the actions to the trailing edge in RTL layouts.
+.rtlGrowSpacer {
+	display: none;
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([dir="rtl"]) .rtlGrowSpacer {
+	display: flex;
+	flex-grow: 1;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+}
+
+// ---------------------------------------------------------------------------
+// Content — preserves the Radix accordion open/close animations
+// ---------------------------------------------------------------------------
+
+@keyframes accordion-down {
+	from {
+		height: 0;
+	}
+	to {
+		height: var(--radix-accordion-content-height);
+	}
+}
+
+@keyframes accordion-up {
+	from {
+		height: var(--radix-accordion-content-height);
+	}
+	to {
+		height: 0;
+	}
+}
+
+.content {
+	overflow-y: hidden;
+
+	&[data-state="open"] {
+		animation: accordion-down 300ms ease-out;
+	}
+
+	&[data-state="closed"] {
+		animation: accordion-up 300ms ease-out;
+	}
+}
+
+.contentInner {
+	padding-top: var(--accordion-item-content-padding-top);
+	padding-right: var(--accordion-item-content-padding-right);
+	padding-bottom: var(--accordion-item-content-padding-bottom);
+	padding-left: var(--accordion-item-content-padding-left);
+}

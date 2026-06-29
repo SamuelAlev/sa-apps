@@ -1,5 +1,7 @@
+import { cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
 import { RgbaColorPicker as ReactColofulRgbaColorPicker } from "react-colorful";
+import styles from "./RgbaColorPicker.module.scss";
 
 export type RgbaColorPickerProps = {
 	color: { r: number; g: number; b: number; a: number };
@@ -11,5 +13,5 @@ export const RgbaColorPicker = ({ color, onColorChange }: RgbaColorPickerProps):
 		onColorChange(newColor);
 	};
 
-	return <ReactColofulRgbaColorPicker className="!w-full" color={color} onChange={handleColorChange} />;
+	return <ReactColofulRgbaColorPicker className={cn(styles.picker)} color={color} onChange={handleColorChange} />;
 };

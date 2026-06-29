@@ -1,0 +1,20 @@
+{
+	"name": "@sa-apps/design-system",
+	"version": "1.0.0",
+	"private": true,
+	"author": "Samuel Alev <samuel.alev@protonmail.com>",
+	"sideEffects": false,
+	"exports": {
+		"./styles": "./src/styles.scss",
+		"./tokens": "./src/_tokens.scss",
+		"./mixins": "./src/_mixins.scss",
+		"./src/*": "./src/*",
+		"./*": "./src/*"
+	},
+	"scripts": {
+		"format": "biome ci ."
+	},
+	"devDependencies": {
+		"sass": "^1.101.0"
+	}
+}

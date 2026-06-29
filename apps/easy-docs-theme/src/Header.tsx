@@ -12,6 +12,7 @@ import type { MouseEvent, ReactElement } from "react";
 import { useMemo, useState } from "react";
 
 import { useThemeContext } from "./Context";
+import styles from "./Header.module.scss";
 import { getLinkFromLanguage } from "./helpers/language";
 import { isDocumentGroup } from "./helpers/types";
 import { useThemeMode } from "./hooks/useThemeMode";
@@ -84,15 +85,15 @@ export const Header = (): ReactElement => {
 	};
 
 	return (
-		<header className="sticky z-40 w-full border-b border-b-border bg-background/80">
-			<div className="sa-container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-				<div className="flex gap-6 md:gap-10">
-					<a className="hidden items-center space-x-2 md:flex" href="/">
+		<header className={styles.header}>
+			<div className={cn("sa-container", styles.headerContainer)}>
+				<div className={styles.navSection}>
+					<a className={styles.brandLink} href="/">
 						{window.application.sandbox.config.context.brand?.image !== undefined && (
-							<img src={window.application.sandbox.config.context.brand.image} className="aspect-auto h-12" alt="Logo" />
+							<img src={window.application.sandbox.config.context.brand.image} className={styles.brandImage} alt="Logo" />
 						)}
 					</a>
-					<nav className="hidden items-center space-x-6 text-sm font-semibold md:flex">
+					<nav className={styles.mainNav}>
 						{!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
 							<a href={coverPage.url} onClick={handleAnchorElementClick} title={coverPage.title} aria-label={coverPage.title}>
 								{coverPage.title}
@@ -107,35 +108,31 @@ export const Header = (): ReactElement => {
 							/>
 						))}
 					</nav>
-					<button
-						type="button"
-						className="flex items-center space-x-2 md:hidden"
-						onClick={() => setShowMobileMenu(!showMobileMenu)}
-					>
+					<button type="button" className={styles.mobileMenuButton} onClick={() => setShowMobileMenu(!showMobileMenu)}>
 						{showMobileMenu ? <X /> : <Menu />}
-						<span className="font-bold">{t("menu")}</span>
+						<span className={styles.menuLabel}>{t("menu")}</span>
 					</button>
 					{showMobileMenu && (
-						<div className="fixed inset-0 top-16 z-50 grid h-[calc(100vh-4rem)] grid-flow-row auto-rows-max overflow-auto p-6 pb-32 shadow-md animate-in slide-in-from-bottom-80 md:hidden">
-							<div className="relative z-20 grid gap-6 rounded-md bg-background p-4 shadow-md">
-								<a className="flex items-center space-x-2" href="/">
+						<div className={styles.mobileMenu}>
+							<div className={styles.mobileMenuPanel}>
+								<a className={styles.mobileBrandLink} href="/">
 									{window.application.sandbox.config.context.brand?.image !== undefined && (
 										<img
 											src={window.application.sandbox.config.context.brand.image}
-											className="aspect-auto h-12"
+											className={styles.brandImage}
 											alt="Logo"
 										/>
 									)}
 								</a>
 
-								<nav className="grid grid-flow-row auto-rows-max text-sm">
+								<nav className={styles.mobileNav}>
 									{!isLoading && coverPage && shouldShowCoverPage(coverPage, isEditing) && (
 										<a
 											href={coverPage.url}
 											onClick={handleAnchorElementClick}
 											title={coverPage.title}
 											aria-label={coverPage.title}
-											className="flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline"
+											className={styles.mobileNavLink}
 										>
 											{coverPage.title}
 										</a>
@@ -153,12 +150,12 @@ export const Header = (): ReactElement => {
 						</div>
 					)}
 				</div>
-				<div className="flex flex-1 items-center space-x-4 sm:justify-end">
-					<div className="flex-1 sm:grow-0">
+				<div className={styles.headerActions}>
+					<div className={styles.searchWrapper}>
 						<Search />
 					</div>
 
-					<nav className="flex space-x-4">
+					<nav className={styles.actionNav}>
 						{dataPortal?.i18n_enabled && !isLoadingPortal && !errorPortal ? (
 							<DropdownMenu>
 								<DropdownMenuTrigger
@@ -200,15 +197,15 @@ export const Header = (): ReactElement => {
 							</DropdownMenuTrigger>
 							<DropdownMenuContent align="end">
 								<DropdownMenuItem onClick={() => setThemeMode("light")}>
-									<Sun className="mr-2 h-4 w-4" />
+									<Sun className={styles.menuItemIcon} />
 									{t("light")}
 								</DropdownMenuItem>
 								<DropdownMenuItem onClick={() => setThemeMode("dark")}>
-									<Moon className="mr-2 h-4 w-4" />
+									<Moon className={styles.menuItemIcon} />
 									{t("dark")}
 								</DropdownMenuItem>
 								<DropdownMenuItem onClick={() => setThemeMode("system")}>
-									<Laptop className="mr-2 h-4 w-4" />
+									<Laptop className={styles.menuItemIcon} />
 									{t("system")}
 								</DropdownMenuItem>
 							</DropdownMenuContent>
@@ -224,7 +221,7 @@ export const Header = (): ReactElement => {
 								</DropdownMenuTrigger>
 								<DropdownMenuContent align="end">
 									<DropdownMenuItem onClick={handleLogOutClick}>
-										<LogOut className="mr-2 h-4 w-4" />
+										<LogOut className={styles.menuItemIcon} />
 										{t("logOut")}
 									</DropdownMenuItem>
 								</DropdownMenuContent>
@@ -253,11 +250,11 @@ const HeaderDocumentOrDocumentGroup = ({ documentOrDocumentGroup, onLinkClick }:
 	if (isDocumentGroup(documentOrDocumentGroup)) {
 		return (
 			<DropdownMenu>
-				<DropdownMenuTrigger className="group flex shrink-0 items-center break-keep">
+				<DropdownMenuTrigger className={styles.groupTrigger}>
 					<span key={documentOrDocumentGroup.id} title={documentOrDocumentGroup.name}>
 						{documentOrDocumentGroup.name}
 					</span>
-					<ChevronDown className="ml-2 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+					<ChevronDown className={styles.chevron} />
 				</DropdownMenuTrigger>
 				<DropdownMenuContent align="end">
 					{groupedDocuments.map((document) => (
@@ -286,20 +283,20 @@ const MobileHeaderDocumentOrDocumentGroup = ({
 	if (isDocumentGroup(documentOrDocumentGroup)) {
 		return (
 			<Collapsible>
-				<CollapsibleTrigger className="group flex shrink-0 items-center break-keep">
+				<CollapsibleTrigger className={styles.groupTrigger}>
 					<a
 						key={documentOrDocumentGroup.id}
 						// biome-ignore lint/a11y/useValidAnchor: <explanation>
 						href="#"
 						title={documentOrDocumentGroup.name}
 						aria-label={documentOrDocumentGroup.name}
-						className="flex w-full items-center rounded-md p-2 text-sm font-medium group-hover:underline"
+						className={styles.mobileGroupLink}
 					>
 						{documentOrDocumentGroup.name}
 					</a>
-					<ChevronDown className="ml-2 h-4 w-4 transition-transform duration-300 group-data-[state=open]:rotate-180" />
+					<ChevronDown className={styles.chevron} />
 				</CollapsibleTrigger>
-				<CollapsibleContent className="pl-2">
+				<CollapsibleContent className={styles.collapsibleContent}>
 					{groupedDocuments.map((document) => (
 						<MobileHeaderDocumentOrLink key={document.id} documentOrLink={document} onLinkClick={onLinkClick} />
 					))}
@@ -320,7 +317,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
 				onClick={onLinkClick}
 				title={documentOrLink.title}
 				aria-label={documentOrLink.title}
-				className="flex shrink-0 items-center break-keep"
+				className={styles.desktopLinkItem}
 				target={documentOrLink.linkSettings?.newTab ? "_blank" : "_self"}
 				rel="noreferrer"
 			>
@@ -329,7 +326,11 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
 					// biome-ignore lint/a11y/useAltText: <explanation>
 					<img
 						src={documentOrLink.linkSettings.iconUrl}
-						className={cn(documentOrLink.linkSettings?.display !== "ICON" && "ml-2", "h-4 w-4 text-white ")}
+						className={cn(
+							styles.linkIcon,
+							styles.linkIconWhite,
+							documentOrLink.linkSettings?.display !== "ICON" && styles.linkIconMargin,
+						)}
 					/>
 				)}
 			</a>
@@ -343,7 +344,7 @@ const HeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocumentOrL
 			onClick={onLinkClick}
 			title={documentOrLink.title}
 			aria-label={documentOrLink.title}
-			className="shrink-0 break-keep"
+			className={styles.desktopDocLink}
 		>
 			{documentOrLink.title}
 		</a>
@@ -359,7 +360,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
 				onClick={onLinkClick}
 				title={documentOrLink.title}
 				aria-label={documentOrLink.title}
-				className="flex w-full shrink-0 items-center break-keep rounded-md p-2 text-sm hover:underline"
+				className={styles.mobileLinkItem}
 				target={documentOrLink.linkSettings?.newTab ? "_blank" : "_self"}
 				rel="noreferrer"
 			>
@@ -368,7 +369,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
 					// biome-ignore lint/a11y/useAltText: icon doesn't have alt here
 					<img
 						src={documentOrLink.linkSettings.iconUrl}
-						className={cn(documentOrLink.linkSettings?.display !== "ICON" && "ml-2", "h-4 w-4")}
+						className={cn(styles.linkIcon, documentOrLink.linkSettings?.display !== "ICON" && styles.linkIconMargin)}
 					/>
 				)}
 			</a>
@@ -382,7 +383,7 @@ const MobileHeaderDocumentOrLink = ({ documentOrLink, onLinkClick }: HeaderDocum
 			onClick={onLinkClick}
 			title={documentOrLink.title}
 			aria-label={documentOrLink.title}
-			className="flex w-full shrink-0 items-center break-keep rounded-md p-2 text-sm hover:underline"
+			className={styles.mobileLinkItem}
 		>
 			{documentOrLink.title}
 		</a>

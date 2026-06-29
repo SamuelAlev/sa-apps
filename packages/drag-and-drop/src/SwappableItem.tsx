@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { cn } from "@sa-apps/utilities";
 import type { ReactNode } from "react";
+import styles from "./SwappableItem.module.scss";
 
 type SwappableItemProps = {
 	id: string;
@@ -25,7 +26,7 @@ export const SwappableItem = ({ id, children, disabled }: SwappableItemProps) =>
 			}}
 			{...attributes}
 			{...listeners}
-			className={cn(disabled ? "cursor-auto" : "cursor-grab active:cursor-grabbing")}
+			className={cn(disabled ? styles.disabled : styles.swappable)}
 		>
 			{children}
 		</div>

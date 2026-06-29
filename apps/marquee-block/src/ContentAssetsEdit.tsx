@@ -1,5 +1,6 @@
 import { type AppBridgeBlock, type Asset, AssetChooserObjectType, useAssetChooser } from "@frontify/app-bridge";
 import { trackEvent } from "@sa-apps/tracking";
+import styles from "./ContentAssetsEdit.module.scss";
 import { ContentAssetsRowAdd } from "./ContentAssetsRowAdd";
 import { ContentAssetsRowEdit } from "./ContentAssetsRowEdit";
 import { useUploadFile } from "./useUploadFile";
@@ -45,7 +46,7 @@ export const ContentAssetsEdit = ({
 	};
 
 	return (
-		<div className="pt-8 flex flex-col gap-4 w-full">
+		<div className={styles.editContainer}>
 			{assets?.map((asset, index) => (
 				<ContentAssetsRowEdit
 					key={asset.id}

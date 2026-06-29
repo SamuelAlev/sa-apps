@@ -12,6 +12,7 @@ import {
 import { Button, buttonVariants } from "@sa-apps/button";
 import { useTranslations } from "@sa-apps/i18n";
 import { useState } from "react";
+import styles from "./AssetRowEdit.module.scss";
 import { prepareImageUrl } from "./helpers";
 
 type AssetRowEditProps = {
@@ -38,11 +39,11 @@ export const AssetRowEdit = ({ asset, onUpdate, onRemove }: AssetRowEditProps) =
 	};
 
 	return (
-		<div className="flex relative">
-			<div className="grid w-full gap-6 items-center grid-cols-[140px_minmax(200px,1fr)] h-48">
+		<div className={styles.row}>
+			<div className={styles.grid}>
 				<img
 					draggable={false}
-					className="h-full w-full object-contain"
+					className={styles.image}
 					src={prepareImageUrl(asset.previewUrl)}
 					// biome-ignore lint/a11y/noRedundantAlt: <explanation>
 					alt="layer for the stackable image"
@@ -52,7 +53,7 @@ export const AssetRowEdit = ({ asset, onUpdate, onRemove }: AssetRowEditProps) =
                     <TextInput defaultValue={contentText} name="contentText" placeholder="Content text (alt)" />
                 </div> */}
 
-				<div className="absolute top-0 bottom-0 right-2 flex items-center justify-center gap-2">
+				<div className={styles.actions}>
 					<Button size="sm" variant="destructive" onClick={handleFirstDeleteClick}>
 						Delete
 					</Button>

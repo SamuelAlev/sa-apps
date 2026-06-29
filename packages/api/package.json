@@ -16,21 +16,21 @@
 	},
 	"dependencies": {
 		"graphql-request": "^7.4.0",
-		"graphql-tag": "^2.12.6",
-		"swr": "^2.4.1"
+		"graphql-tag": "^2.12.7",
+		"swr": "^2.4.2"
 	},
 	"devDependencies": {
 		"@graphql-codegen/cli": "^6.3.1",
 		"@graphql-codegen/typescript": "^5.0.10",
-		"@graphql-codegen/typescript-graphql-request": "^7.0.1",
+		"@graphql-codegen/typescript-graphql-request": "^7.1.0",
 		"@graphql-codegen/typescript-operations": "^5.1.0",
-		"@types/node": "^24.12.2",
+		"@types/node": "^26.0.1",
 		"dotenv-cli": "^11.0.0",
 		"graphql": "^16.13.2",
 		"graphql-codegen-plugin-typescript-swr": "^0.8.5",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"tsx": "^4.21.0",
+		"tsx": "^4.22.4",
 		"typescript": "^6.0.3"
 	}
 }

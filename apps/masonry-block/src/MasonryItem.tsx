@@ -5,13 +5,21 @@ import { RichTextEditor } from "@sa-apps/rich-text-editor";
 import { cn } from "@sa-apps/utilities";
 import { Loader2 } from "lucide-react";
 import type { ChangeEvent, ReactElement } from "react";
-import { contentPaddingClasses, DEFAULT_MASONRY_ITEM, itemBorderClasses, itemBoxShadowClasses, itemCornerRadiusClasses } from "./constant";
+import { DEFAULT_MASONRY_ITEM } from "./constant";
 import { isMasonryItemEmpty, prepareImageUrl, prepareVideoUrl, rgbaObjectToString } from "./helpers";
+import styles from "./MasonryItem.module.scss";
 import { MasonryItemMenu } from "./MasonryItemMenu";
 import type { MasonryItemProps } from "./types";
 import { useUploadFile } from "./useUploadFile";
 import { useDraggableHeightHandle } from "./utilities";
 import { Video } from "./Video";
+
+const boxShadowClass: Record<MasonryItemProps["boxShadow"], string> = {
+	none: "",
+	small: styles.boxShadowSmall,
+	medium: styles.boxShadowMedium,
+	large: styles.boxShadowLarge,
+};
 
 export const MasonryItem = ({
 	appBridge,
@@ -74,25 +82,21 @@ export const MasonryItem = ({
 					backgroundColor: style?.backgroundColor ? rgbaObjectToString(style.backgroundColor) : undefined,
 				}}
 				className={cn(
-					"group/masonryItem relative flex overflow-auto",
-					contentPosition === "top" ? "flex-col-reverse" : "flex-col",
-					itemBorderClasses,
-					itemCornerRadiusClasses,
-					itemBoxShadowClasses[boxShadow],
+					styles.item,
+					contentPosition === "top" ? styles.flexColReverse : styles.flexCol,
+					styles.border,
+					styles.cornerRadius,
+					boxShadowClass[boxShadow],
 				)}
 			>
 				{coverAsset?.previewUrl && !FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
 					// biome-ignore lint/a11y/useAltText: <explanation>
-					<img
-						draggable={false}
-						className="h-full flex-grow select-none overflow-hidden object-cover"
-						src={prepareImageUrl(coverAsset.previewUrl)}
-					/>
+					<img draggable={false} className={styles.coverImage} src={prepareImageUrl(coverAsset.previewUrl)} />
 				)}
 
 				{coverAsset?.previewUrl && FileExtensionSets.Videos.includes(coverAsset.extension as FileExtension) && (
 					<Video
-						className="h-full flex-grow select-none overflow-hidden object-cover"
+						className={styles.coverImage}
 						draggable={false}
 						controls={showControls}
 						loop={loopVideo}
@@ -101,16 +105,16 @@ export const MasonryItem = ({
 					/>
 				)}
 
-				{!coverAsset?.previewUrl && readonly ? <div className="flex-grow" /> : null}
+				{!coverAsset?.previewUrl && readonly ? <div className={styles.flexGrow} /> : null}
 
 				{loadingUpload ? (
-					<div className="flex-grow inset-0 flex items-center justify-center">
-						<Loader2 className="animate-spin dark:text-white" size={32} />
+					<div className={styles.loadingOverlay}>
+						<Loader2 className={styles.loader} size={32} />
 					</div>
 				) : null}
 
 				{!coverAsset?.previewUrl && !loadingUpload && !readonly && (
-					<div className="flex h-[120px] min-h-[120px] w-full items-center justify-center">
+					<div className={styles.dropzoneWrapper}>
 						<Dropzone onUploadClick={handleUploadClick} onBrowseAssetClick={handleBrowseAssetClick} />
 					</div>
 				)}
@@ -124,7 +128,7 @@ export const MasonryItem = ({
 					/>
 				) : null}
 
-				<div className={cn(contentPaddingClasses, content === DEFAULT_MASONRY_ITEM.content && readonly && "hidden")}>
+				<div className={cn(styles.contentPadding, content === DEFAULT_MASONRY_ITEM.content && readonly && styles.hidden)}>
 					<RichTextEditor appBridge={appBridge} id={id} content={content} onTextChange={onContentChange} readonly={readonly} />
 				</div>
 			</div>

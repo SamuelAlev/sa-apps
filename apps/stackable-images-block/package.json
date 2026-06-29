@@ -14,10 +14,11 @@
 		"test:watch": "vitest"
 	},
 	"dependencies": {
-		"@frontify/app-bridge": "^4.0.0-alpha.62",
-		"@frontify/guideline-blocks-settings": "^2.1.8",
+		"@frontify/app-bridge": "^4.0.0-alpha.64",
+		"@frontify/guideline-blocks-settings": "^2.1.14",
 		"@sa-apps/alert-dialog": "workspace:*",
 		"@sa-apps/button": "workspace:*",
+		"@sa-apps/design-system": "workspace:*",
 		"@sa-apps/drag-and-drop": "workspace:*",
 		"@sa-apps/dropdown-menu": "workspace:*",
 		"@sa-apps/dropzone": "workspace:*",
@@ -28,27 +29,23 @@
 		"@sa-apps/text-input": "workspace:*",
 		"@sa-apps/tracking": "workspace:*",
 		"@sa-apps/utilities": "workspace:*",
-		"lucide-react": "^1.8.0",
+		"lucide-react": "^1.21.0",
 		"react": "^18.3.1",
 		"react-dom": "^18.3.1",
-		"react-parallax-tilt": "^1.7.324"
+		"react-parallax-tilt": "^1.7.333"
 	},
 	"devDependencies": {
-		"@frontify/frontify-cli": "^6.0.3",
-		"@sa-apps/tailwind-config": "workspace:*",
+		"@frontify/frontify-cli": "^6.2.3",
 		"@testing-library/react": "^16.3.2",
 		"@types/react": "^18.3.28",
 		"@types/react-dom": "^18.3.7",
-		"@vitejs/plugin-react": "^6.0.1",
-		"@vitest/ui": "^4.1.4",
-		"autoprefixer": "^10.5.0",
-		"jsdom": "^29.0.2",
-		"postcss": "^8.5.10",
-		"sass": "^1.99.0",
-		"sinon": "^21.1.2",
-		"tailwindcss": "^3.4.19",
+		"@vitejs/plugin-react": "^6.0.3",
+		"@vitest/ui": "^4.1.9",
+		"jsdom": "^29.1.1",
+		"sass": "^1.101.0",
+		"sinon": "^22.0.0",
 		"typescript": "^6.0.3",
-		"vite": "^8.0.9",
-		"vitest": "^4.1.4"
+		"vite": "^8.1.0",
+		"vitest": "^4.1.9"
 	}
 }

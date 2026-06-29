@@ -7,6 +7,7 @@ import { useCallback, useEffect, useState } from "react";
 
 import { useThemeContext } from "./Context";
 import { getLinkFromGuidelineSearchResult } from "./helpers/search";
+import styles from "./Search.module.scss";
 
 export const Search = () => {
 	const { appBridge, router } = useThemeContext();
@@ -73,16 +74,10 @@ export const Search = () => {
 
 	return (
 		<>
-			<button
-				type="button"
-				className="relative inline-flex h-auto w-full items-center justify-start rounded-[0.5rem] border border-input px-4 py-2 text-sm font-medium text-muted-foreground ring-offset-background transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 sm:w-64 sm:pr-12"
-				onClick={() => setOpen(true)}
-			>
-				<span className="hidden lg:inline-flex">{t("searchInGuidelineDotDotDot")}</span>
-				<span className="inline-flex lg:hidden">{t("searchDotDotDot")}</span>
-				<kbd className="pointer-events-none absolute right-1.5 top-2 hidden h-5 select-none items-center gap-1 rounded border border-input bg-muted px-1.5 font-mono text-[10px] font-medium opacity-100 sm:flex">
-					{isWindows() ? "ctrl " : <span className="text-xs">⌘ </span>}K
-				</kbd>
+			<button type="button" className={styles.searchButton} onClick={() => setOpen(true)}>
+				<span className={styles.searchPlaceholderLg}>{t("searchInGuidelineDotDotDot")}</span>
+				<span className={styles.searchPlaceholderSm}>{t("searchDotDotDot")}</span>
+				<kbd className={styles.kbd}>{isWindows() ? "ctrl " : <span className={styles.kbdKey}>⌘ </span>}K</kbd>
 			</button>
 
 			<CommandDialog open={open} onOpenChange={setOpen} commandProps={{ shouldFilter: false }}>
@@ -101,18 +96,18 @@ export const Search = () => {
 								<CommandItem
 									key={searchResult.objectId}
 									onSelect={() => handleSearchResultClick(searchResult)}
-									className="flex"
+									className={styles.searchResultItem}
 									value={searchResult.objectId.toString()}
 								>
-									<File className="mr-4 h-4 w-4 shrink-0" />
-									<div className="flex flex-col items-start">
-										<span className="mb-1 border-b border-b-input pb-1">{searchResult.pageTitle}</span>
+									<File className={styles.searchResultIcon} />
+									<div className={styles.searchResultBody}>
+										<span className={styles.searchResultTitle}>{searchResult.pageTitle}</span>
 
 										{searchResult.highlights.map((highlight, index) => (
 											<span
 												// biome-ignore lint/suspicious/noArrayIndexKey: <explanation>
 												key={index}
-												className="[&>em]:font-bold [&>em]:not-italic [&>em]:underline"
+												className={styles.highlight}
 												// biome-ignore lint/security/noDangerouslySetInnerHtml: <explanation>
 												dangerouslySetInnerHTML={{
 													__html: highlight,

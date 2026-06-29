@@ -1,0 +1,108 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+.root {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.relativeWrapper {
+	position: relative;
+}
+
+.output {
+	height: 100%;
+	width: 100%;
+	aspect-ratio: auto;
+
+	> svg {
+		max-width: 100% !important;
+		width: 100% !important;
+		height: 100%;
+	}
+}
+
+.loading {
+	filter: blur(4px) grayscale(1);
+}
+
+.loadingOverlay {
+	position: absolute;
+	inset: 0;
+	@include mixins.flex-center;
+}
+
+.spinner {
+	color: hsl(var(--sa-background));
+	animation: sa-mermaid-spin 1s linear infinite;
+}
+
+.form {
+	padding-left: 1.5rem;
+	padding-right: 1.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
+
+.textarea {
+	border: 1px solid hsl(var(--sa-input));
+	border-radius: calc(var(--sa-radius) - 4px);
+	padding: 0.25rem 0.5rem;
+	@include mixins.focus-ring;
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+
+	&:dir(rtl) {
+		justify-content: flex-start;
+	}
+}
+
+.display {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.container {
+	position: relative;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.svgWrapper {
+	height: 100%;
+	width: 100%;
+	aspect-ratio: auto;
+
+	> svg {
+		max-width: 100% !important;
+		width: 100% !important;
+		height: 100%;
+	}
+}
+
+.showCodeButton {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+	padding: 0.5rem;
+	background-color: hsl(var(--sa-background) / 0.5);
+}
+
+.codePanel {
+	overflow: hidden;
+	height: 100%;
+	max-height: 0;
+	transition: max-height 150ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.display[data-show-code="true"] .codePanel {
+	max-height: 100dvh;
+}

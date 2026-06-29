@@ -1,0 +1,147 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+// ---------------------------------------------------------------------------
+// Overlay
+// ---------------------------------------------------------------------------
+
+@keyframes alertOverlayEnter {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
+@keyframes alertOverlayExit {
+	from {
+		opacity: 1;
+	}
+	to {
+		opacity: 0;
+	}
+}
+
+.overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 50;
+	background-color: rgb(0 0 0 / 0.8);
+
+	&[data-state="open"] {
+		animation: alertOverlayEnter 150ms ease-out both;
+	}
+
+	&[data-state="closed"] {
+		animation: alertOverlayExit 150ms ease-in forwards;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Content
+// ---------------------------------------------------------------------------
+
+@keyframes alertContentEnter {
+	from {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.95);
+	}
+	to {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+}
+
+@keyframes alertContentExit {
+	from {
+		opacity: 1;
+		transform: translate(-50%, -50%) scale(1);
+	}
+	to {
+		opacity: 0;
+		transform: translate(-50%, -50%) scale(0.95);
+	}
+}
+
+.content {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 50;
+	display: grid;
+	width: 100%;
+	max-width: 32rem;
+	gap: 1rem;
+	transform: translate(-50%, -50%);
+	border: 1px solid hsl(var(--sa-border));
+	background-color: hsl(var(--sa-background));
+	padding: 1.5rem;
+	box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+	@media (min-width: 640px) {
+		border-radius: var(--sa-radius);
+	}
+
+	&[data-state="open"] {
+		animation: alertContentEnter 200ms cubic-bezier(0.16, 1, 0.3, 1) both;
+	}
+
+	&[data-state="closed"] {
+		animation: alertContentExit 200ms cubic-bezier(0.4, 0, 1, 1) forwards;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Header / Footer
+// ---------------------------------------------------------------------------
+
+.header {
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+	text-align: center;
+
+	@media (min-width: 640px) {
+		text-align: left;
+	}
+}
+
+.footer {
+	display: flex;
+	flex-direction: column-reverse;
+
+	@media (min-width: 640px) {
+		flex-direction: row;
+		justify-content: flex-end;
+		gap: 0.5rem;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// Title / Description
+// ---------------------------------------------------------------------------
+
+.title {
+	font-size: 1.125rem;
+	line-height: 1.75rem;
+	font-weight: 600;
+	color: hsl(var(--sa-primary));
+}
+
+.description {
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	color: hsl(var(--sa-muted-foreground));
+}
+
+// ---------------------------------------------------------------------------
+// Cancel (mobile-only top margin)
+// ---------------------------------------------------------------------------
+
+.cancel {
+	margin-top: 0.5rem;
+
+	@media (min-width: 640px) {
+		margin-top: 0;
+	}
+}

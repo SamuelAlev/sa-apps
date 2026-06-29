@@ -28,7 +28,7 @@ import { debounce, hex8ToRgbaObject, rgbaObjectToHex8 } from "@sa-apps/utilities
 import { Menu, Paintbrush2, Trash } from "lucide-react";
 import type { MouseEvent, ReactElement } from "react";
 import { useRef, useState } from "react";
-
+import styles from "./AccordionItemMenu.module.scss";
 import type { AccordionItemProps } from "./types";
 
 type AccordionItemMenuProps = {
@@ -85,7 +85,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
 					<DropdownMenuTrigger data-no-dnd={true} asChild onClick={(event) => event.stopPropagation()}>
 						<PopoverTrigger data-no-dnd={true} asChild>
 							<Button size="sm" variant="secondary" ref={itemDropdownRef}>
-								<Menu className="h-[20px] max-h-[20px] w-[20px] max-w-[20px]" />
+								<Menu className={styles.menuIcon} />
 							</Button>
 						</PopoverTrigger>
 					</DropdownMenuTrigger>
@@ -93,12 +93,12 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
 						<DropdownMenuLabel>{t("item")}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={handleDropdownStyleClick}>
-							<Paintbrush2 className="mr-2 h-4 w-4" />
+							<Paintbrush2 className={styles.itemIcon} />
 							{t("styles")}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="text-destructive" onClick={handleDropdownDeleteClick}>
-							<Trash className="mr-2 h-4 w-4" />
+						<DropdownMenuItem className={styles.destructive} onClick={handleDropdownDeleteClick}>
+							<Trash className={styles.itemIcon} />
 							{t("delete")}
 							<DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
 						</DropdownMenuItem>
@@ -109,13 +109,13 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
 						onInteractOutside={(event) => handlePopoverClickOutside(event.target)}
 						onClick={(event) => event.stopPropagation()}
 					>
-						<div className="flex flex-col gap-8">
-							<div className="space-y-2">
-								<h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{t("styles")}</h4>
-								<p className="text-sm text-muted-foreground">{t("stylesDescription")}.</p>
+						<div className={styles.popoverBody}>
+							<div className={styles.section}>
+								<h4 className={styles.sectionTitle}>{t("styles")}</h4>
+								<p className={styles.sectionDescription}>{t("stylesDescription")}.</p>
 							</div>
-							<div className="flex flex-col gap-2">
-								<div className="flex w-full flex-col gap-4">
+							<div className={styles.fieldGroup}>
+								<div className={styles.field}>
 									<Label>{t("backgroundColor")}</Label>
 									<RgbaColorPicker
 										color={
@@ -134,7 +134,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
 										}, 300)}
 									/>
 									<TextInput
-										className="w-[calc(100%-24px)]"
+										className={styles.hexInput}
 										value={localBackgroundColor ? rgbaObjectToHex8(localBackgroundColor) : undefined}
 										onChange={(event) =>
 											handleStyleChange({
@@ -144,7 +144,7 @@ export const AccordionItemMenu = ({ style, onStyleChange, onDeleteClick }: Accor
 									/>
 								</div>
 							</div>
-							<div className="flex w-full justify-end pt-4">
+							<div className={styles.actions}>
 								<Button onClick={handlePopoverCancelClick} size="lg">
 									{t("close")}
 								</Button>

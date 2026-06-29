@@ -1,0 +1,36 @@
+@use "sass:color";
+@use "tokens" as *;
+
+// Center flex content along both axes.
+@mixin flex-center {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@mixin focus-ring {
+	&:focus-visible {
+		outline: none;
+		box-shadow: 0 0 0 2px hsl(var(--sa-background)), 0 0 0 4px hsl(var(--sa-ring));
+	}
+}
+
+// Standard color transition used by interactive elements.
+@mixin transition-colors($duration: 150ms) {
+	transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+	transition-duration: $duration;
+}
+
+// Visually hide content while keeping it accessible to screen readers.
+@mixin visually-hidden {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
+}

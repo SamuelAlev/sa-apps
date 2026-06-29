@@ -1,0 +1,44 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+.content {
+	z-index: 50;
+	width: 18rem;
+	border: 1px solid hsl(var(--sa-border));
+	border-radius: calc(var(--sa-radius) - 2px);
+	background-color: hsl(var(--sa-popover));
+	padding: 1rem;
+	color: hsl(var(--sa-popover-foreground));
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	outline: none;
+	animation: sa-popover-in 150ms cubic-bezier(0.4, 0, 0.2, 1);
+
+	&[data-side="bottom"] {
+		--sa-popover-enter-x: 0;
+		--sa-popover-enter-y: -0.5rem;
+	}
+
+	&[data-side="top"] {
+		--sa-popover-enter-x: 0;
+		--sa-popover-enter-y: 0.5rem;
+	}
+
+	&[data-side="left"] {
+		--sa-popover-enter-x: 0.5rem;
+		--sa-popover-enter-y: 0;
+	}
+
+	&[data-side="right"] {
+		--sa-popover-enter-x: -0.5rem;
+		--sa-popover-enter-y: 0;
+	}
+}
+
+@keyframes sa-popover-in {
+	from {
+		transform: translate3d(var(--sa-popover-enter-x, 0), var(--sa-popover-enter-y, 0), 0);
+	}
+
+	to {
+		transform: translate3d(0, 0, 0);
+	}
+}

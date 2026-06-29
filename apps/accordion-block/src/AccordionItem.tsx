@@ -1,11 +1,9 @@
 import * as Accordion from "@radix-ui/react-accordion";
 import { RichTextEditor } from "@sa-apps/rich-text-editor";
-import { cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
-
+import styles from "./AccordionItem.module.scss";
 import { AccordionItemMenu } from "./AccordionItemMenu";
 import { AccordionItemTrigger } from "./AccordionItemTrigger";
-import { contentPaddingClasses, headerPaddingClasses, itemBorderClasses } from "./constant";
 import { isAccordionItemEmpty, rgbaObjectToString } from "./helpers";
 import type { AccordionItemProps } from "./types";
 
@@ -38,25 +36,22 @@ export const AccordionItem = ({
 			id={id}
 			data-test-id={`accordion-item-${id}`}
 			value={id}
-			className={cn("group/accordionItem", itemBorderClasses)}
+			className={styles.item}
 			style={{
 				backgroundColor: style?.backgroundColor ? rgbaObjectToString(style.backgroundColor) : undefined,
 			}}
 		>
 			<Accordion.Header data-test-id="accordion-item-heading">
-				<Accordion.Trigger
-					className={cn(headerPaddingClasses, "group/trigger flex w-full items-center gap-2 ltr:flex-row rtl:flex-row-reverse")}
-					data-test-id="accordion-item-trigger"
-				>
+				<Accordion.Trigger className={styles.trigger} data-test-id="accordion-item-trigger">
 					{triggerDirection === "left" && <AccordionItemTrigger icon={triggerIcon} />}
 
-					<div className="hidden rtl:flex rtl:grow" />
+					<div className={styles.rtlGrowSpacer} />
 
 					<RichTextEditor appBridge={appBridge} id={id} content={heading} readonly={readonly} onTextChange={onHeadingChange} />
 
-					<div className="flex grow rtl:hidden" />
+					<div className={styles.ltrGrowSpacer} />
 
-					<div className="flex items-center gap-4">
+					<div className={styles.actions}>
 						{onDeleteClick && !isEmpty && !readonly ? (
 							<AccordionItemMenu style={style} onStyleChange={handleStyleChange} onDeleteClick={handleDeleteClick} />
 						) : null}
@@ -66,11 +61,8 @@ export const AccordionItem = ({
 				</Accordion.Trigger>
 			</Accordion.Header>
 
-			<Accordion.Content
-				data-test-id="accordion-item-content"
-				className="overflow-y-hidden data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
-			>
-				<div className={contentPaddingClasses}>
+			<Accordion.Content data-test-id="accordion-item-content" className={styles.content}>
+				<div className={styles.contentInner}>
 					<RichTextEditor appBridge={appBridge} id={id} content={content} readonly={readonly} onTextChange={onContentChange} />
 				</div>
 			</Accordion.Content>

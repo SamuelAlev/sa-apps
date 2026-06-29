@@ -6,3 +6,4 @@ export * from "./moveArray";
 export * from "./os";
 export * from "./range";
 export * from "./rgbaObjectToHex8";
+export * from "./useSaThemeVars";

@@ -1,5 +1,6 @@
 import { Dropzone } from "@sa-apps/dropzone";
 import type { ChangeEvent } from "react";
+import styles from "./AssetRowAdd.module.scss";
 
 type AssetRowAddProps = {
 	onUploadClick: (file: File) => void;
@@ -19,7 +20,7 @@ export const AssetRowAdd = ({ onUploadClick, onBrowseAssetClick }: AssetRowAddPr
 	};
 
 	return (
-		<div className="flex h-[120px] min-h-[120px] w-full items-center justify-center">
+		<div className={styles.dropzone}>
 			<Dropzone onUploadClick={handleUploadClick} onBrowseAssetClick={handleBrowseAssetClick} />
 		</div>
 	);

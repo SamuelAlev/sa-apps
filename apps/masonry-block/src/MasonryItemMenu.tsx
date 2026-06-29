@@ -29,6 +29,7 @@ import { Menu, Paintbrush2, Trash, Unlink } from "lucide-react";
 import type { MouseEvent, ReactElement } from "react";
 import { useRef, useState } from "react";
 
+import styles from "./MasonryItemMenu.module.scss";
 import type { MasonryItemProps } from "./types";
 
 type MasonryItemMenuProps = {
@@ -87,10 +88,10 @@ export const MasonryItemMenu = ({ style, onStyleChange, onUnlinkAsset, onDeleteC
 		<>
 			<Popover open={isStylePopoverOpen}>
 				<DropdownMenu>
-					<DropdownMenuTrigger data-no-dnd={true} asChild className="absolute right-4 top-4">
+					<DropdownMenuTrigger data-no-dnd={true} asChild className={styles.menuTrigger}>
 						<PopoverTrigger data-no-dnd={true} asChild>
 							<Button size="sm" variant="secondary" ref={itemDropdownRef}>
-								<Menu className="h-[20px] max-h-[20px] w-[20px] max-w-[20px]" />
+								<Menu className={styles.menuIcon} />
 							</Button>
 						</PopoverTrigger>
 					</DropdownMenuTrigger>
@@ -98,17 +99,17 @@ export const MasonryItemMenu = ({ style, onStyleChange, onUnlinkAsset, onDeleteC
 						<DropdownMenuLabel>{t("item")}</DropdownMenuLabel>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={handleDropdownStyleClick}>
-							<Paintbrush2 className="mr-2 h-4 w-4" />
+							<Paintbrush2 className={styles.itemIcon} />
 							{t("styles")}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
 						<DropdownMenuItem onClick={handleDropdownUnlinkAssetClick}>
-							<Unlink className="mr-2 h-4 w-4" />
+							<Unlink className={styles.itemIcon} />
 							{t("unlinkAsset")}
 						</DropdownMenuItem>
 						<DropdownMenuSeparator />
-						<DropdownMenuItem className="text-red-600" onClick={handleDropdownDeleteClick}>
-							<Trash className="mr-2 h-4 w-4" />
+						<DropdownMenuItem className={styles.destructiveItem} onClick={handleDropdownDeleteClick}>
+							<Trash className={styles.itemIcon} />
 							{t("delete")}
 							<DropdownMenuShortcut>⌘⌫</DropdownMenuShortcut>
 						</DropdownMenuItem>
@@ -119,13 +120,13 @@ export const MasonryItemMenu = ({ style, onStyleChange, onUnlinkAsset, onDeleteC
 						onEscapeKeyDown={handlePopoverCancelClick}
 						onInteractOutside={(event) => handlePopoverClickOutside(event.target)}
 					>
-						<div className="flex flex-col gap-8">
-							<div className="space-y-2">
-								<h4 className="scroll-m-20 text-xl font-semibold tracking-tight">{t("styles")}</h4>
-								<p className="text-sm text-muted-foreground">{t("stylesDescription")}.</p>
+						<div className={styles.stylePanel}>
+							<div className={styles.fieldGroup}>
+								<h4 className={styles.styleTitle}>{t("styles")}</h4>
+								<p className={styles.styleDescription}>{t("stylesDescription")}.</p>
 							</div>
-							<div className="flex flex-col gap-2">
-								<div className="flex w-full flex-col gap-4">
+							<div className={styles.styleRow}>
+								<div className={styles.styleField}>
 									<Label>{t("backgroundColor")}</Label>
 									<RgbaColorPicker
 										color={
@@ -144,7 +145,7 @@ export const MasonryItemMenu = ({ style, onStyleChange, onUnlinkAsset, onDeleteC
 										}, 300)}
 									/>
 									<TextInput
-										className="w-[calc(100%-24px)]"
+										className={styles.hexInput}
 										value={localBackgroundColor ? rgbaObjectToHex8(localBackgroundColor) : undefined}
 										onChange={(event) =>
 											handleStyleChange({
@@ -154,7 +155,7 @@ export const MasonryItemMenu = ({ style, onStyleChange, onUnlinkAsset, onDeleteC
 									/>
 								</div>
 							</div>
-							<div className="flex w-full justify-end pt-4">
+							<div className={styles.closeRow}>
 								<Button onClick={handlePopoverCancelClick} size="lg">
 									{t("close")}
 								</Button>

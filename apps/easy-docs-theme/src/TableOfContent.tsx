@@ -2,6 +2,7 @@ import { useTranslations } from "@sa-apps/i18n";
 import { cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
 import { useEffect, useState } from "react";
+import styles from "./TableOfContent.module.scss";
 
 const useSections = (): { id: string; title: string | undefined }[] => {
 	const [sections, setSections] = useState<{ id: string; title: string | undefined }[]>([]);
@@ -92,23 +93,18 @@ export const TableOfContent = (): ReactElement | null => {
 	const activeItem = useActiveItem(sections.map((section) => section.id));
 
 	return sections.length > 0 ? (
-		<div className="sticky top-16 -mt-10 max-h-[calc(var(--vh)-4rem)] overflow-y-auto pt-10">
-			<div className="space-y-2">
-				<p className="font-medium">{t("onThisPage")}</p>
-				<ul className="m-0 list-none">
+		<div className={styles.toc}>
+			<div className={styles.tocInner}>
+				<p className={styles.tocTitle}>{t("onThisPage")}</p>
+				<ul className={styles.tocList}>
 					{sections.map((section) => (
-						<li key={section.id} className="mt-0 pt-2">
+						<li key={section.id} className={styles.tocItem}>
 							<button
 								type="button"
 								title={section.title}
 								aria-label={section.title}
 								onClick={() => handleSectionClick(section.id)}
-								className={cn(
-									"inline-block text-sm no-underline transition-colors",
-									section.id === activeItem
-										? "font-medium text-primary"
-										: "cursor-pointer text-sm text-muted-foreground hover:text-primary",
-								)}
+								className={cn(styles.tocLink, section.id === activeItem ? styles.tocLinkActive : styles.tocLinkInactive)}
 							>
 								{section.title}
 							</button>

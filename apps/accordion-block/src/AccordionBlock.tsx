@@ -4,9 +4,9 @@ import * as Accordion from "@radix-ui/react-accordion";
 import type { DragEndEvent } from "@sa-apps/drag-and-drop";
 import { DragAndDropSortableContext, VerticalItem } from "@sa-apps/drag-and-drop";
 import { trackEvent } from "@sa-apps/tracking";
-import { arrayMove } from "@sa-apps/utilities";
+import { arrayMove, cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
-
+import styles from "./AccordionBlock.module.scss";
 import { AccordionItem } from "./AccordionItem";
 import { DEFAULT_ACCORDION_ITEM, DEFAULT_RTE_CONTENT, DEFAULT_RTE_HEADING } from "./constant";
 import { getAccordionRootStyles, getNewAccordionItemId, isLastAccordionItemEmpty } from "./helpers";
@@ -102,7 +102,7 @@ export const AccordionBlock = ({ appBridge }: BlockProps): ReactElement => {
 			<Accordion.Root
 				{...(blockSettings.accordionMultiple ? { type: "multiple" } : { type: "single", collapsible: true })}
 				style={getAccordionRootStyles(blockSettings)}
-				className="flex flex-col gap-[var(--accordion-items-gap)]"
+				className={cn("sa-root", styles.root)}
 				data-test-id="accordion-block"
 			>
 				{accordionItems.map((accordionItem) => (

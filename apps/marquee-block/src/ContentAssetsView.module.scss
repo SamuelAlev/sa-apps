@@ -1,0 +1,22 @@
+.assetItem {
+	display: flex;
+	height: var(--height);
+}
+
+.assetItemHorizontal {
+	margin-left: 1.5rem;
+	margin-right: 1.5rem;
+}
+
+.assetItemVertical {
+	margin-top: 1.5rem;
+	margin-bottom: 1.5rem;
+}
+
+.image {
+	height: 100%;
+	flex-grow: 1;
+	user-select: none;
+	overflow: hidden;
+	object-fit: cover;
+}

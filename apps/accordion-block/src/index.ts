@@ -1,4 +1,4 @@
-import "@sa-apps/tailwind-config/src/styles.scss";
+import "@sa-apps/design-system/styles";
 
 import { defineBlock } from "@frontify/guideline-blocks-settings";
 import { withTranslations } from "@sa-apps/i18n";

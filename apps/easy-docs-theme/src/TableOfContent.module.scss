@@ -1,0 +1,51 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+.toc {
+	position: sticky;
+	top: 4rem;
+	margin-top: -2.5rem;
+	max-height: calc(var(--vh) - 4rem);
+	overflow-y: auto;
+	padding-top: 2.5rem;
+}
+
+.tocInner > * + * {
+	margin-top: 0.5rem;
+}
+
+.tocTitle {
+	font-weight: 500;
+}
+
+.tocList {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.tocItem {
+	margin-top: 0;
+	padding-top: 0.5rem;
+}
+
+.tocLink {
+	display: inline-block;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	text-decoration: none;
+	@include mixins.transition-colors;
+}
+
+.tocLinkActive {
+	font-weight: 500;
+	color: hsl(var(--sa-primary));
+}
+
+.tocLinkInactive {
+	cursor: pointer;
+	color: hsl(var(--sa-muted-foreground));
+}
+
+.tocLinkInactive:hover {
+	color: hsl(var(--sa-primary));
+}

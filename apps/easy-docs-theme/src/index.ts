@@ -1,4 +1,4 @@
-import "@sa-apps/tailwind-config/src/styles.scss";
+import "@sa-apps/design-system/styles";
 import "./styles.scss";
 
 import { defineTheme } from "@frontify/guideline-themes";

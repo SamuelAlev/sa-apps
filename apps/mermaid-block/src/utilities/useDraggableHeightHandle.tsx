@@ -1,6 +1,7 @@
 import { cn } from "@sa-apps/utilities";
 import type { ReactElement, ReactNode } from "react";
 import { useCallback, useEffect, useRef, useState } from "react";
+import styles from "./useDraggableHeightHandle.module.scss";
 
 type UseDraggableHeightHandleProps = {
 	id: string;
@@ -27,14 +28,11 @@ export const useDraggableHeightHandle = ({
 
 	const ResizeHandle = (): ReactElement => {
 		return (
-			<div data-no-dnd={true} className={cn("absolute -bottom-2 left-0 right-0 z-50 flex justify-center", !enabled && "hidden")}>
+			<div data-no-dnd={true} className={cn(styles.handleWrapper, !enabled && styles.handleWrapperHidden)}>
 				<button
 					type="button"
 					id={`resize-handle-${id}`}
-					className={cn(
-						"h-4 w-16 rounded-full border border-border shadow-md transition-colors duration-300",
-						dragging ? "cursor-grabbing bg-gray-200" : "cursor-grab bg-gray-50 hover:bg-gray-100",
-					)}
+					className={cn(styles.handle, dragging && styles.handleDragging)}
 					onMouseDown={handleMouseDown}
 					onTouchStart={handleTouchStart}
 				/>
@@ -43,7 +41,7 @@ export const useDraggableHeightHandle = ({
 	};
 
 	const ResizeWrapper = useCallback(
-		({ children }: { children: ReactNode }): ReactElement => <div className="relative">{children}</div>,
+		({ children }: { children: ReactNode }): ReactElement => <div className={styles.relative}>{children}</div>,
 		[],
 	);
 

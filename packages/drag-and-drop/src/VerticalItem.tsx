@@ -2,6 +2,7 @@ import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { GripVertical } from "lucide-react";
 import type { ReactElement, ReactNode } from "react";
+import styles from "./VerticalItem.module.scss";
 
 type VerticalItemProps = {
 	id: string;
@@ -21,15 +22,8 @@ export const VerticalItem = ({ id, children, disabled }: VerticalItemProps): Rea
 	};
 
 	return (
-		<div ref={setNodeRef} style={style} className="relative">
-			<button
-				type="button"
-				ref={setDraggableNodeRef}
-				{...attributes}
-				{...listeners}
-				disabled={disabled}
-				className="absolute inset-y-0 -left-8 text-slate-700 hover:cursor-grab hover:text-slate-800 active:cursor-grabbing active:text-slate-900 disabled:hidden"
-			>
+		<div ref={setNodeRef} style={style} className={styles.item}>
+			<button type="button" ref={setDraggableNodeRef} {...attributes} {...listeners} disabled={disabled} className={styles.handle}>
 				<GripVertical />
 			</button>
 
