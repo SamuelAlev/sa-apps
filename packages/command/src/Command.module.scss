@@ -1,0 +1,216 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+// ---------------------------------------------------------------------------
+// Command root
+// ---------------------------------------------------------------------------
+
+.command {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	width: 100%;
+	overflow: hidden;
+	border-radius: calc(var(--sa-radius) - 2px);
+	background-color: hsl(var(--sa-popover));
+	color: hsl(var(--sa-popover-foreground));
+}
+
+// ---------------------------------------------------------------------------
+// CommandDialog
+// ---------------------------------------------------------------------------
+
+.dialogContent {
+	overflow: hidden;
+	padding: 0;
+	box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+}
+
+// Modifier applied to <Command> inside CommandDialog: tightens the spacing of
+// the cmdk-rendered descendants (targeted via their stable [cmdk-*] attrs).
+.dialog {
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-group-heading]) {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+		font-weight: 500;
+		color: hsl(var(--sa-muted-foreground));
+	}
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-group]:not([hidden]) ~ [cmdk-group]) {
+		padding-top: 0;
+	}
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-group]) {
+		padding-left: 0.5rem;
+		padding-right: 0.5rem;
+	}
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-input-wrapper] svg) {
+		height: 1.25rem;
+		width: 1.25rem;
+	}
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-input]) {
+		height: 1.5rem;
+	}
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-item]) {
+		padding: 0.75rem 0.5rem;
+	}
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-item] svg) {
+		height: 1.25rem;
+		width: 1.25rem;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// CommandInput
+// ---------------------------------------------------------------------------
+
+.inputWrapper {
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid hsl(var(--sa-input));
+	padding-left: 0.75rem;
+	padding-right: 0.75rem;
+}
+
+.inputIcon {
+	margin-right: 0.5rem;
+	height: 1rem;
+	width: 1rem;
+	flex-shrink: 0;
+	opacity: 0.5;
+}
+
+.input {
+	display: flex;
+	height: 2.75rem;
+	width: 100%;
+	border-radius: calc(var(--sa-radius) - 2px);
+	background-color: transparent;
+	padding-top: 0.75rem;
+	padding-bottom: 0.75rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+
+	&:disabled {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// CommandList
+// ---------------------------------------------------------------------------
+
+.list {
+	max-height: 300px;
+	overflow-y: auto;
+	overflow-x: hidden;
+}
+
+// ---------------------------------------------------------------------------
+// CommandEmpty
+// ---------------------------------------------------------------------------
+
+.empty {
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	text-align: center;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+// ---------------------------------------------------------------------------
+// CommandLoading
+// ---------------------------------------------------------------------------
+
+.loading {
+	display: flex;
+	width: 100%;
+	justify-content: center;
+	padding-top: 1.5rem;
+	padding-bottom: 1.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+// ---------------------------------------------------------------------------
+// CommandGroup
+// ---------------------------------------------------------------------------
+
+.group {
+	overflow: hidden;
+	padding: 0.25rem;
+	color: hsl(var(--sa-foreground));
+
+	// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+	:global([cmdk-group-heading]) {
+		padding: 0.375rem 0.5rem;
+		font-size: 0.75rem;
+		line-height: 1rem;
+		font-weight: 500;
+		color: hsl(var(--sa-muted-foreground));
+	}
+}
+
+// ---------------------------------------------------------------------------
+// CommandSeparator
+// ---------------------------------------------------------------------------
+
+.separator {
+	margin-left: -0.25rem;
+	margin-right: -0.25rem;
+	height: 1px;
+	background-color: hsl(var(--sa-border));
+}
+
+// ---------------------------------------------------------------------------
+// CommandItem
+// ---------------------------------------------------------------------------
+
+.item {
+	position: relative;
+	display: flex;
+	cursor: default;
+	user-select: none;
+	align-items: center;
+	border-radius: calc(var(--sa-radius) - 4px);
+	padding: 0.375rem 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	outline: 2px solid transparent;
+	outline-offset: 2px;
+
+	&[aria-selected="true"] {
+		background-color: hsl(var(--sa-accent));
+		color: hsl(var(--sa-accent-foreground));
+	}
+
+	&[data-disabled] {
+		pointer-events: none;
+		opacity: 0.5;
+	}
+}
+
+// ---------------------------------------------------------------------------
+// CommandShortcut
+// ---------------------------------------------------------------------------
+
+.shortcut {
+	margin-left: auto;
+	font-size: 0.75rem;
+	line-height: 1rem;
+	letter-spacing: 0.1em;
+	color: hsl(var(--sa-muted-foreground));
+}

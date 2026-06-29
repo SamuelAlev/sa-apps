@@ -1,47 +1,35 @@
 import { useTranslations, withTranslations } from "@sa-apps/i18n";
+import { cn } from "@sa-apps/utilities";
 import { Album, Upload } from "lucide-react";
-import type { ChangeEvent } from "react";
+import type { ChangeEvent, HTMLAttributes } from "react";
 import { forwardRef, useRef } from "react";
 
+import styles from "./Dropzone.module.scss";
 import { messages } from "./i18n";
 
-type DropzoneProps = {
+type DropzoneProps = HTMLAttributes<HTMLDivElement> & {
 	onUploadClick: (event: ChangeEvent<HTMLInputElement>) => void;
 	onBrowseAssetClick: () => void;
 };
 
 export const Dropzone = withTranslations(messages)(
-	forwardRef<HTMLDivElement, DropzoneProps>(function SADropzone(props, ref) {
+	forwardRef<HTMLDivElement, DropzoneProps>(function SADropzone({ className, onUploadClick, onBrowseAssetClick, ...props }, ref) {
 		const { t } = useTranslations();
 		const fileInput = useRef<HTMLInputElement>(null);
 
 		const handleClick = () => fileInput.current?.click();
 
 		return (
-			<div
-				ref={ref}
-				className="m-2 flex h-[calc(100%-16px)] w-full overflow-hidden rounded-2xl border border-dashed border-border bg-gray-100"
-				{...props}
-			>
-				<input type="file" className="hidden" onChange={props.onUploadClick} ref={fileInput} />
-				<button
-					type="button"
-					className="m-4 flex w-full items-center justify-center gap-2 rounded-2xl text-slate-800 transition-colors duration-300 ease-out hover:bg-gray-200/75 hover:text-slate-900 active:bg-gray-200 active:text-slate-950"
-					onClick={handleClick}
-					aria-label={t("upload")}
-				>
+			<div ref={ref} className={cn(styles.dropzone, className)} {...props}>
+				<input type="file" className={styles.input} onChange={onUploadClick} ref={fileInput} />
+				<button type="button" className={styles.action} onClick={handleClick} aria-label={t("upload")}>
 					<Upload size={20} />
 					{t("upload")}
 				</button>
 
-				<div className="my-4 w-px border-r border-r-gray-300" />
+				<div className={styles.separator} />
 
-				<button
-					type="button"
-					className="m-4 flex w-full items-center justify-center gap-2 rounded-2xl text-slate-800 transition-colors duration-300 ease-out hover:bg-gray-200/75 hover:text-slate-900 active:bg-gray-200 active:text-slate-950"
-					onClick={props.onBrowseAssetClick}
-					aria-label={t("browse")}
-				>
+				<button type="button" className={styles.action} onClick={onBrowseAssetClick} aria-label={t("browse")}>
 					<Album size={20} />
 					{t("browse")}
 				</button>

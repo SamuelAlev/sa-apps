@@ -1,7 +1,7 @@
 {
 	"name": "@sa-apps/root",
 	"private": true,
-	"packageManager": "pnpm@10.33.0",
+	"packageManager": "pnpm@11.9.0",
 	"scripts": {
 		"generate": "pnpm --stream --filter {packages/**} --filter {apps/**} generate",
 		"format": "biome ci .",
@@ -10,7 +10,7 @@
 		"taze": "taze -r -I major"
 	},
 	"devDependencies": {
-		"@biomejs/biome": "^2.4.12",
-		"taze": "^19.11.0"
+		"@biomejs/biome": "^2.5.1",
+		"taze": "^19.14.1"
 	}
 }

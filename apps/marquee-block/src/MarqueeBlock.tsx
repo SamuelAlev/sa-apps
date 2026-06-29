@@ -12,8 +12,8 @@ import { ContentAssetsEdit } from "./ContentAssetsEdit";
 import { ContentAssetsView } from "./ContentAssetsView";
 import { ContentTextsEdit } from "./ContentTextsEdit";
 import { ContentTextsView } from "./ContentTextsView";
-import { borderClasses, borderRadiusClasses } from "./constants";
 import { getMarqueeRootStyle } from "./helpers";
+import styles from "./MarqueeBlock.module.scss";
 import type { BlockSettings } from "./types";
 import { useBlockAssets } from "./utilities/useBlockAssets";
 import { useDraggableHeightHandle } from "./utilities/useDraggableHeightHandle";
@@ -54,11 +54,11 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
 	});
 
 	return (
-		<div data-test-id="marquee-block" style={getMarqueeRootStyle(blockSettings)}>
+		<div data-test-id="marquee-block" className="sa-root">
 			<ResizeWrapper>
 				<Marquee
-					style={{ height: `${height}px` }}
-					className={cn("overflow-y-hidden h-[--height] [&_.rfm-child]:flex", borderClasses, borderRadiusClasses)}
+					style={{ height: `${height}px`, ...getMarqueeRootStyle(blockSettings) }}
+					className={styles.marquee}
 					loop={0}
 					autoFill={blockSettings.autoFill}
 					speed={blockSettings.speed ? Number.parseInt(blockSettings.speed, 10) : undefined}
@@ -67,12 +67,17 @@ export const MarqueeBlock = ({ appBridge }: BlockProps): ReactElement => {
 					pauseOnClick={blockSettings.pauseClick}
 				>
 					{blockSettings.type === "text" ? (
-						<ContentTextsView contentTexts={blockSettings.contentTexts} direction={blockSettings.directionHV} />
+						<ContentTextsView
+							contentTexts={blockSettings.contentTexts}
+							direction={blockSettings.directionHV}
+							style={getMarqueeRootStyle(blockSettings)}
+						/>
 					) : (
 						<ContentAssetsView
 							assets={blockAssets.items}
 							contentTexts={blockSettings.contentTexts}
 							direction={blockSettings.directionHV}
+							style={getMarqueeRootStyle(blockSettings)}
 						/>
 					)}
 				</Marquee>

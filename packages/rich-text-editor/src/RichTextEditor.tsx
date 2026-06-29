@@ -4,6 +4,7 @@ import { cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
 import { useMemo } from "react";
 import { getPlugins } from "./getPlugins";
+import styles from "./RichTextEditor.module.scss";
 
 type RichTextEditorProps = {
 	appBridge: AppBridgeBlock;
@@ -30,7 +31,7 @@ export const RichTextEditor = ({
 		<div
 			data-no-dnd={true}
 			onClick={(event) => !readonly && event.stopPropagation()}
-			className={cn(!readonly && "cursor-text", "w-full items-start [&]:text-left")}
+			className={cn(styles.root, !readonly && styles.editable)}
 		>
 			<FondueRichTextEditor
 				id={id}

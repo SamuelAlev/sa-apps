@@ -2,13 +2,14 @@ import { AssetChooserObjectType, useAssetChooser, useBlockSettings, useEditorSta
 import type { BlockProps } from "@frontify/guideline-blocks-settings";
 import { trackEvent } from "@sa-apps/tracking";
 import { cn } from "@sa-apps/utilities";
-import type { ReactElement } from "react";
+import { type ReactElement, useRef, useState } from "react";
 import Tilt from "react-parallax-tilt";
 
 import { AssetRowAdd } from "./AssetRowAdd";
 import { AssetRowEdit } from "./AssetRowEdit";
 import { borderClasses, borderRadiusClasses } from "./constants";
 import { getTiltImageStyle, prepareImageUrl } from "./helpers";
+import styles from "./StackableImagesBlock.module.scss";
 import type { BlockSettings } from "./types";
 import { useUploadFile } from "./useUploadFile";
 import { useBlockAssets } from "./utilities/useBlockAssets";
@@ -49,6 +50,18 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
 		trackEvent("changed height");
 	};
 
+	const [manualAngles, setManualAngles] = useState<{ x: number | null; y: number | null }>({ x: null, y: null });
+	const leaveTimer = useRef<ReturnType<typeof setTimeout>>(undefined);
+
+	const handleMouseEnter = () => {
+		clearTimeout(leaveTimer.current);
+		setManualAngles({ x: null, y: null });
+	};
+
+	const handleMouseLeave = () => {
+		leaveTimer.current = setTimeout(() => setManualAngles({ x: 0, y: 0 }), 150);
+	};
+
 	const { height, ResizeHandle, ResizeWrapper } = useDraggableHeightHandle({
 		id: "draggable",
 		initialHeight: Number.parseInt(blockSettings.height, 10) ?? 0,
@@ -57,7 +70,14 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
 	});
 
 	return (
-		<div data-test-id="image-stack-block" style={getTiltImageStyle(blockSettings)}>
+		// biome-ignore lint/a11y/noStaticElementInteractions: <explanation>
+		<div
+			className="sa-root"
+			data-test-id="image-stack-block"
+			style={getTiltImageStyle(blockSettings)}
+			onMouseEnter={handleMouseEnter}
+			onMouseLeave={handleMouseLeave}
+		>
 			<ResizeWrapper>
 				<Tilt
 					style={{ height: `${height}px`, transformStyle: "preserve-3d" }}
@@ -67,17 +87,20 @@ export const StackableImagesBlock = ({ appBridge }: BlockProps): ReactElement =>
 					transitionSpeed={Number.parseFloat(blockSettings.tiltTransitionSpeed)}
 					scale={Number.parseFloat(blockSettings.tiltScale)}
 					gyroscope={true}
-					className={cn("h-[--height] rounded-[inherit]", borderClasses, borderRadiusClasses)}
+					reset={false}
+					tiltAngleXManual={manualAngles.x}
+					tiltAngleYManual={manualAngles.y}
+					className={cn(styles.stack, borderClasses, borderRadiusClasses)}
 				>
 					{blockAssets["image-stack"]?.map((asset, index) => (
 						<div
 							key={asset.id}
-							className="flex h-[--height] w-full rounded-[inherit] overflow-clip"
+							className={styles.layer}
 							style={{ transform: `translate3d(0, calc(var(--height) * -1 * ${index}), calc(100px * ${index}))` }}
 						>
 							<img
 								draggable={false}
-								className="h-full flex-grow select-none overflow-hidden object-cover"
+								className={styles.image}
 								src={prepareImageUrl(asset.previewUrl)}
 								alt={"TODO"} // TODO: Add alt text
 							/>

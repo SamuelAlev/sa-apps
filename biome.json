@@ -55,10 +55,5 @@
 			"trailingCommas": "none",
 			"lineEnding": "lf"
 		}
-	},
-	"css": {
-		"parser": {
-			"tailwindDirectives": true
-		}
 	}
 }

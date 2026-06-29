@@ -1,0 +1,58 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+// z-50 overflow-hidden rounded-md border bg-popover px-3 py-1.5 text-sm
+// text-popover-foreground shadow-md
+.content {
+	z-index: 50;
+	overflow: hidden;
+	border: 1px solid hsl(var(--sa-border));
+	border-radius: calc(var(--sa-radius) - 2px);
+	background-color: hsl(var(--sa-popover));
+	color: hsl(var(--sa-popover-foreground));
+	padding: 0.375rem 0.75rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+
+	// Entrance / exit animation. The original applied `animate-in fade-in-0 zoom-in-95` unconditionally and switched to `animate-out fade-out-0 zoom-out-95` via `data-[state=closed]`.
+	animation-name: tooltipEnter;
+	animation-duration: 150ms;
+	--tw-enter-opacity: 0; // fade-in-0
+	--tw-enter-scale: 0.95; // zoom-in-95
+
+	&:where([data-state="closed"]) {
+		animation-name: tooltipExit;
+		--tw-exit-opacity: 0; // fade-out-0
+		--tw-exit-scale: 0.95; // zoom-out-95
+	}
+
+	// Directional slide-in (slide-in-from-<dir>-2 -> 0.5rem = 2 * 0.25rem).
+	&:where([data-side="bottom"]) {
+		--tw-enter-translate-y: -0.5rem; // slide-in-from-top-2
+	}
+	&:where([data-side="left"]) {
+		--tw-enter-translate-x: 0.5rem; // slide-in-from-right-2
+	}
+	&:where([data-side="right"]) {
+		--tw-enter-translate-x: -0.5rem; // slide-in-from-left-2
+	}
+	&:where([data-side="top"]) {
+		--tw-enter-translate-y: 0.5rem; // slide-in-from-bottom-2
+	}
+}
+
+@keyframes tooltipEnter {
+	from {
+		opacity: var(--tw-enter-opacity, 1);
+		transform: translate3d(var(--tw-enter-translate-x, 0), var(--tw-enter-translate-y, 0), 0)
+			scale3d(var(--tw-enter-scale, 1), var(--tw-enter-scale, 1), var(--tw-enter-scale, 1)) rotate(var(--tw-enter-rotate, 0));
+	}
+}
+
+@keyframes tooltipExit {
+	to {
+		opacity: var(--tw-exit-opacity, 1);
+		transform: translate3d(var(--tw-exit-translate-x, 0), var(--tw-exit-translate-y, 0), 0)
+			scale3d(var(--tw-exit-scale, 1), var(--tw-exit-scale, 1), var(--tw-exit-scale, 1)) rotate(var(--tw-exit-rotate, 0));
+	}
+}

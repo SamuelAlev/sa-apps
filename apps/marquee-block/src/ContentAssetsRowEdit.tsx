@@ -13,6 +13,7 @@ import { Button, buttonVariants } from "@sa-apps/button";
 import { useTranslations } from "@sa-apps/i18n";
 import { TextInput } from "@sa-apps/text-input";
 import { type FormEventHandler, useState } from "react";
+import styles from "./ContentAssetsRowEdit.module.scss";
 import { prepareImageUrl } from "./helpers";
 
 type ContentAssetsRowEditProps = {
@@ -46,22 +47,22 @@ export const ContentAssetsRowEdit = ({ asset, contentText, onUpdateAsset, onUpda
 	};
 
 	return (
-		<div className="flex relative">
-			<form onSubmit={handleUpdateContentText} className="grid w-full gap-6 items-center grid-cols-[140px_minmax(200px,1fr)] h-48">
-				<img draggable={false} className="h-full w-full object-contain" src={prepareImageUrl(asset.previewUrl)} alt={contentText} />
+		<div className={styles.root}>
+			<form onSubmit={handleUpdateContentText} className={styles.form}>
+				<img draggable={false} className={styles.image} src={prepareImageUrl(asset.previewUrl)} alt={contentText} />
 
-				<div className="w-full flex">
+				<div className={styles.contentText}>
 					<TextInput defaultValue={contentText} name="contentText" placeholder="Content text (alt)" />
-				</div>
 
-				<div className="absolute top-0 bottom-0 right-2 flex items-center justify-center gap-2">
-					<Button size="sm" variant="destructive" onClick={handleFirstDeleteClick}>
-						Delete
-					</Button>
+					<div className={styles.actions}>
+						<Button size="sm" variant="destructive" onClick={handleFirstDeleteClick}>
+							Delete
+						</Button>
 
-					<Button size="sm" type="submit">
-						Save
-					</Button>
+						<Button size="sm" type="submit">
+							Save
+						</Button>
+					</div>
 				</div>
 			</form>
 

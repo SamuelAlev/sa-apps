@@ -1,0 +1,36 @@
+.root {
+	display: flex;
+	position: relative;
+}
+
+.form {
+	display: grid;
+	width: 100%;
+	gap: 1.5rem;
+	align-items: center;
+	grid-template-columns: 140px minmax(200px, 1fr);
+	height: 12rem;
+}
+
+.image {
+	height: 100%;
+	width: 100%;
+	object-fit: contain;
+}
+
+.contentText {
+	width: 100%;
+	display: flex;
+	position: relative;
+}
+
+.actions {
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	right: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+}

@@ -3,7 +3,7 @@ import type { BlockProps } from "@frontify/guideline-blocks-settings";
 import type { DragEndEvent } from "@sa-apps/drag-and-drop";
 import { DragAndDropSortableContext, SwappableItem } from "@sa-apps/drag-and-drop";
 import { trackEvent } from "@sa-apps/tracking";
-import { arraySwap } from "@sa-apps/utilities";
+import { arraySwap, cn } from "@sa-apps/utilities";
 import type { ReactElement } from "react";
 import { DEFAULT_MASONRY_ITEM } from "./constant";
 import { getMasonryRootStyles, getNewMasonryItemId, isLastMasonryItemEmpty } from "./helpers";
@@ -135,7 +135,7 @@ export const MasonryBlock = ({ appBridge }: BlockProps): ReactElement => {
 	};
 
 	return (
-		<div style={getMasonryRootStyles(blockSettings)} data-test-id="masonry-block">
+		<div className={cn("sa-root")} style={getMasonryRootStyles(blockSettings)} data-test-id="masonry-block">
 			<DragAndDropSortableContext items={masonryItems} strategy="rect-swapping" onDragEnd={handleDragEnd}>
 				<Masonry
 					columnCount={Number.parseInt(

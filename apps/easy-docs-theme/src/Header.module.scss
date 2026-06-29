@@ -1,0 +1,291 @@
+.header {
+	position: sticky;
+	z-index: 40;
+	width: 100%;
+	border-bottom: 1px solid hsl(var(--sa-border));
+	background-color: hsl(var(--sa-background) / 0.8);
+}
+
+.headerContainer {
+	display: flex;
+	height: 4rem;
+	align-items: center;
+}
+
+.headerContainer > * + * {
+	margin-left: 1rem;
+}
+
+@media (min-width: 640px) {
+	.headerContainer {
+		justify-content: space-between;
+	}
+
+	.headerContainer > * + * {
+		margin-left: 0;
+	}
+}
+
+.navSection {
+	display: flex;
+	gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.navSection {
+		gap: 2.5rem;
+	}
+}
+
+.brandLink {
+	display: none;
+	align-items: center;
+}
+
+.brandLink > * + * {
+	margin-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+	.brandLink {
+		display: flex;
+	}
+}
+
+.brandImage {
+	height: 3rem;
+	width: auto;
+	aspect-ratio: auto;
+}
+
+.mainNav {
+	display: none;
+	align-items: center;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 600;
+}
+
+.mainNav > * + * {
+	margin-left: 1.5rem;
+}
+
+@media (min-width: 768px) {
+	.mainNav {
+		display: flex;
+	}
+}
+
+.mobileMenuButton {
+	display: flex;
+	align-items: center;
+}
+
+.mobileMenuButton > * + * {
+	margin-left: 0.5rem;
+}
+
+@media (min-width: 768px) {
+	.mobileMenuButton {
+		display: none;
+	}
+}
+
+.menuLabel {
+	font-weight: 700;
+}
+
+@keyframes saSlideInFromBottom {
+	from {
+		transform: translateY(2rem);
+		opacity: 0;
+	}
+	to {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+.mobileMenu {
+	position: fixed;
+	top: 4rem;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 50;
+	display: grid;
+	height: calc(100vh - 4rem);
+	grid-auto-flow: row;
+	grid-auto-rows: max-content;
+	overflow: auto;
+	padding: 1.5rem 1.5rem 8rem;
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+	animation: saSlideInFromBottom 0.3s ease-out;
+}
+
+@media (min-width: 768px) {
+	.mobileMenu {
+		display: none;
+	}
+}
+
+.mobileMenuPanel {
+	position: relative;
+	z-index: 20;
+	display: grid;
+	gap: 1.5rem;
+	border-radius: calc(var(--sa-radius) - 2px);
+	background-color: hsl(var(--sa-background));
+	padding: 1rem;
+	box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.mobileBrandLink {
+	display: flex;
+	align-items: center;
+}
+
+.mobileBrandLink > * + * {
+	margin-left: 0.5rem;
+}
+
+.mobileNav {
+	display: grid;
+	grid-auto-flow: row;
+	grid-auto-rows: max-content;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+.mobileNavLink {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	border-radius: calc(var(--sa-radius) - 2px);
+	padding: 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 500;
+}
+
+.mobileNavLink:hover {
+	text-decoration: underline;
+}
+
+.groupTrigger {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	word-break: keep-all;
+}
+
+.groupTrigger[data-state="open"] .chevron {
+	transform: rotate(180deg);
+}
+
+.groupTrigger:hover .mobileGroupLink {
+	text-decoration: underline;
+}
+
+.chevron {
+	margin-left: 0.5rem;
+	height: 1rem;
+	width: 1rem;
+	transition: transform 0.3s ease;
+}
+
+.mobileGroupLink {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	border-radius: calc(var(--sa-radius) - 2px);
+	padding: 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+	font-weight: 500;
+}
+
+.collapsibleContent {
+	padding-left: 0.5rem;
+}
+
+.desktopLinkItem {
+	display: flex;
+	flex-shrink: 0;
+	align-items: center;
+	word-break: keep-all;
+}
+
+.desktopDocLink {
+	flex-shrink: 0;
+	word-break: keep-all;
+}
+
+.linkIcon {
+	height: 1rem;
+	width: 1rem;
+}
+
+.linkIconWhite {
+	color: #fff;
+}
+
+.linkIconMargin {
+	margin-left: 0.5rem;
+}
+
+.mobileLinkItem {
+	display: flex;
+	width: 100%;
+	flex-shrink: 0;
+	align-items: center;
+	word-break: keep-all;
+	border-radius: calc(var(--sa-radius) - 2px);
+	padding: 0.5rem;
+	font-size: 0.875rem;
+	line-height: 1.25rem;
+}
+
+.mobileLinkItem:hover {
+	text-decoration: underline;
+}
+
+.headerActions {
+	display: flex;
+	flex: 1 1 0%;
+	align-items: center;
+}
+
+.headerActions > * + * {
+	margin-left: 1rem;
+}
+
+@media (min-width: 640px) {
+	.headerActions {
+		justify-content: flex-end;
+	}
+}
+
+.searchWrapper {
+	flex: 1 1 0%;
+}
+
+@media (min-width: 640px) {
+	.searchWrapper {
+		flex-grow: 0;
+	}
+}
+
+.actionNav {
+	display: flex;
+}
+
+.actionNav > * + * {
+	margin-left: 1rem;
+}
+
+.menuItemIcon {
+	margin-right: 0.5rem;
+	height: 1rem;
+	width: 1rem;
+}

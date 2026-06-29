@@ -1,3 +1,4 @@
+import styles from "./ContentTextsEdit.module.scss";
 import { ContentTextsRowAdd } from "./ContentTextsRowAdd";
 import { ContentTextsRowEdit } from "./ContentTextsRowEdit";
 
@@ -10,7 +11,7 @@ type ContentTextEditProps = {
 
 export const ContentTextsEdit = ({ values, onUpdateItem, onAddItem, onRemoveItem }: ContentTextEditProps) => {
 	return (
-		<div className="pt-8 flex flex-col gap-4 w-full">
+		<div className={styles.editContainer}>
 			{values?.map((value, index) => (
 				// biome-ignore lint/correctness/useJsxKeyInIterable: no proper key
 				<ContentTextsRowEdit value={value} onUpdate={(value) => onUpdateItem(index, value)} onRemove={() => onRemoveItem(index)} />

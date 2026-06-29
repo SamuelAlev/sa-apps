@@ -1,0 +1,50 @@
+@use "tokens" as *;
+
+// All tokens and base styles are scoped under `.sa-root` so they never leak
+// into the host application. Each app must render its outermost element with
+// the `sa-root` class, and toggle `is-dark` on it for dark mode.
+
+.sa-root {
+	@include theme-light;
+}
+
+.sa-root.is-dark {
+	@include theme-dark;
+}
+
+// ----------------------------------------------------------------------------
+// `.sa-container` — responsive centered container (kept for backwards compat).
+// ----------------------------------------------------------------------------
+
+.sa-container {
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	padding-right: 1.5rem;
+	padding-left: 1.5rem;
+
+	@media (min-width: 1024px) {
+		width: calc(100% - 3rem);
+		max-width: 1024px;
+	}
+
+	@media (min-width: 1280px) {
+		width: calc(100% - 3rem);
+		max-width: 1280px;
+	}
+
+	@media (min-width: 1440px) {
+		width: calc(100% - 3rem);
+		max-width: 1440px;
+	}
+
+	@media (min-width: 1536px) {
+		width: calc(100% - 3rem);
+		max-width: 1536px;
+	}
+
+	@media (min-width: 1600px) {
+		width: calc(100% - 3rem);
+		max-width: 1600px;
+	}
+}

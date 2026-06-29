@@ -3,6 +3,7 @@ import type { VideoHTMLAttributes } from "react";
 import { forwardRef, useRef, useState } from "react";
 
 import { prepareImageUrl } from "./helpers";
+import styles from "./Video.module.scss";
 
 export const Video = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoElement>>(({ style, ...props }, ref) => {
 	const [state, setState] = useState<"init" | "loading" | "ready">("init");
@@ -26,23 +27,15 @@ export const Video = forwardRef<HTMLVideoElement, VideoHTMLAttributes<HTMLVideoE
 		<>
 			{state === "init" && (
 				// biome-ignore lint/a11y/useAltText: <explanation>
-				<img
-					draggable={false}
-					className="h-full flex-grow select-none overflow-hidden object-cover"
-					src={props?.src ? prepareImageUrl(props.src) : undefined}
-				/>
+				<img draggable={false} className={styles.coverImage} src={props?.src ? prepareImageUrl(props.src) : undefined} />
 			)}
 
 			{state === "loading" && (
-				<div className="relative flex h-full w-full items-center justify-center">
+				<div className={styles.loadingState}>
 					{/* biome-ignore lint/a11y/useAltText: <explanation> */}
-					<img
-						draggable={false}
-						className="h-full flex-grow select-none overflow-hidden object-cover blur-sm grayscale"
-						src={props?.src ? prepareImageUrl(props.src) : undefined}
-					/>
-					<div className="absolute inset-0 flex items-center justify-center">
-						<Loader2 className="animate-spin text-white" size={32} />
+					<img draggable={false} className={styles.blurredCover} src={props?.src ? prepareImageUrl(props.src) : undefined} />
+					<div className={styles.loadingOverlay}>
+						<Loader2 className={styles.spinner} size={32} />
 					</div>
 				</div>
 			)}

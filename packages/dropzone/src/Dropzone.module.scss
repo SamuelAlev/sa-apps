@@ -1,0 +1,46 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+.dropzone {
+	display: flex;
+	width: 100%;
+	height: calc(100% - 16px);
+	margin: 0.5rem;
+	overflow: hidden;
+	border: 1px dashed hsl(var(--sa-border));
+	border-radius: 1rem;
+	background-color: #f3f4f6;
+}
+
+.input {
+	display: none;
+}
+
+.action {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: 0.5rem;
+	width: 100%;
+	margin: 1rem;
+	border-radius: 1rem;
+	color: #1e293b;
+	@include mixins.transition-colors(300ms);
+	transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+
+	&:hover {
+		background-color: rgba(229, 231, 235, 0.75);
+		color: #0f172a;
+	}
+
+	&:active {
+		background-color: #e5e7eb;
+		color: #020617;
+	}
+}
+
+.separator {
+	width: 1px;
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border-right: 1px solid #d1d5db;
+}

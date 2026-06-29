@@ -1,0 +1,13 @@
+.border {
+	width: calc(100% - var(--border-disabled, var(--border-width)) * 2);
+	border-width: var(--border-disabled, var(--border-width));
+	border-color: var(--border-disabled, var(--border-color));
+	border-style: var(--border-disabled, var(--border-style));
+}
+
+.borderRadius {
+	border-top-left-radius: var(--border-radius-top-left);
+	border-top-right-radius: var(--border-radius-top-right);
+	border-bottom-left-radius: var(--border-radius-bottom-left);
+	border-bottom-right-radius: var(--border-radius-bottom-right);
+}

@@ -12,6 +12,7 @@ import { Button, buttonVariants } from "@sa-apps/button";
 import { useTranslations } from "@sa-apps/i18n";
 import { TextInput } from "@sa-apps/text-input";
 import { type FormEventHandler, useState } from "react";
+import styles from "./ContentTextsRowEdit.module.scss";
 
 type ContentTextRowEditProps = {
 	value: string;
@@ -37,11 +38,11 @@ export const ContentTextsRowEdit = ({ value, onUpdate, onRemove }: ContentTextRo
 	};
 
 	return (
-		<div className="flex relative">
-			<form onSubmit={handleSave} className="flex w-full">
+		<div className={styles.root}>
+			<form onSubmit={handleSave} className={styles.form}>
 				<TextInput defaultValue={value} name="text" placeholder="My Text" />
 
-				<div className="absolute top-0 bottom-0 right-2 flex items-center justify-center gap-2">
+				<div className={styles.actions}>
 					<Button size="sm" variant="destructive" onClick={handleDropdownDeleteClick}>
 						Delete
 					</Button>

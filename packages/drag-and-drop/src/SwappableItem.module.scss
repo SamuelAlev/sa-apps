@@ -1,0 +1,11 @@
+.swappable {
+	cursor: grab;
+
+	&:active {
+		cursor: grabbing;
+	}
+}
+
+.disabled {
+	cursor: auto;
+}

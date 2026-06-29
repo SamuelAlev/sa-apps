@@ -1,0 +1,6 @@
+.border {
+	width: calc(100% - var(--border-disabled, var(--border-width)) * 2);
+	border-width: var(--border-disabled, var(--border-width));
+	border-color: var(--border-disabled, var(--border-color));
+	border-style: var(--border-disabled, var(--border-style));
+}

@@ -1,0 +1,65 @@
+@use "@sa-apps/design-system/src/_mixins" as mixins;
+
+// Shared trigger icon styling: sizing, stroke thickness and optional border.
+.triggerIcon {
+	height: var(--accordion-trigger-size);
+	max-height: var(--accordion-trigger-size);
+	width: var(--accordion-trigger-size);
+	max-width: var(--accordion-trigger-size);
+	stroke-width: var(--accordion-trigger-thickness);
+	border-width: var(--accordion-trigger-border-disabled, var(--accordion-trigger-border-width));
+	border-color: var(--accordion-trigger-border-disabled, var(--accordion-trigger-border-color));
+	border-style: var(--accordion-trigger-border-disabled, var(--accordion-trigger-border-style));
+}
+
+// Plus/minus icon: the vertical bar rotates 90deg when the trigger opens.
+.lineVertical {
+	transform-origin: center;
+	transition: transform 500ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([data-state="open"]) .lineVertical {
+	transform: rotate(90deg);
+}
+
+// Plus/minus icon: the horizontal bar fades out when the trigger opens.
+.lineHorizontal {
+	transition: opacity 300ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([data-state="open"]) .lineHorizontal {
+	opacity: 0;
+	transition-timing-function: cubic-bezier(0.4, 0, 1, 1);
+}
+
+// Chevron pointing right; rotates 90deg when the trigger opens.
+.chevronRight {
+	transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([data-state="open"]) .chevronRight {
+	transform: rotate(90deg);
+}
+
+// Chevron pointing left (mirrored right); opens to 90deg.
+.chevronLeft {
+	transform: rotate(180deg);
+	transition: transform 150ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+// biome-ignore lint/correctness/noUnknownPseudoClass: <explanation>
+:global([data-state="open"]) .chevronLeft {
+	transform: rotate(90deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.lineVertical,
+	.lineHorizontal,
+	.chevronRight,
+	.chevronLeft {
+		transition: none;
+	}
+}

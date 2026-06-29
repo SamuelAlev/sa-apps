@@ -1,0 +1,19 @@
+.stack {
+	height: var(--height);
+}
+
+.layer {
+	display: flex;
+	height: var(--height);
+	width: 100%;
+	border-radius: inherit;
+	overflow: clip;
+}
+
+.image {
+	height: 100%;
+	flex-grow: 1;
+	user-select: none;
+	overflow: hidden;
+	object-fit: cover;
+}
